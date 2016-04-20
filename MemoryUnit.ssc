@@ -7,7 +7,7 @@
 	<description>SmallStack Memory Unit</description>
 	<label>RAM / ROM</label>
 	<bound right="65" down="40" left="-65" up="-40"/>
-	<colour a="255" r="211" g="215" b="207"/>
+	<colour a="255" r="238" g="238" b="236"/>
 	<pin x="55" y="-40" length="10" direction="up" id="0" flow="in" required="true"/>
 	<pin x="45" y="-40" length="10" direction="up" id="1" flow="in" required="true"/>
 	<pin x="35" y="-40" length="10" direction="up" id="2" flow="in" required="true"/>

@@ -4,6 +4,7 @@
 		<version smartsim="1.4.1"/>
 	</metadata>
 	<name>SmallStack 12-Bit Computer</name>
-	<description></description>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
+	<description>Forth-Inspired 12-bit Stack Computer</description>
+	<component>MemoryUnit.ssc</component>
+	<component root="true">MemoryTester.ssc</component>
 </project>
