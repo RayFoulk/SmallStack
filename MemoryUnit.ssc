@@ -488,6 +488,106 @@
 		<marker x="-100" y="190"/>
 		<marker x="150" y="190"/>
 	</wire>
+	<wire id="23">
+		<path>
+			<point x="390" y="30"/>
+			<point x="390" y="200"/>
+			<point x="140" y="200"/>
+			<point x="140" y="30"/>
+		</path>
+		<path>
+			<point x="140" y="200"/>
+			<point x="-110" y="200"/>
+			<point x="-110" y="30"/>
+		</path>
+		<path>
+			<point x="-110" y="200"/>
+			<point x="-360" y="200"/>
+			<point x="-360" y="30"/>
+		</path>
+		<marker x="140" y="200"/>
+		<marker x="-110" y="200"/>
+	</wire>
+	<wire id="24">
+		<path>
+			<point x="380" y="30"/>
+			<point x="380" y="210"/>
+			<point x="130" y="210"/>
+			<point x="130" y="30"/>
+		</path>
+		<path>
+			<point x="130" y="210"/>
+			<point x="-120" y="210"/>
+			<point x="-120" y="30"/>
+		</path>
+		<path>
+			<point x="-120" y="210"/>
+			<point x="-370" y="210"/>
+			<point x="-370" y="30"/>
+		</path>
+		<marker x="130" y="210"/>
+		<marker x="-120" y="210"/>
+	</wire>
+	<wire id="25">
+		<path>
+			<point x="370" y="30"/>
+			<point x="370" y="220"/>
+			<point x="120" y="220"/>
+			<point x="120" y="30"/>
+		</path>
+		<path>
+			<point x="120" y="220"/>
+			<point x="-130" y="220"/>
+			<point x="-130" y="30"/>
+		</path>
+		<path>
+			<point x="-130" y="220"/>
+			<point x="-380" y="220"/>
+			<point x="-380" y="30"/>
+		</path>
+		<marker x="120" y="220"/>
+		<marker x="-130" y="220"/>
+	</wire>
+	<wire id="26">
+		<path>
+			<point x="360" y="30"/>
+			<point x="360" y="230"/>
+			<point x="110" y="230"/>
+			<point x="110" y="30"/>
+		</path>
+		<path>
+			<point x="110" y="230"/>
+			<point x="-140" y="230"/>
+			<point x="-140" y="30"/>
+		</path>
+		<path>
+			<point x="-140" y="230"/>
+			<point x="-390" y="230"/>
+			<point x="-390" y="30"/>
+		</path>
+		<marker x="110" y="230"/>
+		<marker x="-140" y="230"/>
+	</wire>
+	<wire id="27">
+		<path>
+			<point x="350" y="30"/>
+			<point x="350" y="240"/>
+			<point x="100" y="240"/>
+			<point x="100" y="30"/>
+		</path>
+		<path>
+			<point x="100" y="240"/>
+			<point x="-150" y="240"/>
+			<point x="-150" y="30"/>
+		</path>
+		<path>
+			<point x="-150" y="240"/>
+			<point x="-400" y="240"/>
+			<point x="-400" y="30"/>
+		</path>
+		<marker x="100" y="240"/>
+		<marker x="-150" y="240"/>
+	</wire>
 	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
 		<connection flow="in" pinid="0">
 			<subpin wireid="13" invert="false"/>
@@ -505,11 +605,11 @@
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="27" invert="false"/>
+			<subpin wireid="26" invert="false"/>
+			<subpin wireid="25" invert="false"/>
+			<subpin wireid="24" invert="false"/>
+			<subpin wireid="23" invert="false"/>
 			<subpin wireid="22" invert="false"/>
 			<subpin wireid="21" invert="false"/>
 			<subpin wireid="20" invert="false"/>
@@ -537,11 +637,11 @@
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="27" invert="false"/>
+			<subpin wireid="26" invert="false"/>
+			<subpin wireid="25" invert="false"/>
+			<subpin wireid="24" invert="false"/>
+			<subpin wireid="23" invert="false"/>
 			<subpin wireid="22" invert="false"/>
 			<subpin wireid="21" invert="false"/>
 			<subpin wireid="20" invert="false"/>
@@ -597,11 +697,11 @@
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="27" invert="false"/>
+			<subpin wireid="26" invert="false"/>
+			<subpin wireid="25" invert="false"/>
+			<subpin wireid="24" invert="false"/>
+			<subpin wireid="23" invert="false"/>
 			<subpin wireid="22" invert="false"/>
 			<subpin wireid="21" invert="false"/>
 			<subpin wireid="20" invert="false"/>
@@ -629,11 +729,11 @@
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="27" invert="false"/>
+			<subpin wireid="26" invert="false"/>
+			<subpin wireid="25" invert="false"/>
+			<subpin wireid="24" invert="false"/>
+			<subpin wireid="23" invert="false"/>
 			<subpin wireid="22" invert="false"/>
 			<subpin wireid="21" invert="false"/>
 			<subpin wireid="20" invert="false"/>
