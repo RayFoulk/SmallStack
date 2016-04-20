@@ -8,7 +8,7 @@
 	<label>RAM / ROM</label>
 	<bound right="65" down="40" left="-65" up="-40"/>
 	<colour a="255" r="238" g="238" b="236"/>
-	<pin x="55" y="-40" length="10" direction="up" id="0" flow="in" required="true"/>
+	<pin x="55" y="-40" length="10" direction="up" id="0" flow="in" label="A0" required="true"/>
 	<pin x="45" y="-40" length="10" direction="up" id="1" flow="in" required="true"/>
 	<pin x="35" y="-40" length="10" direction="up" id="2" flow="in" required="true"/>
 	<pin x="25" y="-40" length="10" direction="up" id="3" flow="in" required="true"/>
@@ -19,8 +19,8 @@
 	<pin x="-25" y="-40" length="10" direction="up" id="8" flow="in" required="true"/>
 	<pin x="-35" y="-40" length="10" direction="up" id="9" flow="in" required="true"/>
 	<pin x="-45" y="-40" length="10" direction="up" id="10" flow="in" required="true"/>
-	<pin x="-55" y="-40" length="10" direction="up" id="11" flow="in" required="true"/>
-	<pin x="55" y="40" length="10" direction="down" id="12" flow="bi" required="true"/>
+	<pin x="-55" y="-40" length="10" direction="up" id="11" flow="in" label="A11" required="true"/>
+	<pin x="55" y="40" length="10" direction="down" id="12" flow="bi" label="D0" required="true"/>
 	<pin x="45" y="40" length="10" direction="down" id="13" flow="bi" required="true"/>
 	<pin x="35" y="40" length="10" direction="down" id="14" flow="bi" required="true"/>
 	<pin x="25" y="40" length="10" direction="down" id="15" flow="bi" required="true"/>
@@ -31,11 +31,11 @@
 	<pin x="-25" y="40" length="10" direction="down" id="20" flow="bi" required="true"/>
 	<pin x="-35" y="40" length="10" direction="down" id="21" flow="bi" required="true"/>
 	<pin x="-45" y="40" length="10" direction="down" id="22" flow="bi" required="true"/>
-	<pin x="-55" y="40" length="10" direction="down" id="23" flow="bi" required="true"/>
-	<pin x="-65" y="-20" length="10" direction="left" id="24" flow="in" required="true"/>
-	<pin x="-65" y="0" length="10" direction="left" id="25" flow="in" required="true"/>
-	<pin x="-65" y="20" length="10" direction="left" id="26" flow="in" required="true"/>
-	<pin x="65" y="0" length="10" direction="right" id="27" flow="out" required="false"/>
+	<pin x="-55" y="40" length="10" direction="down" id="23" flow="bi" label="D11" required="true"/>
+	<pin x="-65" y="-20" length="10" direction="left" id="24" flow="in" label="RE" required="true"/>
+	<pin x="-65" y="0" length="10" direction="left" id="25" flow="in" label="WE" required="true"/>
+	<pin x="-65" y="20" length="10" direction="left" id="26" flow="in" label="CL" required="true"/>
+	<pin x="65" y="0" length="10" direction="right" id="27" flow="out" label="ERR" required="false"/>
 	<wire id="0">
 		<path>
 			<point x="-220" y="-20"/>
