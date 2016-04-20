@@ -8,6 +8,22 @@
 	<label></label>
 	<bound right="0" down="0" left="0" up="0"/>
 	<colour a="0" r="255" g="255" b="255"/>
+	<wire id="0">
+		<path>
+			<point x="-75" y="265"/>
+			<point x="-75" y="-10"/>
+			<point x="-110" y="-10"/>
+			<point x="-110" y="240"/>
+		</path>
+	</wire>
+	<wire id="1">
+		<path>
+			<point x="235" y="265"/>
+			<point x="235" y="-10"/>
+			<point x="200" y="-10"/>
+			<point x="200" y="240"/>
+		</path>
+	</wire>
 	<component id="0" def="SmallStack Memory Unit" x="70" y="-115" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="null" invert="false"/>
 		<connection flow="in" pinid="1" wireid="null" invert="false"/>
@@ -37,5 +53,125 @@
 		<connection flow="in" pinid="25" wireid="null" invert="false"/>
 		<connection flow="in" pinid="26" wireid="null" invert="false"/>
 		<connection flow="out" pinid="27" wireid="null" invert="false"/>
+	</component>
+	<component id="1" def="Tristate" x="-110" y="10" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="2" def="Tristate" x="-75" y="35" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="3" def="Tristate" x="-110" y="60" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="4" def="Tristate" x="-110" y="110" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="5" def="Tristate" x="-75" y="135" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="6" def="Tristate" x="-110" y="160" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="7" def="Tristate" x="-75" y="185" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="8" def="Tristate" x="-110" y="210" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="9" def="Tristate" x="-75" y="235" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="10" def="Tristate" x="-110" y="260" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="11" def="Tristate" x="-75" y="285" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="12" def="Tristate" x="-75" y="85" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="13" def="Tristate" x="200" y="10" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="14" def="Tristate" x="235" y="35" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="15" def="Tristate" x="200" y="60" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="16" def="Tristate" x="235" y="85" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="17" def="Tristate" x="200" y="110" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="18" def="Tristate" x="235" y="135" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="19" def="Tristate" x="200" y="160" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="20" def="Tristate" x="235" y="185" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="21" def="Tristate" x="200" y="210" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="22" def="Tristate" x="235" y="235" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="23" def="Tristate" x="200" y="260" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
+	</component>
+	<component id="24" def="Tristate" x="235" y="285" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="1" invert="false"/>
+		<connection flow="out" pinid="2" wireid="null" invert="false"/>
 	</component>
 </custom_component>
