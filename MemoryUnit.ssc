@@ -34,126 +34,6 @@
 	</wire>
 	<wire id="4">
 		<path>
-			<point x="270" y="-90"/>
-			<point x="270" y="-140"/>
-			<point x="20" y="-140"/>
-			<point x="20" y="-90"/>
-		</path>
-		<path>
-			<point x="20" y="-140"/>
-			<point x="-230" y="-140"/>
-			<point x="-230" y="-90"/>
-		</path>
-		<path>
-			<point x="-230" y="-140"/>
-			<point x="-480" y="-140"/>
-			<point x="-480" y="-90"/>
-		</path>
-		<marker x="20" y="-140"/>
-		<marker x="-230" y="-140"/>
-	</wire>
-	<wire id="5">
-		<path>
-			<point x="290" y="-90"/>
-			<point x="290" y="-150"/>
-			<point x="40" y="-150"/>
-			<point x="40" y="-90"/>
-		</path>
-		<path>
-			<point x="40" y="-150"/>
-			<point x="-210" y="-150"/>
-			<point x="-210" y="-90"/>
-		</path>
-		<path>
-			<point x="-210" y="-150"/>
-			<point x="-460" y="-150"/>
-			<point x="-460" y="-90"/>
-		</path>
-		<marker x="40" y="-150"/>
-		<marker x="-210" y="-150"/>
-	</wire>
-	<wire id="6">
-		<path>
-			<point x="330" y="-70"/>
-			<point x="330" y="-160"/>
-			<point x="80" y="-160"/>
-			<point x="80" y="-70"/>
-		</path>
-		<path>
-			<point x="80" y="-160"/>
-			<point x="-170" y="-160"/>
-			<point x="-170" y="-70"/>
-		</path>
-		<path>
-			<point x="-170" y="-160"/>
-			<point x="-420" y="-160"/>
-			<point x="-420" y="-70"/>
-		</path>
-		<marker x="80" y="-160"/>
-		<marker x="-170" y="-160"/>
-	</wire>
-	<wire id="7">
-		<path>
-			<point x="340" y="-70"/>
-			<point x="340" y="-170"/>
-			<point x="90" y="-170"/>
-			<point x="90" y="-70"/>
-		</path>
-		<path>
-			<point x="90" y="-170"/>
-			<point x="-160" y="-170"/>
-			<point x="-160" y="-70"/>
-		</path>
-		<path>
-			<point x="-160" y="-170"/>
-			<point x="-410" y="-170"/>
-			<point x="-410" y="-70"/>
-		</path>
-		<marker x="90" y="-170"/>
-		<marker x="-160" y="-170"/>
-	</wire>
-	<wire id="8">
-		<path>
-			<point x="350" y="-70"/>
-			<point x="350" y="-180"/>
-			<point x="100" y="-180"/>
-			<point x="100" y="-70"/>
-		</path>
-		<path>
-			<point x="100" y="-180"/>
-			<point x="-150" y="-180"/>
-			<point x="-150" y="-70"/>
-		</path>
-		<path>
-			<point x="-150" y="-180"/>
-			<point x="-400" y="-180"/>
-			<point x="-400" y="-70"/>
-		</path>
-		<marker x="100" y="-180"/>
-		<marker x="-150" y="-180"/>
-	</wire>
-	<wire id="9">
-		<path>
-			<point x="360" y="-70"/>
-			<point x="360" y="-190"/>
-			<point x="110" y="-190"/>
-			<point x="110" y="-70"/>
-		</path>
-		<path>
-			<point x="110" y="-190"/>
-			<point x="-140" y="-190"/>
-			<point x="-140" y="-70"/>
-		</path>
-		<path>
-			<point x="-140" y="-190"/>
-			<point x="-390" y="-190"/>
-			<point x="-390" y="-70"/>
-		</path>
-		<marker x="110" y="-190"/>
-		<marker x="-140" y="-190"/>
-	</wire>
-	<wire id="10">
-		<path>
 			<point x="420" y="-70"/>
 			<point x="420" y="-250"/>
 			<point x="170" y="-250"/>
@@ -178,7 +58,7 @@
 		<marker x="420" y="-250"/>
 		<tag type="interface" xwire="420" ywire="-275" xtag="420" ytag="-290" flow="in" pinid="0" text="A0"/>
 	</wire>
-	<wire id="11">
+	<wire id="5">
 		<path>
 			<point x="410" y="-70"/>
 			<point x="410" y="-240"/>
@@ -204,7 +84,7 @@
 		<marker x="390" y="-240"/>
 		<tag type="interface" xwire="390" ywire="-280" xtag="390" ytag="-290" flow="in" pinid="1" text="A1"/>
 	</wire>
-	<wire id="12">
+	<wire id="6">
 		<path>
 			<point x="400" y="-70"/>
 			<point x="400" y="-230"/>
@@ -230,7 +110,7 @@
 		<marker x="360" y="-230"/>
 		<tag type="interface" xwire="360" ywire="-280" xtag="360" ytag="-290" flow="in" pinid="2" text="A2"/>
 	</wire>
-	<wire id="13">
+	<wire id="7">
 		<path>
 			<point x="390" y="-70"/>
 			<point x="390" y="-220"/>
@@ -256,7 +136,7 @@
 		<marker x="330" y="-220"/>
 		<tag type="interface" xwire="330" ywire="-280" xtag="330" ytag="-290" flow="in" pinid="3" text="A3"/>
 	</wire>
-	<wire id="14">
+	<wire id="8">
 		<path>
 			<point x="380" y="-70"/>
 			<point x="380" y="-210"/>
@@ -282,7 +162,7 @@
 		<marker x="300" y="-210"/>
 		<tag type="interface" xwire="300" ywire="-280" xtag="300" ytag="-290" flow="in" pinid="4" text="A4"/>
 	</wire>
-	<wire id="15">
+	<wire id="9">
 		<path>
 			<point x="370" y="-70"/>
 			<point x="370" y="-200"/>
@@ -308,18 +188,234 @@
 		<marker x="270" y="-200"/>
 		<tag type="interface" xwire="270" ywire="-280" xtag="270" ytag="-290" flow="in" pinid="5" text="A5"/>
 	</wire>
+	<wire id="10">
+		<path>
+			<point x="360" y="-70"/>
+			<point x="360" y="-190"/>
+			<point x="110" y="-190"/>
+			<point x="110" y="-70"/>
+		</path>
+		<path>
+			<point x="110" y="-190"/>
+			<point x="-140" y="-190"/>
+			<point x="-140" y="-70"/>
+		</path>
+		<path>
+			<point x="-140" y="-190"/>
+			<point x="-390" y="-190"/>
+			<point x="-390" y="-70"/>
+		</path>
+		<path>
+			<point x="90" y="-190"/>
+			<point x="90" y="-280"/>
+		</path>
+		<marker x="110" y="-190"/>
+		<marker x="-140" y="-190"/>
+		<marker x="90" y="-190"/>
+		<tag type="interface" xwire="90" ywire="-280" xtag="90" ytag="-290" flow="in" pinid="6" text="A6"/>
+	</wire>
+	<wire id="11">
+		<path>
+			<point x="350" y="-70"/>
+			<point x="350" y="-180"/>
+			<point x="100" y="-180"/>
+			<point x="100" y="-70"/>
+		</path>
+		<path>
+			<point x="100" y="-180"/>
+			<point x="-150" y="-180"/>
+			<point x="-150" y="-70"/>
+		</path>
+		<path>
+			<point x="-150" y="-180"/>
+			<point x="-400" y="-180"/>
+			<point x="-400" y="-70"/>
+		</path>
+		<path>
+			<point x="60" y="-180"/>
+			<point x="60" y="-280"/>
+		</path>
+		<marker x="100" y="-180"/>
+		<marker x="-150" y="-180"/>
+		<marker x="60" y="-180"/>
+		<tag type="interface" xwire="60" ywire="-280" xtag="60" ytag="-290" flow="in" pinid="7" text="A7"/>
+	</wire>
+	<wire id="12">
+		<path>
+			<point x="340" y="-70"/>
+			<point x="340" y="-170"/>
+			<point x="90" y="-170"/>
+			<point x="90" y="-70"/>
+		</path>
+		<path>
+			<point x="90" y="-170"/>
+			<point x="-160" y="-170"/>
+			<point x="-160" y="-70"/>
+		</path>
+		<path>
+			<point x="-160" y="-170"/>
+			<point x="-410" y="-170"/>
+			<point x="-410" y="-70"/>
+		</path>
+		<path>
+			<point x="30" y="-170"/>
+			<point x="30" y="-280"/>
+		</path>
+		<marker x="90" y="-170"/>
+		<marker x="-160" y="-170"/>
+		<marker x="30" y="-170"/>
+		<tag type="interface" xwire="30" ywire="-280" xtag="30" ytag="-290" flow="in" pinid="8" text="A8"/>
+	</wire>
+	<wire id="13">
+		<path>
+			<point x="330" y="-70"/>
+			<point x="330" y="-160"/>
+			<point x="80" y="-160"/>
+			<point x="80" y="-70"/>
+		</path>
+		<path>
+			<point x="80" y="-160"/>
+			<point x="-170" y="-160"/>
+			<point x="-170" y="-70"/>
+		</path>
+		<path>
+			<point x="-170" y="-160"/>
+			<point x="-420" y="-160"/>
+			<point x="-420" y="-70"/>
+		</path>
+		<path>
+			<point x="0" y="-160"/>
+			<point x="0" y="-280"/>
+		</path>
+		<marker x="80" y="-160"/>
+		<marker x="-170" y="-160"/>
+		<marker x="0" y="-160"/>
+		<tag type="interface" xwire="0" ywire="-280" xtag="0" ytag="-290" flow="in" pinid="9" text="A9"/>
+	</wire>
+	<wire id="14">
+		<path>
+			<point x="290" y="-90"/>
+			<point x="290" y="-150"/>
+			<point x="40" y="-150"/>
+			<point x="40" y="-90"/>
+		</path>
+		<path>
+			<point x="40" y="-150"/>
+			<point x="-210" y="-150"/>
+			<point x="-210" y="-90"/>
+		</path>
+		<path>
+			<point x="-210" y="-150"/>
+			<point x="-460" y="-150"/>
+			<point x="-460" y="-90"/>
+		</path>
+		<path>
+			<point x="-30" y="-150"/>
+			<point x="-30" y="-280"/>
+		</path>
+		<marker x="40" y="-150"/>
+		<marker x="-210" y="-150"/>
+		<marker x="-30" y="-150"/>
+		<tag type="interface" xwire="-30" ywire="-280" xtag="-30" ytag="-290" flow="in" pinid="10" text="A10"/>
+	</wire>
+	<wire id="15">
+		<path>
+			<point x="270" y="-90"/>
+			<point x="270" y="-140"/>
+			<point x="20" y="-140"/>
+			<point x="20" y="-90"/>
+		</path>
+		<path>
+			<point x="20" y="-140"/>
+			<point x="-230" y="-140"/>
+			<point x="-230" y="-90"/>
+		</path>
+		<path>
+			<point x="-230" y="-140"/>
+			<point x="-480" y="-140"/>
+			<point x="-480" y="-90"/>
+		</path>
+		<path>
+			<point x="-60" y="-140"/>
+			<point x="-60" y="-280"/>
+		</path>
+		<marker x="20" y="-140"/>
+		<marker x="-230" y="-140"/>
+		<marker x="-60" y="-140"/>
+		<tag type="interface" xwire="-60" ywire="-280" xtag="-60" ytag="-290" flow="in" pinid="11" text="A11"/>
+	</wire>
+	<wire id="16">
+		<path>
+			<point x="-300" y="-40"/>
+			<point x="-260" y="-40"/>
+			<point x="-260" y="60"/>
+			<point x="500" y="60"/>
+		</path>
+		<path>
+			<point x="-50" y="-40"/>
+			<point x="-10" y="-40"/>
+			<point x="-10" y="60"/>
+		</path>
+		<path>
+			<point x="200" y="-40"/>
+			<point x="240" y="-40"/>
+			<point x="240" y="60"/>
+		</path>
+		<marker x="-10" y="60"/>
+		<marker x="240" y="60"/>
+	</wire>
+	<wire id="17">
+		<path>
+			<point x="-300" y="-20"/>
+			<point x="-270" y="-20"/>
+			<point x="-270" y="90"/>
+			<point x="500" y="90"/>
+		</path>
+		<path>
+			<point x="-50" y="-20"/>
+			<point x="-20" y="-20"/>
+			<point x="-20" y="90"/>
+		</path>
+		<path>
+			<point x="200" y="-20"/>
+			<point x="230" y="-20"/>
+			<point x="230" y="90"/>
+		</path>
+		<marker x="-20" y="90"/>
+		<marker x="230" y="90"/>
+	</wire>
+	<wire id="18">
+		<path>
+			<point x="-300" y="0"/>
+			<point x="-280" y="0"/>
+			<point x="-280" y="120"/>
+			<point x="500" y="120"/>
+		</path>
+		<path>
+			<point x="-50" y="0"/>
+			<point x="-30" y="0"/>
+			<point x="-30" y="120"/>
+		</path>
+		<path>
+			<point x="200" y="0"/>
+			<point x="220" y="0"/>
+			<point x="220" y="120"/>
+		</path>
+		<marker x="-30" y="120"/>
+		<marker x="220" y="120"/>
+	</wire>
 	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
 		<connection flow="in" pinid="0">
-			<subpin wireid="6" invert="false"/>
-			<subpin wireid="7" invert="false"/>
-			<subpin wireid="8" invert="false"/>
-			<subpin wireid="9" invert="false"/>
-			<subpin wireid="15" invert="false"/>
-			<subpin wireid="14" invert="false"/>
 			<subpin wireid="13" invert="false"/>
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
 			<subpin wireid="10" invert="false"/>
+			<subpin wireid="9" invert="false"/>
+			<subpin wireid="8" invert="false"/>
+			<subpin wireid="7" invert="false"/>
+			<subpin wireid="6" invert="false"/>
+			<subpin wireid="5" invert="false"/>
+			<subpin wireid="4" invert="false"/>
 		</connection>
 		<connection pinid="1">
 			<subpin wireid="null" invert="false"/>
@@ -336,22 +432,22 @@
 			<subpin wireid="null" invert="false"/>
 		</connection>
 		<connection flow="in" pinid="2" wireid="1" invert="false"/>
-		<connection flow="in" pinid="3" wireid="null" invert="false"/>
-		<connection flow="in" pinid="4" wireid="null" invert="false"/>
-		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="16" invert="false"/>
+		<connection flow="in" pinid="4" wireid="17" invert="false"/>
+		<connection flow="in" pinid="5" wireid="18" invert="false"/>
 	</component>
 	<component id="1" def="Memory" x="375" y="-20" direction="down" flip="true" type="ROM-CS">
 		<connection flow="in" pinid="0">
-			<subpin wireid="6" invert="false"/>
-			<subpin wireid="7" invert="false"/>
-			<subpin wireid="8" invert="false"/>
-			<subpin wireid="9" invert="false"/>
-			<subpin wireid="15" invert="false"/>
-			<subpin wireid="14" invert="false"/>
 			<subpin wireid="13" invert="false"/>
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
 			<subpin wireid="10" invert="false"/>
+			<subpin wireid="9" invert="false"/>
+			<subpin wireid="8" invert="false"/>
+			<subpin wireid="7" invert="false"/>
+			<subpin wireid="6" invert="false"/>
+			<subpin wireid="5" invert="false"/>
+			<subpin wireid="4" invert="false"/>
 		</connection>
 		<connection pinid="1">
 			<subpin wireid="null" invert="false"/>
@@ -374,44 +470,44 @@
 	</component>
 	<component id="2" def="And" x="-470" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="5" invert="false"/>
-			<subpin wireid="4" invert="false"/>
+			<subpin wireid="14" invert="false"/>
+			<subpin wireid="15" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="3" invert="false"/>
 	</component>
 	<component id="3" def="And" x="-220" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="5" invert="false"/>
-			<subpin wireid="4" invert="true"/>
+			<subpin wireid="14" invert="false"/>
+			<subpin wireid="15" invert="true"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="0" invert="false"/>
 	</component>
 	<component id="4" def="And" x="30" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="5" invert="true"/>
-			<subpin wireid="4" invert="false"/>
+			<subpin wireid="14" invert="true"/>
+			<subpin wireid="15" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="1" invert="false"/>
 	</component>
 	<component id="5" def="And" x="280" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="5" invert="true"/>
-			<subpin wireid="4" invert="true"/>
+			<subpin wireid="14" invert="true"/>
+			<subpin wireid="15" invert="true"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="2" invert="false"/>
 	</component>
 	<component id="6" def="Memory" x="-375" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
 		<connection flow="in" pinid="0">
-			<subpin wireid="6" invert="false"/>
-			<subpin wireid="7" invert="false"/>
-			<subpin wireid="8" invert="false"/>
-			<subpin wireid="9" invert="false"/>
-			<subpin wireid="15" invert="false"/>
-			<subpin wireid="14" invert="false"/>
 			<subpin wireid="13" invert="false"/>
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
 			<subpin wireid="10" invert="false"/>
+			<subpin wireid="9" invert="false"/>
+			<subpin wireid="8" invert="false"/>
+			<subpin wireid="7" invert="false"/>
+			<subpin wireid="6" invert="false"/>
+			<subpin wireid="5" invert="false"/>
+			<subpin wireid="4" invert="false"/>
 		</connection>
 		<connection pinid="1">
 			<subpin wireid="null" invert="false"/>
@@ -428,22 +524,22 @@
 			<subpin wireid="null" invert="false"/>
 		</connection>
 		<connection flow="in" pinid="2" wireid="3" invert="false"/>
-		<connection flow="in" pinid="3" wireid="null" invert="false"/>
-		<connection flow="in" pinid="4" wireid="null" invert="false"/>
-		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="16" invert="false"/>
+		<connection flow="in" pinid="4" wireid="17" invert="false"/>
+		<connection flow="in" pinid="5" wireid="18" invert="false"/>
 	</component>
 	<component id="7" def="Memory" x="-125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
 		<connection flow="in" pinid="0">
-			<subpin wireid="6" invert="false"/>
-			<subpin wireid="7" invert="false"/>
-			<subpin wireid="8" invert="false"/>
-			<subpin wireid="9" invert="false"/>
-			<subpin wireid="15" invert="false"/>
-			<subpin wireid="14" invert="false"/>
 			<subpin wireid="13" invert="false"/>
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
 			<subpin wireid="10" invert="false"/>
+			<subpin wireid="9" invert="false"/>
+			<subpin wireid="8" invert="false"/>
+			<subpin wireid="7" invert="false"/>
+			<subpin wireid="6" invert="false"/>
+			<subpin wireid="5" invert="false"/>
+			<subpin wireid="4" invert="false"/>
 		</connection>
 		<connection pinid="1">
 			<subpin wireid="null" invert="false"/>
@@ -460,8 +556,12 @@
 			<subpin wireid="null" invert="false"/>
 		</connection>
 		<connection flow="in" pinid="2" wireid="0" invert="false"/>
-		<connection flow="in" pinid="3" wireid="null" invert="false"/>
-		<connection flow="in" pinid="4" wireid="null" invert="false"/>
-		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="16" invert="false"/>
+		<connection flow="in" pinid="4" wireid="17" invert="false"/>
+		<connection flow="in" pinid="5" wireid="18" invert="false"/>
+	</component>
+	<component id="8" def="Buffer" x="265" y="205" direction="down" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
 	</component>
 </custom_component>
