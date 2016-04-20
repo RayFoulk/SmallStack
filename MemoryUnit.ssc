@@ -52,9 +52,49 @@
 		<marker x="20" y="-140"/>
 		<marker x="-230" y="-140"/>
 	</wire>
+	<wire id="5">
+		<path>
+			<point x="290" y="-90"/>
+			<point x="290" y="-150"/>
+			<point x="40" y="-150"/>
+			<point x="40" y="-90"/>
+		</path>
+		<path>
+			<point x="40" y="-150"/>
+			<point x="-210" y="-150"/>
+			<point x="-210" y="-90"/>
+		</path>
+		<path>
+			<point x="-210" y="-150"/>
+			<point x="-460" y="-150"/>
+			<point x="-460" y="-90"/>
+		</path>
+		<marker x="40" y="-150"/>
+		<marker x="-210" y="-150"/>
+	</wire>
+	<wire id="6">
+		<path>
+			<point x="330" y="-70"/>
+			<point x="330" y="-160"/>
+			<point x="80" y="-160"/>
+			<point x="80" y="-70"/>
+		</path>
+		<path>
+			<point x="80" y="-160"/>
+			<point x="-170" y="-160"/>
+			<point x="-170" y="-70"/>
+		</path>
+		<path>
+			<point x="-170" y="-160"/>
+			<point x="-420" y="-160"/>
+			<point x="-420" y="-70"/>
+		</path>
+		<marker x="80" y="-160"/>
+		<marker x="-170" y="-160"/>
+	</wire>
 	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="6" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
@@ -86,7 +126,7 @@
 	</component>
 	<component id="1" def="Memory" x="375" y="-20" direction="down" flip="true" type="ROM-CS">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="6" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
@@ -118,35 +158,35 @@
 	</component>
 	<component id="2" def="And" x="-470" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="5" invert="false"/>
 			<subpin wireid="4" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="3" invert="false"/>
 	</component>
 	<component id="3" def="And" x="-220" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="5" invert="false"/>
 			<subpin wireid="4" invert="true"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="0" invert="false"/>
 	</component>
 	<component id="4" def="And" x="30" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="true"/>
+			<subpin wireid="5" invert="true"/>
 			<subpin wireid="4" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="1" invert="false"/>
 	</component>
 	<component id="5" def="And" x="280" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="true"/>
+			<subpin wireid="5" invert="true"/>
 			<subpin wireid="4" invert="true"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="2" invert="false"/>
 	</component>
 	<component id="6" def="Memory" x="-375" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="6" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
@@ -178,7 +218,7 @@
 	</component>
 	<component id="7" def="Memory" x="-125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
 		<connection flow="in" pinid="0">
-			<subpin wireid="null" invert="false"/>
+			<subpin wireid="6" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
 			<subpin wireid="null" invert="false"/>
