@@ -5,5 +5,5 @@
 	</metadata>
 	<name>SmallStack 12-Bit Computer</name>
 	<description></description>
-	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 </project>
