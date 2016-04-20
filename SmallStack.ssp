@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<project>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>SmallStack 12-Bit Computer</name>
+	<description></description>
+	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
+</project>
