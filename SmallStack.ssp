@@ -5,6 +5,7 @@
 	</metadata>
 	<name>SmallStack 12-Bit Computer</name>
 	<description>Forth-Inspired 12-bit Stack Computer</description>
+	<component>/home/ray/Source/SmartSim/SmallStack/BusIsolator.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 	<component root="true">/home/ray/Source/SmartSim/SmallStack/MemoryTester.ssc</component>
 </project>
