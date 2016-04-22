@@ -858,7 +858,7 @@
 		</path>
 		<tag type="interface" xwire="380" ywire="300" xtag="390" ytag="300" flow="out" pinid="27" text="ERROR"/>
 	</wire>
-	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK">
+	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK" write="/home/rfoulk/Source/SmartSim/SmallStack/DumpRAM.txt">
 		<connection flow="in" pinid="0">
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
@@ -890,7 +890,7 @@
 		<connection flow="in" pinid="4" wireid="43" invert="false"/>
 		<connection flow="in" pinid="5" wireid="15" invert="false"/>
 	</component>
-	<component id="1" def="Memory" x="375" y="-20" direction="down" flip="true" type="ROM-CS">
+	<component id="1" def="Memory" x="375" y="-20" direction="down" flip="true" type="ROM-CS" write="/home/rfoulk/Source/SmartSim/SmallStack/DumpROM.txt">
 		<connection flow="in" pinid="0">
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
@@ -931,15 +931,15 @@
 	</component>
 	<component id="3" def="And" x="-220" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="13" invert="false"/>
-			<subpin wireid="14" invert="true"/>
+			<subpin wireid="13" invert="true"/>
+			<subpin wireid="14" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="0" invert="false"/>
 	</component>
 	<component id="4" def="And" x="30" y="-55" direction="down" flip="false">
 		<connection flow="in" pinid="0">
-			<subpin wireid="13" invert="true"/>
-			<subpin wireid="14" invert="false"/>
+			<subpin wireid="13" invert="false"/>
+			<subpin wireid="14" invert="true"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="1" invert="false"/>
 	</component>
