@@ -5,14 +5,14 @@
 	</metadata>
 	<name>JK Flipflop</name>
 	<description>A negative edge triggered flipflop with set, reset, and toggle functionality</description>
-	<label>JK</label>
-	<bound right="20" down="30" left="-20" up="-30"/>
+	<label> JK</label>
+	<bound right="30" down="30" left="-20" up="-30"/>
 	<colour a="0" r="255" g="255" b="255"/>
 	<pin x="-20" y="-20" length="10" direction="left" id="0" flow="in" label="J" required="true"/>
 	<pin x="-20" y="20" length="10" direction="left" id="1" flow="in" label="K" required="true"/>
 	<pin x="-20" y="0" length="10" direction="left" id="2" flow="in" symlabel="clock" required="true"/>
-	<pin x="20" y="-20" length="10" direction="right" id="3" flow="out" label="Q" required="false"/>
-	<pin x="20" y="20" length="10" direction="right" id="4" flow="out" barlabel="Q" required="false"/>
+	<pin x="30" y="-20" length="10" direction="right" id="3" flow="out" label="Q" required="false"/>
+	<pin x="30" y="20" length="10" direction="right" id="4" flow="out" barlabel="Q" required="false"/>
 	<wire id="0">
 		<path>
 			<point x="-260" y="-80"/>

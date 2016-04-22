@@ -3,61 +3,88 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>Untitled Component 1</name>
-	<description></description>
+	<name>UpDownCounter</name>
+	<description>UpDownCounter</description>
 	<label></label>
 	<bound right="0" down="0" left="0" up="0"/>
 	<colour a="0" r="255" g="255" b="255"/>
-	<wire id="0">
-		<path>
-			<point x="-260" y="-90"/>
-			<point x="-195" y="-90"/>
-		</path>
-		<path>
-			<point x="-225" y="-90"/>
-			<point x="-225" y="-50"/>
-			<point x="-195" y="-50"/>
-		</path>
-		<marker x="-225" y="-90"/>
-	</wire>
-	<wire id="1">
-		<path>
-			<point x="-195" y="-70"/>
-			<point x="-205" y="-70"/>
-			<point x="-205" y="-15"/>
-			<point x="-270" y="-15"/>
-		</path>
-		<tag type="interface" xwire="-270" ywire="-15" xtag="-280" ytag="-15" flow="in" pinid="0" text="CLOCK"/>
-	</wire>
-	<component id="0" def="JK Flipflop" x="-165" y="-70" direction="right" flip="false">
-		<connection flow="in" pinid="0" wireid="0" invert="false"/>
-		<connection flow="in" pinid="1" wireid="0" invert="false"/>
-		<connection flow="in" pinid="2" wireid="1" invert="false"/>
-		<connection flow="out" pinid="3" wireid="null" invert="false"/>
-		<connection flow="out" pinid="4" wireid="null" invert="false"/>
+	<pin x="0" y="0" length="0" direction="right" id="0" flow="in" required="true"/>
+	<component id="0" def="Constant" x="-485" y="-155" direction="right" flip="false" value="1">
+		<connection flow="out" pinid="0" wireid="null" invert="false"/>
 	</component>
-	<component id="1" def="JK Flipflop" x="-60" y="-70" direction="right" flip="false">
+	<component id="1" def="Buffer" x="-190" y="45" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="out" pinid="1" wireid="null" invert="true"/>
+	</component>
+	<component id="2" def="And" x="-225" y="-25" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="3" def="And" x="-10" y="-25" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="4" def="And" x="210" y="-25" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="5" def="JK Flipflop" x="-305" y="-125" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="null" invert="false"/>
 		<connection flow="in" pinid="1" wireid="null" invert="false"/>
 		<connection flow="in" pinid="2" wireid="null" invert="false"/>
 		<connection flow="out" pinid="3" wireid="null" invert="false"/>
 		<connection flow="out" pinid="4" wireid="null" invert="false"/>
 	</component>
-	<component id="2" def="JK Flipflop" x="40" y="-70" direction="right" flip="false">
+	<component id="6" def="JK Flipflop" x="-95" y="-125" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="null" invert="false"/>
 		<connection flow="in" pinid="1" wireid="null" invert="false"/>
 		<connection flow="in" pinid="2" wireid="null" invert="false"/>
 		<connection flow="out" pinid="3" wireid="null" invert="false"/>
 		<connection flow="out" pinid="4" wireid="null" invert="false"/>
 	</component>
-	<component id="3" def="JK Flipflop" x="140" y="-70" direction="right" flip="false">
+	<component id="7" def="JK Flipflop" x="335" y="-130" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="null" invert="false"/>
 		<connection flow="in" pinid="1" wireid="null" invert="false"/>
 		<connection flow="in" pinid="2" wireid="null" invert="false"/>
 		<connection flow="out" pinid="3" wireid="null" invert="false"/>
 		<connection flow="out" pinid="4" wireid="null" invert="false"/>
 	</component>
-	<component id="4" def="Constant" x="-280" y="-90" direction="right" flip="false" value="1">
-		<connection flow="out" pinid="0" wireid="0" invert="false"/>
+	<component id="8" def="Or" x="-170" y="-150" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
 	</component>
+	<component id="9" def="Or" x="40" y="-150" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="10" def="Or" x="265" y="-155" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="11" def="JK Flipflop" x="135" y="-135" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="null" invert="false"/>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="out" pinid="3" wireid="null" invert="false"/>
+		<connection flow="out" pinid="4" wireid="null" invert="false"/>
+	</component>
+	<annotation x="-255" y="-245" text="TODO: Make one of these a counter element" fontsize="12"/>
 </custom_component>

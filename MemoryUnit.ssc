@@ -32,7 +32,7 @@
 	<pin x="-35" y="40" length="10" direction="down" id="21" flow="bi" required="true"/>
 	<pin x="-45" y="40" length="10" direction="down" id="22" flow="bi" required="true"/>
 	<pin x="-55" y="40" length="10" direction="down" id="23" flow="bi" required="true"/>
-	<pin x="-65" y="-20" length="10" direction="left" id="24" flow="in" label="CL" required="true"/>
+	<pin x="-65" y="-20" length="10" direction="left" id="24" flow="in" symlabel="clock" required="true"/>
 	<pin x="-65" y="0" length="10" direction="left" id="25" flow="in" label="WE" required="true"/>
 	<pin x="-65" y="20" length="10" direction="left" id="26" flow="in" label="RE" required="true"/>
 	<pin x="65" y="0" length="10" direction="right" id="27" flow="out" label="ERR" required="false"/>
@@ -858,7 +858,7 @@
 		</path>
 		<tag type="interface" xwire="380" ywire="300" xtag="390" ytag="300" flow="out" pinid="27" text="ERROR"/>
 	</wire>
-	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK" write="/home/rfoulk/Source/SmartSim/SmallStack/DumpRAM.txt">
+	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK" write="/home/ray/Source/SmartSim/SmallStack/DumpRAM.txt">
 		<connection flow="in" pinid="0">
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
@@ -890,7 +890,7 @@
 		<connection flow="in" pinid="4" wireid="43" invert="false"/>
 		<connection flow="in" pinid="5" wireid="15" invert="false"/>
 	</component>
-	<component id="1" def="Memory" x="375" y="-20" direction="down" flip="true" type="ROM-CS" write="/home/rfoulk/Source/SmartSim/SmallStack/DumpROM.txt">
+	<component id="1" def="Memory" x="375" y="-20" direction="down" flip="true" type="ROM-CS" write="/home/ray/Source/SmartSim/SmallStack/DumpROM.txt">
 		<connection flow="in" pinid="0">
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>
