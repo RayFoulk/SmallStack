@@ -5,7 +5,7 @@
 	</metadata>
 	<name>BusIsolator</name>
 	<description>12bit Bus Isolator</description>
-	<label>Bus Isolator</label>
+	<label>Tristate</label>
 	<bound right="65" down="15" left="-65" up="-15"/>
 	<colour a="0" r="255" g="255" b="255"/>
 	<pin x="55" y="-15" length="10" direction="up" id="0" flow="bi" label="In0" required="true"/>
