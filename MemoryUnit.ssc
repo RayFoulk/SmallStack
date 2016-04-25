@@ -858,7 +858,7 @@
 		</path>
 		<tag type="interface" xwire="380" ywire="300" xtag="390" ytag="300" flow="out" pinid="27" text="ERROR"/>
 	</wire>
-	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK" write="/home/ray/Source/SmartSim/SmallStack/DumpRAM.bin">
+	<component id="0" def="Memory" x="125" y="-20" direction="down" flip="true" type="RAM-CS-RE-WE-CLK" write="DumpRAM.bin">
 		<connection flow="in" pinid="0">
 			<subpin wireid="12" invert="false"/>
 			<subpin wireid="11" invert="false"/>

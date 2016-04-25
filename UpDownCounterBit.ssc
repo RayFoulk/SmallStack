@@ -9,11 +9,11 @@
 	<bound right="45" down="40" left="-45" up="-40"/>
 	<colour a="0" r="255" g="255" b="255"/>
 	<pin x="45" y="-20" length="10" direction="right" id="0" flow="out" label="Q" required="false"/>
-	<pin x="45" y="20" length="10" direction="right" id="1" flow="out" label="NotQ" required="false"/>
-	<pin x="45" y="-30" length="10" direction="right" id="2" flow="out" label="UpOut" required="false"/>
-	<pin x="45" y="30" length="10" direction="right" id="3" flow="out" label="DnOut" required="false"/>
-	<pin x="-45" y="-30" length="10" direction="left" id="4" flow="in" label="UpIn" required="true"/>
-	<pin x="-45" y="30" length="10" direction="left" id="5" flow="in" label="DnIn" required="true"/>
+	<pin x="45" y="20" length="10" direction="right" id="1" flow="out" barlabel="Q" required="false"/>
+	<pin x="45" y="-30" length="10" direction="right" id="2" flow="out" label="UO" required="false"/>
+	<pin x="45" y="30" length="10" direction="right" id="3" flow="out" label="DO" required="false"/>
+	<pin x="-45" y="-30" length="10" direction="left" id="4" flow="in" label="UI" required="true"/>
+	<pin x="-45" y="30" length="10" direction="left" id="5" flow="in" label="DI" required="true"/>
 	<pin x="-45" y="0" length="10" direction="left" id="6" flow="in" symlabel="clock" required="true"/>
 	<wire id="0">
 		<path>
@@ -52,14 +52,14 @@
 			<point x="-150" y="-80"/>
 		</path>
 		<marker x="-160" y="-120"/>
-		<tag type="interface" xwire="-200" ywire="-120" xtag="-210" ytag="-120" flow="in" pinid="4" text="UpIn"/>
+		<tag type="interface" xwire="-200" ywire="-120" xtag="-210" ytag="-120" flow="in" pinid="4" text="UI"/>
 	</wire>
 	<wire id="3">
 		<path>
 			<point x="150" y="-110"/>
 			<point x="200" y="-110"/>
 		</path>
-		<tag type="interface" xwire="200" ywire="-110" xtag="210" ytag="-110" flow="out" pinid="2" text="UpOut"/>
+		<tag type="interface" xwire="200" ywire="-110" xtag="210" ytag="-110" flow="out" pinid="2" text="UO"/>
 	</wire>
 	<wire id="4">
 		<path>
@@ -79,7 +79,7 @@
 			<point x="150" y="10"/>
 			<point x="200" y="10"/>
 		</path>
-		<tag type="interface" xwire="200" ywire="10" xtag="210" ytag="10" flow="out" pinid="3" text="DnOut"/>
+		<tag type="interface" xwire="200" ywire="10" xtag="210" ytag="10" flow="out" pinid="3" text="DO"/>
 	</wire>
 	<wire id="6">
 		<path>
@@ -92,7 +92,7 @@
 			<point x="-150" y="-60"/>
 		</path>
 		<marker x="-160" y="20"/>
-		<tag type="interface" xwire="-200" ywire="20" xtag="-210" ytag="20" flow="in" pinid="5" text="DnIn"/>
+		<tag type="interface" xwire="-200" ywire="20" xtag="-210" ytag="20" flow="in" pinid="5" text="DI"/>
 	</wire>
 	<wire id="7">
 		<path>
@@ -101,7 +101,7 @@
 			<point x="-40" y="60"/>
 			<point x="-200" y="60"/>
 		</path>
-		<tag type="interface" xwire="-200" ywire="60" xtag="-210" ytag="60" flow="in" pinid="6" text="Clock"/>
+		<tag type="interface" xwire="-200" ywire="60" xtag="-210" ytag="60" flow="in" pinid="6" text="CLOCK"/>
 	</wire>
 	<component id="0" def="JK Flipflop" x="-5" y="-50" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="0" invert="false"/>
