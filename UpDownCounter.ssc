@@ -5,9 +5,15 @@
 	</metadata>
 	<name>UpDownCounter</name>
 	<description>UpDownCounter</description>
-	<label></label>
-	<bound right="0" down="0" left="0" up="0"/>
+	<label>U/D</label>
+	<bound right="25" down="15" left="-25" up="-15"/>
 	<colour a="0" r="255" g="255" b="255"/>
+	<pin x="15" y="-15" length="10" direction="up" id="0" flow="out" required="true"/>
+	<pin x="5" y="-15" length="10" direction="up" id="1" flow="out" required="true"/>
+	<pin x="-5" y="-15" length="10" direction="up" id="2" flow="out" required="true"/>
+	<pin x="-15" y="-15" length="10" direction="up" id="3" flow="out" required="true"/>
+	<pin x="25" y="-5" length="10" direction="right" id="4" flow="in" required="true"/>
+	<pin x="25" y="5" length="10" direction="right" id="5" flow="in" symlabel="clock" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="130" y="-30"/>
@@ -56,6 +62,7 @@
 			<point x="120" y="-20"/>
 			<point x="120" y="-80"/>
 		</path>
+		<tag type="interface" xwire="120" ywire="-80" xtag="120" ytag="-90" flow="out" pinid="0" text="C0"/>
 	</wire>
 	<wire id="8">
 		<path>
@@ -63,6 +70,7 @@
 			<point x="-5" y="-20"/>
 			<point x="-5" y="-80"/>
 		</path>
+		<tag type="interface" xwire="-5" ywire="-80" xtag="-5" ytag="-90" flow="out" pinid="1" text="C1"/>
 	</wire>
 	<wire id="9">
 		<path>
@@ -70,6 +78,7 @@
 			<point x="-130" y="-20"/>
 			<point x="-130" y="-80"/>
 		</path>
+		<tag type="interface" xwire="-130" ywire="-75" xtag="-130" ytag="-90" flow="out" pinid="2" text="C2"/>
 	</wire>
 	<wire id="10">
 		<path>
@@ -77,6 +86,7 @@
 			<point x="-255" y="-20"/>
 			<point x="-255" y="-80"/>
 		</path>
+		<tag type="interface" xwire="-255" ywire="-80" xtag="-255" ytag="-90" flow="out" pinid="3" text="C3"/>
 	</wire>
 	<wire id="11">
 		<path>
@@ -89,6 +99,7 @@
 			<point x="340" y="-30"/>
 		</path>
 		<marker x="305" y="-30"/>
+		<tag type="interface" xwire="340" ywire="-30" xtag="350" ytag="-30" flow="in" pinid="4" text="UP/DN"/>
 	</wire>
 	<wire id="12">
 		<path>
@@ -115,45 +126,46 @@
 		<marker x="-5" y="80"/>
 		<marker x="120" y="80"/>
 		<marker x="245" y="80"/>
+		<tag type="interface" xwire="340" ywire="80" xtag="350" ytag="80" flow="in" pinid="5" text="CLOCK"/>
 	</wire>
 	<component id="0" def="Buffer" x="280" y="30" direction="left" flip="false">
 		<connection flow="in" pinid="0" wireid="11" invert="false"/>
 		<connection flow="out" pinid="1" wireid="3" invert="true"/>
 	</component>
-	<component id="1" def="UpDownCounterBit" x="-190" y="0" direction="left" flip="false">
-		<connection flow="out" pinid="0" wireid="null" invert="false"/>
-		<connection flow="out" pinid="1" wireid="10" invert="false"/>
+	<component id="1" def="UpDownCounterBit" x="-190" y="0" direction="right" flip="false">
+		<connection flow="out" pinid="0" wireid="10" invert="false"/>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
 		<connection flow="out" pinid="2" wireid="null" invert="false"/>
 		<connection flow="out" pinid="3" wireid="null" invert="false"/>
-		<connection flow="in" pinid="4" wireid="6" invert="false"/>
-		<connection flow="in" pinid="5" wireid="2" invert="false"/>
+		<connection flow="in" pinid="4" wireid="2" invert="false"/>
+		<connection flow="in" pinid="5" wireid="6" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
 	</component>
-	<component id="2" def="UpDownCounterBit" x="-65" y="0" direction="left" flip="false">
-		<connection flow="out" pinid="0" wireid="null" invert="false"/>
-		<connection flow="out" pinid="1" wireid="9" invert="false"/>
-		<connection flow="out" pinid="2" wireid="6" invert="false"/>
-		<connection flow="out" pinid="3" wireid="2" invert="false"/>
-		<connection flow="in" pinid="4" wireid="5" invert="false"/>
-		<connection flow="in" pinid="5" wireid="1" invert="false"/>
+	<component id="2" def="UpDownCounterBit" x="-65" y="0" direction="right" flip="false">
+		<connection flow="out" pinid="0" wireid="9" invert="false"/>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+		<connection flow="out" pinid="2" wireid="2" invert="false"/>
+		<connection flow="out" pinid="3" wireid="6" invert="false"/>
+		<connection flow="in" pinid="4" wireid="1" invert="false"/>
+		<connection flow="in" pinid="5" wireid="5" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
 	</component>
-	<component id="3" def="UpDownCounterBit" x="60" y="0" direction="left" flip="false">
-		<connection flow="out" pinid="0" wireid="null" invert="false"/>
-		<connection flow="out" pinid="1" wireid="8" invert="false"/>
-		<connection flow="out" pinid="2" wireid="5" invert="false"/>
-		<connection flow="out" pinid="3" wireid="1" invert="false"/>
-		<connection flow="in" pinid="4" wireid="4" invert="false"/>
-		<connection flow="in" pinid="5" wireid="0" invert="false"/>
+	<component id="3" def="UpDownCounterBit" x="60" y="0" direction="right" flip="false">
+		<connection flow="out" pinid="0" wireid="8" invert="false"/>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+		<connection flow="out" pinid="2" wireid="1" invert="false"/>
+		<connection flow="out" pinid="3" wireid="5" invert="false"/>
+		<connection flow="in" pinid="4" wireid="0" invert="false"/>
+		<connection flow="in" pinid="5" wireid="4" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
 	</component>
-	<component id="4" def="UpDownCounterBit" x="185" y="0" direction="left" flip="false">
-		<connection flow="out" pinid="0" wireid="null" invert="false"/>
-		<connection flow="out" pinid="1" wireid="7" invert="false"/>
-		<connection flow="out" pinid="2" wireid="4" invert="false"/>
-		<connection flow="out" pinid="3" wireid="0" invert="false"/>
-		<connection flow="in" pinid="4" wireid="3" invert="false"/>
-		<connection flow="in" pinid="5" wireid="11" invert="false"/>
+	<component id="4" def="UpDownCounterBit" x="185" y="0" direction="right" flip="false">
+		<connection flow="out" pinid="0" wireid="7" invert="false"/>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+		<connection flow="out" pinid="2" wireid="0" invert="false"/>
+		<connection flow="out" pinid="3" wireid="4" invert="false"/>
+		<connection flow="in" pinid="4" wireid="11" invert="false"/>
+		<connection flow="in" pinid="5" wireid="3" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
 	</component>
 </custom_component>

@@ -8,13 +8,13 @@
 	<label>CTR BIT</label>
 	<bound right="45" down="40" left="-45" up="-40"/>
 	<colour a="0" r="255" g="255" b="255"/>
-	<pin x="45" y="-20" length="10" direction="right" id="0" flow="out" label="Q" required="false"/>
-	<pin x="45" y="20" length="10" direction="right" id="1" flow="out" barlabel="Q" required="false"/>
-	<pin x="45" y="-30" length="10" direction="right" id="2" flow="out" label="UO" required="false"/>
-	<pin x="45" y="30" length="10" direction="right" id="3" flow="out" label="DO" required="false"/>
-	<pin x="-45" y="-30" length="10" direction="left" id="4" flow="in" label="UI" required="true"/>
-	<pin x="-45" y="30" length="10" direction="left" id="5" flow="in" label="DI" required="true"/>
-	<pin x="-45" y="0" length="10" direction="left" id="6" flow="in" symlabel="clock" required="true"/>
+	<pin x="-45" y="-20" length="10" direction="left" id="0" flow="out" label="Q" required="false"/>
+	<pin x="-45" y="20" length="10" direction="left" id="1" flow="out" barlabel="Q" required="false"/>
+	<pin x="-45" y="-30" length="10" direction="left" id="2" flow="out" label="UO" required="false"/>
+	<pin x="-45" y="30" length="10" direction="left" id="3" flow="out" label="DO" required="false"/>
+	<pin x="45" y="-30" length="10" direction="right" id="4" flow="in" label="UI" required="true"/>
+	<pin x="45" y="30" length="10" direction="right" id="5" flow="in" label="DI" required="true"/>
+	<pin x="45" y="0" length="10" direction="right" id="6" flow="in" symlabel="clock" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="-35" y="-70"/>

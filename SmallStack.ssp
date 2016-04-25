@@ -9,6 +9,7 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlop.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
-	<component root="true">/home/ray/Source/SmartSim/SmallStack/UpDownCounter.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounter.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryTester.ssc</component>
+	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterTester.ssc</component>
 </project>
