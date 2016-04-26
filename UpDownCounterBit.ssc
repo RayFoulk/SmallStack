@@ -15,6 +15,8 @@
 	<pin x="45" y="-30" length="10" direction="right" id="4" flow="in" label="UI" required="true"/>
 	<pin x="45" y="30" length="10" direction="right" id="5" flow="in" label="DI" required="true"/>
 	<pin x="45" y="0" length="10" direction="right" id="6" flow="in" symlabel="clock" required="true"/>
+	<pin x="0" y="-40" length="10" direction="up" id="7" flow="in" label="PRE" required="true"/>
+	<pin x="0" y="40" length="10" direction="down" id="8" flow="in" label="CLR" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="-35" y="-70"/>
@@ -72,7 +74,7 @@
 			<point x="60" y="-30"/>
 		</path>
 		<marker x="60" y="-30"/>
-		<tag type="interface" xwire="200" ywire="-30" xtag="210" ytag="-30" flow="out" pinid="1" text="NotQ"/>
+		<tag type="interface" xwire="200" ywire="-30" xtag="210" ytag="-30" flow="out" pinid="1" text="Not Q"/>
 	</wire>
 	<wire id="5">
 		<path>
@@ -103,32 +105,48 @@
 		</path>
 		<tag type="interface" xwire="-200" ywire="60" xtag="-210" ytag="60" flow="in" pinid="6" text="CLOCK"/>
 	</wire>
-	<component id="0" def="JK Flipflop" x="-5" y="-50" direction="right" flip="false">
-		<connection flow="in" pinid="0" wireid="0" invert="false"/>
-		<connection flow="in" pinid="1" wireid="0" invert="false"/>
-		<connection flow="in" pinid="2" wireid="7" invert="false"/>
-		<connection flow="out" pinid="3" wireid="1" invert="false"/>
-		<connection flow="out" pinid="4" wireid="4" invert="false"/>
-	</component>
-	<component id="1" def="Or" x="-115" y="-70" direction="right" flip="false">
+	<wire id="8">
+		<path>
+			<point x="0" y="-90"/>
+			<point x="0" y="-160"/>
+		</path>
+		<tag type="interface" xwire="0" ywire="-155" xtag="0" ytag="-170" flow="in" pinid="7" text="PRE"/>
+	</wire>
+	<wire id="9">
+		<path>
+			<point x="0" y="-10"/>
+			<point x="0" y="100"/>
+		</path>
+		<tag type="interface" xwire="0" ywire="100" xtag="0" ytag="110" flow="in" pinid="8" text="CLR"/>
+	</wire>
+	<component id="0" def="Or" x="-115" y="-70" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="2" invert="false"/>
 			<subpin wireid="6" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="0" invert="false"/>
 	</component>
-	<component id="2" def="And" x="115" y="-110" direction="right" flip="false">
+	<component id="1" def="And" x="115" y="-110" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="2" invert="false"/>
 			<subpin wireid="1" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="3" invert="false"/>
 	</component>
-	<component id="3" def="And" x="115" y="10" direction="right" flip="false">
+	<component id="2" def="And" x="115" y="10" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="4" invert="false"/>
 			<subpin wireid="6" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="5" invert="false"/>
+	</component>
+	<component id="3" def="JK Flipflop" x="-5" y="-50" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="0" invert="false"/>
+		<connection flow="in" pinid="1" wireid="0" invert="false"/>
+		<connection flow="in" pinid="2" wireid="7" invert="false"/>
+		<connection flow="out" pinid="3" wireid="1" invert="false"/>
+		<connection flow="out" pinid="4" wireid="4" invert="false"/>
+		<connection flow="in" pinid="5" wireid="8" invert="false"/>
+		<connection flow="in" pinid="6" wireid="9" invert="false"/>
 	</component>
 </custom_component>

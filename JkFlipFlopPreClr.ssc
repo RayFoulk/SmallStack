@@ -13,6 +13,8 @@
 	<pin x="-20" y="0" length="10" direction="left" id="2" flow="in" symlabel="clock" required="true"/>
 	<pin x="30" y="-20" length="10" direction="right" id="3" flow="out" label="Q" required="false"/>
 	<pin x="30" y="20" length="10" direction="right" id="4" flow="out" barlabel="Q" required="false"/>
+	<pin x="5" y="-30" length="10" direction="up" id="5" flow="in" label="PRE" required="true"/>
+	<pin x="5" y="30" length="10" direction="down" id="6" flow="in" label="CLR" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="-260" y="-80"/>
@@ -160,6 +162,22 @@
 		<marker x="240" y="30"/>
 		<tag type="interface" xwire="260" ywire="30" xtag="280" ytag="30" flow="out" pinid="4" text="Not Q"/>
 	</wire>
+	<wire id="12">
+		<path>
+			<point x="165" y="-70"/>
+			<point x="155" y="-70"/>
+			<point x="155" y="-160"/>
+		</path>
+		<tag type="interface" xwire="155" ywire="-160" xtag="155" ytag="-170" flow="in" pinid="5" text="PRE"/>
+	</wire>
+	<wire id="13">
+		<path>
+			<point x="165" y="30"/>
+			<point x="160" y="30"/>
+			<point x="160" y="160"/>
+		</path>
+		<tag type="interface" xwire="160" ywire="160" xtag="160" ytag="170" flow="in" pinid="6" text="CLR"/>
+	</wire>
 	<component id="0" def="And" x="-160" y="-80" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="11" invert="false"/>
@@ -207,6 +225,7 @@
 	<component id="6" def="And" x="200" y="-70" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="6" invert="false"/>
+			<subpin wireid="12" invert="true"/>
 			<subpin wireid="11" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="10" invert="true"/>
@@ -214,6 +233,7 @@
 	<component id="7" def="And" x="200" y="30" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="10" invert="false"/>
+			<subpin wireid="13" invert="true"/>
 			<subpin wireid="5" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="11" invert="true"/>
@@ -222,5 +242,5 @@
 		<connection flow="in" pinid="0" wireid="4" invert="false"/>
 		<connection flow="out" pinid="1" wireid="9" invert="true"/>
 	</component>
-	<annotation x="-320" y="-200" text="Negative Edge Triggered JK Flipflop" fontsize="36"/>
+	<annotation x="-320" y="-265" text="Negative Edge Triggered JK Flipflop with Preset and Clear" fontsize="20"/>
 </custom_component>
