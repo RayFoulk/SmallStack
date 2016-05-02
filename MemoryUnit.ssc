@@ -1014,7 +1014,7 @@
 		<connection flow="in" pinid="4" wireid="43" invert="false"/>
 		<connection flow="in" pinid="5" wireid="15" invert="false"/>
 	</component>
-	<component id="8" def="BusIsolator" x="375" y="65" direction="right" flip="false">
+	<component id="8" def="BusReadInterface" x="375" y="65" direction="right" flip="false">
 		<connection pinid="0" wireid="27" invert="false"/>
 		<connection pinid="1" wireid="26" invert="false"/>
 		<connection pinid="2" wireid="25" invert="false"/>

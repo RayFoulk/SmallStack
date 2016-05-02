@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>BusIsolator</name>
+	<name>BusReadInterface</name>
 	<description>12bit Bus Isolator</description>
 	<label>Tristate</label>
 	<bound right="65" down="15" left="-65" up="-15"/>
