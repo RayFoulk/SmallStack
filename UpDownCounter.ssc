@@ -6,19 +6,19 @@
 	<name>UpDownCounter</name>
 	<description>UpDownCounter</description>
 	<label>U/D</label>
-	<bound right="25" down="15" left="-25" up="-15"/>
+	<bound right="30" down="20" left="-30" up="-20"/>
 	<colour a="0" r="255" g="255" b="255"/>
-	<pin x="15" y="-15" length="10" direction="up" id="0" flow="out" required="true"/>
-	<pin x="5" y="-15" length="10" direction="up" id="1" flow="out" required="true"/>
-	<pin x="-5" y="-15" length="10" direction="up" id="2" flow="out" required="true"/>
-	<pin x="-15" y="-15" length="10" direction="up" id="3" flow="out" required="true"/>
-	<pin x="25" y="-5" length="10" direction="right" id="4" flow="in" required="true"/>
-	<pin x="25" y="5" length="10" direction="right" id="5" flow="in" symlabel="clock" required="true"/>
-	<pin x="-25" y="5" length="10" direction="left" id="6" flow="in" required="true"/>
-	<pin x="15" y="15" length="10" direction="down" id="7" flow="in" required="true"/>
-	<pin x="5" y="15" length="10" direction="down" id="8" flow="in" required="true"/>
-	<pin x="-5" y="15" length="10" direction="down" id="9" flow="in" required="true"/>
-	<pin x="-15" y="15" length="10" direction="down" id="10" flow="in" required="true"/>
+	<pin x="15" y="-20" length="10" direction="up" id="0" flow="out" required="true"/>
+	<pin x="5" y="-20" length="10" direction="up" id="1" flow="out" required="true"/>
+	<pin x="-5" y="-20" length="10" direction="up" id="2" flow="out" required="true"/>
+	<pin x="-15" y="-20" length="10" direction="up" id="3" flow="out" required="true"/>
+	<pin x="30" y="-10" length="10" direction="right" id="4" flow="in" required="true"/>
+	<pin x="30" y="5" length="10" direction="right" id="5" flow="in" symlabel="clock" required="true"/>
+	<pin x="-30" y="5" length="10" direction="left" id="6" flow="in" required="true"/>
+	<pin x="15" y="20" length="10" direction="down" id="7" flow="in" required="true"/>
+	<pin x="5" y="20" length="10" direction="down" id="8" flow="in" required="true"/>
+	<pin x="-5" y="20" length="10" direction="down" id="9" flow="in" required="true"/>
+	<pin x="-15" y="20" length="10" direction="down" id="10" flow="in" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="130" y="-30"/>
