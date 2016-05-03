@@ -140,6 +140,8 @@
 		<connection flow="in" pinid="4" wireid="2" invert="false"/>
 		<connection flow="in" pinid="5" wireid="6" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
 	</component>
 	<component id="2" def="UpDownCounterBit" x="-65" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="9" invert="false"/>
@@ -149,6 +151,8 @@
 		<connection flow="in" pinid="4" wireid="1" invert="false"/>
 		<connection flow="in" pinid="5" wireid="5" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
 	</component>
 	<component id="3" def="UpDownCounterBit" x="60" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="8" invert="false"/>
@@ -158,6 +162,8 @@
 		<connection flow="in" pinid="4" wireid="0" invert="false"/>
 		<connection flow="in" pinid="5" wireid="4" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
 	</component>
 	<component id="4" def="UpDownCounterBit" x="185" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="7" invert="false"/>
@@ -167,5 +173,7 @@
 		<connection flow="in" pinid="4" wireid="11" invert="false"/>
 		<connection flow="in" pinid="5" wireid="3" invert="false"/>
 		<connection flow="in" pinid="6" wireid="12" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
 	</component>
 </custom_component>
