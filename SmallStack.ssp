@@ -6,10 +6,11 @@
 	<name>SmallStack 12-Bit Computer</name>
 	<description>Forth-Inspired 12-bit Stack Computer</description>
 	<component>/home/ray/Source/SmartSim/SmallStack/BusReadInterface.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlop.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlopPreClr.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/ThirdParty/pe d flipflop.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBitPL.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounter.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryTester.ssc</component>
 	<component root="true">/home/ray/Source/SmartSim/SmallStack/UpDownCounterTester.ssc</component>

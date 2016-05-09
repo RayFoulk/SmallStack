@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>JK Flipflop</name>
+	<name>JK Flipflop with Preset and Clear</name>
 	<description>A negative edge triggered flipflop with set, reset, and toggle functionality</description>
 	<label> JK</label>
 	<bound right="30" down="30" left="-20" up="-30"/>
