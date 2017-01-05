@@ -168,6 +168,13 @@
 			<point x="155" y="-70"/>
 			<point x="155" y="-160"/>
 		</path>
+		<path>
+			<point x="155" y="-145"/>
+			<point x="-95" y="-145"/>
+			<point x="-95" y="-70"/>
+			<point x="-75" y="-70"/>
+		</path>
+		<marker x="155" y="-145"/>
 		<tag type="interface" xwire="155" ywire="-160" xtag="155" ytag="-170" flow="in" pinid="5" text="PRE"/>
 	</wire>
 	<wire id="13">
@@ -176,6 +183,13 @@
 			<point x="160" y="30"/>
 			<point x="160" y="160"/>
 		</path>
+		<path>
+			<point x="160" y="145"/>
+			<point x="-100" y="145"/>
+			<point x="-100" y="30"/>
+			<point x="-75" y="30"/>
+		</path>
+		<marker x="160" y="145"/>
 		<tag type="interface" xwire="160" ywire="160" xtag="160" ytag="170" flow="in" pinid="6" text="CLR"/>
 	</wire>
 	<component id="0" def="And" x="-160" y="-80" direction="right" flip="false">
@@ -197,6 +211,7 @@
 	<component id="2" def="And" x="-40" y="30" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="8" invert="false"/>
+			<subpin wireid="13" invert="true"/>
 			<subpin wireid="3" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="7" invert="true"/>
@@ -204,6 +219,7 @@
 	<component id="3" def="And" x="-40" y="-70" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="2" invert="false"/>
+			<subpin wireid="12" invert="true"/>
 			<subpin wireid="7" invert="false"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="8" invert="true"/>
