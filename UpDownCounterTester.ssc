@@ -111,7 +111,7 @@
 		</path>
 		<marker x="-140" y="-150"/>
 	</wire>
-	<component id="0" def="Clock" x="60" y="-45" direction="left" flip="false" on="200" off="200">
+	<component id="0" def="Clock" x="60" y="-45" direction="left" flip="false" on="2000" off="2000">
 		<connection flow="out" pinid="0" wireid="12" invert="false"/>
 	</component>
 	<component id="1" def="Toggle" x="60" y="-100" direction="left" flip="false">
