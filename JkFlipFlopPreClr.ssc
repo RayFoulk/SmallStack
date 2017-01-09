@@ -242,5 +242,5 @@
 		<connection flow="in" pinid="0" wireid="4" invert="false"/>
 		<connection flow="out" pinid="1" wireid="9" invert="true"/>
 	</component>
-	<annotation x="-320" y="-265" text="Negative Edge Triggered JK Flipflop with Preset and Clear" fontsize="20"/>
+	<annotation x="-320" y="-265" text="Negative Edge Triggered JkFlipFlopPreClr" fontsize="20"/>
 </custom_component>

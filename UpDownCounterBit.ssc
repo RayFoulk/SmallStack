@@ -167,7 +167,7 @@
 		</connection>
 		<connection flow="out" pinid="1" wireid="3" invert="false"/>
 	</component>
-	<component id="3" def="JK Flipflop with Preset and Clear" x="-5" y="-50" direction="right" flip="false">
+	<component id="3" def="JkFlipFlopPreClr" x="-5" y="-50" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="0" invert="false"/>
 		<connection flow="in" pinid="1" wireid="0" invert="false"/>
 		<connection flow="in" pinid="2" wireid="5" invert="false"/>
