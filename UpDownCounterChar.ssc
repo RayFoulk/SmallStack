@@ -3,8 +3,8 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>UpDownCounter</name>
-	<description>UpDownCounter</description>
+	<name>UpDownCounterChar</name>
+	<description>UpDownCounterChar</description>
 	<label>CTR6</label>
 	<bound right="35" down="25" left="-35" up="-25"/>
 	<colour a="0" r="255" g="255" b="255"/>

@@ -305,7 +305,7 @@
 		<connection flow="in" pinid="3" wireid="6" invert="false"/>
 		<connection flow="in" pinid="4" wireid="null" invert="false"/>
 	</component>
-	<component id="20" def="UpDownCounter" x="-85" y="-40" direction="right" flip="false">
+	<component id="20" def="UpDownCounterChar" x="-85" y="-40" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="0" invert="false"/>
 		<connection flow="out" pinid="1" wireid="1" invert="false"/>
 		<connection flow="out" pinid="2" wireid="2" invert="false"/>
@@ -327,7 +327,7 @@
 		<connection flow="out" pinid="18" wireid="15" invert="false"/>
 		<connection flow="out" pinid="19" wireid="16" invert="false"/>
 	</component>
-	<component id="21" def="UpDownCounter" x="-185" y="-40" direction="right" flip="false">
+	<component id="21" def="UpDownCounterChar" x="-185" y="-40" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="7" invert="false"/>
 		<connection flow="out" pinid="1" wireid="8" invert="false"/>
 		<connection flow="out" pinid="2" wireid="9" invert="false"/>
