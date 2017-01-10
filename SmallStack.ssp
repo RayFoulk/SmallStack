@@ -13,5 +13,6 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryTester.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
-	<component root="true">/home/ray/Source/SmartSim/SmallStack/UpDownCounterTester.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterTester.ssc</component>
+	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/Accumulator.ssc</component>
 </project>
