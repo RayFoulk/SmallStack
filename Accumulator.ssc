@@ -6,36 +6,36 @@
 	<name>Accumulator</name>
 	<description>Accumulator Register</description>
 	<label>ACC</label>
-	<bound right="65" down="25" left="-65" up="-25"/>
+	<bound right="65" down="30" left="-65" up="-30"/>
 	<colour a="0" r="255" g="255" b="255"/>
-	<pin x="55" y="-25" length="10" direction="up" id="0" flow="out" label="R0" required="true"/>
-	<pin x="45" y="-25" length="10" direction="up" id="1" flow="out" required="true"/>
-	<pin x="35" y="-25" length="10" direction="up" id="2" flow="out" required="true"/>
-	<pin x="25" y="-25" length="10" direction="up" id="3" flow="out" required="true"/>
-	<pin x="15" y="-25" length="10" direction="up" id="4" flow="out" required="true"/>
-	<pin x="5" y="-25" length="10" direction="up" id="5" flow="out" required="true"/>
-	<pin x="-5" y="-25" length="10" direction="up" id="6" flow="out" required="true"/>
-	<pin x="-15" y="-25" length="10" direction="up" id="7" flow="out" required="true"/>
-	<pin x="-25" y="-25" length="10" direction="up" id="8" flow="out" required="true"/>
-	<pin x="-35" y="-25" length="10" direction="up" id="9" flow="out" required="true"/>
-	<pin x="-45" y="-25" length="10" direction="up" id="10" flow="out" required="true"/>
-	<pin x="-55" y="-25" length="10" direction="up" id="11" flow="out" required="true"/>
-	<pin x="55" y="25" length="10" direction="down" id="12" flow="in" label="W0" required="true"/>
-	<pin x="45" y="25" length="10" direction="down" id="13" flow="in" required="true"/>
-	<pin x="35" y="25" length="10" direction="down" id="14" flow="in" required="true"/>
-	<pin x="25" y="25" length="10" direction="down" id="15" flow="in" required="true"/>
-	<pin x="15" y="25" length="10" direction="down" id="16" flow="in" required="true"/>
-	<pin x="5" y="25" length="10" direction="down" id="17" flow="in" required="true"/>
-	<pin x="-5" y="25" length="10" direction="down" id="18" flow="in" required="true"/>
-	<pin x="-15" y="25" length="10" direction="down" id="19" flow="in" required="true"/>
-	<pin x="-25" y="25" length="10" direction="down" id="20" flow="in" required="true"/>
-	<pin x="-35" y="25" length="10" direction="down" id="21" flow="in" required="true"/>
-	<pin x="-45" y="25" length="10" direction="down" id="22" flow="in" required="true"/>
-	<pin x="-55" y="25" length="10" direction="down" id="23" flow="in" required="true"/>
-	<pin x="65" y="-15" length="10" direction="right" id="24" flow="in" required="true"/>
-	<pin x="65" y="-5" length="10" direction="right" id="25" flow="in" symlabel="clock" required="true"/>
-	<pin x="65" y="5" length="10" direction="right" id="26" flow="in" required="true"/>
-	<pin x="65" y="15" length="10" direction="right" id="27" flow="in" required="true"/>
+	<pin x="55" y="-30" length="10" direction="up" id="0" flow="out" label="R0" required="true"/>
+	<pin x="45" y="-30" length="10" direction="up" id="1" flow="out" required="true"/>
+	<pin x="35" y="-30" length="10" direction="up" id="2" flow="out" required="true"/>
+	<pin x="25" y="-30" length="10" direction="up" id="3" flow="out" required="true"/>
+	<pin x="15" y="-30" length="10" direction="up" id="4" flow="out" required="true"/>
+	<pin x="5" y="-30" length="10" direction="up" id="5" flow="out" required="true"/>
+	<pin x="-5" y="-30" length="10" direction="up" id="6" flow="out" required="true"/>
+	<pin x="-15" y="-30" length="10" direction="up" id="7" flow="out" required="true"/>
+	<pin x="-25" y="-30" length="10" direction="up" id="8" flow="out" required="true"/>
+	<pin x="-35" y="-30" length="10" direction="up" id="9" flow="out" required="true"/>
+	<pin x="-45" y="-30" length="10" direction="up" id="10" flow="out" required="true"/>
+	<pin x="-55" y="-30" length="10" direction="up" id="11" flow="out" required="true"/>
+	<pin x="55" y="30" length="10" direction="down" id="12" flow="in" label="W0" required="true"/>
+	<pin x="45" y="30" length="10" direction="down" id="13" flow="in" required="true"/>
+	<pin x="35" y="30" length="10" direction="down" id="14" flow="in" required="true"/>
+	<pin x="25" y="30" length="10" direction="down" id="15" flow="in" required="true"/>
+	<pin x="15" y="30" length="10" direction="down" id="16" flow="in" required="true"/>
+	<pin x="5" y="30" length="10" direction="down" id="17" flow="in" required="true"/>
+	<pin x="-5" y="30" length="10" direction="down" id="18" flow="in" required="true"/>
+	<pin x="-15" y="30" length="10" direction="down" id="19" flow="in" required="true"/>
+	<pin x="-25" y="30" length="10" direction="down" id="20" flow="in" required="true"/>
+	<pin x="-35" y="30" length="10" direction="down" id="21" flow="in" required="true"/>
+	<pin x="-45" y="30" length="10" direction="down" id="22" flow="in" required="true"/>
+	<pin x="-55" y="30" length="10" direction="down" id="23" flow="in" required="true"/>
+	<pin x="65" y="-20" length="10" direction="right" id="24" flow="in" required="true"/>
+	<pin x="65" y="-10" length="10" direction="right" id="25" flow="in" symlabel="clock" required="true"/>
+	<pin x="65" y="0" length="10" direction="right" id="26" flow="in" required="true"/>
+	<pin x="65" y="10" length="10" direction="right" id="27" flow="in" required="true"/>
 	<pin x="65" y="20" length="10" direction="right" id="28" flow="in" required="true"/>
 	<wire id="0">
 		<path>

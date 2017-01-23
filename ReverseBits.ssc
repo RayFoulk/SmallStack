@@ -1,0 +1,263 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>Untitled Component 1</name>
+	<description></description>
+	<label></label>
+	<bound right="0" down="0" left="0" up="0"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<component id="0" def="Xor" x="190" y="-430" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="1" def="Xor" x="190" y="-360" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="2" def="Xor" x="190" y="-290" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="3" def="Xor" x="190" y="-220" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="4" def="Xor" x="190" y="-145" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="5" def="Xor" x="190" y="-70" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="6" def="Xor" x="190" y="0" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="7" def="Xor" x="190" y="70" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="8" def="Xor" x="195" y="140" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="9" def="Xor" x="190" y="210" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="10" def="Xor" x="190" y="280" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="11" def="Xor" x="190" y="350" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="12" def="And" x="15" y="-440" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="13" def="And" x="10" y="-370" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="14" def="And" x="15" y="-300" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="15" def="And" x="15" y="-235" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="16" def="And" x="15" y="-165" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="17" def="And" x="20" y="-85" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="18" def="And" x="15" y="-10" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="19" def="And" x="10" y="55" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="20" def="And" x="5" y="120" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="21" def="And" x="5" y="200" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="22" def="And" x="10" y="270" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="23" def="And" x="10" y="340" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="24" def="And" x="95" y="-400" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="25" def="And" x="95" y="-325" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="26" def="And" x="95" y="-260" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="27" def="And" x="90" y="-200" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="28" def="And" x="90" y="-125" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="29" def="And" x="95" y="-55" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="30" def="And" x="95" y="25" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="31" def="And" x="90" y="100" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="32" def="And" x="80" y="165" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="33" def="And" x="80" y="230" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="34" def="And" x="80" y="300" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+	<component id="35" def="And" x="80" y="380" direction="right" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="null" invert="false"/>
+	</component>
+</custom_component>
