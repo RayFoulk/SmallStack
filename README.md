@@ -2,8 +2,8 @@
 Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 
 # Purpose
-    - To have fun & learn about alternative CPU architectures.
-    - To create my own hobbyist CPU from scratch.
+    . To have fun & learn about alternative CPU architectures.
+    . To create my own hobbyist CPU from scratch.
 
 # Design Goals:
     - Simple, Small, Minimalistic Design (Minimal Instruction Set Computer)
