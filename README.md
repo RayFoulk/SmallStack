@@ -14,9 +14,7 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 -- Don't get stuck in 'Turing Tarpit'
 -- Support at minimum 1k instruction words in ROM
 -- Be different, to challenge my assumptions and force myself to be creative
---- Originally began with 6-bit design.  Why? this is the minimum number
-    of bits to support an alphanumeric charset.  It's also a good size
-    for a minimalistic instruction set / opcode.
+--- Originally began with 6-bit design.  Why? this is the minimum number of bits to support an alphanumeric charset.  It's also a good size for a minimalistic instruction set / opcode.
 --- Ended up with 12-bit design, packing two chars per word.
 --- Future iterations may transition to 18-bit design
 
