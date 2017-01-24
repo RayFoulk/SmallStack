@@ -1,0 +1,363 @@
+/////////////////////////////////////////////////////
+// 12-Bit MISC Stack Machine CPU Design
+
+Harvard Architecture
+    Single, Pluggable 4K ROM
+    One or More 4K RAM Modules, Segmented
+
+All registers, data bus, and address bus are 12 bits wide
+All Opcodes are 6 bits with (mostly) implied operands
+    2 opcodes per ROM fetch.
+    Microcode sequence is: fetch-exec-exec, repeat
+ROM addresses/NIP/jumps point to odd instructions
+    May need to fill in NOPs here and there.
+    "Big Endian" (in terms of 6-bit 'chars')
+
+/////////////////////////////////////////////////////
+// CPU Diagram
+
+Machine & Bus Layout:
+       ___              ___
+[CLK] |   |-[BOP]------|   \---[MCS]--\
+   |  |DEC|   ||       |ALU|=\\  || \  \   _
+[INS]-|___|---||-[ACC]-|___/ ||  || |   \=| |==...
+  ||       \  ||   ||        ||  || |     | |
+  =========|========================|=====|C|==... 
+  =========|===== DATA BUS =========|=====|P|==... 
+  =========|========================|=====|U|==... 
+  ||       |                     || /     | |
+[NIP]------+-------------------[PTR]      |S|
+  ||                             ||       |O|
+  ========================================|C|==... 
+  =============== ADDR BUS ===============|K|==... 
+  ========================================|E|==... 
+                                          |T|
+                                          |_|    
+
+/////////////////////////////////////////////////////
+// Devices Attached to Internal Main Data Bus
+
+I    INS    INSTR WORD REG FOR DECODE (WO)
+A    ACC    ALU INPUT 1 : A (ACCUMULATOR) (R/W)
+B    BOP    ALU INPUT 2 : B (GP/DYADIC) (R/W)
+L    ALU    ALU OUTPUT (DIRECT TO BUS) (RO)
+C    MCS    MACHINE CTRL/STATUS: CARRY, CMP,
+                PTR_SEL, DEV_SEL (R/W)
+P    PTR    RAM ADDR REG (R/W) (FUTURE:
+                SELECTABLE ARRAY, AUTO INC/DEC on R/W)
+N    NIP    ROM ADDR REG (R/W) AKA NIP
+S    SKT    PERIPHERAL DEVICE I/O BUS (R/W)
+                12 DATA PINS
+                12 ADDR PINS (Driven by PTR[] or NIP during FCH)
+                3 DEV_SEL PINS to drive chip select on peripherals
+                2 R/W PINS 
+
+/////////////////////////////////////////////////////
+// Inter-Device Transport Notes
+ROM to INS is special case (Read-Only from ROM to Write-Only for INS)
+ALU output is special case (Write-Only to Data Bus)
+Accumulator-centric transport instructions
+ACC is used for unary operations
+BOP is used with ACC for duadic operations
+BOP will have a bypass MUX at ALU for ops like
+    INC, DEC, JRC
+
+// Special Case Transport
+INS <-- SKT	    Fetch, Read line overrides DEV_SEL to 0 at socket
+                also overrides ADDR_BUS with NIP at socket
+                NOTE: SKW to dev 0 is illegal
+ALU --> ACC     Driven by ALU opcodes, implied operands are ACC and BOP
+ALU --> NIP     Certain jump instructions, overrides BOP before ALU
+NIP <-> SKT     Would be necessary for return, drive INC/DEC PTR[]
+ACC <-> NIP	    Actually pretty normal, other than the fact that
+                this jumps absolute! or else just gets the current NIP
+                Categorized separately only for this reason
+
+// Normal Case Transport (Simple Internal Data R/W)
+// (R/W Lines are routed to the target to drive IN/DEC if present)
+ACC <-> BOP     Swap would be nice, but this is a destructive copy 
+ACC <-> MCS     Destructive copy, can be used to clear CAR, CMP
+ACC <-> PTR     Normal except R/W drives INC/DEC PTR[PTR_SEL]
+ACC <-> SKT     RAM Read/Write or ROM Read by manually driving DEV_SEL
+                Internal R/W lines drive INC/DEC PTR[PTR_SEL]
+
+/////////////////////////////////////////////////////
+// TODO: 
+Name this processor
+    DuoFortis, DuoChar, DuoMini, DuoMicro
+    SixShooter, DoubleSix
+    
+Character table with ASCII conversion algorithm
+Need to decide on ASCII-to-6bit char mapping
+
+Determine which PTR IDX are auto inc/dec
+    and whether on R or W.  stack behavior vs queue
+    probably make this a fixed table
+
+Design peripheral interfaces
+    ROM expected at address 0
+    RAM expected at address 1
+    Graphics - Color LCD
+        8080 interface. CMD/CTRL
+        2 devs possible 12 bit RGB or 9bit 1 dev
+    Monochrome Console LCD
+        1 dev for cmd & ctrl
+    Keyboard
+        1 dev: 6 bit low or high char others zero
+        parallel interface? look up early apple 1
+    Hard Disk
+    External RAM
+        3 devs: 12 high addr, 12 low addr, 12 data
+        2 dev: bit fields mux select, value
+    Network
+    Bus extender / reducer for interfacing with
+        8 to 10 bit hardware: mode addr/data
+        1 bus addr -- rising edge triggered
+            mode select bit, data apply bit.
+        2 bus addrs -- can preserve 12 bits
+
+/////////////////////////////////////////////////////
+// Main Board Peripheral Bus (8 Addresses)
+// (Board Layout & Design is flexible here)
+
+[Design A - 8K RAM with fully extended 12 bit peripheral bus]
+0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
+1    RAM    4K RAM (R/W)
+2    RAM    4K RAM (R/W)
+3    ((More RAM? Inter-CPU for multi-core? Network?))
+4    KEYB (Parallel Interface -- TBD)
+5    LCD (8080 + REGS/MODE -- TBD)
+6    BUS_EXT ADDR -- Combine with Data Bus for 24-bit address
+7    BUS_EXT DATA
+
+[Design B - 16K "Mega RAM" with extended 10 bit peripheral bus]
+0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
+1    RAM    4K RAM (R/W)
+2    RAM    4K RAM (R/W)
+3    RAM    4K RAM (R/W)
+4    RAM    4K RAM (R/W)
+5    KEYB (Parallel Interface -- TBD)
+6    LCD (8080 + REGS/MODE -- TBD)
+7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
+
+/////////////////////////////////////////////////////
+// Instruction Design Notes
+ZRO, UNO not needed. SL6 twice will zero A
+OC0,7 ; OC1,7 ; SL6 ; OC0,7 ; OC1,7 will set 07777
+GT and LT comparisons can be synthesized easily
+MUL and DIV can be sythesized.  will never be included.
+
+// Later Design changes:
+single cycle hardware register swap or
+ queue would be very useful for ptr/stack/data
+also: MUX reg on RAM PTR array.  only exposes
+one to the data bus.  Use lower bits of
+machine status register. 2 bits for 4 regs:
+stack + 3 ptrs -- could be used for call args.
+
+NOTE: ROM needs to be separate and socketable.
+An address bus driven by NIP and PTR is necessary,
+as well as a bypass on external DEV_SEL.
+this would reduce the number of CPU pins by re-using
+the address lines for ROM and RAM.  Not shown above
+  are the control lines.
+FCH bypasses DEV_SEL and asserts 0 on output pins
+ADDR output pins are normally driven by PTR[]
+but FCH instructuon overrides this with NIP
+NOTE: This also allows PTR access to ROM for reading
+fonts, bitmaps, strings, etc... 
+  by manually setting DEV_SEL to 0,
+  set PTR[] to desired address and executing IOR.
+  This eliminates the need for LBL and frees up an
+    8-block of opcodes.
+
+/////////////////////////////////////////////////////
+Initial MCS Register Layout:
+
+ 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+[  DEV_SEL  |    RES    |  PTR_SEL  |RES CMP CAR]
+
+Might be better (less code) to do long add
+with carry if CAR was static to ALU, but then
+might not be useful otherwise.  problem with
+driving PTR select here is in having to be
+extra careful not to clobber CAR.  Might be
+be better redesigned this way to align with
+octet load and character shift
+
+ 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+[RES RES CMP|RES RES CAR|  DEV_SEL  |  PTR_SEL ]
+
+// Example Code
+C2A    ; Get MCS reg to ACC
+OC0,1  ; Set value to select PTR 1
+A2C    ; Write back to MCS, CAR is preserved
+...
+C2A    ; Get MCS reg to ACC
+SRC    ; Shift right 6, discarding select values
+OC1,0  ; Make sure any CMP bit is cleared
+A2B    ; Put carry bit into B register
+OC0,2  ; Set value to select PTR 2
+A2C    ; Write back to MCS, CAR is lost here
+LDA    ; Read value to be added
+ADD    ; Add with carry in B
+STA    ; Store result, overwriting original
+
+General / Accumulator Register Layout:
+
+ 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+[  Most Sig | Next-Most | Next-Least| Least Sig ]
+[  Octet 3  |  Octet 2  |  Octet 1  |  Octet 0  ]
+[  High Char            |  Low Char             ]
+
+/////////////////////////////////////////////////////
+// Updated Opcodes
+*  Will not be in initial implementation
+   Alternative method exists but uses more code
+
+
+<Bin>   <Oct>  <Mnem.>  <Descr.>
+000000  000    HLT      Halt Execution
+000001  001    NOP      No Operation
+000010  002    
+000011  003    
+000100  004    FCH      INS = SKT, DEV_SEL => 0, NIP++
+000101  005    
+000110  006  * IPT      PTR[PTR_SEL]++
+000111  007  * DPT      PTR[PTR_SEL]--    
+
+// Normal Transport Operations, ACC Implied.
+// 1 bit to/from, 2 bits src/dst
+001000  010    A2B      BOP = ACC
+001001  011    A2C      MCS = ACC
+001010  012    A2P      PTR[PTR_SEL] = ACC, INC/DEC PTR
+001011  013    A2S      SKT = ACC, (INC/DEC PTR???)
+001100  014    B2A      ACC = BOP
+001101  015    C2A      ACC = MCS
+001110  016    P2A      ACC = PTR[PTR_SEL], INC/DEC PTR
+001111  017    S2A      ACC = SKT, (INC/DEC PTR???)
+
+// Arithmetic & Logic Operations
+010000  020    ADD      ACC += BOP
+010001  021    NEG      ACC = -ACC (2's comp)
+010010  022    INC      ACC++ (leave BOP intact)
+010011  023    DEC      ACC-- (leave BOP intact)
+010100  024    AND      ACC &= BOP
+010101  025    OR       ACC |= BOP
+010110  026    XOR      ACC ^= BOP
+010111  027    NOT      ACC = ~ACC
+
+// Comparison Operations
+011000  030    EQ       MCS[CMP] = (ACC == BOP)
+011001  031    NEQ      MCS[CMP] = (ACC != BOP)
+011010  032    EZ       MCS[CMP] = (ACC == 0)
+011011  033    NEZ      MCS[CMP] = (ACC != 0)
+011100  034
+011101  035    
+011110  036    
+011111  037  * SWP      High/Low ACC Character Swap    
+
+// Barrel Shifter
+1000XY  040-3  SHL      ACC <<= N(XY)
+                        00=1,01=3,10=4,11=6
+1001XY  044-7  SHR      ACC >>= N(XY)
+                        00=1,01=3,10=4,11=6
+
+// Jump Absolute & Conditional Relative
+// Store NIP in RAM & Get NIP to ACC
+// NOTE: JPM is return, but will require
+// auto-inc/dec stack ptr
+101000  040    A2N      NIP = ACC, Jump Absolute!!!
+101001  041    N2A      ACC = NIP, Get Instruction Pointer
+101010  042  * JPM      NIP = SKT, PTR[]--, DEV_SEL to 1 ???
+101011  043  * N2M      SKT = NIP, ++PTR[], DEV_SEL to 1 ???
+
+// Bitwise NIP offset calc with generated values
+// of NIP += 2, 6, 10, 14.  Need 2-stage approach
+// that pre-loads NIP into ACC before bypassing
+// B and performing ALU ADD => NIP
+1011XY  044-7  JRC     IF !MCS[CMP] NIP += b00XY10
+
+// Literal Octet Assignment to Accumulator
+110NNN  060-7  OC0      Assign Least Octet to ACC
+                        Remainder of ACC left intact
+111NNN  070-7  OC1      Assign Next-Least Octet to A
+                        Remainder of ACC left intact
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+// Outdated Design Info (but still helpful)
+// may be used when design is updated to hw stacks
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+// Block Load data from ROM to RAM
+// (or else allow data read from ROM to to ACC )
+// 1, 3, 5, 7, ... 15. ends on even boundary
+// including opcode.  good for loading
+// fonts, strings, bitmaps from ROM
+101XYZ  05(0-7) * LBL   Next 0b00XYZ1 words
+                        ROM[NIP++] => RAM[PTR++]
+NOTE: This instruction would be unnecessary
+if ROM were outside SKT as external device 0
+and RAM could be device 1.
+
+/////////////////////////////////////////////////////
+// Op Codes - Early Design Notes
+
+Halt
+[Nop]
+
+Read from RAM to data stack (Push)
+write data stack to RAM (Pop)
+
+read/write ram address register
+
+Read ROM to instruction register (Fetch)
+
+Push NIP to return stack (call w/o jump)
+Pop return stack to NIP (Return)
+Pop data stack to NIP (Jump)
+
+duplicate top data stack element
+swap top two data stack elements
+pop data stack and push onto return stack
+pop return stack and push onto data stack
+
+pop and add top two data stack elements, push result
+negate top data stack element
+
+shift data stack top element left one bit
+shift data stack top element right one bit
+
+shift data stack top elem left six bits
+    assign lower six bits literal const
+shift data stack top elem right six bits
+    assign upper six bits literal const
+
+compare and jump +2 if not true
+    continue if true
+
+and
+or
+xor
+not
+
+/////////////////////////////////////////////////////
+// Alternate, Simplified, Conventional Design - Early Notes.
+
+Registers
+A, B, C or R1, R2, R3 and Status
+Possibly also/or Stack ptr reg
+    alternatively store stack ptr in ram
+    would effect call/cmp logic
+addressible vs non-addresible regs
+
+    status could be also be general purpose reg
+
