@@ -2,14 +2,14 @@
 Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 
 # Purpose
-    . To have fun & learn about alternative CPU architectures.
-    . To create my own hobbyist CPU from scratch.
+. To have fun & learn about alternative CPU architectures.
+. To create my own hobbyist CPU from scratch.
 
 # Design Goals:
-    - Simple, Small, Minimalistic Design (Minimal Instruction Set Computer)
-    - Early designs will NOT have hardware stacks but will use RAM
-        - will initially resemble typical CPU designs, just to get off the ground
-        - future designs will implement hardware stacks rather than adding registers
+- Simple, Small, Minimalistic Design (Minimal Instruction Set Computer)
+- Early designs will NOT have hardware stacks but will use RAM
+-- will initially resemble typical CPU designs, just to get off the ground
+-- future designs will implement hardware stacks rather than adding registers
     - Have a design that still remains useful despite its simplicity
         - Don't get stuck in 'Turing Tarpit'
         - Support at least 1k instruction words in ROM
