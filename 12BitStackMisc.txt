@@ -5,7 +5,7 @@ Harvard Architecture
     Single, Pluggable 4K ROM
     One or More 4K RAM Modules, Segmented
 
-All registers, data bus, and address bus are 12 bits wide
+All registers, address and data bus are 12 bits wide
 All Opcodes are 6 bits with (mostly) implied operands
     2 opcodes per ROM fetch.
     Microcode sequence is: fetch-exec-exec, repeat
@@ -17,22 +17,22 @@ ROM addresses/NIP/jumps point to odd instructions
 // CPU Diagram
 
 Machine & Bus Layout:
-       ___              ___
-[CLK] |   |-[BOP]------|   \---[MCS]--\
-   |  |DEC|   ||       |ALU|=\\  || \  \   _
-[INS]-|___|---||-[ACC]-|___/ ||  || |   \=| |==...
-  ||       \  ||   ||        ||  || |     | |
-  =========|========================|=====|C|==... 
-  =========|===== DATA BUS =========|=====|P|==... 
-  =========|========================|=====|U|==... 
-  ||       |                     || /     | |
-[NIP]------+-------------------[PTR]      |S|
-  ||                             ||       |O|
-  ========================================|C|==... 
-  =============== ADDR BUS ===============|K|==... 
-  ========================================|E|==... 
-                                          |T|
-                                          |_|    
+         ___              ___
+  [CLK] |   |-[BOP]------|   \---[MCS]--\
+     |  |DEC|   ||       |ALU|=\\  || \  \   _
+  [INS]-|___|---||-[ACC]-|___/ ||  || |   \=| |==...
+    ||       \  ||   ||        ||  || |     | |
+    =========|========================|=====|C|==... 
+    =========|===== DATA BUS =========|=====|P|==... 
+    =========|========================|=====|U|==... 
+    ||       |                     || /     | |
+  [NIP]------+-------------------[PTR]      |S|
+    ||                             ||       |O|
+    ========================================|C|==... 
+    =============== ADDR BUS ===============|K|==... 
+    ========================================|E|==... 
+                                            |T|
+                                            |_|    
 
 /////////////////////////////////////////////////////
 // Devices Attached to Internal Main Data Bus
@@ -42,19 +42,21 @@ A    ACC    ALU INPUT 1 : A (ACCUMULATOR) (R/W)
 B    BOP    ALU INPUT 2 : B (GP/DYADIC) (R/W)
 L    ALU    ALU OUTPUT (DIRECT TO BUS) (RO)
 C    MCS    MACHINE CTRL/STATUS: CARRY, CMP,
-                PTR_SEL, DEV_SEL (R/W)
-P    PTR    RAM ADDR REG (R/W) (FUTURE:
-                SELECTABLE ARRAY, AUTO INC/DEC on R/W)
+              PTR_SEL, DEV_SEL (R/W)
+P    PTR    RAM ADDR REG (R/W) (SELECTABLE ARRAY,
+              AUTO INC/DEC on R/W)
 N    NIP    ROM ADDR REG (R/W) AKA NIP
 S    SKT    PERIPHERAL DEVICE I/O BUS (R/W)
-                12 DATA PINS
-                12 ADDR PINS (Driven by PTR[] or NIP during FCH)
-                3 DEV_SEL PINS to drive chip select on peripherals
-                2 R/W PINS 
+              12 DATA PINS, 12 ADDR PINS
+                (Driven by PTR[] or NIP during FCH)
+              3 DEV_SEL PINS
+                (Drive chip select on peripherals)
+              2 R/W PINS 
 
 /////////////////////////////////////////////////////
 // Inter-Device Transport Notes
-ROM to INS is special case (Read-Only from ROM to Write-Only for INS)
+ROM to INS is special case
+  (Read-Only from ROM to Write-Only for INS)
 ALU output is special case (Write-Only to Data Bus)
 Accumulator-centric transport instructions
 ACC is used for unary operations
@@ -255,7 +257,7 @@ General / Accumulator Register Layout:
 011100  034
 011101  035    
 011110  036    
-011111  037  * SWP      High/Low ACC Character Swap    
+011111  037  * SWP      High/Low ACC Char Swap    
 
 // Barrel Shifter
 1000XY  040-3  SHL      ACC <<= N(XY)
@@ -267,10 +269,12 @@ General / Accumulator Register Layout:
 // Store NIP in RAM & Get NIP to ACC
 // NOTE: JPM is return, but will require
 // auto-inc/dec stack ptr
-101000  040    A2N      NIP = ACC, Jump Absolute!!!
-101001  041    N2A      ACC = NIP, Get Instruction Pointer
-101010  042  * JPM      NIP = SKT, PTR[]--, DEV_SEL to 1 ???
-101011  043  * N2M      SKT = NIP, ++PTR[], DEV_SEL to 1 ???
+101000  040    A2N      NIP = ACC, Jump Abs!!!
+101001  041    N2A      ACC = NIP, Get Instr Ptr
+101010  042  * JPM      NIP = SKT, PTR[]--,
+                            DEV_SEL to 1 ???
+101011  043  * N2M      SKT = NIP, ++PTR[],
+                            DEV_SEL to 1 ???
 
 // Bitwise NIP offset calc with generated values
 // of NIP += 2, 6, 10, 14.  Need 2-stage approach
@@ -287,77 +291,3 @@ General / Accumulator Register Layout:
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-// Outdated Design Info (but still helpful)
-// may be used when design is updated to hw stacks
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-
-// Block Load data from ROM to RAM
-// (or else allow data read from ROM to to ACC )
-// 1, 3, 5, 7, ... 15. ends on even boundary
-// including opcode.  good for loading
-// fonts, strings, bitmaps from ROM
-101XYZ  05(0-7) * LBL   Next 0b00XYZ1 words
-                        ROM[NIP++] => RAM[PTR++]
-NOTE: This instruction would be unnecessary
-if ROM were outside SKT as external device 0
-and RAM could be device 1.
-
-/////////////////////////////////////////////////////
-// Op Codes - Early Design Notes
-
-Halt
-[Nop]
-
-Read from RAM to data stack (Push)
-write data stack to RAM (Pop)
-
-read/write ram address register
-
-Read ROM to instruction register (Fetch)
-
-Push NIP to return stack (call w/o jump)
-Pop return stack to NIP (Return)
-Pop data stack to NIP (Jump)
-
-duplicate top data stack element
-swap top two data stack elements
-pop data stack and push onto return stack
-pop return stack and push onto data stack
-
-pop and add top two data stack elements, push result
-negate top data stack element
-
-shift data stack top element left one bit
-shift data stack top element right one bit
-
-shift data stack top elem left six bits
-    assign lower six bits literal const
-shift data stack top elem right six bits
-    assign upper six bits literal const
-
-compare and jump +2 if not true
-    continue if true
-
-and
-or
-xor
-not
-
-/////////////////////////////////////////////////////
-// Alternate, Simplified, Conventional Design - Early Notes.
-
-Registers
-A, B, C or R1, R2, R3 and Status
-Possibly also/or Stack ptr reg
-    alternatively store stack ptr in ram
-    would effect call/cmp logic
-addressible vs non-addresible regs
-
-    status could be also be general purpose reg
-
