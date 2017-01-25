@@ -14,7 +14,7 @@ All Opcodes are 6 bits with (mostly) implied operands
     Microcode sequence is: fetch-exec-exec, repeat
 ROM addresses/NIP/jumps point to odd instructions
     May need to fill in NOPs here and there.
-    "Big Endian" (in terms of 6-bit 'chars')
+    "Big Endian" (in terms of 6-bit chars)
 
 /////////////////////////////////////////////////////
 // CPU Diagram
@@ -201,9 +201,9 @@ Design peripheral interfaces
 7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
          writes:
          11xxxxxxxxxx set addr mode, apply data(addr)
-         10xxxxxxxxxx set addr mode, don't apply data
+         10xxxxxxxxxx set addr mode, do not apply data
          01xxxxxxxxxx set data mode, apply data(data)
-         00xxxxxxxxxx set data mode, don't apply data
+         00xxxxxxxxxx set data mode, do not apply data
 
 /////////////////////////////////////////////////////
 // Instruction Design Notes
@@ -288,9 +288,9 @@ General / Accumulator Register Layout:
 001111  017    N2A      ACC = NIP, Get Instr Ptr
 
 // Arithmetic & Logic Operations
-010000  020    ADD      ACC += BOP with CAR
-010001  021    NEG      ACC = -ACC (2's comp)
-010010  022    SWP      High/Low ACC Char Swap    
+010000  020    ADD      ACC += BOP (w/ CAR as carry)
+010001  021    SUB      ACC -= BOP (w/ CAR as borrow)
+010010  022    SWP      ACC High/Low Character Swap    
 010011  023    ---      RESERVED
 010100  024    AND      ACC &= BOP
 010101  025    OR       ACC |= BOP
@@ -310,7 +310,7 @@ General / Accumulator Register Layout:
 011111  037    DPT      PTR[PTR_SEL]--    
 
 // Single Stage Barrel Shifter
-// (Requires 1 Argument: 1, 3, 4, or 6)
+// (Requires Argument: 1, 3, 4, or 6)
 1000XY  040-3  SHL      ACC <<= N(XY)
                         00=1,01=3,10=4,11=6
 1001XY  044-7  SHR      ACC >>= N(XY)
@@ -321,13 +321,15 @@ General / Accumulator Register Layout:
 // of NIP += 2, 6, 10, 14. (or -2, -6, -10, -14)
 // These require that N2A be executed first to
 // pre-load NIP into ACC before JCP or JCN bypass
-// BOP and performing ALU ADD => NIP.  This will
-// also require an extra inline NEG in decode.
+// BOP and performing ALU ADD or SUB => NIP.
+// The formulation of the jump offset word
+// may need to be adjusted later.
+// (Requires Argument: 2, 6, 10, or 14)
 1010XY  040-3  JCP      IF MCS[CMP] NIP += b00XY10
 1011XY  044-7  JCN      IF MCS[CMP] NIP -= b00XY10
 
 // Literal Octet Assignment to Accumulator
-// (Requires 1 Argument: 1 through 7) 
+// (Requires Argument: 1 through 7) 
 110NNN  060-7  OC0      Assign Least Octet to ACC
                         Remainder of ACC left intact
 111NNN  070-7  OC1      Assign Next-Least Octet to A
