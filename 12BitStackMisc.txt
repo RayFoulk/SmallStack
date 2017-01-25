@@ -65,17 +65,24 @@ BOP will have a bypass MUX at ALU for ops like
     INC, DEC, JRC
 
 // Special Case Transport
-INS <-- SKT	    Fetch, Read line overrides DEV_SEL to 0 at socket
-                also overrides ADDR_BUS with NIP at socket
-                NOTE: SKW to dev 0 is illegal
-ALU --> ACC     Driven by ALU opcodes, implied operands are ACC and BOP
-ALU --> NIP     Certain jump instructions, overrides BOP before ALU
-NIP <-> SKT     Would be necessary for return, drive INC/DEC PTR[]
-ACC <-> NIP	    Actually pretty normal, other than the fact that
-                this jumps absolute! or else just gets the current NIP
-                Categorized separately only for this reason
+INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
+                Read line overrides DEV_SEL out to 0
+                also overrides ADDR_BUS with NIP out
+                NOTE: A2S with DEV_SEL 0 is illegal
+ALU --> ACC     Driven by ALU opcodes,
+                Implied operands are ACC and BOP
+ALU --> NIP     Cond. Relative Jump instruction JRC,
+                Overrides BOP before ALU
+NIP <-> SKT     Will be necessary for return,
+                Drives INC/DEC PTR[]
+ACC <-> NIP     Actually pretty normal, other than
+                the fact that this jumps absolute!
+                or else just gets the current NIP
+                Categorized separately only for
+                this reason
 
 // Normal Case Transport (Simple Internal Data R/W)
+/////////////////////////////////////////////////////
 // (R/W Lines are routed to the target to drive IN/DEC if present)
 ACC <-> BOP     Swap would be nice, but this is a destructive copy 
 ACC <-> MCS     Destructive copy, can be used to clear CAR, CMP
