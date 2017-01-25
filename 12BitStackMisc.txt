@@ -68,27 +68,35 @@ BOP will have a bypass MUX at ALU for ops like
 INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
                 Read line overrides DEV_SEL out to 0
                 also overrides ADDR_BUS with NIP out
-                NOTE: A2S with DEV_SEL 0 is illegal
+                NOTE: SKW with DEV_SEL 0 is illegal
 ALU --> ACC     Driven by ALU opcodes,
                 Implied operands are ACC and BOP
+
 ALU --> NIP     Cond. Relative Jump instruction JRC,
                 Overrides BOP before ALU
+
 NIP <-> SKT     Will be necessary for return,
                 Drives INC/DEC PTR[]
+
+ACC <-> SKT     RAM Read/Write or ROM Read, all
+                expect manually driving DEV_SEL
+                Internal R/W lines auto drive
+                INC/DEC of PTR[PTR_SEL]
+
+// Normal Case Transport (Simple Internal Data R/W)
+ACC <-> BOP     Swap would be nice, but this is a
+                destructive copy 
+
+ACC <-> MCS     Destructive copy, can be used to
+                clear CAR, CMP and set PTR_SEL
+                and DEV_SEL
+
+ACC <-> PTR     Normal destructive copy
+
 ACC <-> NIP     Actually pretty normal, other than
                 the fact that this jumps absolute!
                 or else just gets the current NIP
-                Categorized separately only for
-                this reason
 
-// Normal Case Transport (Simple Internal Data R/W)
-/////////////////////////////////////////////////////
-// (R/W Lines are routed to the target to drive IN/DEC if present)
-ACC <-> BOP     Swap would be nice, but this is a destructive copy 
-ACC <-> MCS     Destructive copy, can be used to clear CAR, CMP
-ACC <-> PTR     Normal except R/W drives INC/DEC PTR[PTR_SEL]
-ACC <-> SKT     RAM Read/Write or ROM Read by manually driving DEV_SEL
-                Internal R/W lines drive INC/DEC PTR[PTR_SEL]
 
 /////////////////////////////////////////////////////
 // TODO: 
@@ -129,17 +137,18 @@ Design peripheral interfaces
 // Main Board Peripheral Bus (8 Addresses)
 // (Board Layout & Design is flexible here)
 
-[Design A - 8K RAM with fully extended 12 bit peripheral bus]
+[Design A - 8K RAM with ext 12 bit peripheral bus]
 0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
 1    RAM    4K RAM (R/W)
 2    RAM    4K RAM (R/W)
 3    ((More RAM? Inter-CPU for multi-core? Network?))
 4    KEYB (Parallel Interface -- TBD)
 5    LCD (8080 + REGS/MODE -- TBD)
-6    BUS_EXT ADDR -- Combine with Data Bus for 24-bit address
+6    BUS_EXT ADDR -- Combine with Data Bus
+         for 24-bit address
 7    BUS_EXT DATA
 
-[Design B - 16K "Mega RAM" with extended 10 bit peripheral bus]
+[Design B - 16K RAM with ext 10 bit peripheral bus]
 0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
 1    RAM    4K RAM (R/W)
 2    RAM    4K RAM (R/W)
@@ -148,6 +157,11 @@ Design peripheral interfaces
 5    KEYB (Parallel Interface -- TBD)
 6    LCD (8080 + REGS/MODE -- TBD)
 7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
+         writes:
+         11xxxxxxxxxx set addr mode, apply data(addr)
+         10xxxxxxxxxx set addr mode, don't apply data
+         01xxxxxxxxxx set data mode, apply data(data)
+         00xxxxxxxxxx set data mode, don't apply data
 
 /////////////////////////////////////////////////////
 // Instruction Design Notes
@@ -192,25 +206,11 @@ might not be useful otherwise.  problem with
 driving PTR select here is in having to be
 extra careful not to clobber CAR.  Might be
 be better redesigned this way to align with
-octet load and character shift
+octet load and character shift.  UPDATE:
+Not a problem.  wire that octet to the ALU.
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
 [RES RES CMP|RES RES CAR|  DEV_SEL  |  PTR_SEL ]
-
-// Example Code
-C2A    ; Get MCS reg to ACC
-OC0,1  ; Set value to select PTR 1
-A2C    ; Write back to MCS, CAR is preserved
-...
-C2A    ; Get MCS reg to ACC
-SRC    ; Shift right 6, discarding select values
-OC1,0  ; Make sure any CMP bit is cleared
-A2B    ; Put carry bit into B register
-OC0,2  ; Set value to select PTR 2
-A2C    ; Write back to MCS, CAR is lost here
-LDA    ; Read value to be added
-ADD    ; Add with carry in B
-STA    ; Store result, overwriting original
 
 General / Accumulator Register Layout:
 
@@ -224,30 +224,36 @@ General / Accumulator Register Layout:
 *  Will not be in initial implementation
    Alternative method exists but uses more code
 
-
 <Bin>   <Oct>  <Mnem.>  <Descr.>
 000000  000    HLT      Halt Execution
 000001  001    NOP      No Operation
-000010  002    
-000011  003    
-000100  004    FCH      INS = SKT, DEV_SEL => 0, NIP++
-000101  005    
-000110  006  * IPT      PTR[PTR_SEL]++
-000111  007  * DPT      PTR[PTR_SEL]--    
+000010  002    ---      RESERVED
+000011  003    FCH      INS = SKT, DEV_SEL => 0,
+                        NIP++ driven by read
+
+// Special Case Transport
+// Store NIP in RAM: S2N is return
+// Will require auto-inc/dec stack ptr
+000100  004    SKW      SKT = ACC, INC/DEC PTR[]
+000101  005    SKR      ACC = SKT, INC/DEC PTR[]
+000110  006  * N2S      SKT = NIP, ++PTR[],
+                            DEV_SEL to 1 ???
+000111  007  * S2N      NIP = SKT, PTR[]--,
+                            DEV_SEL to 1 ???
 
 // Normal Transport Operations, ACC Implied.
 // 1 bit to/from, 2 bits src/dst
 001000  010    A2B      BOP = ACC
 001001  011    A2C      MCS = ACC
-001010  012    A2P      PTR[PTR_SEL] = ACC, INC/DEC PTR
-001011  013    A2S      SKT = ACC, (INC/DEC PTR???)
+001010  012    A2P      PTR[PTR_SEL] = ACC
+001011  013    A2N      NIP = ACC, Jump Abs!!!
 001100  014    B2A      ACC = BOP
 001101  015    C2A      ACC = MCS
-001110  016    P2A      ACC = PTR[PTR_SEL], INC/DEC PTR
-001111  017    S2A      ACC = SKT, (INC/DEC PTR???)
+001110  016    P2A      ACC = PTR[PTR_SEL]
+001111  017    N2A      ACC = NIP, Get Instr Ptr
 
 // Arithmetic & Logic Operations
-010000  020    ADD      ACC += BOP
+010000  020    ADD      ACC += BOP with CAR
 010001  021    NEG      ACC = -ACC (2's comp)
 010010  022    INC      ACC++ (leave BOP intact)
 010011  023    DEC      ACC-- (leave BOP intact)
@@ -261,9 +267,11 @@ General / Accumulator Register Layout:
 011001  031    NEQ      MCS[CMP] = (ACC != BOP)
 011010  032    EZ       MCS[CMP] = (ACC == 0)
 011011  033    NEZ      MCS[CMP] = (ACC != 0)
-011100  034
-011101  035    
-011110  036    
+
+// Miscellaneous
+011100  034  * IPT      PTR[PTR_SEL]++
+011101  035  * DPT      PTR[PTR_SEL]--    
+011110  036    ---      RESERVED
 011111  037  * SWP      High/Low ACC Char Swap    
 
 // Barrel Shifter
@@ -272,22 +280,18 @@ General / Accumulator Register Layout:
 1001XY  044-7  SHR      ACC >>= N(XY)
                         00=1,01=3,10=4,11=6
 
-// Jump Absolute & Conditional Relative
-// Store NIP in RAM & Get NIP to ACC
-// NOTE: JPM is return, but will require
-// auto-inc/dec stack ptr
-101000  040    A2N      NIP = ACC, Jump Abs!!!
-101001  041    N2A      ACC = NIP, Get Instr Ptr
-101010  042  * JPM      NIP = SKT, PTR[]--,
-                            DEV_SEL to 1 ???
-101011  043  * N2M      SKT = NIP, ++PTR[],
-                            DEV_SEL to 1 ???
+// Unused -- reclaim for misc?
+101000  040    
+101001  041    
+101010  042
+101011  043
 
+// Conditional Relative Jump
 // Bitwise NIP offset calc with generated values
 // of NIP += 2, 6, 10, 14.  Need 2-stage approach
 // that pre-loads NIP into ACC before bypassing
 // B and performing ALU ADD => NIP
-1011XY  044-7  JRC     IF !MCS[CMP] NIP += b00XY10
+1011XY  044-7  JRC      IF MCS[CMP] NIP += b00XY10
 
 // Literal Octet Assignment to Accumulator
 110NNN  060-7  OC0      Assign Least Octet to ACC
