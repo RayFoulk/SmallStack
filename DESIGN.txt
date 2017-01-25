@@ -1,9 +1,12 @@
 /////////////////////////////////////////////////////
-// 12-Bit MISC Stack Machine CPU Design
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+// 12-Bit MISC CPU Design (Name TBD)
 
 Harvard Architecture
     Single, Pluggable 4K ROM
     One or More 4K RAM Modules, Segmented
+    Second Iteration will be a proper Stack Machine
 
 All registers, address and data bus are 12 bits wide
 All Opcodes are 6 bits with (mostly) implied operands
@@ -51,7 +54,47 @@ S    SKT    PERIPHERAL DEVICE I/O BUS (R/W)
                 (Driven by PTR[] or NIP during FCH)
               3 DEV_SEL PINS
                 (Drive chip select on peripherals)
-              2 R/W PINS 
+              2 R/W PINS
+              ALSO: (GND, VDD, CLK, RST ...)
+
+/////////////////////////////////////////////////////
+// CPU socket layout:
+Rough Total Pins (From ABove): 33 (div 4 = 8.25)
+    Round up to 9 on a side (square chip)
+    and include extra GNDs & VDDs, also CLK_IN/CLK_OUT
+    new total = 9 x 4 = 36
+
+    _|_|_|_|_|_|_|_|_|_
+  --|                 |--
+  --|                 |--
+  --|                 |--
+  --|                 |--
+  --|      C P U      |--
+  --|                 |--
+  --|                 |--
+  --|                 |--
+  --|_________________|--
+     | | | | | | | | |
+
+Alternative Rectangular Layout
+(Would keep Data Bus on one side
+and Address Bus on the other)
+36 - 24 = 12 , /2 = 6
+
+    _|_|_|_|_|_|_
+  --|           |--
+  --|           |--
+  --|           |--
+  --|           |--
+  --|           |--
+  --|           |--
+  --|   C P U   |--
+  --|           |--
+  --|           |--
+  --|           |--
+  --|           |--
+  --|___________|--
+     | | | | | |
 
 /////////////////////////////////////////////////////
 // Inter-Device Transport Notes
@@ -62,7 +105,7 @@ Accumulator-centric transport instructions
 ACC is used for unary operations
 BOP is used with ACC for duadic operations
 BOP will have a bypass MUX at ALU for ops like
-    INC, DEC, JRC
+    INC, DEC, JCP
 
 // Special Case Transport
 INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
@@ -72,7 +115,7 @@ INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
 ALU --> ACC     Driven by ALU opcodes,
                 Implied operands are ACC and BOP
 
-ALU --> NIP     Cond. Relative Jump instruction JRC,
+ALU --> NIP     Cond. Relative Jump instruction JCP,
                 Overrides BOP before ALU
 
 NIP <-> SKT     Will be necessary for return,
@@ -96,7 +139,6 @@ ACC <-> PTR     Normal destructive copy
 ACC <-> NIP     Actually pretty normal, other than
                 the fact that this jumps absolute!
                 or else just gets the current NIP
-
 
 /////////////////////////////////////////////////////
 // TODO: 
@@ -166,7 +208,7 @@ Design peripheral interfaces
 /////////////////////////////////////////////////////
 // Instruction Design Notes
 ZRO, UNO not needed. SL6 twice will zero A
-OC0,7 ; OC1,7 ; SL6 ; OC0,7 ; OC1,7 will set 07777
+OC0,7 ; OC1,7 ; SHL,6 ; OC0,7 ; OC1,7 will set 07777
 GT and LT comparisons can be synthesized easily
 MUL and DIV can be sythesized.  will never be included.
 
@@ -195,19 +237,12 @@ fonts, bitmaps, strings, etc...
     8-block of opcodes.
 
 /////////////////////////////////////////////////////
-Initial MCS Register Layout:
+MCS Register Layout:
 
- 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[  DEV_SEL  |    RES    |  PTR_SEL  |RES CMP CAR]
-
-Might be better (less code) to do long add
-with carry if CAR was static to ALU, but then
-might not be useful otherwise.  problem with
-driving PTR select here is in having to be
-extra careful not to clobber CAR.  Might be
-be better redesigned this way to align with
-octet load and character shift.  UPDATE:
-Not a problem.  wire that octet to the ALU.
+Upper two octets R/W are hardwired to ALU in/out.
+In this way, the MCS resembles ACC except reversed.
+writing ACC => MCS with zero in upper char clears
+carry and compare bits.  ADD is always with carry.
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
 [RES RES CMP|RES RES CAR|  DEV_SEL  |  PTR_SEL ]
@@ -222,7 +257,7 @@ General / Accumulator Register Layout:
 /////////////////////////////////////////////////////
 // Updated Opcodes
 *  Will not be in initial implementation
-   Alternative method exists but uses more code
+   (Alternative method exists but uses more code)
 
 <Bin>   <Oct>  <Mnem.>  <Descr.>
 000000  000    HLT      Halt Execution
@@ -255,8 +290,8 @@ General / Accumulator Register Layout:
 // Arithmetic & Logic Operations
 010000  020    ADD      ACC += BOP with CAR
 010001  021    NEG      ACC = -ACC (2's comp)
-010010  022    INC      ACC++ (leave BOP intact)
-010011  023    DEC      ACC-- (leave BOP intact)
+010010  022    SWP      High/Low ACC Char Swap    
+010011  023    ---      RESERVED
 010100  024    AND      ACC &= BOP
 010101  025    OR       ACC |= BOP
 010110  026    XOR      ACC ^= BOP
@@ -268,32 +303,31 @@ General / Accumulator Register Layout:
 011010  032    EZ       MCS[CMP] = (ACC == 0)
 011011  033    NEZ      MCS[CMP] = (ACC != 0)
 
-// Miscellaneous
-011100  034  * IPT      PTR[PTR_SEL]++
-011101  035  * DPT      PTR[PTR_SEL]--    
-011110  036    ---      RESERVED
-011111  037  * SWP      High/Low ACC Char Swap    
+// Incrementors / Decrementors
+011100  034    INC      ACC++ (in-place register operation)
+011101  035    DEC      ACC-- (in-place register operation)
+011110  036    IPT      PTR[PTR_SEL]++
+011111  037    DPT      PTR[PTR_SEL]--    
 
-// Barrel Shifter
+// Single Stage Barrel Shifter
+// (Requires 1 Argument: 1, 3, 4, or 6)
 1000XY  040-3  SHL      ACC <<= N(XY)
                         00=1,01=3,10=4,11=6
 1001XY  044-7  SHR      ACC >>= N(XY)
                         00=1,01=3,10=4,11=6
 
-// Unused -- reclaim for misc?
-101000  040    
-101001  041    
-101010  042
-101011  043
-
-// Conditional Relative Jump
+// Conditional Relative Jumps
 // Bitwise NIP offset calc with generated values
-// of NIP += 2, 6, 10, 14.  Need 2-stage approach
-// that pre-loads NIP into ACC before bypassing
-// B and performing ALU ADD => NIP
-1011XY  044-7  JRC      IF MCS[CMP] NIP += b00XY10
+// of NIP += 2, 6, 10, 14. (or -2, -6, -10, -14)
+// These require that N2A be executed first to
+// pre-load NIP into ACC before JCP or JCN bypass
+// BOP and performing ALU ADD => NIP.  This will
+// also require an extra inline NEG in decode.
+1010XY  040-3  JCP      IF MCS[CMP] NIP += b00XY10
+1011XY  044-7  JCN      IF MCS[CMP] NIP -= b00XY10
 
 // Literal Octet Assignment to Accumulator
+// (Requires 1 Argument: 1 through 7) 
 110NNN  060-7  OC0      Assign Least Octet to ACC
                         Remainder of ACC left intact
 111NNN  070-7  OC1      Assign Next-Least Octet to A
