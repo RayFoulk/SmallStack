@@ -61,7 +61,8 @@ S    SKT    PERIPHERAL DEVICE I/O BUS (R/W)
 // CPU socket layout:
 Rough Total Pins (From ABove): 33 (div 4 = 8.25)
     Round up to 9 on a side (square chip)
-    and include extra GNDs & VDDs, also CLK_IN/CLK_OUT
+    and include extra GNDs & VDDs, also
+    CLK_IN/CLK_OUT
     new total = 9 x 4 = 36
 
     _|_|_|_|_|_|_|_|_|_
@@ -255,6 +256,21 @@ General / Accumulator Register Layout:
 [  High Char            |  Low Char             ]
 
 /////////////////////////////////////////////////////
+// PTR[PTR_SEL] Register Bank Behavior
+// (One of these can be selected at a time)
+
+PTR_SEL    SKW/N2S    SKR/S2N    Intended Usage
+
+000  0     PTR[]--    PTR[]++    Return Stack
+001  1     PTR[]--    PTR[]++    Data Stack
+010  2     PTR[]++    PTR[]++    Block Mem Load/Store
+011  3     PTR[]--    PTR[]--    Block Mem Load/Store
+100  4     N/A        N/A        \
+101  5     N/A        N/A        | General Purpose
+110  6     N/A        N/A        | Pointer Args
+111  7     N/A        N/A        / To Subroutines
+
+/////////////////////////////////////////////////////
 // Updated Opcodes
 *  Will not be in initial implementation
    (Alternative method exists but uses more code)
@@ -265,6 +281,12 @@ General / Accumulator Register Layout:
 000010  002    ---      RESERVED
 000011  003    FCH      INS = SKT, DEV_SEL => 0,
                         NIP++ driven by read
+
+// NOTE: fetch opcode may be avoidable since this
+// can be (probably) more simply built into the main
+// micro cycle => drive lines. IE nothing to
+// "decode" per se, just do it! That would free up
+// this opcode.
 
 // Special Case Transport
 // Store NIP in RAM: S2N is return
