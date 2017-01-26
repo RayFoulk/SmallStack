@@ -45,14 +45,14 @@ A    ACC    ALU INPUT 1 : A (ACCUMULATOR) (R/W)
 B    BOP    ALU INPUT 2 : B (GP/DYADIC) (R/W)
 L    ALU    ALU OUTPUT (DIRECT TO BUS) (RO)
 C    MCS    MACHINE CTRL/STATUS: CARRY, CMP,
-              PTR_SEL, DEV_SEL (R/W)
+              PSEL, DSEL (R/W)
 P    PTR    RAM ADDR REG (R/W) (SELECTABLE ARRAY,
               AUTO INC/DEC on R/W)
 N    NIP    ROM ADDR REG (R/W) AKA NIP
 S    SKT    PERIPHERAL DEVICE I/O BUS (R/W)
               12 DATA PINS, 12 ADDR PINS
-                (Driven by PTR[] or NIP during FCH)
-              3 DEV_SEL PINS
+                (Driven by PTR[PSEL] or NIP during FCH)
+              3 DSEL PINS
                 (Drive chip select on peripherals)
               2 R/W PINS
               ALSO: (GND, VDD, CLK, RST ...)
@@ -110,9 +110,9 @@ BOP will have a bypass MUX at ALU for ops like
 
 // Special Case Transport
 INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
-                Read line overrides DEV_SEL out to 0
+                Read line overrides DSEL out to 0
                 also overrides ADDR_BUS with NIP out
-                NOTE: SKW with DEV_SEL 0 is illegal
+                NOTE: SKW with DSEL 0 is illegal
 ALU --> ACC     Driven by ALU opcodes,
                 Implied operands are ACC and BOP
 
@@ -120,20 +120,20 @@ ALU --> NIP     Cond. Relative Jump instruction JCP,
                 Overrides BOP before ALU
 
 NIP <-> SKT     Will be necessary for return,
-                Drives INC/DEC PTR[]
+                Drives INC/DEC PTR[PSEL]
 
 ACC <-> SKT     RAM Read/Write or ROM Read, all
-                expect manually driving DEV_SEL
+                expect manually driving DSEL
                 Internal R/W lines auto drive
-                INC/DEC of PTR[PTR_SEL]
+                INC/DEC of PTR[PSEL]
 
 // Normal Case Transport (Simple Internal Data R/W)
 ACC <-> BOP     Swap would be nice, but this is a
                 destructive copy 
 
 ACC <-> MCS     Destructive copy, can be used to
-                clear CAR, CMP and set PTR_SEL
-                and DEV_SEL
+                clear CAR, CMP and set PSEL
+                and DSEL
 
 ACC <-> PTR     Normal destructive copy
 
@@ -207,9 +207,27 @@ Design peripheral interfaces
          00xxxxxxxxxx set data mode, do not apply data
 
 /////////////////////////////////////////////////////
-// Instruction Design Notes
-ZRO, UNO not needed. SL6 twice will zero A
-OC0,7 ; OC1,7 ; SHL,6 ; OC0,7 ; OC1,7 will set 07777
+// Instruction Design Notes -- With Examples
+
+SHL 6  ; Zero out ACC
+SHL 6
+
+OC0 7  ; Set ACC to 07777
+OC1 7
+SHL 6
+OC0 7
+OC1 7
+A2B    ; Store 07777 in BOP
+
+C2A    ; Get MCS to ACC
+OC0 1  ; Select first RAM bank
+OC1 0  ; Select return stack pointer
+A2C    ; Write MCS register
+
+B2A    ; Get 07777 back from earlier
+A2P    ; Initialize return stack pointer
+
+// Synthesis of other instructions:
 GT and LT comparisons can be synthesized easily
 MUL and DIV can be sythesized.  will never be included.
 
@@ -223,17 +241,17 @@ stack + 3 ptrs -- could be used for call args.
 
 NOTE: ROM needs to be separate and socketable.
 An address bus driven by NIP and PTR is necessary,
-as well as a bypass on external DEV_SEL.
+as well as a bypass on external DSEL.
 this would reduce the number of CPU pins by re-using
 the address lines for ROM and RAM.  Not shown above
   are the control lines.
-FCH bypasses DEV_SEL and asserts 0 on output pins
-ADDR output pins are normally driven by PTR[]
+FCH bypasses DSEL and asserts 0 on output pins
+ADDR output pins are normally driven by PTR[PSEL]
 but FCH instructuon overrides this with NIP
 NOTE: This also allows PTR access to ROM for reading
 fonts, bitmaps, strings, etc... 
-  by manually setting DEV_SEL to 0,
-  set PTR[] to desired address and executing IOR.
+  by manually setting DSEL to 0,
+  set PTR[PSEL] to desired address and executing IOR.
   This eliminates the need for LBL and frees up an
     8-block of opcodes.
 
@@ -246,29 +264,38 @@ writing ACC => MCS with zero in upper char clears
 carry and compare bits.  ADD is always with carry.
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[RES RES CMP|RES RES CAR|  DEV_SEL  |  PTR_SEL ]
+[RES RES CMP|RES RES CAR|   DSEL    |   PSEL   ]
+
+Alternatively, To help simulate ROR and ROL, since
+shift operations can handle up to six bits at a
+time, use the whole upper character of MCS to
+hold the result of the last (applicable) ALU
+operation.
+
+ 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+[          RES          |   DSEL    |   PSEL   ]
 
 General / Accumulator Register Layout:
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
 [  Most Sig | Next-Most | Next-Least| Least Sig ]
 [  Octet 3  |  Octet 2  |  Octet 1  |  Octet 0  ]
-[  High Char            |  Low Char             ]
+[  High Char (HCHAR)    |  Low Char (LCHAR)     ]
 
 /////////////////////////////////////////////////////
-// PTR[PTR_SEL] Register Bank Behavior
+// PTR[PSEL] Register Bank Behavior
 // (One of these can be selected at a time)
 
-PTR_SEL    SKW/N2S    SKR/S2N    Intended Usage
+PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
-000  0     PTR[]--    PTR[]++    Return Stack
-001  1     PTR[]--    PTR[]++    Data Stack
-010  2     PTR[]++    PTR[]++    Block Mem Load/Store
-011  3     PTR[]--    PTR[]--    Block Mem Load/Store
-100  4     N/A        N/A        \
-101  5     N/A        N/A        | General Purpose
-110  6     N/A        N/A        | Pointer Args
-111  7     N/A        N/A        / To Subroutines
+000  0  PTR[PSEL]--  PTR[PSEL]++  Return Stack
+001  1  PTR[PSEL]--  PTR[PSEL]++  Data Stack
+010  2  PTR[PSEL]++  PTR[PSEL]++  Block Mem Load/Store
+011  3  PTR[PSEL]--  PTR[PSEL]--  Block Mem Load/Store
+100  4  N/A          N/A          \
+101  5  N/A          N/A          | General Purpose
+110  6  N/A          N/A          | Pointer Args
+111  7  N/A          N/A          / To Subroutines
 
 /////////////////////////////////////////////////////
 // Updated Opcodes
@@ -279,7 +306,7 @@ PTR_SEL    SKW/N2S    SKR/S2N    Intended Usage
 000000  000    HLT      Halt Execution
 000001  001    NOP      No Operation
 000010  002    ---      RESERVED
-000011  003    FCH      INS = SKT, DEV_SEL => 0,
+000011  003    FCH      INS = SKT, DSEL => 0,
                         NIP++ driven by read
 
 // NOTE: fetch opcode may be avoidable since this
@@ -291,28 +318,28 @@ PTR_SEL    SKW/N2S    SKR/S2N    Intended Usage
 // Special Case Transport
 // Store NIP in RAM: S2N is return
 // Will require auto-inc/dec stack ptr
-000100  004    SKW      SKT = ACC, INC/DEC PTR[]
-000101  005    SKR      ACC = SKT, INC/DEC PTR[]
-000110  006  * N2S      SKT = NIP, ++PTR[],
-                            DEV_SEL to 1 ???
-000111  007  * S2N      NIP = SKT, PTR[]--,
-                            DEV_SEL to 1 ???
+000100  004    SKW      SKT = ACC, INC/DEC PTR[PSEL]
+000101  005    SKR      ACC = SKT, INC/DEC PTR[PSEL]
+000110  006  * N2S      SKT = NIP, ++PTR[PSEL],
+                            DSEL to 1 ???
+000111  007  * S2N      NIP = SKT, PTR[PSEL]--,
+                            DSEL to 1 ???
 
 // Normal Transport Operations, ACC Implied.
 // 1 bit to/from, 2 bits src/dst
 001000  010    A2B      BOP = ACC
 001001  011    A2C      MCS = ACC
-001010  012    A2P      PTR[PTR_SEL] = ACC
+001010  012    A2P      PTR[PSEL] = ACC
 001011  013    A2N      NIP = ACC, Jump Abs!!!
 001100  014    B2A      ACC = BOP
 001101  015    C2A      ACC = MCS
-001110  016    P2A      ACC = PTR[PTR_SEL]
+001110  016    P2A      ACC = PTR[PSEL]
 001111  017    N2A      ACC = NIP, Get Instr Ptr
 
 // Arithmetic & Logic Operations
 010000  020    ADD      ACC += BOP (w/ CAR as carry)
 010001  021    SUB      ACC -= BOP (w/ CAR as borrow)
-010010  022    SWP      ACC High/Low Character Swap    
+010010  022    SWP      ACC[HCHAR] <=> ACC[LCHAR]
 010011  023    ---      RESERVED
 010100  024    AND      ACC &= BOP
 010101  025    OR       ACC |= BOP
@@ -320,19 +347,21 @@ PTR_SEL    SKW/N2S    SKR/S2N    Intended Usage
 010111  027    NOT      ACC = ~ACC
 
 // Comparison Operations
-011000  030    EQ       MCS[CMP] = (ACC == BOP)
-011001  031    NEQ      MCS[CMP] = (ACC != BOP)
-011010  032    EZ       MCS[CMP] = (ACC == 0)
-011011  033    NEZ      MCS[CMP] = (ACC != 0)
+011000  030    EQ       MCS[RES]:6 = (ACC == BOP)
+011001  031    NEQ      MCS[RES]:6 = (ACC != BOP)
+011010  032    EZ       MCS[RES]:6 = (ACC == 0)
+011011  033    NEZ      MCS[RES]:6 = (ACC != 0)
 
 // Incrementors / Decrementors
-011100  034    INC      ACC++ (in-place register operation)
-011101  035    DEC      ACC-- (in-place register operation)
-011110  036    IPT      PTR[PTR_SEL]++
-011111  037    DPT      PTR[PTR_SEL]--    
+011100  034    INC      ACC++ (in-place register op)
+011101  035    DEC      ACC-- (in-place register op)
+011110  036    IPT      PTR[PSEL]++
+011111  037    DPT      PTR[PSEL]--    
 
 // Single Stage Barrel Shifter
 // (Requires Argument: 1, 3, 4, or 6)
+// Shifted-out bits go to MCS[RES] to facilitate
+// Simulation of ROR and ROL
 1000XY  040-3  SHL      ACC <<= N(XY)
                         00=1,01=3,10=4,11=6
 1001XY  044-7  SHR      ACC >>= N(XY)
@@ -347,8 +376,8 @@ PTR_SEL    SKW/N2S    SKR/S2N    Intended Usage
 // The formulation of the jump offset word
 // may need to be adjusted later.
 // (Requires Argument: 2, 6, 10, or 14)
-1010XY  040-3  JCP      IF MCS[CMP] NIP += b00XY10
-1011XY  044-7  JCN      IF MCS[CMP] NIP -= b00XY10
+1010XY  040-3  JCP      IF MCS[RES]:6 NIP += b00XY10
+1011XY  044-7  JCN      IF MCS[RES]:6 NIP -= b00XY10
 
 // Literal Octet Assignment to Accumulator
 // (Requires Argument: 1 through 7) 
