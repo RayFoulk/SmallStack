@@ -8,7 +8,7 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/BusReadInterface.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlopPreClr.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/ThirdParty/pe d flipflop.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBits.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/TwoToOneMultiplexerChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
