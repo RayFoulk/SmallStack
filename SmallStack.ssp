@@ -11,9 +11,10 @@
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TwoToOneMultiplexerChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
+	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/TwoToOneMultiplexer.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryTester.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterTester.ssc</component>
-	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/Accumulator.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/Accumulator.ssc</component>
 </project>
