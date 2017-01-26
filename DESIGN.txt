@@ -80,7 +80,7 @@ Rough Total Pins (From ABove): 33 (div 4 = 8.25)
 Alternative Rectangular Layout
 (Would keep Data Bus on one side
 and Address Bus on the other)
-36 - 24 = 12 , /2 = 6
+36 - 24 = 12 , / 2 = 6
 
     _|_|_|_|_|_|_
   --|           |--
@@ -220,8 +220,8 @@ OC1 7
 A2B    ; Store 07777 in BOP
 
 C2A    ; Get MCS to ACC
-OC0 1  ; Select first RAM bank
-OC1 0  ; Select return stack pointer
+OC0 0  ; Select return stack pointer
+OC1 1  ; Select first RAM bank
 A2C    ; Write MCS register
 
 B2A    ; Get 07777 back from earlier
@@ -230,6 +230,11 @@ A2P    ; Initialize return stack pointer
 // Synthesis of other instructions:
 GT and LT comparisons can be synthesized easily
 MUL and DIV can be sythesized.  will never be included.
+
+S2A    ; Read some value from RAM or ROM
+A2B    ; Copy value into BOP
+SHL 1  ; Multiply by 2
+ADD    ; Add in BOP, result is "multiply by 3"
 
 // Later Design changes:
 single cycle hardware register swap or
@@ -256,7 +261,7 @@ fonts, bitmaps, strings, etc...
     8-block of opcodes.
 
 /////////////////////////////////////////////////////
-MCS Register Layout:
+// MCS Register Layout:
 
 Upper two octets R/W are hardwired to ALU in/out.
 In this way, the MCS resembles ACC except reversed.
@@ -337,8 +342,8 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 001111  017    N2A      ACC = NIP, Get Instr Ptr
 
 // Arithmetic & Logic Operations
-010000  020    ADD      ACC += BOP (w/ CAR as carry)
-010001  021    SUB      ACC -= BOP (w/ CAR as borrow)
+010000  020    ADD      ACC += BOP (Carry MCS[RES]:6)
+010001  021    SUB      ACC -= BOP (Borrow MCS[RES]:6)
 010010  022    SWP      ACC[HCHAR] <=> ACC[LCHAR]
 010011  023    ---      RESERVED
 010100  024    AND      ACC &= BOP
@@ -378,6 +383,8 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // (Requires Argument: 2, 6, 10, or 14)
 1010XY  040-3  JCP      IF MCS[RES]:6 NIP += b00XY10
 1011XY  044-7  JCN      IF MCS[RES]:6 NIP -= b00XY10
+// b0XY100 produces 4, 12, 20, 28
+// bX0Y010 produces 2, 10, 34, 42
 
 // Literal Octet Assignment to Accumulator
 // (Requires Argument: 1 through 7) 
