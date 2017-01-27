@@ -1,11 +1,11 @@
-## SmallStack
+# SmallStack
 Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 
-# Purpose
+### Purpose
 - To have fun & learn about alternative CPU architectures.
 - To create my own hobbyist CPU from scratch.
 
-# Design Goals:
+### Design Goals:
 - Simple, Small, Minimalistic Design (Minimal Instruction Set Computer)
 - Early designs will NOT have hardware stacks but will use RAM
     - Will initially resemble typical CPU designs, just to get off the ground
@@ -22,9 +22,10 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
     - Maintain 6bit opcodes / characters by packing 2 chars per word.
     - Future designs  may transition to 18-bit design with 3 chars per word
 
-# Research:
+### Research:
 - Discovery that "Minimal Instruction Set Computer" is a real thing (MISC)
 - Inspired by the life's work of Charles Moore, an unsung genius (in my opinion)
     - Computer Cowboys, Ultratechnology, Greenarrays
     - Stack Computers, RPN, and Forth Language.
-- Book: Stack Computers (Koopman, 1989)
+- Book: Stack Computers "The New Wave" (Koopman, 1989)
+

@@ -9,12 +9,14 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlopPreClr.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/ThirdParty/pe d flipflop.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TwoToOneMultiplexerChar.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsWord.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
-	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/TwoToOneMultiplexer.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/MemoryTester.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
+	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsTester.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterTester.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Accumulator.ssc</component>
 </project>
