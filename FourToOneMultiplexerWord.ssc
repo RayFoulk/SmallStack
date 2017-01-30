@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>FourToOneMultiplexerWord</name>
+	<description></description>
+	<label>4:1</label>
+	<bound right="30" down="230" left="-30" up="-230"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<component id="0" def="TwoToOneMultiplexerWord" x="-60" y="-160" direction="right" flip="false"/>
+	<component id="1" def="TwoToOneMultiplexerWord" x="-60" y="160" direction="right" flip="false"/>
+	<component id="2" def="TwoToOneMultiplexerWord" x="60" y="0" direction="right" flip="false"/>
+</custom_component>

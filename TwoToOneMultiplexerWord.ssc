@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>TwoToOneMultiplexerWord</name>
+	<description></description>
+	<label>2:1</label>
+	<bound right="20" down="140" left="-20" up="-140"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<component id="0" def="TwoToOneMultiplexerChar" x="0" y="-95" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="null" invert="false"/>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="null" invert="false"/>
+		<connection flow="in" pinid="4" wireid="null" invert="false"/>
+		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+		<connection flow="in" pinid="6" wireid="null" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
+		<connection flow="in" pinid="9" wireid="null" invert="false"/>
+		<connection flow="in" pinid="10" wireid="null" invert="false"/>
+		<connection flow="in" pinid="11" wireid="null" invert="false"/>
+		<connection flow="in" pinid="12" wireid="null" invert="false"/>
+		<connection flow="in" pinid="13" wireid="null" invert="false"/>
+		<connection flow="in" pinid="14" wireid="null" invert="false"/>
+		<connection flow="in" pinid="15" wireid="null" invert="false"/>
+		<connection flow="in" pinid="16" wireid="null" invert="false"/>
+		<connection flow="in" pinid="17" wireid="null" invert="false"/>
+		<connection flow="in" pinid="18" wireid="null" invert="false"/>
+	</component>
+	<component id="1" def="TwoToOneMultiplexerChar" x="0" y="95" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="null" invert="false"/>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="null" invert="false"/>
+		<connection flow="in" pinid="4" wireid="null" invert="false"/>
+		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+		<connection flow="in" pinid="6" wireid="null" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
+		<connection flow="in" pinid="9" wireid="null" invert="false"/>
+		<connection flow="in" pinid="10" wireid="null" invert="false"/>
+		<connection flow="in" pinid="11" wireid="null" invert="false"/>
+		<connection flow="in" pinid="12" wireid="null" invert="false"/>
+		<connection flow="in" pinid="13" wireid="null" invert="false"/>
+		<connection flow="in" pinid="14" wireid="null" invert="false"/>
+		<connection flow="in" pinid="15" wireid="null" invert="false"/>
+		<connection flow="in" pinid="16" wireid="null" invert="false"/>
+		<connection flow="in" pinid="17" wireid="null" invert="false"/>
+		<connection flow="in" pinid="18" wireid="null" invert="false"/>
+	</component>
+</custom_component>

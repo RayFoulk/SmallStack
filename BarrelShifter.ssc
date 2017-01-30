@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>BarrelShifter</name>
+	<description></description>
+	<label></label>
+	<bound right="20" down="65" left="-20" up="-65"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<component id="0" def="FourToOneMultiplexerWord" x="60" y="0" direction="right" flip="false"/>
+	<component id="1" def="ReverseBitsOrPassThrough" x="290" y="-5" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="null" invert="false"/>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="null" invert="false"/>
+		<connection flow="in" pinid="4" wireid="null" invert="false"/>
+		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+		<connection flow="in" pinid="6" wireid="null" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
+		<connection flow="in" pinid="9" wireid="null" invert="false"/>
+		<connection flow="in" pinid="10" wireid="null" invert="false"/>
+		<connection flow="in" pinid="11" wireid="null" invert="false"/>
+		<connection flow="out" pinid="12" wireid="null" invert="false"/>
+		<connection flow="out" pinid="13" wireid="null" invert="false"/>
+		<connection flow="out" pinid="14" wireid="null" invert="false"/>
+		<connection flow="out" pinid="15" wireid="null" invert="false"/>
+		<connection flow="out" pinid="16" wireid="null" invert="false"/>
+		<connection flow="out" pinid="17" wireid="null" invert="false"/>
+		<connection flow="out" pinid="18" wireid="null" invert="false"/>
+		<connection flow="out" pinid="19" wireid="null" invert="false"/>
+		<connection flow="out" pinid="20" wireid="null" invert="false"/>
+		<connection flow="out" pinid="21" wireid="null" invert="false"/>
+		<connection flow="out" pinid="22" wireid="null" invert="false"/>
+		<connection flow="out" pinid="23" wireid="null" invert="false"/>
+		<connection flow="in" pinid="24" wireid="null" invert="false"/>
+	</component>
+	<component id="2" def="ReverseBitsOrPassThrough" x="-240" y="-10" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="null" invert="false"/>
+		<connection flow="in" pinid="1" wireid="null" invert="false"/>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="null" invert="false"/>
+		<connection flow="in" pinid="4" wireid="null" invert="false"/>
+		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+		<connection flow="in" pinid="6" wireid="null" invert="false"/>
+		<connection flow="in" pinid="7" wireid="null" invert="false"/>
+		<connection flow="in" pinid="8" wireid="null" invert="false"/>
+		<connection flow="in" pinid="9" wireid="null" invert="false"/>
+		<connection flow="in" pinid="10" wireid="null" invert="false"/>
+		<connection flow="in" pinid="11" wireid="null" invert="false"/>
+		<connection flow="out" pinid="12" wireid="null" invert="false"/>
+		<connection flow="out" pinid="13" wireid="null" invert="false"/>
+		<connection flow="out" pinid="14" wireid="null" invert="false"/>
+		<connection flow="out" pinid="15" wireid="null" invert="false"/>
+		<connection flow="out" pinid="16" wireid="null" invert="false"/>
+		<connection flow="out" pinid="17" wireid="null" invert="false"/>
+		<connection flow="out" pinid="18" wireid="null" invert="false"/>
+		<connection flow="out" pinid="19" wireid="null" invert="false"/>
+		<connection flow="out" pinid="20" wireid="null" invert="false"/>
+		<connection flow="out" pinid="21" wireid="null" invert="false"/>
+		<connection flow="out" pinid="22" wireid="null" invert="false"/>
+		<connection flow="out" pinid="23" wireid="null" invert="false"/>
+		<connection flow="in" pinid="24" wireid="null" invert="false"/>
+	</component>
+</custom_component>
