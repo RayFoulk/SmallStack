@@ -267,6 +267,8 @@ Upper two octets R/W are hardwired to ALU in/out.
 In this way, the MCS resembles ACC except reversed.
 writing ACC => MCS with zero in upper char clears
 carry and compare bits.  ADD is always with carry.
+DSEL and PSEL octets could be independent up/dn
+counters to all for next/prev-dev and psel instr.
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
 [RES RES CMP|RES RES CAR|   DSEL    |   PSEL   ]
@@ -278,7 +280,23 @@ hold the result of the last (applicable) ALU
 operation.
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[          RES          |   DSEL    |   PSEL   ]
+[     OVER/CAR/CMP      |   DSEL    |   PSEL   ]
+
+Problem with this approach is overflow bits
+clobber the comparator result, which would be
+particularly problematic in a loop. Compromise
+design, but would only keep the 3 closest bits.
+ 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+[RES RES CMP| OVER/CAR  |   DSEL    |   PSEL   ]
+
+Another alternative design.. would require rework:
+ 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+[       OVER/CAR        |CMP| DSEL  |   PSEL   ]
+
+Nope. Original Design above is best.  Keep overflow
+bits away from add/sub result.  Use PTR as temp
+var if necessary to simulate rotate.  Even if we
+store bits here it is not less code to retrieve them.
 
 General / Accumulator Register Layout:
 
