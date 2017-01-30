@@ -269,36 +269,16 @@ writing ACC => MCS with zero in upper char clears
 carry and compare bits.  ADD is always with carry.
 DSEL and PSEL octets could be independent up/dn
 counters to all for next/prev-dev and psel instr.
+PTR[] registers may be used for temporary storage
+to simulate ROR and ROL operations.  Future usage
+for some reserved bits include greater/less
+comparison and also signed versus unsigned
+operations.
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
 [RES RES CMP|RES RES CAR|   DSEL    |   PSEL   ]
 
-Alternatively, To help simulate ROR and ROL, since
-shift operations can handle up to six bits at a
-time, use the whole upper character of MCS to
-hold the result of the last (applicable) ALU
-operation.
-
- 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[     OVER/CAR/CMP      |   DSEL    |   PSEL   ]
-
-Problem with this approach is overflow bits
-clobber the comparator result, which would be
-particularly problematic in a loop. Compromise
-design, but would only keep the 3 closest bits.
- 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[RES RES CMP| OVER/CAR  |   DSEL    |   PSEL   ]
-
-Another alternative design.. would require rework:
- 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[       OVER/CAR        |CMP| DSEL  |   PSEL   ]
-
-Nope. Original Design above is best.  Keep overflow
-bits away from add/sub result.  Use PTR as temp
-var if necessary to simulate rotate.  Even if we
-store bits here it is not less code to retrieve them.
-
-General / Accumulator Register Layout:
+// General / Accumulator Register Layout:
 
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
 [  Most Sig | Next-Most | Next-Least| Least Sig ]
@@ -307,14 +287,24 @@ General / Accumulator Register Layout:
 
 /////////////////////////////////////////////////////
 // PTR[PSEL] Register Bank Behavior
-// (One of these can be selected at a time)
+
+One of these can be selected at any time via the PSEL
+bit field in the MCS register.  The currently
+selected register in the PTR[] bank drives the ADDR
+bus output lines, as well as having its incrementor
+and dectrementor lines connected to the decoder,
+such that on socket R/W and stack R/W operations
+cause the applicable in-place inc/dec (if
+applicable).  When N/A the register value remains
+static unless purposefully assigned or driven by
+IPT/DPT operations.
 
 PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
 000  0  PTR[PSEL]--  PTR[PSEL]++  Return Stack
 001  1  PTR[PSEL]--  PTR[PSEL]++  Data Stack
-010  2  PTR[PSEL]++  PTR[PSEL]++  Block Mem Load/Store
-011  3  PTR[PSEL]--  PTR[PSEL]--  Block Mem Load/Store
+010  2  PTR[PSEL]++  PTR[PSEL]++  Blk Mem Load/Store
+011  3  PTR[PSEL]--  PTR[PSEL]--  Blk Mem Load/Store
 100  4  N/A          N/A          \
 101  5  N/A          N/A          | General Purpose
 110  6  N/A          N/A          | Pointer Args
@@ -322,21 +312,22 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
 /////////////////////////////////////////////////////
 // Updated Opcodes
-*  Will not be in initial implementation
-   (Alternative method exists but uses more code)
+*  (Will not be in initial implementation
+   Alternative method exists but may use more code)
+
+NOTE: fetch opcode is avoided since this can be built
+directly into the main micro cycle => drive lines.
+I.E. For this "instruction" only, there nothing to
+"decode" per se, just do it!
+
+XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
+                        NIP++ driven by read
 
 <Bin>   <Oct>  <Mnem.>  <Descr.>
 000000  000    HLT      Halt Execution
 000001  001    NOP      No Operation
 000010  002    ---      RESERVED
-000011  003    FCH      INS = SKT, DSEL => 0,
-                        NIP++ driven by read
-
-// NOTE: fetch opcode may be avoidable since this
-// can be (probably) more simply built into the main
-// micro cycle => drive lines. IE nothing to
-// "decode" per se, just do it! That would free up
-// this opcode.
+000011  003    ---      RESERVED
 
 // Special Case Transport
 // Store NIP in RAM: S2N is return
