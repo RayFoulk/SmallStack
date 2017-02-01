@@ -323,6 +323,15 @@ I.E. For this "instruction" only, there nothing to
 XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
                         NIP++ driven by read
 
+NOTE: Other instructions to consider:
+PSEL++ and PSEL--
+MCS[CMP] = MCS[CAR] for testing carry in 2 instr vs 5
+MCS[CMP] = ~MCS[CMP] via JK toggle
+Work out if N2S and S2N really necessary,
+  or if N2A,SKW and SKR,A2N will do
+ASB swap ACC <=> BOP and save another opcode
+do the same with PTR[]?  ASP?
+
 <Bin>   <Oct>  <Mnem.>  <Descr.>
 000000  000    HLT      Halt Execution
 000001  001    NOP      No Operation
@@ -351,8 +360,8 @@ XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
 001111  017    N2A      ACC = NIP, Get Instr Ptr
 
 // Arithmetic & Logic Operations
-010000  020    ADD      ACC += BOP (Carry MCS[RES]:6)
-010001  021    SUB      ACC -= BOP (Borrow MCS[RES]:6)
+010000  020    ADD      ACC += BOP (Carry MCS[CAR])
+010001  021    SUB      ACC -= BOP (Borrow MCS[CAR])
 010010  022    SWP      ACC[HCHAR] <=> ACC[LCHAR]
 010011  023    ---      RESERVED
 010100  024    AND      ACC &= BOP
@@ -361,10 +370,10 @@ XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
 010111  027    NOT      ACC = ~ACC
 
 // Comparison Operations
-011000  030    EQ       MCS[RES]:6 = (ACC == BOP)
-011001  031    NEQ      MCS[RES]:6 = (ACC != BOP)
-011010  032    EZ       MCS[RES]:6 = (ACC == 0)
-011011  033    NEZ      MCS[RES]:6 = (ACC != 0)
+011000  030    EQ       MCS[CMP] = (ACC == BOP)
+011001  031    NEQ      MCS[CMP] = (ACC != BOP)
+011010  032    EZ       MCS[CMP] = (ACC == 0)
+011011  033    NEZ      MCS[CMP] = (ACC != 0)
 
 // Incrementors / Decrementors
 011100  034    INC      ACC++ (in-place register op)
@@ -390,8 +399,8 @@ XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
 // The formulation of the jump offset word
 // may need to be adjusted later.
 // (Requires Argument: 2, 6, 10, or 14)
-1010XY  040-3  JCP      IF MCS[RES]:6 NIP += b00XY10
-1011XY  044-7  JCN      IF MCS[RES]:6 NIP -= b00XY10
+1010XY  040-3  JCP      IF MCS[CMP] NIP += b00XY10
+1011XY  044-7  JCN      IF MCS[CMP] NIP -= b00XY10
 // b0XY100 produces 4, 12, 20, 28
 // bX0Y010 produces 2, 10, 34, 42
 
@@ -445,6 +454,3 @@ http://www.learnabout-electronics.org/Digital/images/register-SISO-PISO.gif
 		- default is latched to PC control
 		- override with a write to AR
 		- resets after a read or write to MEM
-
-
-
