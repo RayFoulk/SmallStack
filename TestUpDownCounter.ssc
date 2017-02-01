@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>UpDownCounterTester</name>
+	<name>TestUpDownCounter</name>
 	<description></description>
 	<label></label>
 	<bound right="0" down="0" left="0" up="0"/>

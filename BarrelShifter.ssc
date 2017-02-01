@@ -684,7 +684,13 @@
 		<connection flow="out" pinid="23" wireid="15" invert="false"/>
 		<connection flow="in" pinid="24" wireid="49" invert="false"/>
 	</component>
-	<component id="2" def="FourToOneMultiplexerWord" x="200" y="-5" direction="right" flip="false">
+	<component id="2" def="Constant" x="120" y="245" direction="right" flip="false" value="0">
+		<connection flow="out" pinid="0" wireid="12" invert="false"/>
+	</component>
+	<component id="3" def="Reader" x="190" y="-290" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="15" invert="false"/>
+	</component>
+	<component id="4" def="FourToOneMultiplexerWord" x="200" y="-5" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="12" invert="false"/>
 		<connection flow="in" pinid="1" wireid="12" invert="false"/>
 		<connection flow="in" pinid="2" wireid="12" invert="false"/>
@@ -733,8 +739,8 @@
 		<connection flow="in" pinid="45" wireid="24" invert="false"/>
 		<connection flow="in" pinid="46" wireid="13" invert="false"/>
 		<connection flow="in" pinid="47" wireid="14" invert="false"/>
-		<connection flow="in" pinid="48" wireid="51" invert="false"/>
-		<connection flow="in" pinid="49" wireid="50" invert="false"/>
+		<connection flow="in" pinid="48" wireid="50" invert="false"/>
+		<connection flow="in" pinid="49" wireid="51" invert="false"/>
 		<connection flow="out" pinid="50" wireid="11" invert="false"/>
 		<connection flow="out" pinid="51" wireid="10" invert="false"/>
 		<connection flow="out" pinid="52" wireid="9" invert="false"/>
@@ -747,12 +753,6 @@
 		<connection flow="out" pinid="59" wireid="2" invert="false"/>
 		<connection flow="out" pinid="60" wireid="1" invert="false"/>
 		<connection flow="out" pinid="61" wireid="0" invert="false"/>
-	</component>
-	<component id="3" def="Constant" x="120" y="245" direction="right" flip="false" value="0">
-		<connection flow="out" pinid="0" wireid="12" invert="false"/>
-	</component>
-	<component id="4" def="Reader" x="190" y="-290" direction="right" flip="false">
-		<connection flow="in" pinid="0" wireid="15" invert="false"/>
 	</component>
 	<annotation x="-300" y="240" text="Shift Left: 00=1,01=3,10=4,11=6" fontsize="12"/>
 	<annotation x="-95" y="-355" text="Single Stage Discrete Barrel Shifter" fontsize="20"/>

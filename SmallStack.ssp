@@ -15,12 +15,12 @@
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TwoToOneMultiplexerWord.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/MemoryTester.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/TestMemoryUnit.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsTester.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestReverseBits.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/FourToOneMultiplexerWord.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterTester.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/TestUpDownCounter.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Accumulator.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/BarrelShifter.ssc</component>
-	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/BarrelShifterTester.ssc</component>
+	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/TestBarrelShifter.ssc</component>
 </project>

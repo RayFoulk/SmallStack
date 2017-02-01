@@ -56,8 +56,8 @@
 	<pin x="-30" y="-230" length="10" direction="left" id="45" flow="in" required="true"/>
 	<pin x="-30" y="-240" length="10" direction="left" id="46" flow="in" required="true"/>
 	<pin x="-30" y="-250" length="10" direction="left" id="47" flow="in" required="true"/>
-	<pin x="-5" y="260" length="10" direction="down" id="48" flow="in" required="true"/>
-	<pin x="5" y="260" length="10" direction="down" id="49" flow="in" required="true"/>
+	<pin x="5" y="260" length="10" direction="down" id="48" flow="in" required="true"/>
+	<pin x="-5" y="260" length="10" direction="down" id="49" flow="in" required="true"/>
 	<pin x="30" y="55" length="10" direction="right" id="50" flow="out" required="true"/>
 	<pin x="30" y="45" length="10" direction="right" id="51" flow="out" required="true"/>
 	<pin x="30" y="35" length="10" direction="right" id="52" flow="out" required="true"/>
@@ -764,14 +764,14 @@
 			<point x="-25" y="420"/>
 		</path>
 		<marker x="-25" y="310"/>
-		<tag type="interface" xwire="-25" ywire="420" xtag="-25" ytag="430" flow="in" pinid="48" text="S0"/>
+		<tag type="interface" xwire="-25" ywire="420" xtag="-25" ytag="430" flow="in" pinid="48" text="S1"/>
 	</wire>
 	<wire id="85">
 		<path>
 			<point x="80" y="145"/>
 			<point x="80" y="420"/>
 		</path>
-		<tag type="interface" xwire="80" ywire="420" xtag="80" ytag="430" flow="in" pinid="49" text="S1"/>
+		<tag type="interface" xwire="80" ywire="420" xtag="80" ytag="430" flow="in" pinid="49" text="S0"/>
 	</wire>
 	<component id="0" def="TwoToOneMultiplexerWord" x="80" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="35" invert="false"/>
