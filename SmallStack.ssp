@@ -14,11 +14,13 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer2to1Word.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/ShiftRegisterBit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/TestMemoryUnit.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestReverseBits.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer4to1Word.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/ShiftRegisterOctet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/TestUpDownCounter.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Accumulator.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/BarrelShifter.ssc</component>

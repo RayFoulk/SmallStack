@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>SmallStack Memory Unit</name>
+	<name>MemoryUnit</name>
 	<description>SmallStack Memory Unit</description>
 	<label>RAM / ROM</label>
 	<bound right="65" down="40" left="-65" up="-40"/>
@@ -1056,4 +1056,5 @@
 		<connection flow="out" pinid="1" wireid="44" invert="false"/>
 	</component>
 	<annotation x="450" y="-55" text="1k 12bit ROM" fontsize="12"/>
+	<annotation x="-565" y="-335" text="Combined ROM/RAM Unit for Old Design" fontsize="18"/>
 </custom_component>

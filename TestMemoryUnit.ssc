@@ -459,7 +459,7 @@
 		<marker x="200" y="-10"/>
 		<marker x="-100" y="-95"/>
 	</wire>
-	<component id="0" def="SmallStack Memory Unit" x="70" y="-115" direction="right" flip="false">
+	<component id="0" def="MemoryUnit" x="70" y="-115" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="37" invert="false"/>
 		<connection flow="in" pinid="1" wireid="36" invert="false"/>
 		<connection flow="in" pinid="2" wireid="35" invert="false"/>
