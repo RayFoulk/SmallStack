@@ -207,34 +207,11 @@ Design peripheral interfaces
          00xxxxxxxxxx set data mode, do not apply data
 
 /////////////////////////////////////////////////////
-// Instruction Design Notes -- With Examples
-
-SHL 6  ; Zero out ACC
-SHL 6
-
-OC0 7  ; Set ACC to 07777
-OC1 7
-SHL 6
-OC0 7
-OC1 7
-A2B    ; Store 07777 in BOP
-
-C2A    ; Get MCS to ACC
-OC0 0  ; Select return stack pointer
-OC1 1  ; Select first RAM bank
-A2C    ; Write MCS register
-
-B2A    ; Get 07777 back from earlier
-A2P    ; Initialize return stack pointer
+// Instruction Design Notes
 
 // Synthesis of other instructions:
 GT and LT comparisons can be synthesized easily
 MUL and DIV can be sythesized.  will never be included.
-
-S2A    ; Read some value from RAM or ROM
-A2B    ; Copy value into BOP
-SHL 1  ; Multiply by 2
-ADD    ; Add in BOP, result is "multiply by 3"
 
 // Later Design changes:
 single cycle hardware register swap or
@@ -355,7 +332,7 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 000101  005    NEQ      MCS[CMP] = (ACC != BOP)
 000110  006    EZ       MCS[CMP] = (ACC == 0)
 000111  007    NZ       MCS[CMP] = (ACC != 0)
-// Alternate Comparator Design
+// Alternate Comparator Design (Debatable)
 // More capable, More complex wiring
 000100  004    EQ       MCS[CMP] = (ACC == BOP)
 000101  005    NZ       MCS[CMP] = (ACC != 0)
@@ -377,7 +354,7 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 010000  020    ADD      ACC += BOP (Carry MCS[CAR])
 010001  021    SUB      ACC -= BOP (Borrow MCS[CAR])
 010010  022    SWP      ACC[HCHAR] <=> ACC[LCHAR]
-010011  023    ZHI      ACC[HCHAR] = 0
+010011  023    ZHI      ACC[HCHAR] = 0 (Debatable)
 010100  024    AND      ACC &= BOP
 010101  025    OR       ACC |= BOP
 010110  026    XOR      ACC ^= BOP
