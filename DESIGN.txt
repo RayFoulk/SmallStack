@@ -260,6 +260,34 @@ fonts, bitmaps, strings, etc...
   This eliminates the need for LBL and frees up an
     8-block of opcodes.
 
+NOTE: fetch opcode is avoided since this can be built
+directly into the main micro cycle => drive lines.
+I.E. For this "instruction" only, there nothing to
+"decode" per se, just do it!
+
+XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
+                        NIP++ driven by read
+
+NOTE: Other instructions to consider:
+PSEL++ and PSEL--
+DSEL++ and DSEL--
+MCS[CMP] = MCS[CAR] for testing carry in 2 instr vs 5
+MCS[CMP] = ~MCS[CMP] via JK toggle (reduce #opcodes)
+
+Work out if N2S and S2N really necessary,
+  or if N2A,SKW and SKR,A2N will do.. code an example
+ASB swap ACC <=> BOP and save another opcode
+do the same with PTR[]?  ASP?
+* N2S      SKT = NIP, ++PTR[PSEL],force DSEL to 1?
+* S2N      NIP = SKT, PTR[PSEL]--,force DSEL to 1?
+*  (Will not be in initial implementation
+   Alternative method exists but may use more code)
+...Or work out a proper Call/Return
+Store NIP in RAM: S2N is return
+Will require selecting stack ptr
+// NIX..Shifted-out bits go to MCS[RES] to facilitate
+// Simulation of ROR and ROL
+
 /////////////////////////////////////////////////////
 // MCS Register Layout:
 
@@ -312,79 +340,62 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
 /////////////////////////////////////////////////////
 // Updated Opcodes
-*  (Will not be in initial implementation
-   Alternative method exists but may use more code)
-
-NOTE: fetch opcode is avoided since this can be built
-directly into the main micro cycle => drive lines.
-I.E. For this "instruction" only, there nothing to
-"decode" per se, just do it!
-
-XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
-                        NIP++ driven by read
-
-NOTE: Other instructions to consider:
-PSEL++ and PSEL--
-MCS[CMP] = MCS[CAR] for testing carry in 2 instr vs 5
-MCS[CMP] = ~MCS[CMP] via JK toggle
-Work out if N2S and S2N really necessary,
-  or if N2A,SKW and SKR,A2N will do
-ASB swap ACC <=> BOP and save another opcode
-do the same with PTR[]?  ASP?
-
 <Bin>   <Oct>  <Mnem.>  <Descr.>
+
+// Essentials
 000000  000    HLT      Halt Execution
 000001  001    NOP      No Operation
-000010  002    ---      RESERVED
-000011  003    ---      RESERVED
 
-// Special Case Transport
-// Store NIP in RAM: S2N is return
-// Will require auto-inc/dec stack ptr
-000100  004    SKW      SKT = ACC, INC/DEC PTR[PSEL]
-000101  005    SKR      ACC = SKT, INC/DEC PTR[PSEL]
-000110  006  * N2S      SKT = NIP, ++PTR[PSEL],
-                            DSEL to 1 ???
-000111  007  * S2N      NIP = SKT, PTR[PSEL]--,
-                            DSEL to 1 ???
+// Special Case Transport (Socket Write/Read)
+000010  002    SKW      SKT = ACC, INC/DEC PTR[PSEL]
+000011  003    SKR      ACC = SKT, INC/DEC PTR[PSEL]
 
-// Normal Transport Operations, ACC Implied.
-// 1 bit to/from, 2 bits src/dst
+// Comparator Operations
+000100  004    EQ       MCS[CMP] = (ACC == BOP)
+000101  005    NEQ      MCS[CMP] = (ACC != BOP)
+000110  006    EZ       MCS[CMP] = (ACC == 0)
+000111  007    NZ       MCS[CMP] = (ACC != 0)
+// Alternate Comparator Design
+// More capable, More complex wiring
+000100  004    EQ       MCS[CMP] = (ACC == BOP)
+000101  005    NZ       MCS[CMP] = (ACC != 0)
+000110  006    INV      MCS[CMP] = ~MCS[CMP] (JK Toggle)
+000111  007    CCB      MCS[CMP] = MCS[CAR] (Loopback Set)
+
+// Normal Transport Operations
+// ACC Implied: 1 bit to/from, 2 bits src/dst
 001000  010    A2B      BOP = ACC
 001001  011    A2C      MCS = ACC
 001010  012    A2P      PTR[PSEL] = ACC
-001011  013    A2N      NIP = ACC, Jump Abs!!!
+001011  013    A2N      NIP = ACC (Absolute Jump)
 001100  014    B2A      ACC = BOP
 001101  015    C2A      ACC = MCS
 001110  016    P2A      ACC = PTR[PSEL]
-001111  017    N2A      ACC = NIP, Get Instr Ptr
+001111  017    N2A      ACC = NIP (Get Instr Ptr)
 
 // Arithmetic & Logic Operations
 010000  020    ADD      ACC += BOP (Carry MCS[CAR])
 010001  021    SUB      ACC -= BOP (Borrow MCS[CAR])
 010010  022    SWP      ACC[HCHAR] <=> ACC[LCHAR]
-010011  023    ---      RESERVED
+010011  023    ZHI      ACC[HCHAR] = 0
 010100  024    AND      ACC &= BOP
 010101  025    OR       ACC |= BOP
 010110  026    XOR      ACC ^= BOP
 010111  027    NOT      ACC = ~ACC
 
-// Comparison Operations
-011000  030    EQ       MCS[CMP] = (ACC == BOP)
-011001  031    NEQ      MCS[CMP] = (ACC != BOP)
-011010  032    EZ       MCS[CMP] = (ACC == 0)
-011011  033    NEZ      MCS[CMP] = (ACC != 0)
-
 // Incrementors / Decrementors
-011100  034    INC      ACC++ (in-place register op)
-011101  035    DEC      ACC-- (in-place register op)
-011110  036    IPT      PTR[PSEL]++
-011111  037    DPT      PTR[PSEL]--    
+// (All are in-place up/down counter ops)
+011000  030    INC      ACC++
+011001  031    DEC      ACC--
+011010  032    IPT      PTR[PSEL]++
+011011  033    DPT      PTR[PSEL]--
+011100  034    IPS      PSEL++
+011101  035    DPS      PSEL--
+011110  036    IDS      DSEL++
+011111  037    DDS      DSEL--    
 
 // Single Stage Barrel Shifter
 // (Requires Argument: 1, 3, 4, or 6)
-// Shifted-out bits go to MCS[RES] to facilitate
-// Simulation of ROR and ROL
 1000XY  040-3  SHL      ACC <<= N(XY)
                         00=1,01=3,10=4,11=6
 1001XY  044-7  SHR      ACC >>= N(XY)
