@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>TwoToOneMultiplexerWord</name>
+	<name>Multiplexer2to1Word</name>
 	<description></description>
 	<label>2:1</label>
 	<bound right="20" down="135" left="-20" up="-135"/>
@@ -385,7 +385,7 @@
 		<marker x="95" y="185"/>
 		<tag type="interface" xwire="95" ywire="310" xtag="95" ytag="320" flow="in" pinid="36" text="S"/>
 	</wire>
-	<component id="0" def="TwoToOneMultiplexerChar" x="0" y="-95" direction="right" flip="false">
+	<component id="0" def="Multiplexer2to1Char" x="0" y="-95" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="30" invert="false"/>
 		<connection flow="in" pinid="1" wireid="31" invert="false"/>
 		<connection flow="in" pinid="2" wireid="32" invert="false"/>
@@ -406,7 +406,7 @@
 		<connection flow="in" pinid="17" wireid="10" invert="false"/>
 		<connection flow="in" pinid="18" wireid="36" invert="false"/>
 	</component>
-	<component id="1" def="TwoToOneMultiplexerChar" x="0" y="95" direction="right" flip="false">
+	<component id="1" def="Multiplexer2to1Char" x="0" y="95" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="24" invert="false"/>
 		<connection flow="in" pinid="1" wireid="25" invert="false"/>
 		<connection flow="in" pinid="2" wireid="26" invert="false"/>

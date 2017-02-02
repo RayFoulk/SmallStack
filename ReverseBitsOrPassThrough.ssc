@@ -428,7 +428,7 @@
 		</path>
 		<tag type="interface" xwire="385" ywire="-175" xtag="395" ytag="-175" flow="out" pinid="23" text="Out11"/>
 	</wire>
-	<component id="0" def="TwoToOneMultiplexerChar" x="120" y="130" direction="right" flip="false">
+	<component id="0" def="Multiplexer2to1Char" x="120" y="130" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="0" invert="false"/>
 		<connection flow="in" pinid="1" wireid="1" invert="false"/>
 		<connection flow="in" pinid="2" wireid="2" invert="false"/>
@@ -449,7 +449,7 @@
 		<connection flow="in" pinid="17" wireid="30" invert="false"/>
 		<connection flow="in" pinid="18" wireid="24" invert="false"/>
 	</component>
-	<component id="1" def="TwoToOneMultiplexerChar" x="120" y="-115" direction="right" flip="false">
+	<component id="1" def="Multiplexer2to1Char" x="120" y="-115" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="11" invert="false"/>
 		<connection flow="in" pinid="1" wireid="10" invert="false"/>
 		<connection flow="in" pinid="2" wireid="9" invert="false"/>

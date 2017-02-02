@@ -690,7 +690,7 @@
 	<component id="3" def="Reader" x="190" y="-290" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="15" invert="false"/>
 	</component>
-	<component id="4" def="FourToOneMultiplexerWord" x="200" y="-5" direction="right" flip="false">
+	<component id="4" def="Multiplexer4to1Word" x="200" y="-5" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="12" invert="false"/>
 		<connection flow="in" pinid="1" wireid="12" invert="false"/>
 		<connection flow="in" pinid="2" wireid="12" invert="false"/>

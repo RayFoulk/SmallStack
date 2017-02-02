@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>FourToOneMultiplexerWord</name>
+	<name>Multiplexer4to1Word</name>
 	<description></description>
 	<label>4:1</label>
 	<bound right="30" down="260" left="-30" up="-260"/>
@@ -773,7 +773,7 @@
 		</path>
 		<tag type="interface" xwire="80" ywire="420" xtag="80" ytag="430" flow="in" pinid="49" text="S0"/>
 	</wire>
-	<component id="0" def="TwoToOneMultiplexerWord" x="80" y="0" direction="right" flip="false">
+	<component id="0" def="Multiplexer2to1Word" x="80" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="35" invert="false"/>
 		<connection flow="out" pinid="1" wireid="33" invert="false"/>
 		<connection flow="out" pinid="2" wireid="31" invert="false"/>
@@ -812,7 +812,7 @@
 		<connection flow="in" pinid="35" wireid="12" invert="false"/>
 		<connection flow="in" pinid="36" wireid="85" invert="false"/>
 	</component>
-	<component id="1" def="TwoToOneMultiplexerWord" x="-75" y="-155" direction="right" flip="false">
+	<component id="1" def="Multiplexer2to1Word" x="-75" y="-155" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="0" invert="false"/>
 		<connection flow="out" pinid="1" wireid="1" invert="false"/>
 		<connection flow="out" pinid="2" wireid="2" invert="false"/>
@@ -851,7 +851,7 @@
 		<connection flow="in" pinid="35" wireid="48" invert="false"/>
 		<connection flow="in" pinid="36" wireid="84" invert="false"/>
 	</component>
-	<component id="2" def="TwoToOneMultiplexerWord" x="-75" y="155" direction="right" flip="false">
+	<component id="2" def="Multiplexer2to1Word" x="-75" y="155" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="23" invert="false"/>
 		<connection flow="out" pinid="1" wireid="22" invert="false"/>
 		<connection flow="out" pinid="2" wireid="21" invert="false"/>

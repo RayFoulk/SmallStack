@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>TwoToOneMultiplexerChar</name>
+	<name>Multiplexer2to1Char</name>
 	<description></description>
 	<label>2:1</label>
 	<bound right="20" down="70" left="-20" up="-70"/>
