@@ -29,3 +29,15 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
     - Stack Computers, RPN, and Forth Language.
 - Book: Stack Computers "The New Wave" (Koopman, 1989)
 
+- Links for further reading:
+https://www.youtube.com/watch?v=tb0_V7Tc5MU
+https://www.youtube.com/watch?v=N1FUY6g5crA
+https://en.wikipedia.org/wiki/Charles_H._Moore
+https://www.simple-talk.com/opinion/geek-of-the-week/chuck-moore-geek-of-the-week/
+http://www.ultratechnology.com/cowboys.html
+http://www.ultratechnology.com/misc.html
+http://www.greenarraychips.com/
+https://users.ece.cmu.edu/~koopman/stack_computers/
+
+
+
