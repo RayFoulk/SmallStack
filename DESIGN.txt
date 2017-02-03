@@ -144,8 +144,8 @@ ACC <-> NIP     Actually pretty normal, other than
 /////////////////////////////////////////////////////
 // TODO: 
 Name this processor
+    FCH12 (Foam Cowboy Hat / Fetch Mnemonic)
     DoubleSix, Yeehaw12, FoamHat12,
-    FCH12 (Foam Cowboy Hat)
     
 Character table with ASCII conversion algorithm
 Need to decide on ASCII-to-6bit char mapping
@@ -314,6 +314,13 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 101  5  N/A          N/A          | General Purpose
 110  6  N/A          N/A          | Pointer Args
 111  7  N/A          N/A          / To Subroutines
+
+// Consider storing or indicating stack sizes to
+// internal data bus.  As it is, the stack size would
+// have to be computed from knowing the start address
+// and subtracting the current pointer address.
+// This speaks to having proper hardware stacks in
+// future designs.
 
 /////////////////////////////////////////////////////
 // Updated Opcodes

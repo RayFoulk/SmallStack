@@ -1,4 +1,4 @@
-
+; could use a high ptr[] register to store jump address for prologue
 
 
 mult3:  skr     ; read some value from rom or ram
