@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>Untitled Component 1</name>
+	<description></description>
+	<label></label>
+	<bound right="0" down="0" left="0" up="0"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<wire id="0">
+		<path>
+			<point x="0" y="-35"/>
+			<point x="0" y="-105"/>
+		</path>
+	</wire>
+	<wire id="1">
+		<path>
+			<point x="10" y="-35"/>
+			<point x="40" y="-105"/>
+		</path>
+	</wire>
+	<wire id="2">
+		<path>
+			<point x="-10" y="-35"/>
+			<point x="-40" y="-105"/>
+		</path>
+	</wire>
+	<wire id="3">
+		<path>
+			<point x="0" y="100"/>
+			<point x="0" y="35"/>
+		</path>
+	</wire>
+	<wire id="4">
+		<path>
+			<point x="30" y="100"/>
+			<point x="10" y="35"/>
+		</path>
+	</wire>
+	<wire id="5">
+		<path>
+			<point x="-30" y="100"/>
+			<point x="-10" y="35"/>
+		</path>
+	</wire>
+	<wire id="6">
+		<path>
+			<point x="60" y="135"/>
+			<point x="60" y="5"/>
+			<point x="30" y="5"/>
+		</path>
+	</wire>
+	<wire id="7">
+		<path>
+			<point x="125" y="150"/>
+			<point x="65" y="-5"/>
+			<point x="30" y="-5"/>
+		</path>
+	</wire>
+	<wire id="8">
+		<path>
+			<point x="30" y="-15"/>
+			<point x="50" y="-15"/>
+			<point x="50" y="-45"/>
+			<point x="-70" y="-45"/>
+			<point x="-70" y="-15"/>
+			<point x="-30" y="-15"/>
+		</path>
+	</wire>
+	<wire id="9">
+		<path>
+			<point x="30" y="15"/>
+			<point x="50" y="15"/>
+			<point x="50" y="45"/>
+			<point x="-70" y="45"/>
+			<point x="-70" y="15"/>
+			<point x="-30" y="15"/>
+		</path>
+	</wire>
+	<component id="0" def="ShiftRegisterOctet" x="0" y="0" direction="right" flip="false">
+		<connection flow="in" pinid="0" wireid="8" invert="false"/>
+		<connection flow="in" pinid="1" wireid="9" invert="false"/>
+		<connection flow="out" pinid="2" wireid="8" invert="false"/>
+		<connection flow="out" pinid="3" wireid="9" invert="false"/>
+		<connection flow="out" pinid="4" wireid="1" invert="false"/>
+		<connection flow="out" pinid="5" wireid="0" invert="false"/>
+		<connection flow="out" pinid="6" wireid="2" invert="false"/>
+		<connection flow="in" pinid="7" wireid="4" invert="false"/>
+		<connection flow="in" pinid="8" wireid="3" invert="false"/>
+		<connection flow="in" pinid="9" wireid="5" invert="false"/>
+		<connection flow="in" pinid="10" wireid="6" invert="false"/>
+		<connection flow="in" pinid="11" wireid="7" invert="false"/>
+		<connection flow="out" pinid="12" wireid="null" invert="false"/>
+		<connection flow="out" pinid="13" wireid="null" invert="false"/>
+	</component>
+	<component id="1" def="Reader" x="40" y="-135" direction="up" flip="false">
+		<connection flow="in" pinid="0" wireid="1" invert="false"/>
+	</component>
+	<component id="2" def="Reader" x="0" y="-135" direction="up" flip="false">
+		<connection flow="in" pinid="0" wireid="0" invert="false"/>
+	</component>
+	<component id="3" def="Reader" x="-40" y="-135" direction="up" flip="false">
+		<connection flow="in" pinid="0" wireid="2" invert="false"/>
+	</component>
+	<component id="4" def="Constant" x="30" y="120" direction="up" flip="false" value="1">
+		<connection flow="out" pinid="0" wireid="4" invert="false"/>
+	</component>
+	<component id="5" def="Constant" x="0" y="120" direction="up" flip="false" value="0">
+		<connection flow="out" pinid="0" wireid="3" invert="false"/>
+	</component>
+	<component id="6" def="Constant" x="-30" y="120" direction="up" flip="false" value="0">
+		<connection flow="out" pinid="0" wireid="5" invert="false"/>
+	</component>
+	<component id="7" def="Clock" x="60" y="165" direction="up" flip="false" on="2000" off="2000">
+		<connection flow="out" pinid="0" wireid="6" invert="false"/>
+	</component>
+	<component id="8" def="Toggle" x="125" y="180" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="7" invert="false"/>
+	</component>
+</custom_component>
