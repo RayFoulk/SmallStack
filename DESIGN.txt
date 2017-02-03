@@ -144,8 +144,8 @@ ACC <-> NIP     Actually pretty normal, other than
 /////////////////////////////////////////////////////
 // TODO: 
 Name this processor
-    DuoFortis, DuoChar, DuoMini, DuoMicro
-    SixShooter, DoubleSix
+    DoubleSix, Yeehaw12, FoamHat12,
+    FCH12 (Foam Cowboy Hat)
     
 Character table with ASCII conversion algorithm
 Need to decide on ASCII-to-6bit char mapping
