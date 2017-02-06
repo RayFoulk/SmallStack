@@ -3,7 +3,7 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>BarrelShifterRotatorRotator</name>
+	<name>BarrelShifterRotator</name>
 	<description></description>
 	<label>BSR</label>
 	<bound right="25" down="65" left="-25" up="-65"/>

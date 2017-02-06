@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <custom_component>
 	<metadata>
-		<version smartsim="1.2.1"/>
+		<version smartsim="1.4.1"/>
 	</metadata>
 	<name>Full Adder</name>
 	<description></description>

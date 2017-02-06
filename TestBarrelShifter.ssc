@@ -270,7 +270,7 @@
 	<component id="26" def="Toggle" x="75" y="290" direction="up" flip="false">
 		<connection flow="out" pinid="0" wireid="12" invert="false"/>
 	</component>
-	<component id="27" def="BarrelShifterRotatorRotator" x="60" y="-5" direction="right" flip="false">
+	<component id="27" def="BarrelShifterRotator" x="60" y="-5" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="16" invert="false"/>
 		<connection flow="in" pinid="1" wireid="17" invert="false"/>
 		<connection flow="in" pinid="2" wireid="18" invert="false"/>
