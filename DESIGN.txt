@@ -143,9 +143,7 @@ ACC <-> NIP     Actually pretty normal, other than
 
 /////////////////////////////////////////////////////
 // TODO: 
-Name this processor
-    FCH12 (Foam Cowboy Hat / Fetch Mnemonic)
-    DoubleSix, Yeehaw12, FoamHat12,
+Name this processor: FCH12a
     
 Character table with ASCII conversion algorithm
 Need to decide on ASCII-to-6bit char mapping
@@ -250,18 +248,16 @@ PSEL++ and PSEL--
 DSEL++ and DSEL--
 MCS[CMP] = MCS[CAR] for testing carry in 2 instr vs 5
 MCS[CMP] = ~MCS[CMP] via JK toggle (reduce #opcodes)
+ZHI      ACC[HCHAR] = 0 (Debatable)
 
-Work out if N2S and S2N really necessary,
-  or if N2A,SKW and SKR,A2N will do.. code an example
+N2S and S2N not really necessary as N2A,SKW and
+  SKR,A2N will suffice.. although need to load contant
+  into operand and premptively ADD to NIP.
+  Will require selecting stack ptr
+
 ASB swap ACC <=> BOP and save another opcode
 do the same with PTR[]?  ASP?
-* N2S      SKT = NIP, ++PTR[PSEL],force DSEL to 1?
-* S2N      NIP = SKT, PTR[PSEL]--,force DSEL to 1?
-*  (Will not be in initial implementation
-   Alternative method exists but may use more code)
-...Or work out a proper Call/Return
-Store NIP in RAM: S2N is return
-Will require selecting stack ptr
+
 // NIX..Shifted-out bits go to MCS[RES] to facilitate
 // Simulation of ROR and ROL
 
@@ -308,8 +304,8 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
 000  0  PTR[PSEL]--  PTR[PSEL]++  Return Stack
 001  1  PTR[PSEL]--  PTR[PSEL]++  Data Stack
-010  2  PTR[PSEL]++  PTR[PSEL]++  Blk Mem Load/Store
-011  3  PTR[PSEL]--  PTR[PSEL]--  Blk Mem Load/Store
+010  2  PTR[PSEL]++  N/A          Block Mem Store
+011  3  N/A          PTR[PSEL]++  Block Mem Load
 100  4  N/A          N/A          \
 101  5  N/A          N/A          | General Purpose
 110  6  N/A          N/A          | Pointer Args
@@ -320,7 +316,24 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // have to be computed from knowing the start address
 // and subtracting the current pointer address.
 // This speaks to having proper hardware stacks in
-// future designs.
+// future designs.  On that note here is an alternate
+// design.  Return and Data Stack pointers and size
+// (0) are initialized on RESET.
+
+// Stack Pointers and Sizes
+000  0  PTR[PSEL]--  PTR[PSEL]++  Return Stack
+001  1  ((Read Only Register))    Return Stack Size
+010  2  PTR[PSEL]--  PTR[PSEL]++  Data Stack
+011  3  ((Read Only Register))    Data Stack Size
+
+// General Purpose / Subroutine Argument Registers
+// (Arguments can be pointer or literal value,
+// address bus output at socket is only enabled
+// during socket read/write).
+100  2  PTR[PSEL]++  N/A          Block Mem Store
+101  3  N/A          PTR[PSEL]++  Block Mem Load
+110  6  N/A          N/A
+111  7  N/A          N/A
 
 /////////////////////////////////////////////////////
 // Updated Opcodes
@@ -361,7 +374,7 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 010000  020    ADD      ACC += BOP (Carry MCS[CAR])
 010001  021    SUB      ACC -= BOP (Borrow MCS[CAR])
 010010  022    SWP      ACC[HCHAR] <=> ACC[LCHAR]
-010011  023    ZHI      ACC[HCHAR] = 0 (Debatable)
+010011  023    ---      RESERVED
 010100  024    AND      ACC &= BOP
 010101  025    OR       ACC |= BOP
 010110  026    XOR      ACC ^= BOP
@@ -405,6 +418,26 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
                         Remainder of ACC left intact
 111NNN  070-7  OC1      Assign Next-Least Octet to A
                         Remainder of ACC left intact
+
+// NOTE: Alternative design to allow more/alternate
+// opcodes (or just better use of opcode space)
+// This would also make address load code more compact.
+
+110000  060
+110001  061
+110010  062
+110011  063
+
+110100  064
+110101  065
+110110  066
+
+110111  067    ROR      Rotate right 3 bits (octet)
+111NNN  070-7  LOR      Load lowest octet and rotate
+                        left by 3 bits. (asserts
+                        mode line on barrel shifter.
+
+
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
