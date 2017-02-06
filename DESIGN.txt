@@ -359,16 +359,17 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 000110  006    INV      MCS[CMP] = ~MCS[CMP] (JK Toggle)
 000111  007    CCB      MCS[CMP] = MCS[CAR] (Loopback Set)
 
-// Normal Transport Operations
+// Normal Transport Operations (Move)
 // ACC Implied: 1 bit to/from, 2 bits src/dst
-001000  010    A2B      BOP = ACC
-001001  011    A2C      MCS = ACC
-001010  012    A2P      PTR[PSEL] = ACC
-001011  013    A2N      NIP = ACC (Absolute Jump)
-001100  014    B2A      ACC = BOP
-001101  015    C2A      ACC = MCS
-001110  016    P2A      ACC = PTR[PSEL]
-001111  017    N2A      ACC = NIP (Get Instr Ptr)
+// Requires Argument: BOP, MCS, PTR, NIP
+0010XY  010-3  MTX      Move Accumulator To XY
+                        00=BOP, 01=MCS,
+                        10=PTR[PSEL], 11=NIP
+                        (Absolute Jump)
+0011XY  014-7  MFX      Move From XY To Accumulator
+                        00=BOP, 01=MCS,
+                        10=PTR[PSEL], 11=NIP
+                        (Get Instr Ptr)
 
 // Arithmetic & Logic Operations
 010000  020    ADD      ACC += BOP (Carry MCS[CAR])
@@ -382,14 +383,13 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
 // Incrementors / Decrementors
 // (All are in-place up/down counter ops)
-011000  030    INC      ACC++
-011001  031    DEC      ACC--
-011010  032    IPT      PTR[PSEL]++
-011011  033    DPT      PTR[PSEL]--
-011100  034    IPS      PSEL++
-011101  035    DPS      PSEL--
-011110  036    IDS      DSEL++
-011111  037    DDS      DSEL--    
+// (Requires Argument: ACC, PTR, PSEL, DSEL)
+0110XY  030-3  INC      Increment Register
+                        00=ACC,01=PTR[PSEL],
+                        10=PSEL,11=DSEL
+0111XY  034-7  DEC      Decrement Register
+                        00=ACC,01=PTR[PSEL],
+                        10=PSEL,11=DSEL
 
 // Single Stage Barrel Shifter
 // (Requires Argument: 1, 3, 4, or 6)
@@ -407,10 +407,11 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // The formulation of the jump offset word
 // may need to be adjusted later.
 // (Requires Argument: 2, 6, 10, or 14)
-1010XY  040-3  JCP      IF MCS[CMP] NIP += b00XY10
-1011XY  044-7  JCN      IF MCS[CMP] NIP -= b00XY10
+1010XY  050-3  JCP      IF MCS[CMP] NIP += b00XY10
+1011XY  054-7  JCN      IF MCS[CMP] NIP -= b00XY10
 // b0XY100 produces 4, 12, 20, 28
 // bX0Y010 produces 2, 10, 34, 42
+// b0X0Y10 produces 2, 6, 18, 22
 
 // Literal Octet Assignment to Accumulator
 // (Requires Argument: 1 through 7) 
@@ -423,21 +424,19 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // opcodes (or just better use of opcode space)
 // This would also make address load code more compact.
 
-110000  060
-110001  061
-110010  062
-110011  063
+110000  060    ---      RESERVED
+110001  061    ---      RESERVED
+110010  062    ---      RESERVED
+110011  063    ---      RESERVED
+110100  064    ---      RESERVED
+110101  065    ---      RESERVED
+110110  066    ROR      Rotate Octet Right (3 Bits)
+110111  067    ROL      Rotate Octet Left (3 Bits)
 
-110100  064
-110101  065
-110110  066
-
-110111  067    ROR      Rotate right 3 bits (octet)
-111NNN  070-7  LOR      Load lowest octet and rotate
-                        left by 3 bits. (asserts
-                        mode line on barrel shifter.
-
-
+111NNN  070-7  LOL      Load Octet & Rotate Left
+                        (3 Bits).  All rotate ops
+                        assert mode line on barrel
+                        shifter.
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////

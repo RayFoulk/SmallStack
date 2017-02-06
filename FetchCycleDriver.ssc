@@ -3,10 +3,10 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>Untitled Component 1</name>
+	<name>FetchCycleDriver</name>
 	<description></description>
 	<label></label>
-	<bound right="0" down="0" left="0" up="0"/>
+	<bound right="20" down="20" left="-20" up="-20"/>
 	<colour a="0" r="255" g="255" b="255"/>
 	<wire id="0">
 		<path>
