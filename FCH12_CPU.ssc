@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>FCH12_CPU</name>
+	<description>FCH12_CPU</description>
+	<label>FCH12 CPU</label>
+	<bound right="85" down="85" left="-85" up="-85"/>
+	<colour a="0" r="255" g="255" b="255"/>
+</custom_component>

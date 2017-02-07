@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>FCH12_MainBoard</name>
+	<description>FCH12_MainBoard</description>
+	<label></label>
+	<bound right="0" down="0" left="0" up="0"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<component id="0" def="FCH12_CPU" x="-300" y="0" direction="right" flip="false"/>
+	<component id="1" def="Memory" x="-100" y="0" direction="down" flip="false" type="ROM-CS">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection pinid="1">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="null" invert="false"/>
+		<connection flow="in" pinid="4" wireid="null" invert="false"/>
+		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+	</component>
+	<component id="2" def="Memory" x="95" y="0" direction="down" flip="false" type="RAM-CS-RE-WE-CLK">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection pinid="1">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="null" invert="false"/>
+		<connection flow="in" pinid="4" wireid="null" invert="false"/>
+		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+	</component>
+	<component id="3" def="Memory" x="285" y="0" direction="down" flip="false" type="RAM-CS-RE-WE-CLK">
+		<connection flow="in" pinid="0">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection pinid="1">
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+			<subpin wireid="null" invert="false"/>
+		</connection>
+		<connection flow="in" pinid="2" wireid="null" invert="false"/>
+		<connection flow="in" pinid="3" wireid="null" invert="false"/>
+		<connection flow="in" pinid="4" wireid="null" invert="false"/>
+		<connection flow="in" pinid="5" wireid="null" invert="false"/>
+	</component>
+</custom_component>
