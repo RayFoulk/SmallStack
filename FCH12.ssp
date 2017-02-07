@@ -9,10 +9,12 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlopPreClr.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer2to1Char.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsWord.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/FCH12_CPU.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer2to1Word.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ShiftRegisterBit.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/FCH12_MainBoard.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestReverseBits.ssc</component>
