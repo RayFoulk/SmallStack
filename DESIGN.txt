@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-// 12-Bit MISC CPU Design (Name TBD)
+// 12-Bit MISC CPU Design: FCH12
 
 Harvard Architecture
     Single, Pluggable 4K ROM
@@ -119,38 +119,29 @@ ALU --> ACC     Driven by ALU opcodes,
 ALU --> NIP     Cond. Relative Jump instruction JCP,
                 Overrides BOP before ALU
 
-NIP <-> SKT     Will be necessary for return,
-                Drives INC/DEC PTR[PSEL]
-
 ACC <-> SKT     RAM Read/Write or ROM Read, all
                 expect manually driving DSEL
                 Internal R/W lines auto drive
                 INC/DEC of PTR[PSEL]
 
 // Normal Case Transport (Simple Internal Data R/W)
-ACC <-> BOP     Swap would be nice, but this is a
-                destructive copy 
-
-ACC <-> MCS     Destructive copy, can be used to
-                clear CAR, CMP and set PSEL
-                and DSEL
-
-ACC <-> PTR     Normal destructive copy
-
-ACC <-> NIP     Actually pretty normal, other than
-                the fact that this jumps absolute!
-                or else just gets the current NIP
+ACC <-> BOP     Swap would be nice in some cases,
+ACC <-> MCS     but these are all overwrite copy.
+ACC <-> PTR     Writing to MCS will clear/set carry
+ACC <-> NIP     and compare bits. Writing to NIP
+                will also of course jump absolute!
+                Writing to PTR and PSEL drives the
+                address bus to ROM/RAM/(EEPROM)
 
 /////////////////////////////////////////////////////
 // TODO: 
-Name this processor: FCH12a
     
 Character table with ASCII conversion algorithm
 Need to decide on ASCII-to-6bit char mapping
-
-Determine which PTR IDX are auto inc/dec
-    and whether on R or W.  stack behavior vs queue
-    probably make this a fixed table
+    - Possibly have 2 tables: normal and shifted
+    - Or keep it simple with 1 table
+    - ability to port/play Roguelike games a priority
+    - in competition with ability to port Forth.
 
 Design peripheral interfaces
     ROM expected at address 0
@@ -182,7 +173,7 @@ Design peripheral interfaces
 0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
 1    RAM    4K RAM (R/W)
 2    RAM    4K RAM (R/W)
-3    ((More RAM? Inter-CPU for multi-core? Network?))
+3    EEPROM 512K (R/W) (Non-Volatile Storage)
 4    KEYB (Parallel Interface -- TBD)
 5    LCD (8080 + REGS/MODE -- TBD)
 6    BUS_EXT ADDR -- Combine with Data Bus
@@ -215,9 +206,7 @@ MUL and DIV can be sythesized.  will never be included.
 single cycle hardware register swap or
  queue would be very useful for ptr/stack/data
 also: MUX reg on RAM PTR array.  only exposes
-one to the data bus.  Use lower bits of
-machine status register. 2 bits for 4 regs:
-stack + 3 ptrs -- could be used for call args.
+one to the data bus.
 
 NOTE: ROM needs to be separate and socketable.
 An address bus driven by NIP and PTR is necessary,
@@ -280,9 +269,8 @@ operations.
 [RES RES CMP|RES RES CAR|   DSEL    |   PSEL   ]
 
 // General / Accumulator Register Layout:
-
  11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[  Most Sig | Next-Most | Next-Least| Least Sig ]
+[ Most Sig  | Next-Most | Next-Least| Least Sig ]
 [  Octet 3  |  Octet 2  |  Octet 1  |  Octet 0  ]
 [  High Char (HCHAR)    |  Low Char (LCHAR)     ]
 
@@ -295,7 +283,7 @@ selected register in the PTR[] bank drives the ADDR
 bus output lines, as well as having its incrementor
 and dectrementor lines connected to the decoder,
 such that on socket R/W and stack R/W operations
-cause the applicable in-place inc/dec (if
+cause the applicable in-place INC/DEC (if
 applicable).  When N/A the register value remains
 static unless purposefully assigned or driven by
 IPT/DPT operations.
@@ -336,24 +324,106 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 111  7  N/A          N/A
 
 /////////////////////////////////////////////////////
-// Updated Opcodes
+// Opcode Table
+
 <Bin>   <Oct>  <Mnem.>  <Descr.>
 
+//----- 00 Group -----
+// Essentials / Reserved Block / Special Transport
 
-
-// Essentials
 000000  000    HLT      Halt Execution
-000001  001    NOP      No Operation
+000001  001    RST      Reset CPU
+000010  002    NOP      No Operation
+000011  003    ---      RESERVED
+000100  004    ---      RESERVED
+000101  005    ---      RESERVED
+000110  006    ---      RESERVED
+000101  007    SKW      SKT = ACC, AUTO INC/DEC PTR[]
+000111  003    SKR      ACC = SKT, AUTO INC/DEC PTR[]
 
-// Special Case Transport (Socket Write/Read)
-000010  002    SKW      SKT = ACC, INC/DEC PTR[PSEL]
-000011  003    SKR      ACC = SKT, INC/DEC PTR[PSEL]
+//----- 01 Group -----
+// Normal Transport Operations (Move)
+// ACC Implied: 1 bit to/from, 2 bits src/dst
+// Requires Argument: BOP, MCS, PTR, NIP 
+
+0010XY  010-3  MTR      Move Accumulator To Register
+                        00=BOP, 01=MCS,
+                        10=PTR[PSEL], 11=NIP
+                        (Absolute Jump)
+
+0011XY  014-7  MFR      Move From Register To Accumulator
+                        00=BOP, 01=MCS,
+                        10=PTR[PSEL], 11=NIP
+                        (Get Instr Ptr)
+
+//----- 02 Group -----
+// Literal Octet Assignment to Accumulator
+// (Requires Argument: 1 through 7) 
+// Left-shifts by 3 bits and loads ACC Octet 0
+// ACC Octet 3 is discarded.  This is done by
+// bypassing Octet 3 before the BarrelShifter
+// and asserting the SH/RO line (Rotate Mode)
+
+010XYZ  020-7  LOL      ACC Load Octet 0 with XYZ
+                        Rotate ACC Left 3
+
+//----- 03 Group -----
+// Arithmetic & Logic Operations
+// First two are diverted over to the BarrelShifter
+// to help with loading specific values into ACC
+
+011000  030    ROR      ACC Rotate Octet Right (3 Bits)
+011001  031    ROL      ACC Rotate Octet Left (3 Bits)
+011010  032    ADD      ACC += BOP (Carry MCS[CAR])
+011011  033    SUB      ACC -= BOP (Borrow MCS[CAR])
+011100  034    AND      ACC &= BOP
+011101  035    OR       ACC |= BOP
+011110  036    XOR      ACC ^= BOP
+011111  037    NOT      ACC = ~ACC
+
+//----- 04 Group -----
+// Single Stage Barrel Shifter (Shift Mode)
+// (Requires Argument: 1, 3, 4, or 6)
+
+1000XY  040-3  SHL      ACC <<= N(XY)
+                        00=1,01=3,10=4,11=6
+
+1001XY  044-7  SHR      ACC >>= N(XY)
+                        00=1,01=3,10=4,11=6
+
+//----- 05 Group -----
+// Incrementors / Decrementors
+// (All are in-place up/down counter ops)
+// (Requires Argument: ACC, PTR, PSEL, DSEL)
+
+1010XY  050-3  INC      Increment Register
+                        00=ACC,01=PTR[PSEL],
+                        10=PSEL,11=DSEL
+
+1011XY  054-7  DEC      Decrement Register
+                        00=ACC,01=PTR[PSEL],
+                        10=PSEL,11=DSEL
+
+//----- 06 Group -----
+// String / BCD / Misc
+// Currently a mess & debatable
+
+110000  060  * SWC      ACC[HCHAR] <=> ACC[LCHAR]
+110001  061  * SWO      ACC[OCT3] <=> ACC[OCT2]
+110010  062  * NOC      ACC[OCT3] = ~ACC[OCT3]
+110011  063    ---      RESERVED
+
+110100  064    ---      RESERVED
+110101  065    ---      RESERVED
+110110  066    ---      RESERVED
+110111  067    ---      RESERVED
 
 // Comparator Operations
 000100  004    EQ       MCS[CMP] = (ACC == BOP)
 000101  005    NEQ      MCS[CMP] = (ACC != BOP)
 000110  006    EZ       MCS[CMP] = (ACC == 0)
 000111  007    NZ       MCS[CMP] = (ACC != 0)
+
 // Alternate Comparator Design (Debatable)
 // More capable, More complex wiring
 000100  004    EQ       MCS[CMP] = (ACC == BOP)
@@ -361,65 +431,7 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 000110  006    NCB      MCS[CMP] = ~MCS[CMP] (JK Toggle)
 000111  007    CCB      MCS[CMP] = MCS[CAR] (Loopback Set)
 
-
-
-// Normal Transport Operations (Move)
-// ACC Implied: 1 bit to/from, 2 bits src/dst
-// Requires Argument: BOP, MCS, PTR, NIP
-0010XY  010-3  MTR      Move Accumulator To Register
-                        00=BOP, 01=MCS,
-                        10=PTR[PSEL], 11=NIP
-                        (Absolute Jump)
-0011XY  014-7  MFR      Move From Register To Accumulator
-                        00=BOP, 01=MCS,
-                        10=PTR[PSEL], 11=NIP
-                        (Get Instr Ptr)
-
-
-
-// Literal Octet Assignment to Accumulator
-// (Requires Argument: 1 through 7) 
-// Alternate design to allow better use of opcode
-// space.  Will also make address loading code more
-// compact.
-111NNN  070-7  LOL      Load Octet & Rotate Left
-                        (3 Bits).  All rotate ops
-                        assert mode line on barrel
-                        shifter.  9 bits of ACC
-                        remain intact, 3 overwritten
-
-
-// Arithmetic & Logic Operations
-010000  020    ROR      Rotate ACC Octet Right (3 Bits)
-010001  021    ROL      Rotate ACC Octet Left (3 Bits)
-010010  022    ADD      ACC += BOP (Carry MCS[CAR])
-010011  023    SUB      ACC -= BOP (Borrow MCS[CAR])
-010100  024    AND      ACC &= BOP
-010101  025    OR       ACC |= BOP
-010110  026    XOR      ACC ^= BOP
-010111  027    NOT      ACC = ~ACC
-
-
-// Single Stage Barrel Shifter
-// (Requires Argument: 1, 3, 4, or 6)
-1000XY  040-3  SHL      ACC <<= N(XY)
-                        00=1,01=3,10=4,11=6
-1001XY  044-7  SHR      ACC >>= N(XY)
-                        00=1,01=3,10=4,11=6
-
-
-// Incrementors / Decrementors
-// (All are in-place up/down counter ops)
-// (Requires Argument: ACC, PTR, PSEL, DSEL)
-0110XY  030-3  INC      Increment Register
-                        00=ACC,01=PTR[PSEL],
-                        10=PSEL,11=DSEL
-0111XY  034-7  DEC      Decrement Register
-                        00=ACC,01=PTR[PSEL],
-                        10=PSEL,11=DSEL
-
-
-
+//----- 07 Group -----
 // Conditional Relative Jumps
 // Bitwise NIP offset calc with generated values
 // of NIP += 2, 6, 10, 14. (or -2, -6, -10, -14)
@@ -428,24 +440,14 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // BOP and performing ALU ADD or SUB => NIP.
 // The formulation of the jump offset word
 // may need to be adjusted later.
-// (Requires Argument: 2, 6, 10, or 14)
-1010XY  050-3  JCP      IF MCS[CMP] NIP += b00XY10
-1011XY  054-7  JCN      IF MCS[CMP] NIP -= b00XY10
 // b0XY100 produces 4, 12, 20, 28
 // bX0Y010 produces 2, 10, 34, 42
 // b0X0Y10 produces 2, 6, 18, 22
+// (Requires Argument: 2, 6, 10, or 14)
 
-// String / BCD / Misc
-110000  060    SWC      ACC[HCHAR] <=> ACC[LCHAR]
-110001  061    SWO      ACC[OCT3] <=> ACC[OCT2]
-110010  062    NOC      ACC[OCT3] = ~ACC[OCT3]
-110011  063    ---      RESERVED
-110100  064    ---      RESERVED
-110101  065    ---      RESERVED
-110110  066    ---      RESERVED
-110111  067    ---      RESERVED
+1110XY  070-3  JCP      IF MCS[CMP] NIP += b00XY10
 
-
+1111XY  074-7  JCN      IF MCS[CMP] NIP -= b00XY10
 
 
 /////////////////////////////////////////////////////
@@ -455,7 +457,7 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // Links for Reference:
 http://www.learnabout-electronics.org/Digital/images/register-SISO-PISO.gif
 
-// Old TODO Contents:
+// Old (Mostly Outdated) TODO Contents:
 - Create bi-directional bus tristate buffer component
 - Create up-down counter component (4 bit and 12 bit versions, or 4 bit cascadable)
 	- This will be used for the PC, and also the stack sizes
