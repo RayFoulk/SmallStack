@@ -23,5 +23,6 @@
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/BarrelShifterRotator.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/FetchCycleDriver.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestBarrelShifter.ssc</component>
-	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/TestFetchCycle.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestFetchCycle.ssc</component>
+	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/TestRegisterAccumulator.ssc</component>
 </project>
