@@ -13,8 +13,8 @@
 	<pin x="45" y="-20" length="10" direction="right" id="2" flow="in" label="J" required="true"/>
 	<pin x="45" y="20" length="10" direction="right" id="3" flow="in" label="K" required="true"/>
 	<pin x="45" y="0" length="10" direction="right" id="4" flow="in" symlabel="clock" required="true"/>
-	<pin x="-5" y="40" length="10" direction="down" id="5" flow="in" required="true"/>
-	<pin x="5" y="40" length="10" direction="down" id="6" flow="in" required="true"/>
+	<pin x="-5" y="40" length="10" direction="down" id="5" flow="in" label="D" required="true"/>
+	<pin x="5" y="40" length="10" direction="down" id="6" flow="in" label="L" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="-35" y="-50"/>

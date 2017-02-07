@@ -13,17 +13,17 @@
 	<pin x="5" y="-25" length="10" direction="up" id="2" flow="out" required="true"/>
 	<pin x="-5" y="-25" length="10" direction="up" id="3" flow="out" required="true"/>
 	<pin x="-15" y="-25" length="10" direction="up" id="4" flow="in" required="true"/>
-	<pin x="-25" y="-25" length="10" direction="up" id="5" flow="in" required="true"/>
+	<pin x="-25" y="-25" length="10" direction="up" id="5" flow="in" label="C5" required="true"/>
 	<pin x="25" y="25" length="10" direction="down" id="6" flow="in" required="true"/>
 	<pin x="15" y="25" length="10" direction="down" id="7" flow="in" required="true"/>
 	<pin x="5" y="25" length="10" direction="down" id="8" flow="in" required="true"/>
 	<pin x="-5" y="25" length="10" direction="down" id="9" flow="in" required="true"/>
 	<pin x="-15" y="25" length="10" direction="down" id="10" flow="in" required="true"/>
-	<pin x="-25" y="25" length="10" direction="down" id="11" flow="in" required="true"/>
-	<pin x="35" y="-15" length="10" direction="right" id="12" flow="in" required="true"/>
-	<pin x="35" y="-5" length="10" direction="right" id="13" flow="in" required="true"/>
+	<pin x="-25" y="25" length="10" direction="down" id="11" flow="in" label="D5" required="true"/>
+	<pin x="35" y="-15" length="10" direction="right" id="12" flow="in" label="INC" required="true"/>
+	<pin x="35" y="-5" length="10" direction="right" id="13" flow="in" label="DEC" required="true"/>
 	<pin x="35" y="5" length="10" direction="right" id="14" flow="in" symlabel="clock" required="true"/>
-	<pin x="35" y="15" length="10" direction="right" id="15" flow="out" required="true"/>
+	<pin x="35" y="15" length="10" direction="right" id="15" flow="out" label="LOAD" required="true"/>
 	<pin x="-35" y="-15" length="10" direction="left" id="16" flow="out" required="false"/>
 	<pin x="-35" y="-5" length="10" direction="left" id="17" flow="out" required="false"/>
 	<pin x="-35" y="5" length="10" direction="left" id="18" flow="out" symlabel="clock" required="false"/>
@@ -219,7 +219,7 @@
 		<marker x="-185" y="110"/>
 		<marker x="-310" y="110"/>
 		<marker x="-435" y="110"/>
-		<tag type="interface" xwire="340" ywire="110" xtag="350" ytag="110" flow="in" pinid="15" text="PL"/>
+		<tag type="interface" xwire="340" ywire="110" xtag="350" ytag="110" flow="in" pinid="15" text="LOAD"/>
 	</wire>
 	<wire id="23">
 		<path>
@@ -272,7 +272,7 @@
 			<point x="-550" y="110"/>
 			<point x="-580" y="110"/>
 		</path>
-		<tag type="interface" xwire="-580" ywire="110" xtag="-590" ytag="110" flow="out" pinid="19" text="PLo"/>
+		<tag type="interface" xwire="-580" ywire="110" xtag="-590" ytag="110" flow="out" pinid="19" text="LOADo"/>
 	</wire>
 	<wire id="25">
 		<path>
@@ -286,28 +286,28 @@
 			<point x="-495" y="-30"/>
 			<point x="-580" y="-30"/>
 		</path>
-		<tag type="interface" xwire="-580" ywire="-30" xtag="-590" ytag="-30" flow="out" pinid="16" text="UPo"/>
+		<tag type="interface" xwire="-580" ywire="-30" xtag="-590" ytag="-30" flow="out" pinid="16" text="INCo"/>
 	</wire>
 	<wire id="27">
 		<path>
 			<point x="240" y="30"/>
 			<point x="340" y="30"/>
 		</path>
-		<tag type="interface" xwire="340" ywire="30" xtag="350" ytag="30" flow="in" pinid="13" text="DN"/>
+		<tag type="interface" xwire="340" ywire="30" xtag="350" ytag="30" flow="in" pinid="13" text="DEC"/>
 	</wire>
 	<wire id="28">
 		<path>
 			<point x="240" y="-30"/>
 			<point x="340" y="-30"/>
 		</path>
-		<tag type="interface" xwire="340" ywire="-30" xtag="350" ytag="-30" flow="in" pinid="12" text="UP"/>
+		<tag type="interface" xwire="340" ywire="-30" xtag="350" ytag="-30" flow="in" pinid="12" text="INC"/>
 	</wire>
 	<wire id="29">
 		<path>
 			<point x="-495" y="30"/>
 			<point x="-580" y="30"/>
 		</path>
-		<tag type="interface" xwire="-580" ywire="30" xtag="-590" ytag="30" flow="out" pinid="17" text="DNo"/>
+		<tag type="interface" xwire="-580" ywire="30" xtag="-590" ytag="30" flow="out" pinid="17" text="DECo"/>
 	</wire>
 	<component id="0" def="UpDownCounterBit" x="-190" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="9" invert="false"/>

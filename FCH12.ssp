@@ -3,29 +3,23 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>SmallStack 12-Bit Computer</name>
-	<description>Forth-Inspired 12-bit Stack Computer</description>
-	<component>/home/ray/Source/SmartSim/SmallStack/BusReadInterface.ssc</component>
+	<name>FCH12</name>
+	<description>12-Bit MISC Computer</description>
+	<component>/home/ray/Source/SmartSim/SmallStack/BusInterfaceWord.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlopPreClr.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/ThirdParty/pe d flipflop.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer2to1Char.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsWord.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ThirdParty/half adder.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/MemoryUnit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer2to1Word.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ShiftRegisterBit.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ThirdParty/full adder.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/TestMemoryUnit.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestReverseBits.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer4to1Word.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/ShiftRegisterOctet.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ThirdParty/4 bit addition.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/TestUpDownCounter.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/Accumulator.ssc</component>
+	<component>/home/rfoulk/Source/SmartSim/SmallStack/RegisterAccumulator.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/BarrelShifterRotator.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/FetchCycleDriver.ssc</component>
 	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestBarrelShifter.ssc</component>

@@ -185,7 +185,19 @@
 		</path>
 		<tag type="interface" xwire="-310" ywire="105" xtag="-320" ytag="105" flow="out" pinid="12" text="CLKo"/>
 	</wire>
-	<component id="0" def="ShiftRegisterBit" x="165" y="0" direction="right" flip="false">
+	<component id="0" def="Buffer" x="-265" y="-20" direction="left" flip="false">
+		<connection flow="in" pinid="0" wireid="10" invert="false"/>
+		<connection flow="out" pinid="1" wireid="11" invert="false"/>
+	</component>
+	<component id="1" def="Buffer" x="-215" y="105" direction="left" flip="false">
+		<connection flow="in" pinid="0" wireid="12" invert="false"/>
+		<connection flow="out" pinid="1" wireid="15" invert="false"/>
+	</component>
+	<component id="2" def="Buffer" x="-265" y="135" direction="left" flip="false">
+		<connection flow="in" pinid="0" wireid="13" invert="false"/>
+		<connection flow="out" pinid="1" wireid="14" invert="false"/>
+	</component>
+	<component id="3" def="ShiftRegisterBit" x="165" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="4" invert="false"/>
 		<connection flow="out" pinid="1" wireid="0" invert="false"/>
 		<connection flow="in" pinid="2" wireid="2" invert="false"/>
@@ -194,7 +206,7 @@
 		<connection flow="in" pinid="5" wireid="7" invert="false"/>
 		<connection flow="in" pinid="6" wireid="13" invert="false"/>
 	</component>
-	<component id="1" def="ShiftRegisterBit" x="0" y="0" direction="right" flip="false">
+	<component id="4" def="ShiftRegisterBit" x="0" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="5" invert="false"/>
 		<connection flow="out" pinid="1" wireid="1" invert="false"/>
 		<connection flow="in" pinid="2" wireid="4" invert="false"/>
@@ -203,7 +215,7 @@
 		<connection flow="in" pinid="5" wireid="8" invert="false"/>
 		<connection flow="in" pinid="6" wireid="13" invert="false"/>
 	</component>
-	<component id="2" def="ShiftRegisterBit" x="-165" y="0" direction="right" flip="false">
+	<component id="5" def="ShiftRegisterBit" x="-165" y="0" direction="right" flip="false">
 		<connection flow="out" pinid="0" wireid="10" invert="false"/>
 		<connection flow="out" pinid="1" wireid="6" invert="false"/>
 		<connection flow="in" pinid="2" wireid="5" invert="false"/>
@@ -211,17 +223,5 @@
 		<connection flow="in" pinid="4" wireid="12" invert="false"/>
 		<connection flow="in" pinid="5" wireid="9" invert="false"/>
 		<connection flow="in" pinid="6" wireid="13" invert="false"/>
-	</component>
-	<component id="3" def="Buffer" x="-265" y="-20" direction="left" flip="false">
-		<connection flow="in" pinid="0" wireid="10" invert="false"/>
-		<connection flow="out" pinid="1" wireid="11" invert="false"/>
-	</component>
-	<component id="4" def="Buffer" x="-215" y="105" direction="left" flip="false">
-		<connection flow="in" pinid="0" wireid="12" invert="false"/>
-		<connection flow="out" pinid="1" wireid="15" invert="false"/>
-	</component>
-	<component id="5" def="Buffer" x="-265" y="135" direction="left" flip="false">
-		<connection flow="in" pinid="0" wireid="13" invert="false"/>
-		<connection flow="out" pinid="1" wireid="14" invert="false"/>
 	</component>
 </custom_component>

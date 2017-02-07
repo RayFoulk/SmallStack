@@ -3,9 +3,9 @@
 	<metadata>
 		<version smartsim="1.4.1"/>
 	</metadata>
-	<name>BusReadInterface</name>
-	<description>12bit Bus Isolator</description>
-	<label>Tristate</label>
+	<name>BusInterfaceWord</name>
+	<description>12-Bit Bus Isolator</description>
+	<label>BUS IF</label>
 	<bound right="65" down="15" left="-65" up="-15"/>
 	<colour a="0" r="255" g="255" b="255"/>
 	<pin x="55" y="-15" length="10" direction="up" id="0" flow="bi" label="In0" required="true"/>
