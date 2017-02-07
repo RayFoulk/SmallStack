@@ -10,24 +10,23 @@ args    ...     ; push all subroutine arguments to data stack
         ...
         ...
 
-push:   shr 6   ; zero out high char, will clear carry & compare
-        oc0 0   ; set psel octet to return stack pointer
-        oc1 1   ; set dsel octet to first ram bank
-        a2c     ; configure the mcs register
-        oc0 5   ; high char still 0, load nip offset (+5 words) in acc
-        oc1 0
-        a2b     ; put nip offset into operand
-        n2a     ; get nip into accumulator
+push:   shl 6   ; pull up zero char to clear carry & compare
+        lol 1   ; set dsel octet to first ram bank
+        lol 0   ; set psel octet to return stack pointer
+        mtr mcs ; configure the mcs register
+        ror     ; rotate back to dsel octet
+        lol 4   ; high char still 0, load nip offset (+4 words) in acc
+        mtr bop ; put nip offset into operand
+        mfr nip ; get nip into accumulator
         add     ; add nip offset into accumulator
         skw     ; socket write the address to return stack
                 ; and decrement stack pointer (push)
                 
-call:   oc1 1   ; load hypothetical subroutine address 1337 into acc
-        oc0 3
-        shl 6
-        oc1 3
-        oc0 7
-        a2n     ; jump to subroutine
+call:   lol 1   ; load hypothetical subroutine address 1337 into acc
+        lol 3
+        lol 3
+        lol 7
+        mtr nip ; jump to subroutine
 
 cont:   ...     ; point where code returns to
         ...
@@ -41,13 +40,11 @@ sub:    ...     ; start of subroutine at nip 1337
         ...     ; do a bunch of stuff...
         ...
         ...
-        
-return: shr 6   ; zero out high char, will clear carry & compare
-        oc0 0   ; set psel octet to return stack pointer
-        oc1 1   ; set dsel octet to first ram bank
-        a2c     ; configure the mcs register
-        skr     ; socket read the return address and decrement
-                ; stack pointer (pop)
-        a2n     ; jump back to return address (return)
-        
+
+return: shl 6   ; pull up zero char to clear carry & compare
+        lol 1   ; set dsel octet to first ram bank
+        lol 0   ; set psel octet to return stack pointer
+        mtr mcs ; configure the mcs register
+        skr     ; pop from return stack into accumulator
+        mtr nip ; jump back to return address (return)
         
