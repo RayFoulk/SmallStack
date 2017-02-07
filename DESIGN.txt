@@ -339,6 +339,8 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // Updated Opcodes
 <Bin>   <Oct>  <Mnem.>  <Descr.>
 
+
+
 // Essentials
 000000  000    HLT      Halt Execution
 000001  001    NOP      No Operation
@@ -356,30 +358,55 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // More capable, More complex wiring
 000100  004    EQ       MCS[CMP] = (ACC == BOP)
 000101  005    NZ       MCS[CMP] = (ACC != 0)
-000110  006    INV      MCS[CMP] = ~MCS[CMP] (JK Toggle)
+000110  006    NCB      MCS[CMP] = ~MCS[CMP] (JK Toggle)
 000111  007    CCB      MCS[CMP] = MCS[CAR] (Loopback Set)
+
+
 
 // Normal Transport Operations (Move)
 // ACC Implied: 1 bit to/from, 2 bits src/dst
 // Requires Argument: BOP, MCS, PTR, NIP
-0010XY  010-3  MTX      Move Accumulator To XY
+0010XY  010-3  MTR      Move Accumulator To Register
                         00=BOP, 01=MCS,
                         10=PTR[PSEL], 11=NIP
                         (Absolute Jump)
-0011XY  014-7  MFX      Move From XY To Accumulator
+0011XY  014-7  MFR      Move From Register To Accumulator
                         00=BOP, 01=MCS,
                         10=PTR[PSEL], 11=NIP
                         (Get Instr Ptr)
 
+
+
+// Literal Octet Assignment to Accumulator
+// (Requires Argument: 1 through 7) 
+// Alternate design to allow better use of opcode
+// space.  Will also make address loading code more
+// compact.
+111NNN  070-7  LOL      Load Octet & Rotate Left
+                        (3 Bits).  All rotate ops
+                        assert mode line on barrel
+                        shifter.  9 bits of ACC
+                        remain intact, 3 overwritten
+
+
 // Arithmetic & Logic Operations
-010000  020    ADD      ACC += BOP (Carry MCS[CAR])
-010001  021    SUB      ACC -= BOP (Borrow MCS[CAR])
-010010  022    SWP      ACC[HCHAR] <=> ACC[LCHAR]
-010011  023    ---      RESERVED
+010000  020    ROR      Rotate ACC Octet Right (3 Bits)
+010001  021    ROL      Rotate ACC Octet Left (3 Bits)
+010010  022    ADD      ACC += BOP (Carry MCS[CAR])
+010011  023    SUB      ACC -= BOP (Borrow MCS[CAR])
 010100  024    AND      ACC &= BOP
 010101  025    OR       ACC |= BOP
 010110  026    XOR      ACC ^= BOP
 010111  027    NOT      ACC = ~ACC
+
+
+// Single Stage Barrel Shifter
+// (Requires Argument: 1, 3, 4, or 6)
+1000XY  040-3  SHL      ACC <<= N(XY)
+                        00=1,01=3,10=4,11=6
+1001XY  044-7  SHR      ACC >>= N(XY)
+                        00=1,01=3,10=4,11=6
+
 
 // Incrementors / Decrementors
 // (All are in-place up/down counter ops)
@@ -391,12 +418,7 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
                         00=ACC,01=PTR[PSEL],
                         10=PSEL,11=DSEL
 
-// Single Stage Barrel Shifter
-// (Requires Argument: 1, 3, 4, or 6)
-1000XY  040-3  SHL      ACC <<= N(XY)
-                        00=1,01=3,10=4,11=6
-1001XY  044-7  SHR      ACC >>= N(XY)
-                        00=1,01=3,10=4,11=6
+
 
 // Conditional Relative Jumps
 // Bitwise NIP offset calc with generated values
@@ -413,30 +435,18 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 // bX0Y010 produces 2, 10, 34, 42
 // b0X0Y10 produces 2, 6, 18, 22
 
-// Literal Octet Assignment to Accumulator
-// (Requires Argument: 1 through 7) 
-110NNN  060-7  OC0      Assign Least Octet to ACC
-                        Remainder of ACC left intact
-111NNN  070-7  OC1      Assign Next-Least Octet to A
-                        Remainder of ACC left intact
-
-// NOTE: Alternative design to allow more/alternate
-// opcodes (or just better use of opcode space)
-// This would also make address load code more compact.
-
-110000  060    ---      RESERVED
-110001  061    ---      RESERVED
-110010  062    ---      RESERVED
+// String / BCD / Misc
+110000  060    SWC      ACC[HCHAR] <=> ACC[LCHAR]
+110001  061    SWO      ACC[OCT3] <=> ACC[OCT2]
+110010  062    NOC      ACC[OCT3] = ~ACC[OCT3]
 110011  063    ---      RESERVED
 110100  064    ---      RESERVED
 110101  065    ---      RESERVED
-110110  066    ROR      Rotate Octet Right (3 Bits)
-110111  067    ROL      Rotate Octet Left (3 Bits)
+110110  066    ---      RESERVED
+110111  067    ---      RESERVED
 
-111NNN  070-7  LOL      Load Octet & Rotate Left
-                        (3 Bits).  All rotate ops
-                        assert mode line on barrel
-                        shifter.
+
+
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
