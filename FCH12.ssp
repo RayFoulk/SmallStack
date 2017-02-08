@@ -5,27 +5,27 @@
 	</metadata>
 	<name>FCH12</name>
 	<description>12-Bit MISC Computer</description>
-	<component>/home/ray/Source/SmartSim/SmallStack/BusInterfaceWord.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/JkFlipFlopPreClr.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer2to1Char.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsWord.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/FCH12_CPU.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterBit.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ReverseBitsOrPassThrough.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer2to1Word.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ShiftRegisterBit.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/FCH12_MainBoard.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/UpDownCounterChar.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/UpDownCounterOctet.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestReverseBits.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/Multiplexer4to1Word.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/ShiftRegisterOctet.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/TestUpDownCounter.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/RegisterAccumulator.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/BarrelShifterRotator.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/FetchCycleDriver.ssc</component>
-	<component root="true">/home/rfoulk/Source/SmartSim/SmallStack/TestMemory.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestBarrelShifter.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestFetchCycle.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/TestRegisterAccumulator.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/BusInterfaceWord.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/JkFlipFlopPreClr.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer2to1Char.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/ReverseBitsWord.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/FCH12_CPU.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterBit.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/ReverseBitsOrPassThrough.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer2to1Word.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/ShiftRegisterBit.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/FCH12_MainBoard.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterChar.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterOctet.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestReverseBits.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer4to1Word.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/ShiftRegisterOctet.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestUpDownCounter.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterAccumulator.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/BarrelShifterRotator.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/FetchCycleDriver.ssc</component>
+	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestMemory.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestBarrelShifter.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestFetchCycle.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterAccumulator.ssc</component>
 </project>
