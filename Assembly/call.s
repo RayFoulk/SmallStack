@@ -3,10 +3,11 @@
 ; necessary depending on the context, but this example will work in
 ; all cases.  Also: if an extended addition or subtraction operation
 ; is in progress or for whatever reason you don't want the high
-; character in MCS to be cleared, then instead, execute c2a,oc1,oc0,a2c
+; character in MCS to be cleared, then instead, execute:
+; mfr mcs, shr 6, lol 1, lol 0, mtr mcs
 
-args    ...     ; push all subroutine arguments to data stack
-        ...     ; put number of arguments in high ptr array
+args:   ...     ; push all subroutine arguments to data stack
+        ...     ; put number of arguments in high ptr array?
         ...
         ...
 
@@ -14,8 +15,8 @@ push:   shl 6   ; pull up zero char to clear carry & compare
         lol 1   ; set dsel octet to first ram bank
         lol 0   ; set psel octet to return stack pointer
         mtr mcs ; configure the mcs register
-        ror     ; rotate back to dsel octet
-        lol 4   ; high char still 0, load nip offset (+4 words) in acc
+        shr 6   ; hchar still 0, discard all selector bits
+        lol 4   ; load nip offset (+4 words) in acc
         mtr bop ; put nip offset into operand
         mfr nip ; get nip into accumulator
         add     ; add nip offset into accumulator
