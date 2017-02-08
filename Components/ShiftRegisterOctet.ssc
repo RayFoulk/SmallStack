@@ -18,7 +18,7 @@
 	<pin x="10" y="25" length="10" direction="down" id="7" flow="in" required="true"/>
 	<pin x="0" y="25" length="10" direction="down" id="8" flow="in" required="true"/>
 	<pin x="-10" y="25" length="10" direction="down" id="9" flow="in" required="true"/>
-	<pin x="20" y="5" length="10" direction="right" id="10" flow="in" required="true"/>
+	<pin x="20" y="5" length="10" direction="right" id="10" flow="in" symlabel="clock" required="true"/>
 	<pin x="20" y="-5" length="10" direction="right" id="11" flow="in" required="true"/>
 	<pin x="-20" y="5" length="10" direction="left" id="12" flow="out" required="false"/>
 	<pin x="-20" y="-5" length="10" direction="left" id="13" flow="out" required="false"/>

@@ -416,9 +416,9 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
 // Comparator Operations
 110100  064    EQ       MCS[CMP] = (ACC == BOP)
-110101  065    NEQ      MCS[CMP] = (ACC != BOP)
-110110  066    EZ       MCS[CMP] = (ACC == 0)
-110111  067    NEZ      MCS[CMP] = (ACC != 0)
+110101  065    NZ       MCS[CMP] = (ACC != 0)
+110110  066    INV      MCS[CMP] = ~MCS[CMP] (JK Toggle)
+110111  067    ---      RESERVED
 
 //----- 07 Group -----
 // Conditional Relative Jumps
