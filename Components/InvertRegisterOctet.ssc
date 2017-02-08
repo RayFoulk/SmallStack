@@ -14,11 +14,11 @@
 	<pin x="10" y="25" length="10" direction="down" id="3" flow="in" required="true"/>
 	<pin x="0" y="25" length="10" direction="down" id="4" flow="in" required="true"/>
 	<pin x="-10" y="25" length="10" direction="down" id="5" flow="in" label="D2" required="true"/>
-	<pin x="20" y="15" length="10" direction="right" id="6" flow="in" label="INV" required="true"/>
+	<pin x="20" y="-15" length="10" direction="right" id="6" flow="in" label="INV" required="true"/>
 	<pin x="20" y="5" length="10" direction="right" id="7" flow="in" symlabel="clock" required="true"/>
-	<pin x="20" y="-5" length="10" direction="right" id="8" flow="in" required="true"/>
-	<pin x="-20" y="5" length="10" direction="left" id="9" flow="out" required="false"/>
-	<pin x="-20" y="-5" length="10" direction="left" id="10" flow="out" required="false"/>
+	<pin x="20" y="15" length="10" direction="right" id="8" flow="in" label="PL" required="true"/>
+	<pin x="-20" y="5" length="10" direction="left" id="9" flow="out" symlabel="clock" required="false"/>
+	<pin x="-20" y="15" length="10" direction="left" id="10" flow="out" required="false"/>
 	<wire id="0">
 		<path>
 			<point x="160" y="50"/>
@@ -90,14 +90,14 @@
 		<marker x="170" y="135"/>
 		<marker x="5" y="135"/>
 		<marker x="-160" y="135"/>
-		<tag type="interface" xwire="290" ywire="135" xtag="300" ytag="135" flow="in" pinid="8" text="LD"/>
+		<tag type="interface" xwire="290" ywire="135" xtag="300" ytag="135" flow="in" pinid="8" text="PL"/>
 	</wire>
 	<wire id="5">
 		<path>
 			<point x="-290" y="135"/>
 			<point x="-310" y="135"/>
 		</path>
-		<tag type="interface" xwire="-310" ywire="135" xtag="-320" ytag="135" flow="out" pinid="10" text="LDo"/>
+		<tag type="interface" xwire="-310" ywire="135" xtag="-320" ytag="135" flow="out" pinid="10" text="PLo"/>
 	</wire>
 	<wire id="6">
 		<path>
