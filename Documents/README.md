@@ -23,25 +23,32 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
     - Future designs  may transition to 18-bit design with 3 chars per word
 
 ### Research:
+- Links regarding hobbyist CPUs
+    - [FPGA CPU org](http://www.fpgacpu.org/)
 - Discovery that "Minimal Instruction Set Computer" is a real thing (MISC)
 - Inspired by the life's work of Charles Moore, an unsung genius (in my opinion)
     - Computer Cowboys, Ultratechnology, Greenarrays
     - Stack Computers, RPN, and Forth Language.
 - Links regarding Stack Computers:
-
     - [Stack Computers "The New Wave" (Koopman, 1989)]
       (https://users.ece.cmu.edu/~koopman/stack_computers/)
-
+    - [FPGACPU.CA: Stack Computer Architecture]
+      (http://fpgacpu.ca/stack/index.html)
 - Links regarding Charles Moore:
-    - [Charles H. Moore]
+    - [Wikipedia: Charles H. Moore]
       (https://en.wikipedia.org/wiki/Charles_H._Moore)
-    - [Chuck Moore: Geek of the Week]
+    - [Simple Talk: Chuck Moore: Geek of the Week]
       (https://www.simple-talk.com/opinion/geek-of-the-week/chuck-moore-geek-of-the-week/)
-    - http://www.greenarraychips.com/
-    - http://www.ultratechnology.com/cowboys.html
-    - http://www.ultratechnology.com/misc.html
-    - https://www.youtube.com/watch?v=tb0_V7Tc5MU
-    - https://www.youtube.com/watch?v=N1FUY6g5crA
-
-
+    - [GreenArrays, Inc]
+      (http://www.greenarraychips.com/)
+        - Affordable evaluation boards available!
+        - Fully asynchronous 144 parallel SoC 
+    - [UltraTechnology: Charles Moore, Forth, and Computer Cowboys]
+      (http://www.ultratechnology.com/cowboys.html)
+    - [UltraTechnology: Minimal Instruction Set Computers]
+      (http://www.ultratechnology.com/misc.html)
+    - [TEDx (Circa 2011?) Charles H. Moore - Software: Past and Future]
+      (https://www.youtube.com/watch?v=tb0_V7Tc5MU)
+    - [Chuck Moore (Forth) Fireside Chat - May 22 1999]
+      (https://www.youtube.com/watch?v=N1FUY6g5crA)
 
