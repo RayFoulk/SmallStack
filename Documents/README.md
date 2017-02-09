@@ -32,6 +32,8 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 - Links regarding Stack Computers:
     - [Stack Computers "The New Wave" (Koopman, 1989)]
       (https://users.ece.cmu.edu/~koopman/stack_computers/)
+    - [Stack Computers & Forth (Koopman)]
+      (https://users.ece.cmu.edu/~koopman/stack.html)
     - [FPGACPU.CA: Stack Computer Architecture]
       (http://fpgacpu.ca/stack/index.html)
 - Links regarding Charles Moore:

@@ -249,8 +249,9 @@ ZHI      ACC[HCHAR] = 0 (Debatable)
 // More capable, More complex wiring
 NCB      MCS[CMP] = ~MCS[CMP] (JK Toggle)
 CCB      MCS[CMP] = MCS[CAR] (Loopback Set)
-// NIX..Shifted-out bits go to MCS[RES] to facilitate
-// Simulation of ROR and ROL
+// NIX..Shifted-out bits go to MCS[RES]
+NOTE: ROR or ROL twice will do a high/low char swap
+NIX: SWC      ACC[HCHAR] <=> ACC[LCHAR]
 
 /////////////////////////////////////////////////////
 // MCS Register Layout:
@@ -408,10 +409,9 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 
 //----- 06 Group -----
 // Miscellaneous, String, BCD Helpers
-
-110000  060  * SWC      ACC[HCHAR] <=> ACC[LCHAR]
-110001  061  * SWO      ACC[OCT3] <=> ACC[OCT2]
-110010  062  * BCD      ACC[4:11] = 0
+110000  060  * SWO      ACC[OCT3] <=> ACC[OCT2]
+110001  061  * BCD      ACC[4:11] = 0
+110010  062    ---      RESERVED
 110011  063    ---      RESERVED
 
 // Comparator Operations
