@@ -33,8 +33,10 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
       (https://users.ece.cmu.edu/~koopman/stack_computers/)
 
 - Links regarding Charles Moore:
-    - https://en.wikipedia.org/wiki/Charles_H._Moore
-    - https://www.simple-talk.com/opinion/geek-of-the-week/chuck-moore-geek-of-the-week/
+    - [Charles H. Moore]
+      (https://en.wikipedia.org/wiki/Charles_H._Moore)
+    - [Chuck Moore: Geek of the Week]
+      (https://www.simple-talk.com/opinion/geek-of-the-week/chuck-moore-geek-of-the-week/)
     - http://www.greenarraychips.com/
     - http://www.ultratechnology.com/cowboys.html
     - http://www.ultratechnology.com/misc.html
