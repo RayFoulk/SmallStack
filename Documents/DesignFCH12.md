@@ -137,13 +137,13 @@ and Address Bus on the other)
 
 #### Normal Case Transport (Simple Internal Data R/W)
 
-ACC <-> BOP     Swap would be nice in some cases,
-ACC <-> MCS     but these are all overwrite copy.
-ACC <-> PTR     Writing to MCS will clear/set carry
-ACC <-> NIP     and compare bits. Writing to NIP
-                will also of course jump absolute!
-                Writing to PTR and PSEL drives the
-                address bus to ROM/RAM/(EEPROM)
+    ACC <-> BOP     Swap would be nice in some cases,
+    ACC <-> MCS     but these are all overwrite copy.
+    ACC <-> PTR     Writing to MCS will clear/set carry
+    ACC <-> NIP     and compare bits. Writing to NIP
+                    will also of course jump absolute!
+                    Writing to PTR and PSEL drives the
+                    address bus to ROM/RAM/(EEPROM)
 
 #### MCS Register Layout:
 
