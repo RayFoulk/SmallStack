@@ -1,16 +1,17 @@
 // Experimental Reduced 5-bit Opcode Instruction Set
 // would need to enable loading next literal word
 // transport would be simplified with hw stacks
+// this is thinking ahead to 16-bit design
 
 00000  hlt
 00001  nop
 00010  skw
 00011  skr
 
-00100  
-00101  
-00110  
-00111
+00100  lit
+00101  eq
+00110  ez
+00111  inv
 
 01000  mtr
 01001  |
@@ -29,14 +30,11 @@
 
 10100  slu  acc = (acc << 1) | 1
 10101  slz  acc <<= 1
-10110  sru  acc = (acc >> 1) | (width(acc) high bit set)
-10111  rzz  acc >>=1
+10110  
+10111  srz  acc >>= 1
 
 1100X  inc  0=acc,1=ptr
 1101X  dec  1=acc,1=ptr
 
-11100  eq
-11101  inv
-
-1111X  jcp  if mcs[cmp] nip += bX010
+111XY  jcp  if mcs[cmp] nip += b0000XY10
 
