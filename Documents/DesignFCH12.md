@@ -1,110 +1,114 @@
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-// 12-Bit MISC CPU Design: FCH12
+# FCH12: 12-Bit MISC CPU Design
 
-Harvard Architecture
-    Single, Pluggable 4K ROM
-    One or More 4K RAM Modules, Segmented
-    Second Iteration will be a proper Stack Machine
+### Overview
 
-All registers, address and data bus are 12 bits wide
-All Opcodes are 6 bits with (mostly) implied operands
-    2 opcodes per ROM fetch.
-    Microcode sequence is: fetch-exec-exec, repeat
-ROM addresses/NIP/jumps point to odd instructions
-    May need to fill in NOPs here and there.
-    "Big Endian" (in terms of 6-bit chars)
+- Harvard Architecture
+    - Single, Pluggable 4K ROM (Like an Early Game Console)
+    - One or More 4K RAM Modules
+        - Segmented Addressing
+        - Data Only, Non-Executable
+- Rudimentary Stack Functionality
+    - Sythesized using lower-level opcodes
+    - Future Designs will be a true Stack Machines
+- Registers, Address, and Data bus are 12 bits wide
+- Opcodes are  6 bits with (mostly) implied operands
+    - 2 opcodes per ROM fetch.
+    - Hardwired microcode sequence is: fetch-exec-exec
+- Instruction Pointer & Jumps point to odd # instructions
+    - Will need to fill in NOPs here and there.
+    - "Big Endian" (in terms of 6-bit char order)
 
-/////////////////////////////////////////////////////
-// CPU Diagram
+### CPU Diagram
 
-Machine & Bus Layout:
-         ___              ___
-  [CLK] |   |-[BOP]------|   \---[MCS]--\
-     |  |DEC|   ||       |ALU|=\\  || \  \   _
-  [INS]-|___|---||-[ACC]-|___/ ||  || |   \=| |==...
-    ||       \  ||   ||        ||  || |     | |
-    =========|========================|=====|C|==... 
-    =========|===== DATA BUS =========|=====|P|==... 
-    =========|========================|=====|U|==... 
-    ||       |                     || /     | |
-  [NIP]------+-------------------[PTR][]    |S|
-    ||                             ||       |O|
-    ========================================|C|==... 
-    =============== ADDR BUS ===============|K|==... 
-    ========================================|E|==... 
-                                            |T|
-                                            |_|    
+    Machine & Bus Layout:
+           ___              ___
+    [CLK] |   |-[BOP]------|   \---[MCS]--\
+       |  |DEC|   ||       |ALU|=\\  || \  \   _
+    [INS]-|___|---||-[ACC]-|___/ ||  || |   \=| |==...
+      ||       \  ||   ||        ||  || |     | |
+      =========|========================|=====|C|==... 
+      =========|===== DATA BUS =========|=====|P|==... 
+      =========|========================|=====|U|==... 
+      ||       |                     || /     | |
+    [NIP]------+-------------------[PTR][]    |S|
+      ||                             ||       |O|
+      ========================================|C|==... 
+      =============== ADDR BUS ===============|K|==... 
+      ========================================|E|==... 
+                                              |T|
+                                              |_|
 
-/////////////////////////////////////////////////////
-// Devices Attached to Internal Main Data Bus
+### Internal Data Bus
 
-INS  (WO) Instruction word register for decode
-ACC  (RW) Accumulator: 1st ALU input and output
-BOP  (RW) Operand: 2nd ALU input for dyadic funcs. 
-ALU  (RO) ALU output to data bus
-MCS  (RW) Machine Control/Status: Carry [CAR],
-          Compare [CMP], Device (Peripheral) Select
-          [DSEL], Pointer (Address) Select [PSEL]
-PTR  (RW) Peripheral Address (ROM/RAM/EEPROM)
-          Selectable Register Bank.  Some are
-          auto incrementing or decrementing
-          on SKW/SKR according to table.
-NIP  (RW) Next Instruction Pointer (for ROM Only)
-SKT  (RW) CPU Socket: Bi-Directional Tristated
-          Peripheral Device I/O and other dedicated
-          interface pins.
+List of Registers & Devices
+Interfaced with Internal Main Data Bus
 
-              12 DATA PINS, 12 ADDR PINS
-                (Driven by PTR[PSEL] or NIP during FCH)
-              3 DSEL PINS
-                (Drive chip select on peripherals)
-              2 R/W PINS
-              ALSO: (GND, VDD, CLK, RST ...)
+Mnemonic | Access | Description
+|---|---|---|
+INS | (WO) | Instruction word register for decode (2 x 6-Bit Opcodes)
+ACC | (RW) | Accumulator: 1st ALU input and output
+BOP | (RW) | Operand: 2nd ALU input for dyadic funcs. 
+ALU | (RO) | ALU output to data bus
+MCS | (RW) | Machine Control & Status: Carry, Compare, Device Select, Pointer Select
+PTR | (RW) | Peripheral Address (ROM/RAM/etc) Selectable Register Bank. See table below
+NIP | (RW) | Next Instruction Pointer (for ROM Only)
+SKT | (RW) | CPU Socket: Bi-Directional Tristated Peripheral Device I/O and other dedicated interface pins.
 
-/////////////////////////////////////////////////////
-// CPU socket layout:
-Rough Total Pins (From ABove): 33 (div 4 = 8.25)
-    Round up to 9 on a side (square chip)
-    and include extra GNDs & VDDs, also
-    CLK_IN/CLK_OUT
-    new total = 9 x 4 = 36
+### CPU socket layout:
 
-    _|_|_|_|_|_|_|_|_|_
-  --|                 |--
-  --|                 |--
-  --|                 |--
-  --|                 |--
-  --|      C P U      |--
-  --|                 |--
-  --|                 |--
-  --|                 |--
-  --|_________________|--
-     | | | | | | | | |
+- Bidirectional Data Bus: 12 pins
+- Output Address Bus: 12 pins
+    - Driven by PTR[PSEL] or NIP during instruction fetch
+- Output Device Select: 3 pins
+    - DSEL Intended to drive chip select on peripherals
+- Data Mode (8080 Style) Read/Write: 2 pins
+- Other Pins
+    - Multiple Grounds (GND), Multiple Voltage In (VDD)
+    - Reset (RST), Halt (HLT), Clock In (CLKi), Clock Out (CLKo)
+
+#### Layout Option 1
+
+Rough Total Pins (From Above): 33 (div 4 = 8.25)
+Round up to 9 on a side (assuming square chip)
+and include extra GNDs & VDDs, also CLK_IN/CLK_OUT
+new total is 9 x 4 = 36 pins
+
+      _|_|_|_|_|_|_|_|_|_
+    --|                 |--
+    --|                 |--
+    --|                 |--
+    --|                 |--
+    --|      C P U      |--
+    --|                 |--
+    --|                 |--
+    --|                 |--
+    --|_________________|--
+       | | | | | | | | |
+
+#### Layout Option 2
 
 Alternative Rectangular Layout
 (Would keep Data Bus on one side
 and Address Bus on the other)
-36 - 24 = 12 , / 2 = 6
+36 pins - 24 = 12 remaining, / 2 = 6
 
-    _|_|_|_|_|_|_
-  --|           |--
-  --|           |--
-  --|           |--
-  --|           |--
-  --|           |--
-  --|           |--
-  --|   C P U   |--
-  --|           |--
-  --|           |--
-  --|           |--
-  --|           |--
-  --|___________|--
-     | | | | | |
+      _|_|_|_|_|_|_
+    --|           |--
+    --|           |--
+    --|           |--
+    --|           |--
+    --|           |--
+    --|           |--
+    --|   C P U   |--
+    --|           |--
+    --|           |--
+    --|           |--
+    --|           |--
+    --|___________|--
+       | | | | | |
 
-/////////////////////////////////////////////////////
-// Inter-Device Transport Notes
+### Inter-Device Transport Notes
+
 ROM to INS is special case
   (Read-Only from ROM to Write-Only for INS)
 ALU output is special case (Write-Only to Data Bus)
@@ -139,128 +143,7 @@ ACC <-> NIP     and compare bits. Writing to NIP
                 Writing to PTR and PSEL drives the
                 address bus to ROM/RAM/(EEPROM)
 
-/////////////////////////////////////////////////////
-// TODO: 
-    
-Character table with ASCII conversion algorithm
-Need to decide on ASCII-to-6bit char mapping
-    - Possibly have 2 tables: normal and shifted
-    - Or keep it simple with 1 table
-    - ability to port/play Roguelike games a priority
-    - in competition with ability to port Forth.
-
-Design peripheral interfaces
-    ROM expected at address 0
-    RAM expected at address 1
-    Graphics - Color LCD
-        8080 interface. CMD/CTRL
-        2 devs possible 12 bit RGB or 9bit 1 dev
-    Monochrome Console LCD
-        1 dev for cmd & ctrl
-    Keyboard
-        1 dev: 6 bit low or high char others zero
-        parallel interface? look up early apple 1
-    Hard Disk
-    External RAM
-        3 devs: 12 high addr, 12 low addr, 12 data
-        2 dev: bit fields mux select, value
-    Network
-    Bus extender / reducer for interfacing with
-        8 to 10 bit hardware: mode addr/data
-        1 bus addr -- rising edge triggered
-            mode select bit, data apply bit.
-        2 bus addrs -- can preserve 12 bits
-
-/////////////////////////////////////////////////////
-// Main Board Peripheral Bus (8 Addresses)
-// (Board Layout & Design is flexible here)
-
-[Design A - 8K RAM with ext 12 bit peripheral bus]
-0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
-1    RAM    4K RAM (R/W)
-2    RAM    4K RAM (R/W)
-3    EEPROM 512K (R/W) (Non-Volatile Storage)
-4    KEYB (Parallel Interface -- TBD)
-5    LCD (8080 + REGS/MODE -- TBD)
-6    BUS_EXT ADDR -- Combine with Data Bus
-         for 24-bit address
-7    BUS_EXT DATA
-
-[Design B - 16K RAM with ext 10 bit peripheral bus]
-0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
-1    RAM    4K RAM (R/W)
-2    RAM    4K RAM (R/W)
-3    RAM    4K RAM (R/W)
-4    RAM    4K RAM (R/W)
-5    KEYB (Parallel Interface -- TBD)
-6    LCD (8080 + REGS/MODE -- TBD)
-7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
-         writes:
-         11xxxxxxxxxx set addr mode, apply data(addr)
-         10xxxxxxxxxx set addr mode, do not apply data
-         01xxxxxxxxxx set data mode, apply data(data)
-         00xxxxxxxxxx set data mode, do not apply data
-
-/////////////////////////////////////////////////////
-// Instruction Design Notes
-
-// Synthesis of other instructions:
-GT and LT comparisons can be synthesized easily
-MUL and DIV can be sythesized.  will never be included.
-
-// Later Design changes:
-single cycle hardware register swap or
- queue would be very useful for ptr/stack/data
-also: MUX reg on RAM PTR array.  only exposes
-one to the data bus.
-
-NOTE: ROM needs to be separate and socketable.
-An address bus driven by NIP and PTR is necessary,
-as well as a bypass on external DSEL.
-this would reduce the number of CPU pins by re-using
-the address lines for ROM and RAM.  Not shown above
-  are the control lines.
-FCH bypasses DSEL and asserts 0 on output pins
-ADDR output pins are normally driven by PTR[PSEL]
-but FCH instructuon overrides this with NIP
-NOTE: This also allows PTR access to ROM for reading
-fonts, bitmaps, strings, etc... 
-  by manually setting DSEL to 0,
-  set PTR[PSEL] to desired address and executing IOR.
-  This eliminates the need for LBL and frees up an
-    8-block of opcodes.
-
-NOTE: fetch opcode is avoided since this can be built
-directly into the main micro cycle => drive lines.
-I.E. For this "instruction" only, there nothing to
-"decode" per se, just do it!
-
-XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
-                        NIP++ driven by read
-
-N2S and S2N not really necessary as N2A,SKW and
-  SKR,A2N will suffice.. although need to load contant
-  into operand and premptively ADD to NIP.
-  Will require selecting stack ptr
-
-ASB swap ACC <=> BOP and save another opcode
-do the same with PTR[]?  ASP?
-
-// Instruction Trash Bin:
-NOTE: Other instructions to consider:
-MCS[CMP] = MCS[CAR] for testing carry in 2 instr vs 5
-MCS[CMP] = ~MCS[CMP] via JK toggle (reduce #opcodes)
-ZHI      ACC[HCHAR] = 0 (Debatable)
-// Alternate Comparator Design (Debatable)
-// More capable, More complex wiring
-NCB      MCS[CMP] = ~MCS[CMP] (JK Toggle)
-CCB      MCS[CMP] = MCS[CAR] (Loopback Set)
-// NIX..Shifted-out bits go to MCS[RES]
-NOTE: ROR or ROL twice will do a high/low char swap
-NIX: SWC      ACC[HCHAR] <=> ACC[LCHAR]
-
-/////////////////////////////////////////////////////
-// MCS Register Layout:
+#### MCS Register Layout:
 
 Upper two octets R/W are hardwired to ALU in/out.
 In this way, the MCS resembles ACC except reversed.
@@ -274,17 +157,22 @@ for some reserved bits include greater/less
 comparison and also signed versus unsigned
 operations.
 
- 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[RES RES CMP|RES RES CAR|   DSEL    |   PSEL   ]
+| Octet 3    | Octet 2   | Octet 1   | Octet 0   |
+|------------|-----------|-----------|-----------|
 
-// General / Accumulator Register Layout:
- 11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-[ Most Sig  | Next-Most | Next-Least| Least Sig ]
-[  Octet 3  |  Octet 2  |  Octet 1  |  Octet 0  ]
-[  High Char (HCHAR)    |  Low Char (LCHAR)     ]
+| 11| 10| 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|RES|RES|CMP|RES|RES|CAR|   DSEL    |   PSEL    |
 
-/////////////////////////////////////////////////////
-// PTR[PSEL] Register Bank Behavior
+
+#### General / Accumulator Register Layout:
+
+     11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+    [ Most Sig  | Next-Most | Next-Least| Least Sig ]
+    [  Octet 3  |  Octet 2  |  Octet 1  |  Octet 0  ]
+    [  High Char (HCHAR)    |  Low Char (LCHAR)     ]
+
+## Address Pointer (PTR[PSEL]) Register Bank Behavior
 
 One of these can be selected at any time via the PSEL
 bit field in the MCS register.  The currently
@@ -445,9 +333,124 @@ PSEL    SKW/N2S      SKR/S2N      Intended Usage
 1111XY  074-7  JCN      IF MCS[CMP] NIP -= b00XY10
 
 
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
+### TODO: 
+    
+- Character table with ASCII conversion algorithm
+- Need to decide on ASCII-to-6bit char mapping
+    - Possibly have 2 tables: normal and shifted
+    - Or keep it simple with 1 table
+    - ability to port/play Roguelike games a priority
+    - in competition with ability to port Forth.
+
+- Design peripheral interfaces
+    - ROM expected at peripheral address 0
+    - Graphics - Color LCD
+        - 8080 interface. CMD/CTRL
+        - 2 devs possible 12 bit RGB or 9bit 1 dev
+    - Monochrome Console LCD
+        - 1 dev for cmd & ctrl
+    - Keyboard
+        - 1 dev: 6 bit low or high char others zero
+        - parallel interface? look up early apple 1
+    - Hard Disk -- use EEPROM instead?
+    - External RAM
+        - 3 devs: 12 high addr, 12 low addr, 12 data
+        - 2 dev: bit fields mux select, value
+    - Network
+    - Bus extender / reducer for interfacing with
+        - 8 to 10 bit hardware: mode addr/data
+        - 1 bus addr -- rising edge triggered mode select bit, data apply bit.
+        - 2 bus addrs -- can preserve 12 bits
+
+### Main Board Peripheral Bus (8 Addresses)
+
+(Board Layout & Design is flexible here)
+
+[Design A - 8K RAM with ext 12 bit peripheral bus]
+0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
+1    RAM    4K RAM (R/W)
+2    RAM    4K RAM (R/W)
+3    EEPROM 512K (R/W) (Non-Volatile Storage)
+4    KEYB (Parallel Interface -- TBD)
+5    LCD (8080 + REGS/MODE -- TBD)
+6    BUS_EXT ADDR -- Combine with Data Bus
+         for 24-bit address
+7    BUS_EXT DATA
+
+[Design B - 16K RAM with ext 10 bit peripheral bus]
+0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
+1    RAM    4K RAM (R/W)
+2    RAM    4K RAM (R/W)
+3    RAM    4K RAM (R/W)
+4    RAM    4K RAM (R/W)
+5    KEYB (Parallel Interface -- TBD)
+6    LCD (8080 + REGS/MODE -- TBD)
+7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
+         writes:
+         11xxxxxxxxxx set addr mode, apply data(addr)
+         10xxxxxxxxxx set addr mode, do not apply data
+         01xxxxxxxxxx set data mode, apply data(data)
+         00xxxxxxxxxx set data mode, do not apply data
+
+### Instruction Design Notes
+
+// Synthesis of other instructions:
+GT and LT comparisons can be synthesized easily
+MUL and DIV can be sythesized.  will never be included.
+
+// Later Design changes:
+single cycle hardware register swap or
+ queue would be very useful for ptr/stack/data
+also: MUX reg on RAM PTR array.  only exposes
+one to the data bus.
+
+NOTE: ROM needs to be separate and socketable.
+An address bus driven by NIP and PTR is necessary,
+as well as a bypass on external DSEL.
+this would reduce the number of CPU pins by re-using
+the address lines for ROM and RAM.  Not shown above
+  are the control lines.
+FCH bypasses DSEL and asserts 0 on output pins
+ADDR output pins are normally driven by PTR[PSEL]
+but FCH instructuon overrides this with NIP
+NOTE: This also allows PTR access to ROM for reading
+fonts, bitmaps, strings, etc... 
+  by manually setting DSEL to 0,
+  set PTR[PSEL] to desired address and executing IOR.
+  This eliminates the need for LBL and frees up an
+    8-block of opcodes.
+
+NOTE: fetch opcode is avoided since this can be built
+directly into the main micro cycle => drive lines.
+I.E. For this "instruction" only, there nothing to
+"decode" per se, just do it!
+
+XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
+                        NIP++ driven by read
+
+N2S and S2N not really necessary as N2A,SKW and
+  SKR,A2N will suffice.. although need to load contant
+  into operand and premptively ADD to NIP.
+  Will require selecting stack ptr
+
+ASB swap ACC <=> BOP and save another opcode
+do the same with PTR[]?  ASP?
+
+// Instruction Trash Bin:
+NOTE: Other instructions to consider:
+MCS[CMP] = MCS[CAR] for testing carry in 2 instr vs 5
+MCS[CMP] = ~MCS[CMP] via JK toggle (reduce #opcodes)
+ZHI      ACC[HCHAR] = 0 (Debatable)
+// Alternate Comparator Design (Debatable)
+// More capable, More complex wiring
+NCB      MCS[CMP] = ~MCS[CMP] (JK Toggle)
+CCB      MCS[CMP] = MCS[CAR] (Loopback Set)
+// NIX..Shifted-out bits go to MCS[RES]
+NOTE: ROR or ROL twice will do a high/low char swap
+NIX: SWC      ACC[HCHAR] <=> ACC[LCHAR]
+
+
+### Old Stuff
 
 // Links for Reference:
 http://www.learnabout-electronics.org/Digital/images/register-SISO-PISO.gif

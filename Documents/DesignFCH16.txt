@@ -2,7 +2,10 @@
 // would need to enable loading next literal word
 // transport would be simplified with hw stacks
 // this is thinking ahead to 16-bit design
-
+// There will be no DSEL lines as everything will be memory mapped
+// via 16 bit address bus output.  registers will be 4-bit nibble-aligned.
+// 3 x 5-bit opcodes per word fetch
+ 
 00000  hlt
 00001  nop
 00010  skw
@@ -13,28 +16,28 @@
 00110  ez
 00111  inv
 
-01000  mtr
-01001  |
-01010  |
-01011  |
 
-01100  mfr
+01000  mtr    push
+01001  |      pop
+01010  |      over
+01011  |      dup
+
+01100  mfr    jmp
 01101  |
 01110  |
 01111  |
 
+// reclaim not and or via simplifying transport
 10000  add
 10001  sub
 10010  and
 10011  xor
 
-10100  slu  acc = (acc << 1) | 1
-10101  slz  acc <<= 1
-10110  
-10111  srz  acc >>= 1
+1010X  shl  acc <<= (X ? 4 : 1)
+1011X  shr  acc >>= (X ? 4 : 1)
 
-1100X  inc  0=acc,1=ptr
-1101X  dec  1=acc,1=ptr
+1100X  inc  0=acc,1=ptr ++
+1101X  dec  1=acc,1=ptr ++
 
 111XY  jcp  if mcs[cmp] nip += b0000XY10
 
