@@ -29,7 +29,7 @@ Machine & Bus Layout:
     =========|===== DATA BUS =========|=====|P|==... 
     =========|========================|=====|U|==... 
     ||       |                     || /     | |
-  [NIP]------+-------------------[PTR]      |S|
+  [NIP]------+-------------------[PTR][]    |S|
     ||                             ||       |O|
     ========================================|C|==... 
     =============== ADDR BUS ===============|K|==... 
@@ -40,16 +40,22 @@ Machine & Bus Layout:
 /////////////////////////////////////////////////////
 // Devices Attached to Internal Main Data Bus
 
-I    INS    INSTR WORD REG FOR DECODE (WO)
-A    ACC    ALU INPUT 1 : A (ACCUMULATOR) (R/W)
-B    BOP    ALU INPUT 2 : B (GP/DYADIC) (R/W)
-L    ALU    ALU OUTPUT (DIRECT TO BUS) (RO)
-C    MCS    MACHINE CTRL/STATUS: CARRY, CMP,
-              PSEL, DSEL (R/W)
-P    PTR    RAM ADDR REG (R/W) (SELECTABLE ARRAY,
-              AUTO INC/DEC on R/W)
-N    NIP    ROM ADDR REG (R/W) AKA NIP
-S    SKT    PERIPHERAL DEVICE I/O BUS (R/W)
+INS  (WO) Instruction word register for decode
+ACC  (RW) Accumulator: 1st ALU input and output
+BOP  (RW) Operand: 2nd ALU input for dyadic funcs. 
+ALU  (RO) ALU output to data bus
+MCS  (RW) Machine Control/Status: Carry [CAR],
+          Compare [CMP], Device (Peripheral) Select
+          [DSEL], Pointer (Address) Select [PSEL]
+PTR  (RW) Peripheral Address (ROM/RAM/EEPROM)
+          Selectable Register Bank.  Some are
+          auto incrementing or decrementing
+          on SKW/SKR according to table.
+NIP  (RW) Next Instruction Pointer (for ROM Only)
+SKT  (RW) CPU Socket: Bi-Directional Tristated
+          Peripheral Device I/O and other dedicated
+          interface pins.
+
               12 DATA PINS, 12 ADDR PINS
                 (Driven by PTR[PSEL] or NIP during FCH)
               3 DSEL PINS
