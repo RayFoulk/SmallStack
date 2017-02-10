@@ -3,7 +3,8 @@
 ### Overview
 
 - Harvard Architecture
-    - Single, Pluggable 4K ROM (Like an Early Game Console)
+    - Single, Pluggable 4K ROM
+        - Similar to early game consoles
     - One or More 4K RAM Modules
         - Segmented Addressing
         - Data Only, Non-Executable
@@ -211,11 +212,10 @@ Alternate Design:
 001  (d1) | N/A (RO)    | N/A (RO)    | Return Stack Size
 010  (d2) | PTR[PSEL]-- | PTR[PSEL]++ | Data Stack
 011  (d3) | N/A (RO)    | N/A (RO)    | Data Stack Size
-
-100  2  PTR[PSEL]++  N/A          Block Mem Store
-101  3  N/A          PTR[PSEL]++  Block Mem Load
-110  6  N/A          N/A
-111  7  N/A          N/A          (Could be NIP)
+100  (d2) | PTR[PSEL]++ | N/A         | Block Mem Store
+101  (d3) | N/A         | PTR[PSEL]++ | Block Mem Load
+110  (d6) | N/A         | N/A         | Loop Counter
+111  (d7) | N/A         | N/A         | (Could be NIP)
 
 General Purpose / Subroutine Argument Registers
 (Arguments can be pointer or literal value,
@@ -244,89 +244,82 @@ during socket read/write).
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0010XY | 010 to 013 | mtr | Move ACC To Register<br>
-00=BOP, 01=MCS, 10=PTR[PSEL], 11=NIP (Absolute Jump)
-0011XY | 014 to 017 | mfr | Move From Reg To ACC: 00=BOP, 01=MCS, 10=PTR[PSEL], 11=NIP (Get Instr Ptr)
+0010XY | 010 to 013 | mtr | Move ACC To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSEL], 11=NIP (Absolute Jump)
+0011XY | 014 to 017 | mfr | Move From Register To ACC<br> 00=BOP, 01=MCS,<br> 10=PTR[PSEL], 11=NIP (Get Instr Ptr)
 
-//----- 02 Group -----
-// Literal Octet Assignment to Accumulator
-// (Requires Argument: 1 through 7) 
-// Left-shifts by 3 bits and loads ACC Octet 0
-// ACC Octet 3 is discarded.  This is done by
-// bypassing Octet 3 before the BarrelShifter
-// and asserting the SH/RO line (Rotate Mode)
+##### Group 2: Literal Octet Assignment
+- Requires Argument: 1 through 7
+- Left-shifts by 3 bits and loads ACC Octet 0
+- ACC Octet 3 is discarded.
+    - This is done by bypassing Octet 3 before the BarrelShifter
+    - And asserting the SH/RO line (Rotate Mode)
 
-010XYZ  020-7  LOL      ACC Load Octet 0 with XYZ
-                        Rotate ACC Left 3
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+010XYZ | 020 to 027 | lol | ACC Load Octet 0 with XYZ and Rotate ACC Left 3
 
-//----- 03 Group -----
-// Arithmetic & Logic Operations
-// First two are diverted over to the BarrelShifter
-// to help with loading specific values into ACC
+##### Group 3: Arithmetic & Logic Operations + Rotate Octet
+- First two are diverted over to the BarrelShifter to help with loading specific values into ACC
 
-011000  030    ROR      ACC Rotate Octet Right (3 Bits)
-011001  031    ROL      ACC Rotate Octet Left (3 Bits)
-011010  032    ADD      ACC += BOP (Carry MCS[CAR])
-011011  033    SUB      ACC -= BOP (Borrow MCS[CAR])
-011100  034    AND      ACC &= BOP
-011101  035    OR       ACC |= BOP
-011110  036    XOR      ACC ^= BOP
-011111  037    NOT      ACC = ~ACC
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+011000 | 030 | ror | ACC Rotate Octet Right (3 Bits)
+011001 | 031 | rol | ACC Rotate Octet Left (3 Bits)
+011010 | 032 | add | ACC += BOP (Carry MCS[CAR])
+011011 | 033 | sub | ACC -= BOP (Borrow MCS[CAR])
+011100 | 034 | and | ACC &= BOP
+011101 | 035 | or  | ACC |= BOP
+011110 | 036 | xor | ACC ^= BOP
+011111 | 037 | not | ACC = ~ACC
 
-//----- 04 Group -----
-// Single Stage Barrel Shifter (Shift Mode)
-// (Requires Argument: 1, 3, 4, or 6)
+##### Group 4: Single Stage Barrel Shifter (Shift Mode)
+- Requires Argument: 1, 3, 4, or 6 (Legal number of bits)
 
-1000XY  040-3  SHL      ACC <<= N(XY)
-                        00=1,01=3,10=4,11=6
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+1000XY | 040 to 043 | shl | ACC <<= N(XY) where 00=1,01=3,10=4,11=6
+1001XY | 044 to 047 | shr | ACC >>= N(XY) where 00=1,01=3,10=4,11=6
 
-1001XY  044-7  SHR      ACC >>= N(XY)
-                        00=1,01=3,10=4,11=6
+##### Group 5: Incrementors and Decrementors
+- All are in-place up/down counter operations
+- Requires Argument: ACC, PTR, PSEL, DSEL
 
-//----- 05 Group -----
-// Incrementors / Decrementors
-// (All are in-place up/down counter ops)
-// (Requires Argument: ACC, PTR, PSEL, DSEL)
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+1010XY | 050 to 053 | inc | Increment Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
+1011XY | 054 to 057 | dec | Decrement Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
 
-1010XY  050-3  INC      Increment Register
-                        00=ACC,01=PTR[PSEL],
-                        10=PSEL,11=DSEL
+##### Group 6: Miscellaneous, BCD Helpers, Comparators
+- Reduce, eliminate, or move these to get to 5 bits
 
-1011XY  054-7  DEC      Decrement Register
-                        00=ACC,01=PTR[PSEL],
-                        10=PSEL,11=DSEL
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+110000 | 060 | *swo | ACC[OCT3] <=> ACC[OCT2]
+110001 | 061 | *bcd | ACC[4:11] = 0
+110010 | 062 | ---  | RESERVED
+110011 | 063 | ---  | RESERVED
+110100 | 064 | eq   | MCS[CMP] = (ACC == BOP)
+110101 | 065 | nz   | MCS[CMP] = (ACC != 0)
+110110 | 066 | inv  | MCS[CMP] = ~MCS[CMP] (JK Toggle)
+110111 | 067 | ---  | RESERVED
 
-//----- 06 Group -----
-// Miscellaneous, String, BCD Helpers
-110000  060  * SWO      ACC[OCT3] <=> ACC[OCT2]
-110001  061  * BCD      ACC[4:11] = 0
-110010  062    ---      RESERVED
-110011  063    ---      RESERVED
+##### Group 7: Conditional Relative Jumps
+- Requires Argument: 2, 6, 10, or 14
+- Bitwise composition of NIP offset
+    - Values generated are +/- 2, 6, 10, 14
+- These require a specific calling sequence
+    - Give an example in Assembly/loop.s
+    - Execute mfr nip, jcp
+    - ALU output written directly to NIP
+- May need to adjust bit composition of offset
+    - b0XY100 produces 4, 12, 20, 28
+    - bX0Y010 produces 2, 10, 34, 42
+    - b0X0Y10 produces 2, 6, 18, 22
 
-// Comparator Operations
-110100  064    EQ       MCS[CMP] = (ACC == BOP)
-110101  065    NZ       MCS[CMP] = (ACC != 0)
-110110  066    INV      MCS[CMP] = ~MCS[CMP] (JK Toggle)
-110111  067    ---      RESERVED
-
-//----- 07 Group -----
-// Conditional Relative Jumps
-// Bitwise NIP offset calc with generated values
-// of NIP += 2, 6, 10, 14. (or -2, -6, -10, -14)
-// These require that N2A be executed first to
-// pre-load NIP into ACC before JCP or JCN bypass
-// BOP and performing ALU ADD or SUB => NIP.
-// The formulation of the jump offset word
-// may need to be adjusted later.
-// b0XY100 produces 4, 12, 20, 28
-// bX0Y010 produces 2, 10, 34, 42
-// b0X0Y10 produces 2, 6, 18, 22
-// (Requires Argument: 2, 6, 10, or 14)
-
-1110XY  070-3  JCP      IF MCS[CMP] NIP += b00XY10
-
-1111XY  074-7  JCN      IF MCS[CMP] NIP -= b00XY10
-
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+1110XY | 070 to 073 | jcp | if MCS[CMP] then NIP += b00XY10
+1111XY | 074 to 077 | jcn | if MCS[CMP] then NIP -= b00XY10
 
 ### TODO: 
     
@@ -359,33 +352,24 @@ during socket read/write).
 
 ### Main Board Peripheral Bus (8 Addresses)
 
-(Board Layout & Design is flexible here)
+- Board Layout & Design is flexible here)
+- Last Device on bus could be memory map
+    - all remaining peripherals use full address and data bus
+    - large number of control registers possible!
+- Design Example
+    - 16K RAM with external 12 bit peripheral bus
 
-[Design A - 8K RAM with ext 12 bit peripheral bus]
-0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
-1    RAM    4K RAM (R/W)
-2    RAM    4K RAM (R/W)
-3    EEPROM 512K (R/W) (Non-Volatile Storage)
-4    KEYB (Parallel Interface -- TBD)
-5    LCD (8080 + REGS/MODE -- TBD)
-6    BUS_EXT ADDR -- Combine with Data Bus
-         for 24-bit address
-7    BUS_EXT DATA
-
-[Design B - 16K RAM with ext 10 bit peripheral bus]
-0    ROM    4K ROM (RO) (PLUGGABLE CARTRIDGE)
-1    RAM    4K RAM (R/W)
-2    RAM    4K RAM (R/W)
-3    RAM    4K RAM (R/W)
-4    RAM    4K RAM (R/W)
-5    KEYB (Parallel Interface -- TBD)
-6    LCD (8080 + REGS/MODE -- TBD)
-7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
-         writes:
-         11xxxxxxxxxx set addr mode, apply data(addr)
-         10xxxxxxxxxx set addr mode, do not apply data
-         01xxxxxxxxxx set data mode, apply data(data)
-         00xxxxxxxxxx set data mode, do not apply data
+| Device Address | Device Type | Description
+|---|---|--
+0 | ROM | 4K ROM (RO) Pluggable Cartridge
+1 | RAM | 4K RAM (RW)
+2 | RAM | 4K RAM (RW)
+3 | RAM | 4K RAM (RW)
+4 | RAM | 4K RAM (RW)
+5 | EEPROM | 512K (RW) Large(ish) Non Volatile Storage
+6 | KEYB | Parallel Interface TBD
+6 | LCD | 8080 Interface + address control regs & mode TBD
+7 | MEM MAP | Put other peripherals out here
 
 ### Instruction Design Notes
 
@@ -449,6 +433,16 @@ NIX: SWC      ACC[HCHAR] <=> ACC[LCHAR]
 
 // Links for Reference:
 http://www.learnabout-electronics.org/Digital/images/register-SISO-PISO.gif
+
+// Bus reduction using rising edge latches
+// not really necessary at all
+7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
+         writes:
+         11xxxxxxxxxx set addr mode, apply data(addr)
+         10xxxxxxxxxx set addr mode, do not apply data
+         01xxxxxxxxxx set data mode, apply data(data)
+         00xxxxxxxxxx set data mode, do not apply data
+
 
 // Old (Mostly Outdated) TODO Contents:
 - Create bi-directional bus tristate buffer component
