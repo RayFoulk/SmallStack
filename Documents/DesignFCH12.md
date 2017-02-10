@@ -107,22 +107,22 @@ and Address Bus on the other)
     --|___________|--
        | | | | | |
 
-### Inter-Device Transport Notes
+### Inter-Register Transport Notes
 
-ROM to INS is special case
-  (Read-Only from ROM to Write-Only for INS)
-ALU output is special case (Write-Only to Data Bus)
-Accumulator-centric transport instructions
-ACC is used for unary operations
-BOP is used with ACC for duadic operations
-BOP will have a bypass MUX at ALU for ops like
-    INC, DEC, JCP
+- ROM to INS: Read-Only from ROM to Write-Only for INS
+- ALU output: Write-Only to Data Bus)
+- Accumulator-centric transport instructions
+- ACC is used for unary operations
+- BOP is used with ACC for all dyadic operations
+- BOP will have a bypass MUX at ALU for ops like INC, DEC, JCP
 
-// Special Case Transport
+#### Special Case Transport
+
 INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
                 Read line overrides DSEL out to 0
                 also overrides ADDR_BUS with NIP out
                 NOTE: SKW with DSEL 0 is illegal
+
 ALU --> ACC     Driven by ALU opcodes,
                 Implied operands are ACC and BOP
 
@@ -134,7 +134,8 @@ ACC <-> SKT     RAM Read/Write or ROM Read, all
                 Internal R/W lines auto drive
                 INC/DEC of PTR[PSEL]
 
-// Normal Case Transport (Simple Internal Data R/W)
+#### Normal Case Transport (Simple Internal Data R/W)
+
 ACC <-> BOP     Swap would be nice in some cases,
 ACC <-> MCS     but these are all overwrite copy.
 ACC <-> PTR     Writing to MCS will clear/set carry
@@ -157,13 +158,8 @@ for some reserved bits include greater/less
 comparison and also signed versus unsigned
 operations.
 
-| Octet 3    | Octet 2   | Octet 1   | Octet 0   |
-|------------|-----------|-----------|-----------|
-
-| 11| 10| 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-|RES|RES|CMP|RES|RES|CAR|   DSEL    |   PSEL    |
-
+     11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
+    [RES RES CMP|RES RES CAR|   DSEL    |   PSEL   ]
 
 #### General / Accumulator Register Layout:
 
@@ -185,73 +181,72 @@ applicable).  When N/A the register value remains
 static unless purposefully assigned or driven by
 IPT/DPT operations.
 
-PSEL    SKW/N2S      SKR/S2N      Intended Usage
+First Design:
 
-000  0  PTR[PSEL]--  PTR[PSEL]++  Return Stack
-001  1  PTR[PSEL]--  PTR[PSEL]++  Data Stack
-010  2  PTR[PSEL]++  N/A          Block Mem Store
-011  3  N/A          PTR[PSEL]++  Block Mem Load
-100  4  N/A          N/A          \
-101  5  N/A          N/A          | General Purpose
-110  6  N/A          N/A          | Pointer Args
-111  7  N/A          N/A          / To Subroutines
+| PSEL    | On SKW      | On SKR      | Intended Usage
+|---------|-------------|-------------|---
+000  (d0) | PTR[PSEL]-- | PTR[PSEL]++ | Return Stack
+001  (d1) | PTR[PSEL]-- | PTR[PSEL]++ | Data Stack
+010  (d2) | PTR[PSEL]++ | N/A         | Block Mem Store
+011  (d3) | N/A         | PTR[PSEL]++ | Block Mem Load
+100  (d4) | N/A         | N/A         |
+101  (d5) | N/A         | N/A         | General Purpose
+110  (d6) | N/A         | N/A         | Pointer Args
+111  (d7) | N/A         | N/A         | To Subroutines
 
-// Consider storing or indicating stack sizes to
-// internal data bus.  As it is, the stack size would
-// have to be computed from knowing the start address
-// and subtracting the current pointer address.
-// This speaks to having proper hardware stacks in
-// future designs.  On that note here is an alternate
-// design.  Return and Data Stack pointers and size
-// (0) are initialized on RESET.
+Consider storing or indicating stack sizes to
+internal data bus.  As it is, the stack size would
+have to be computed from knowing the start address
+and subtracting the current pointer address.
+This speaks to having proper hardware stacks in
+future designs.  On that note here is an alternate
+design.  Return and Data Stack pointers and size
+(0) are initialized on RESET.
 
-// Stack Pointers and Sizes
-000  0  PTR[PSEL]--  PTR[PSEL]++  Return Stack
-001  1  ((Read Only Register))    Return Stack Size
-010  2  PTR[PSEL]--  PTR[PSEL]++  Data Stack
-011  3  ((Read Only Register))    Data Stack Size
+Alternate Design:
 
-// General Purpose / Subroutine Argument Registers
-// (Arguments can be pointer or literal value,
-// address bus output at socket is only enabled
-// during socket read/write).
+| PSEL    | On SKW      | On SKR      | Intended Usage
+|---------|-------------|-------------|---
+000  (d0) | PTR[PSEL]-- | PTR[PSEL]++ | Return Stack
+001  (d1) | N/A (RO)    | N/A (RO)    | Return Stack Size
+010  (d2) | PTR[PSEL]-- | PTR[PSEL]++ | Data Stack
+011  (d3) | N/A (RO)    | N/A (RO)    | Data Stack Size
+
 100  2  PTR[PSEL]++  N/A          Block Mem Store
 101  3  N/A          PTR[PSEL]++  Block Mem Load
 110  6  N/A          N/A
 111  7  N/A          N/A          (Could be NIP)
 
-/////////////////////////////////////////////////////
-// Opcode Table
+General Purpose / Subroutine Argument Registers
+(Arguments can be pointer or literal value,
+address bus output at socket is only enabled
+during socket read/write).
 
-<Bin>   <Oct>  <Mnem.>  <Descr.>
+### Opcode Table
 
-//----- 00 Group -----
-// Essentials / Reserved Block / Special Transport
+##### Group 0: Essentials, Special Transport
 
-000000  000    HLT      Halt Execution
-000001  001    RST      Reset CPU
-000010  002    NOP      No Operation
-000011  003    ---      RESERVED
-000100  004    ---      RESERVED
-000101  005    ---      RESERVED
-000110  006    ---      RESERVED
-000101  007    SKW      SKT = ACC, AUTO INC/DEC PTR[]
-000111  003    SKR      ACC = SKT, AUTO INC/DEC PTR[]
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+000000 | 000 | hlt | Halt Execution
+000001 | 001 | rst | Reset CPU
+000010 | 002 | nop | No Operation
+000011 | 003 | --- | RESERVED
+000100 | 004 | --- | RESERVED
+000101 | 005 | --- | RESERVED
+000110 | 006 | --- | RESERVED
+000101 | 007 | skw | SKT = ACC, AUTO INC/DEC PTR[]
+000111 | 003 | skr | ACC = SKT, AUTO INC/DEC PTR[]
 
-//----- 01 Group -----
-// Normal Transport Operations (Move)
-// ACC Implied: 1 bit to/from, 2 bits src/dst
-// Requires Argument: BOP, MCS, PTR, NIP 
+##### Group 1: Normal Transport Operations (Move)
+- ACC Implied: 1 bit to/from, 2 bits src/dst
+- Requires Argument: BOP, MCS, PTR, NIP 
 
-0010XY  010-3  MTR      Move Accumulator To Register
-                        00=BOP, 01=MCS,
-                        10=PTR[PSEL], 11=NIP
-                        (Absolute Jump)
-
-0011XY  014-7  MFR      Move From Register To Accumulator
-                        00=BOP, 01=MCS,
-                        10=PTR[PSEL], 11=NIP
-                        (Get Instr Ptr)
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+0010XY | 010 to 013 | mtr | Move ACC To Register<br>
+00=BOP, 01=MCS, 10=PTR[PSEL], 11=NIP (Absolute Jump)
+0011XY | 014 to 017 | mfr | Move From Reg To ACC: 00=BOP, 01=MCS, 10=PTR[PSEL], 11=NIP (Get Instr Ptr)
 
 //----- 02 Group -----
 // Literal Octet Assignment to Accumulator

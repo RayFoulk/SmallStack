@@ -40,10 +40,10 @@
 	<pin x="65" y="10" length="10" direction="right" id="29" flow="in" symlabel="clock" required="true"/>
 	<pin x="65" y="0" length="10" direction="right" id="30" flow="in" label="PS--" required="true"/>
 	<pin x="65" y="-10" length="10" direction="right" id="31" flow="in" label="PS++" required="true"/>
-	<pin x="-65" y="30" length="10" direction="left" id="32" flow="in" label="WCM" required="true"/>
-	<pin x="-65" y="20" length="10" direction="left" id="33" flow="in" label="CMP" required="true"/>
-	<pin x="-65" y="0" length="10" direction="left" id="34" flow="in" label="WCR" required="true"/>
-	<pin x="-65" y="-10" length="10" direction="left" id="35" flow="in" label="CAR" required="true"/>
+	<pin x="-65" y="20" length="10" direction="left" id="32" flow="in" label="CMPi" required="true"/>
+	<pin x="-65" y="30" length="10" direction="left" id="33" flow="in" label="WCM" required="true"/>
+	<pin x="-65" y="-10" length="10" direction="left" id="34" flow="in" label="CARi" required="true"/>
+	<pin x="-65" y="0" length="10" direction="left" id="35" flow="in" label="WCA" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="155" y="100"/>
@@ -529,7 +529,7 @@
 			<point x="-105" y="-145"/>
 			<point x="-420" y="-145"/>
 		</path>
-		<tag type="interface" xwire="-420" ywire="-145" xtag="-430" ytag="-145" flow="in" pinid="26" text="INV_CMP"/>
+		<tag type="interface" xwire="-420" ywire="-145" xtag="-430" ytag="-145" flow="in" pinid="26" text="INV"/>
 	</wire>
 	<wire id="43">
 		<path>
@@ -640,6 +640,38 @@
 			<point x="-45" y="15"/>
 			<point x="-45" y="5"/>
 		</path>
+	</wire>
+	<wire id="59">
+		<path>
+			<point x="-115" y="5"/>
+			<point x="-115" y="140"/>
+			<point x="-420" y="140"/>
+		</path>
+		<tag type="interface" xwire="-420" ywire="140" xtag="-430" ytag="140" flow="in" pinid="32" text="CMPi"/>
+	</wire>
+	<wire id="60">
+		<path>
+			<point x="-105" y="5"/>
+			<point x="-105" y="170"/>
+			<point x="-420" y="170"/>
+		</path>
+		<tag type="interface" xwire="-420" ywire="170" xtag="-430" ytag="170" flow="in" pinid="33" text="WCM"/>
+	</wire>
+	<wire id="61">
+		<path>
+			<point x="-25" y="5"/>
+			<point x="-25" y="170"/>
+			<point x="300" y="170"/>
+		</path>
+		<tag type="interface" xwire="300" ywire="170" xtag="310" ytag="170" flow="in" pinid="34" text="CARi"/>
+	</wire>
+	<wire id="62">
+		<path>
+			<point x="-15" y="5"/>
+			<point x="-15" y="140"/>
+			<point x="300" y="140"/>
+		</path>
+		<tag type="interface" xwire="300" ywire="140" xtag="310" ytag="140" flow="in" pinid="35" text="WCA"/>
 	</wire>
 	<component id="0" def="BusInterfaceWord" x="80" y="100" direction="left" flip="false">
 		<connection pinid="0" wireid="14" invert="false"/>
@@ -763,10 +795,10 @@
 		<connection flow="out" pinid="3" wireid="45" invert="false"/>
 		<connection flow="out" pinid="4" wireid="44" invert="false"/>
 		<connection flow="out" pinid="5" wireid="43" invert="false"/>
-		<connection flow="in" pinid="6" wireid="null" invert="false"/>
+		<connection flow="in" pinid="6" wireid="59" invert="false"/>
 		<connection flow="in" pinid="7" wireid="47" invert="false"/>
 		<connection flow="out" pinid="8" wireid="46" invert="false"/>
-		<connection flow="in" pinid="9" wireid="null" invert="false"/>
+		<connection flow="in" pinid="9" wireid="60" invert="false"/>
 	</component>
 	<component id="8" def="SetFlagOrPassThroughOctet" x="-40" y="-25" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="58" invert="false"/>
@@ -775,9 +807,9 @@
 		<connection flow="out" pinid="3" wireid="50" invert="false"/>
 		<connection flow="out" pinid="4" wireid="49" invert="false"/>
 		<connection flow="out" pinid="5" wireid="48" invert="false"/>
-		<connection flow="in" pinid="6" wireid="null" invert="false"/>
+		<connection flow="in" pinid="6" wireid="61" invert="false"/>
 		<connection flow="in" pinid="7" wireid="52" invert="false"/>
 		<connection flow="out" pinid="8" wireid="51" invert="false"/>
-		<connection flow="in" pinid="9" wireid="null" invert="false"/>
+		<connection flow="in" pinid="9" wireid="62" invert="false"/>
 	</component>
 </custom_component>

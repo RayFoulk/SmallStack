@@ -710,7 +710,22 @@
 	<component id="30" def="Toggle" x="205" y="-115" direction="left" flip="false">
 		<connection flow="out" pinid="0" wireid="43" invert="false"/>
 	</component>
-	<component id="31" def="RegisterControlAndStatus" x="0" y="55" direction="right" flip="false">
+	<component id="31" def="Toggle" x="-105" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="59" invert="false"/>
+	</component>
+	<component id="32" def="Toggle" x="-140" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="60" invert="false"/>
+	</component>
+	<component id="33" def="Toggle" x="-175" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="61" invert="false"/>
+	</component>
+	<component id="34" def="Toggle" x="-210" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="58" invert="false"/>
+	</component>
+	<component id="35" def="Toggle" x="-245" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="57" invert="false"/>
+	</component>
+	<component id="36" def="RegisterControlAndStatus" x="0" y="55" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="2" invert="false"/>
 		<connection flow="in" pinid="1" wireid="3" invert="false"/>
 		<connection flow="in" pinid="2" wireid="4" invert="false"/>
@@ -743,24 +758,9 @@
 		<connection flow="in" pinid="29" wireid="1" invert="false"/>
 		<connection flow="in" pinid="30" wireid="40" invert="false"/>
 		<connection flow="in" pinid="31" wireid="41" invert="false"/>
-		<connection flow="in" pinid="32" wireid="59" invert="false"/>
-		<connection flow="in" pinid="33" wireid="60" invert="false"/>
-		<connection flow="in" pinid="34" wireid="58" invert="false"/>
-		<connection flow="in" pinid="35" wireid="57" invert="false"/>
-	</component>
-	<component id="32" def="Toggle" x="-105" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="59" invert="false"/>
-	</component>
-	<component id="33" def="Toggle" x="-140" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="60" invert="false"/>
-	</component>
-	<component id="34" def="Toggle" x="-175" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="61" invert="false"/>
-	</component>
-	<component id="35" def="Toggle" x="-210" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="58" invert="false"/>
-	</component>
-	<component id="36" def="Toggle" x="-245" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="57" invert="false"/>
+		<connection flow="in" pinid="32" wireid="60" invert="false"/>
+		<connection flow="in" pinid="33" wireid="59" invert="false"/>
+		<connection flow="in" pinid="34" wireid="57" invert="false"/>
+		<connection flow="in" pinid="35" wireid="58" invert="false"/>
 	</component>
 </custom_component>
