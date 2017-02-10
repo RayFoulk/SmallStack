@@ -119,21 +119,21 @@ and Address Bus on the other)
 
 #### Special Case Transport
 
-INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
-                Read line overrides DSEL out to 0
-                also overrides ADDR_BUS with NIP out
-                NOTE: SKW with DSEL 0 is illegal
+    INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
+                    Read line overrides DSEL out to 0
+                    also overrides ADDR_BUS with NIP out
+                    NOTE: SKW with DSEL 0 is illegal
 
-ALU --> ACC     Driven by ALU opcodes,
-                Implied operands are ACC and BOP
+    ALU --> ACC     Driven by ALU opcodes,
+                    Implied operands are ACC and BOP
 
-ALU --> NIP     Cond. Relative Jump instruction JCP,
-                Overrides BOP before ALU
+    ALU --> NIP     Cond. Relative Jump instruction JCP,
+                    Overrides BOP before ALU
 
-ACC <-> SKT     RAM Read/Write or ROM Read, all
-                expect manually driving DSEL
-                Internal R/W lines auto drive
-                INC/DEC of PTR[PSEL]
+    ACC <-> SKT     RAM Read/Write or ROM Read, all
+                    expect manually driving DSEL
+                    Internal R/W lines auto drive
+                    INC/DEC of PTR[PSEL]
 
 #### Normal Case Transport (Simple Internal Data R/W)
 
@@ -234,9 +234,8 @@ during socket read/write).
 000011 | 003 | --- | RESERVED
 000100 | 004 | --- | RESERVED
 000101 | 005 | --- | RESERVED
-000110 | 006 | --- | RESERVED
-000101 | 007 | skw | SKT = ACC, AUTO INC/DEC PTR[]
-000111 | 003 | skr | ACC = SKT, AUTO INC/DEC PTR[]
+000110 | 006 | skw | SKT = ACC, AUTO INC/DEC PTR[]
+000111 | 007 | skr | ACC = SKT, AUTO INC/DEC PTR[]
 
 ##### Group 1: Normal Transport Operations (Move)
 - ACC Implied: 1 bit to/from, 2 bits src/dst
@@ -294,14 +293,14 @@ during socket read/write).
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-110000 | 060 | *swo | ACC[OCT3] <=> ACC[OCT2]
-110001 | 061 | *bcd | ACC[4:11] = 0
-110010 | 062 | ---  | RESERVED
-110011 | 063 | ---  | RESERVED
-110100 | 064 | eq   | MCS[CMP] = (ACC == BOP)
-110101 | 065 | nz   | MCS[CMP] = (ACC != 0)
-110110 | 066 | inv  | MCS[CMP] = ~MCS[CMP] (JK Toggle)
-110111 | 067 | ---  | RESERVED
+110000 | 060 | swo | ACC[OCT3] <=> ACC[OCT2]
+110001 | 061 | bcd | ACC[4:11] = 0
+110010 | 062 | --- | RESERVED
+110011 | 063 | --- | RESERVED
+110100 | 064 | eq  | MCS[CMP] = (ACC == BOP)
+110101 | 065 | nz  | MCS[CMP] = (ACC != 0)
+110110 | 066 | inv | MCS[CMP] = ~MCS[CMP] (JK Toggle)
+110111 | 067 | --- | RESERVED
 
 ##### Group 7: Conditional Relative Jumps
 - Requires Argument: 2, 6, 10, or 14
