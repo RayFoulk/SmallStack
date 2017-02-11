@@ -5,6 +5,10 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 - To have fun & learn about alternative CPU architectures.
 - To create my own hobbyist CPU from scratch.
 
+### What Is This?
+- This is a Register-Transfer Level (RTL) simulation of my CPU written using SmartSim, Ashley Newson's wonderful project.
+- To run it you will need to install or build SmartSim first, and then open FCH12.ssp
+
 ### Design Goals:
 - Simple, Small, Minimalistic Design (Minimal Instruction Set Computer)
 - Early designs will NOT have hardware stacks but will use RAM
