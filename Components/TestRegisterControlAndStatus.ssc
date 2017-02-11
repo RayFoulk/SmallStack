@@ -463,26 +463,13 @@
 	</wire>
 	<wire id="52">
 		<path>
-			<point x="-15" y="-5"/>
-			<point x="-15" y="-70"/>
-			<point x="-55" y="-70"/>
-			<point x="-55" y="-125"/>
-		</path>
-		<path>
-			<point x="-15" y="5"/>
-			<point x="-15" y="-10"/>
-		</path>
-		<marker x="-15" y="-10"/>
-	</wire>
-	<wire id="53">
-		<path>
 			<point x="-25" y="5"/>
 			<point x="-25" y="-60"/>
 			<point x="-65" y="-60"/>
 			<point x="-65" y="-125"/>
 		</path>
 	</wire>
-	<wire id="54">
+	<wire id="53">
 		<path>
 			<point x="-35" y="5"/>
 			<point x="-35" y="-50"/>
@@ -490,7 +477,7 @@
 			<point x="-95" y="-125"/>
 		</path>
 	</wire>
-	<wire id="55">
+	<wire id="54">
 		<path>
 			<point x="-45" y="5"/>
 			<point x="-45" y="-40"/>
@@ -498,7 +485,7 @@
 			<point x="-105" y="-125"/>
 		</path>
 	</wire>
-	<wire id="56">
+	<wire id="55">
 		<path>
 			<point x="-55" y="5"/>
 			<point x="-55" y="-30"/>
@@ -506,35 +493,43 @@
 			<point x="-115" y="-125"/>
 		</path>
 	</wire>
-	<wire id="57">
+	<wire id="56">
 		<path>
 			<point x="-75" y="45"/>
 			<point x="-245" y="240"/>
 		</path>
 	</wire>
-	<wire id="58">
+	<wire id="57">
 		<path>
 			<point x="-210" y="240"/>
 			<point x="-75" y="55"/>
 		</path>
 	</wire>
-	<wire id="59">
+	<wire id="58">
 		<path>
 			<point x="-75" y="85"/>
 			<point x="-75" y="240"/>
 			<point x="-105" y="240"/>
 		</path>
 	</wire>
-	<wire id="60">
+	<wire id="59">
 		<path>
 			<point x="-140" y="240"/>
 			<point x="-75" y="75"/>
 		</path>
 	</wire>
-	<wire id="61">
+	<wire id="60">
 		<path>
 			<point x="-75" y="65"/>
 			<point x="-175" y="240"/>
+		</path>
+	</wire>
+	<wire id="61">
+		<path>
+			<point x="-15" y="5"/>
+			<point x="-15" y="-70"/>
+			<point x="-55" y="-70"/>
+			<point x="-55" y="-125"/>
 		</path>
 	</wire>
 	<component id="0" def="Basic Seven Segment Display" x="40" y="-170" direction="right" flip="false" type="Hexadecimal">
@@ -553,15 +548,15 @@
 	</component>
 	<component id="2" def="Basic Seven Segment Display" x="-60" y="-170" direction="right" flip="false" type="Hexadecimal">
 		<connection flow="in" pinid="0" wireid="51" invert="false"/>
-		<connection flow="in" pinid="1" wireid="52" invert="false"/>
-		<connection flow="in" pinid="2" wireid="53" invert="false"/>
+		<connection flow="in" pinid="1" wireid="61" invert="false"/>
+		<connection flow="in" pinid="2" wireid="52" invert="false"/>
 		<connection flow="in" pinid="3" wireid="0" invert="false"/>
 		<connection flow="in" pinid="4" wireid="null" invert="false"/>
 	</component>
 	<component id="3" def="Basic Seven Segment Display" x="-110" y="-170" direction="right" flip="false" type="Hexadecimal">
-		<connection flow="in" pinid="0" wireid="54" invert="false"/>
-		<connection flow="in" pinid="1" wireid="55" invert="false"/>
-		<connection flow="in" pinid="2" wireid="56" invert="false"/>
+		<connection flow="in" pinid="0" wireid="53" invert="false"/>
+		<connection flow="in" pinid="1" wireid="54" invert="false"/>
+		<connection flow="in" pinid="2" wireid="55" invert="false"/>
 		<connection flow="in" pinid="3" wireid="0" invert="false"/>
 		<connection flow="in" pinid="4" wireid="null" invert="false"/>
 	</component>
@@ -711,19 +706,19 @@
 		<connection flow="out" pinid="0" wireid="43" invert="false"/>
 	</component>
 	<component id="31" def="Toggle" x="-105" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="59" invert="false"/>
-	</component>
-	<component id="32" def="Toggle" x="-140" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="60" invert="false"/>
-	</component>
-	<component id="33" def="Toggle" x="-175" y="270" direction="up" flip="false">
-		<connection flow="out" pinid="0" wireid="61" invert="false"/>
-	</component>
-	<component id="34" def="Toggle" x="-210" y="270" direction="up" flip="false">
 		<connection flow="out" pinid="0" wireid="58" invert="false"/>
 	</component>
-	<component id="35" def="Toggle" x="-245" y="270" direction="up" flip="false">
+	<component id="32" def="Toggle" x="-140" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="59" invert="false"/>
+	</component>
+	<component id="33" def="Toggle" x="-175" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="60" invert="false"/>
+	</component>
+	<component id="34" def="Toggle" x="-210" y="270" direction="up" flip="false">
 		<connection flow="out" pinid="0" wireid="57" invert="false"/>
+	</component>
+	<component id="35" def="Toggle" x="-245" y="270" direction="up" flip="false">
+		<connection flow="out" pinid="0" wireid="56" invert="false"/>
 	</component>
 	<component id="36" def="RegisterControlAndStatus" x="0" y="55" direction="right" flip="false">
 		<connection flow="in" pinid="0" wireid="2" invert="false"/>
@@ -745,22 +740,22 @@
 		<connection flow="out" pinid="16" wireid="49" invert="false"/>
 		<connection flow="out" pinid="17" wireid="50" invert="false"/>
 		<connection flow="out" pinid="18" wireid="51" invert="false"/>
-		<connection flow="out" pinid="19" wireid="52" invert="false"/>
-		<connection flow="out" pinid="20" wireid="53" invert="false"/>
-		<connection flow="out" pinid="21" wireid="54" invert="false"/>
-		<connection flow="out" pinid="22" wireid="55" invert="false"/>
-		<connection flow="out" pinid="23" wireid="56" invert="false"/>
+		<connection flow="out" pinid="19" wireid="61" invert="false"/>
+		<connection flow="out" pinid="20" wireid="52" invert="false"/>
+		<connection flow="out" pinid="21" wireid="53" invert="false"/>
+		<connection flow="out" pinid="22" wireid="54" invert="false"/>
+		<connection flow="out" pinid="23" wireid="55" invert="false"/>
 		<connection flow="in" pinid="24" wireid="44" invert="false"/>
 		<connection flow="in" pinid="25" wireid="39" invert="false"/>
-		<connection flow="in" pinid="26" wireid="61" invert="false"/>
+		<connection flow="in" pinid="26" wireid="60" invert="false"/>
 		<connection flow="in" pinid="27" wireid="42" invert="false"/>
 		<connection flow="in" pinid="28" wireid="43" invert="false"/>
 		<connection flow="in" pinid="29" wireid="1" invert="false"/>
 		<connection flow="in" pinid="30" wireid="40" invert="false"/>
 		<connection flow="in" pinid="31" wireid="41" invert="false"/>
-		<connection flow="in" pinid="32" wireid="60" invert="false"/>
-		<connection flow="in" pinid="33" wireid="59" invert="false"/>
-		<connection flow="in" pinid="34" wireid="57" invert="false"/>
-		<connection flow="in" pinid="35" wireid="58" invert="false"/>
+		<connection flow="in" pinid="32" wireid="59" invert="false"/>
+		<connection flow="in" pinid="33" wireid="58" invert="false"/>
+		<connection flow="in" pinid="34" wireid="56" invert="false"/>
+		<connection flow="in" pinid="35" wireid="57" invert="false"/>
 	</component>
 </custom_component>

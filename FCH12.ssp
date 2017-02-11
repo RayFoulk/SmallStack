@@ -31,8 +31,10 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestMemory.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestInvertOctet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterControlAndStatus.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointer.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestBarrelShifter.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestFetchCycle.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterAccumulator.ssc</component>
 	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterControlAndStatus.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerStackPair.ssc</component>
 </project>
