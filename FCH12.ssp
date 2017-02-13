@@ -18,7 +18,7 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/ShiftRegisterBit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/FCH12_MainBoard.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/SetFlagOrPassThroughOctet.ssc</component>
-	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestMultiplexer.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestMultiplexer.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterOctet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestReverseBits.ssc</component>
@@ -38,4 +38,5 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterAccumulator.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterControlAndStatus.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerStackPair.ssc</component>
+	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestStackPointer.ssc</component>
 </project>
