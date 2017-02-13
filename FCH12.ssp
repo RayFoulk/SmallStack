@@ -11,13 +11,14 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/ReverseBitsWord.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/FCH12_CPU.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer2to1Octet.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/LogicXorWord.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterBit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer2to1Word.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/ShiftRegisterBit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/FCH12_MainBoard.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestMultiplexer.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/SetFlagOrPassThroughOctet.ssc</component>
+	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestMultiplexer.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterChar.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterOctet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestReverseBits.ssc</component>
@@ -35,6 +36,6 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestBarrelShifter.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestFetchCycle.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterAccumulator.ssc</component>
-	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterControlAndStatus.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterControlAndStatus.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerStackPair.ssc</component>
 </project>
