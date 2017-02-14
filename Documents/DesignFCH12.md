@@ -361,14 +361,13 @@ during socket read/write).
 | Device Address | Device Type | Description
 |---|---|--
 0 | ROM | 4K ROM (RO) Pluggable Cartridge
-1 | RAM | 4K RAM (RW)
+1 | RAM | 4K RAM (RW) Stacks in Upper 1K
 2 | RAM | 4K RAM (RW)
 3 | RAM | 4K RAM (RW)
-4 | EEPROM | ?K (RW) Large(ish) Non Volatile Storage
-5 | KEYB | Parallel Interface TBD
-6 | CONS | Simple Text Console TBD
+4 | RAM | 4K RAM (RW)
+5 | EEPROM | ?K (RW) Large(ish) Non Volatile Storage
+6 | TERMINAL | Parallel Input Keyboard, Simple Text Console TBD
 7 | MEM MAP | Put other peripherals out here
-
 
 ### Memory Model
 
