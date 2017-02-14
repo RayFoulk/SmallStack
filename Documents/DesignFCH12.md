@@ -332,7 +332,7 @@ during socket read/write).
 - Design peripheral interfaces
     - ROM expected at peripheral address 0
     - Graphics - Color LCD
-        - 8080 interface. CMD/CTRL
+        - 8080 interface. memory mapped CMD/CTRL regs
         - 2 devs possible 12 bit RGB or 9bit 1 dev
     - Monochrome Console LCD
         - 1 dev for cmd & ctrl
@@ -364,11 +364,18 @@ during socket read/write).
 1 | RAM | 4K RAM (RW)
 2 | RAM | 4K RAM (RW)
 3 | RAM | 4K RAM (RW)
-4 | RAM | 4K RAM (RW)
-5 | EEPROM | 512K (RW) Large(ish) Non Volatile Storage
-6 | KEYB | Parallel Interface TBD
-6 | LCD | 8080 Interface + address control regs & mode TBD
+4 | EEPROM | ?K (RW) Large(ish) Non Volatile Storage
+5 | KEYB | Parallel Interface TBD
+6 | CONS | Simple Text Console TBD
 7 | MEM MAP | Put other peripherals out here
+
+
+### Memory Model
+
+- RAM Bank at Device Address 1
+Return Stack512 Entries 0 to 511 7000 to 7777
+Data Stack 512 0 to 511    6000 to 6777
+Heap  3072  0 to 3071  
 
 ### Instruction Design Notes
 
