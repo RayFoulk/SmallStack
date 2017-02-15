@@ -358,23 +358,25 @@ during socket read/write).
 - Design Example
     - 16K RAM with external 12 bit peripheral bus
 
-| Device Address | Device Type | Description
-|---|---|--
+| Device Address | Device Type | Description 
+|----------------|-------------|---
 0 | ROM | 4K ROM (RO) Pluggable Cartridge
 1 | RAM | 4K RAM (RW) Stacks in Upper 1K
 2 | RAM | 4K RAM (RW)
 3 | RAM | 4K RAM (RW)
 4 | RAM | 4K RAM (RW)
-5 | EEPROM | ?K (RW) Large(ish) Non Volatile Storage
+5 | EEPROM | ???K (RW) Large(ish) Non Volatile Storage
 6 | TERMINAL | Parallel Input Keyboard, Simple Text Console TBD
 7 | MEM MAP | Put other peripherals out here
 
 ### Memory Model
 
-- RAM Bank at Device Address 1
-Return Stack512 Entries 0 to 511 7000 to 7777
-Data Stack 512 0 to 511    6000 to 6777
-Heap  3072  0 to 3071  
+| RAM Module | Designation | Entries | Address Range (Octal)
+|---|---|---|---
+1 | Return Stack | 0 to 512 | 7000 to 7777
+1 | Data Stack | 0 to 512 | 6000 to 6777
+1 | Heap / Decompressed App Data (Strings, Bitmaps) | 3072 | 0 to 5777
+2 | Heap / Scratch Pad | 4096 | 0 to 7777
 
 ### Instruction Design Notes
 
