@@ -372,7 +372,7 @@ during socket read/write).
 | Device Address | Device Type | Description 
 |----------------|-------------|---
 0 | ROM | 4K ROM (RO) Pluggable Cartridge
-1 | RAM | 4K RAM (RW) Stacks in Upper 1K, Decompressed Data
+1 | RAM | [4K RAM](http://www.idt.com/document/70v35342524-data-sheet) (RW) Stacks in Upper 1K, Decompressed Data
 2 | RAM | 4K RAM (RW) High Memory (Heap)
 3 | N/A | Empty Slot (Could be 4K RAM module)
 4 | N/A | Empty Slot (Could be 4K RAM module)
