@@ -298,8 +298,8 @@ during socket read/write).
 110010 | 062 | --- | RESERVED
 110011 | 063 | --- | RESERVED
 110100 | 064 | eq  | MCS[CMP] = (ACC == BOP)
-110101 | 065 | nz  | MCS[CMP] = (ACC != 0)
-110110 | 066 | inv | MCS[CMP] = \~MCS[CMP] (JK Toggle)
+110101 | 065 | eqz | MCS[CMP] = (ACC == 0)
+110110 | 066 | inv | MCS[CMP] = ~MCS\[CMP\] (JK Toggle)
 110111 | 067 | --- | RESERVED
 
 ##### Group 7: Conditional Relative Jumps
