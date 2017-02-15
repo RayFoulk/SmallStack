@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>LogicXorOctet</name>
+	<description></description>
+	<label>XOR</label>
+	<bound right="40" down="20" left="-40" up="-20"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<pin x="-10" y="20" length="10" direction="down" id="0" flow="in" required="true"/>
+	<pin x="-20" y="20" length="10" direction="down" id="1" flow="in" required="true"/>
+	<pin x="-30" y="20" length="10" direction="down" id="2" flow="in" required="true"/>
+	<pin x="30" y="20" length="10" direction="down" id="3" required="true"/>
+	<pin x="20" y="20" length="10" direction="down" id="4" required="true"/>
+	<pin x="10" y="20" length="10" direction="down" id="5" required="true"/>
+	<pin x="10" y="-20" length="10" direction="up" id="6" required="true"/>
+	<pin x="0" y="-20" length="10" direction="up" id="7" required="true"/>
+	<pin x="-10" y="-20" length="10" direction="up" id="8" required="true"/>
+	<wire id="0">
+		<path>
+			<point x="0" y="-40"/>
+			<point x="0" y="-95"/>
+		</path>
+		<tag type="interface" xwire="0" ywire="-95" xtag="0" ytag="-105" flow="out" pinid="7" text="X1"/>
+	</wire>
+	<wire id="1">
+		<path>
+			<point x="-60" y="-40"/>
+			<point x="-60" y="-95"/>
+		</path>
+		<tag type="interface" xwire="-60" ywire="-95" xtag="-60" ytag="-105" flow="out" pinid="8" text="X2"/>
+	</wire>
+	<wire id="2">
+		<path>
+			<point x="60" y="-40"/>
+			<point x="60" y="-95"/>
+		</path>
+		<tag type="interface" xwire="60" ywire="-95" xtag="60" ytag="-105" flow="out" pinid="6" text="X0"/>
+	</wire>
+	<wire id="3">
+		<path>
+			<point x="-10" y="30"/>
+			<point x="-10" y="60"/>
+		</path>
+		<tag type="interface" xwire="-10" ywire="60" xtag="-10" ytag="70" flow="in" pinid="1" text="A1"/>
+	</wire>
+	<wire id="4">
+		<path>
+			<point x="10" y="30"/>
+			<point x="10" y="125"/>
+		</path>
+		<tag type="interface" xwire="10" ywire="125" xtag="10" ytag="135" flow="in" pinid="4" text="B1"/>
+	</wire>
+	<wire id="5">
+		<path>
+			<point x="50" y="30"/>
+			<point x="50" y="60"/>
+		</path>
+		<tag type="interface" xwire="50" ywire="60" xtag="50" ytag="70" flow="in" pinid="0" text="A0"/>
+	</wire>
+	<wire id="6">
+		<path>
+			<point x="70" y="30"/>
+			<point x="70" y="125"/>
+		</path>
+		<tag type="interface" xwire="70" ywire="125" xtag="70" ytag="135" flow="in" pinid="3" text="B0"/>
+	</wire>
+	<wire id="7">
+		<path>
+			<point x="-50" y="30"/>
+			<point x="-50" y="125"/>
+		</path>
+		<tag type="interface" xwire="-50" ywire="125" xtag="-50" ytag="135" flow="in" pinid="5" text="B2"/>
+	</wire>
+	<wire id="8">
+		<path>
+			<point x="-70" y="30"/>
+			<point x="-70" y="60"/>
+		</path>
+		<tag type="interface" xwire="-70" ywire="60" xtag="-70" ytag="70" flow="in" pinid="2" text="A2"/>
+	</wire>
+	<component id="0" def="Xor" x="-60" y="-5" direction="up" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="8" invert="false"/>
+			<subpin wireid="7" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="1" invert="false"/>
+	</component>
+	<component id="1" def="Xor" x="0" y="-5" direction="up" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="3" invert="false"/>
+			<subpin wireid="4" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="0" invert="false"/>
+	</component>
+	<component id="2" def="Xor" x="60" y="-5" direction="up" flip="false">
+		<connection flow="in" pinid="0">
+			<subpin wireid="5" invert="false"/>
+			<subpin wireid="6" invert="false"/>
+		</connection>
+		<connection flow="out" pinid="1" wireid="2" invert="false"/>
+	</component>
+</custom_component>

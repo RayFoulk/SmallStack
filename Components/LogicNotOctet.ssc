@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<custom_component>
+	<metadata>
+		<version smartsim="1.4.1"/>
+	</metadata>
+	<name>LogicNotOctet</name>
+	<description></description>
+	<label>NOT</label>
+	<bound right="20" down="20" left="-20" up="-20"/>
+	<colour a="0" r="255" g="255" b="255"/>
+	<pin x="10" y="20" length="10" direction="down" id="0" flow="in" required="true"/>
+	<pin x="0" y="20" length="10" direction="down" id="1" flow="in" required="true"/>
+	<pin x="-10" y="20" length="10" direction="down" id="2" flow="in" required="true"/>
+	<pin x="10" y="-20" length="10" direction="up" id="3" flow="out" required="true"/>
+	<pin x="0" y="-20" length="10" direction="up" id="4" flow="out" required="true"/>
+	<pin x="-10" y="-20" length="10" direction="up" id="5" flow="out" required="true"/>
+	<wire id="0">
+		<path>
+			<point x="0" y="-40"/>
+			<point x="0" y="-95"/>
+		</path>
+		<tag type="interface" xwire="0" ywire="-95" xtag="0" ytag="-105" flow="out" pinid="4" text="N1"/>
+	</wire>
+	<wire id="1">
+		<path>
+			<point x="-60" y="-40"/>
+			<point x="-60" y="-95"/>
+		</path>
+		<tag type="interface" xwire="-60" ywire="-95" xtag="-60" ytag="-105" flow="out" pinid="5" text="N2"/>
+	</wire>
+	<wire id="2">
+		<path>
+			<point x="60" y="-40"/>
+			<point x="60" y="-95"/>
+		</path>
+		<tag type="interface" xwire="60" ywire="-95" xtag="60" ytag="-105" flow="out" pinid="3" text="N0"/>
+	</wire>
+	<wire id="3">
+		<path>
+			<point x="-60" y="10"/>
+			<point x="-60" y="40"/>
+		</path>
+		<tag type="interface" xwire="-60" ywire="40" xtag="-60" ytag="50" flow="in" pinid="2" text="I2"/>
+	</wire>
+	<wire id="4">
+		<path>
+			<point x="0" y="10"/>
+			<point x="0" y="40"/>
+		</path>
+		<tag type="interface" xwire="0" ywire="40" xtag="0" ytag="50" flow="in" pinid="1" text="I1"/>
+	</wire>
+	<wire id="5">
+		<path>
+			<point x="60" y="10"/>
+			<point x="60" y="40"/>
+		</path>
+		<tag type="interface" xwire="60" ywire="40" xtag="60" ytag="50" flow="in" pinid="0" text="I0"/>
+	</wire>
+	<component id="0" def="Buffer" x="60" y="-15" direction="up" flip="false">
+		<connection flow="in" pinid="0" wireid="5" invert="false"/>
+		<connection flow="out" pinid="1" wireid="2" invert="true"/>
+	</component>
+	<component id="1" def="Buffer" x="0" y="-15" direction="up" flip="false">
+		<connection flow="in" pinid="0" wireid="4" invert="false"/>
+		<connection flow="out" pinid="1" wireid="0" invert="true"/>
+	</component>
+	<component id="2" def="Buffer" x="-60" y="-15" direction="up" flip="false">
+		<connection flow="in" pinid="0" wireid="3" invert="false"/>
+		<connection flow="out" pinid="1" wireid="1" invert="true"/>
+	</component>
+</custom_component>
