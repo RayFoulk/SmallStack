@@ -348,7 +348,7 @@ during socket read/write).
         - 1 dev: 6 bit low or high char others zero
         - parallel interface? look up early apple 1
     - Hard Disk -- use EEPROM instead?
-    - (128K EEPROM)[http://ww1.microchip.com/downloads/en/DeviceDoc/doc0395F.pdf]
+    - [128K EEPROM](http://ww1.microchip.com/downloads/en/DeviceDoc/doc0395F.pdf)
         - Will have to be external mem-mapped because of interface pinout
         - Control register and Data register
     - External RAM
