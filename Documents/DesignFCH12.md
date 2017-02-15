@@ -267,7 +267,7 @@ during socket read/write).
 011010 | 032 | add | ACC += BOP (Carry MCS[CAR])
 011011 | 033 | sub | ACC -= BOP (Borrow MCS[CAR])
 011100 | 034 | and | ACC &= BOP
-011101 | 035 | or  | ACC |= BOP
+011101 | 035 | or  | ACC \|= BOP
 011110 | 036 | xor | ACC ^= BOP
 011111 | 037 | not | ACC = ~ACC
 
