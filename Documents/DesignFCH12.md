@@ -212,10 +212,10 @@ Alternate Design:
 001  (d1) | N/A (RO)    | N/A (RO)    | Return Stack Size
 010  (d2) | PTR[PSEL]-- | PTR[PSEL]++ | Data Stack
 011  (d3) | N/A (RO)    | N/A (RO)    | Data Stack Size
-100  (d2) | PTR[PSEL]++ | N/A         | Block Mem Store
-101  (d3) | N/A         | PTR[PSEL]++ | Block Mem Load
-110  (d6) | N/A         | N/A         | Loop Counter
-111  (d7) | N/A         | N/A         | (Could be NIP)
+100  (d2) | PTR[PSEL]++ | N/A         | General,<br>Block Mem Store
+101  (d3) | N/A         | PTR[PSEL]++ | General,<br>Block Mem Load
+110  (d6) | N/A         | N/A         | General
+111  (d7) | N/A         | N/A         | General, <br>(Could be NIP?)
 
 General Purpose / Subroutine Argument Registers
 (Arguments can be pointer or literal value,
@@ -234,8 +234,8 @@ during socket read/write).
 000011 | 003 | --- | RESERVED
 000100 | 004 | --- | RESERVED
 000101 | 005 | --- | RESERVED
-000110 | 006 | skw | SKT = ACC, AUTO INC/DEC PTR[]
-000111 | 007 | skr | ACC = SKT, AUTO INC/DEC PTR[]
+000110 | 006 | skw | SKT = ACC, Auto-inc/dec PTR[] if applicable (wired)
+000111 | 007 | skr | ACC = SKT, Auto-inc/dec PTR[] if applicable (wired)
 
 ##### Group 1: Normal Transport Operations (Move)
 - ACC Implied: 1 bit to/from, 2 bits src/dst
@@ -246,61 +246,69 @@ during socket read/write).
 0010XY | 010 to 013 | mtr | Move ACC To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSEL], 11=NIP (Absolute Jump)
 0011XY | 014 to 017 | mfr | Move From Register To ACC<br> 00=BOP, 01=MCS,<br> 10=PTR[PSEL], 11=NIP (Get Instr Ptr)
 
-##### Group 2: Literal Octet Assignment
-- Requires Argument: 1 through 7
-- Left-shifts by 3 bits and loads ACC Octet 0
-- ACC Octet 3 is discarded.
-    - This is done by bypassing Octet 3 before the BarrelShifter
-    - And asserting the SH/RO line (Rotate Mode)
-
-| Binary | Octal | Mnemonic | Description
-|--------|-------|----------|---
-010XYZ | 020 to 027 | lol | ACC Load Octet 0 with XYZ and Rotate ACC Left 3
-
-##### Group 3: Arithmetic & Logic Operations + Rotate Octet
-- First two are diverted over to the BarrelShifter to help with loading specific values into ACC
-
-| Binary | Octal | Mnemonic | Description
-|--------|-------|----------|---
-011000 | 030 | ror | ACC Rotate Octet Right (3 Bits)
-011001 | 031 | rol | ACC Rotate Octet Left (3 Bits)
-011010 | 032 | add | ACC += BOP (Carry MCS[CAR])
-011011 | 033 | sub | ACC -= BOP (Borrow MCS[CAR])
-011100 | 034 | and | ACC &= BOP
-011101 | 035 | or  | ACC \|= BOP
-011110 | 036 | xor | ACC ^= BOP
-011111 | 037 | not | ACC = ~ACC
-
-##### Group 4: Single Stage Barrel Shifter (Shift Mode)
-- Requires Argument: 1, 3, 4, or 6 (Legal number of bits)
-
-| Binary | Octal | Mnemonic | Description
-|--------|-------|----------|---
-1000XY | 040 to 043 | shl | ACC <<= N(XY) where 00=1,01=3,10=4,11=6
-1001XY | 044 to 047 | shr | ACC >>= N(XY) where 00=1,01=3,10=4,11=6
-
-##### Group 5: Incrementors and Decrementors
+##### Group 2: Incrementors and Decrementors
 - All are in-place up/down counter operations
 - Requires Argument: ACC, PTR, PSEL, DSEL
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-1010XY | 050 to 053 | inc | Increment Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
-1011XY | 054 to 057 | dec | Decrement Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
+0100XY | 020 to 023 | inc | Increment Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
+0101XY | 024 to 027 | dec | Decrement Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
 
-##### Group 6: Miscellaneous, BCD Helpers, Comparators
-- Reduce, eliminate, or move these to get to 5 bits
+##### Group 3: Single Stage Barrel Shifter (Shift Mode)
+- Requires Argument: 1, 3, 4, or 6 (Legal number of bits)
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-110000 | 060 | swo | ACC[OCT3] <=> ACC[OCT2]
-110001 | 061 | bcd | ACC[4:11] = 0
+0110XY | 030 to 033 | shl | ACC <<= N(XY) where 00=1,01=3,10=4,11=6
+0111XY | 034 to 037 | shr | ACC >>= N(XY) where 00=1,01=3,10=4,11=6
+
+##### Group 4: Literal Octet Assignment
+- Requires Argument: 1 through 7
+- Left-shifts by 3 bits and loads ACC Octet 0
+- ACC Octet 3 is discarded.
+    - This is done by bypassing Octet 3 before the BarrelShifter
+    - And asserting the SH/RO line (Rotate Mode)
+- Assembler will support a higher level 'load' command
+    - Given some label:, support 'load label'
+    - To facilitate labels & subroutine calls
+    - assembler will replace with 4 sequential lol operations
+- Labels themselves are also supported by the assembler
+- How can the assembler itself be cross-assembled?
+    - Probably will have to hand-write it.
+    - Depends on board layout & non-volatile storage.
+    - This concept best held off until FCH16.
+
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+100XYZ | 040 to 047 | lol | ACC Load Octet 0 with XYZ and Rotate ACC Left 3
+
+##### Group 5: Comparators + Rotate Octet
+- BarrelShifter (Rotate Mode) used to help with loading specific values into ACC
+
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+101000 | 050 | ror | ACC Rotate Octet Right (3 Bits)
+101001 | 051 | rol | ACC Rotate Octet Left (3 Bits)
+101010 | 052 | --- | RESERVED
+101011 | 053 | --- | RESERVED
+101100 | 054 | eq  | MCS[CMP] = (ACC == BOP)
+101101 | 055 | eqz | MCS[CMP] = (ACC == 0)
+101110 | 056 | neq | MCS[CMP] = ~MCS\[CMP\] (JK Toggle)
+101111 | 057 | --- | RESERVED
+
+##### Group 6: Arithmetic & Logic Operations
+
+| Binary | Octal | Mnemonic | Description
+|--------|-------|----------|---
+110000 | 060 | add | ACC += BOP (Carry MCS[CAR])
+110001 | 061 | sub | ACC -= BOP (Borrow MCS[CAR])
 110010 | 062 | --- | RESERVED
 110011 | 063 | --- | RESERVED
-110100 | 064 | eq  | MCS[CMP] = (ACC == BOP)
-110101 | 065 | eqz | MCS[CMP] = (ACC == 0)
-110110 | 066 | inv | MCS[CMP] = ~MCS\[CMP\] (JK Toggle)
-110111 | 067 | --- | RESERVED
+110100 | 064 | and | ACC &= BOP
+110101 | 065 | or  | ACC \|= BOP
+110110 | 066 | xor | ACC ^= BOP
+110111 | 067 | not | ACC = ~ACC
 
 ##### Group 7: Conditional Relative Jumps
 - Requires Argument: 2, 6, 10, or 14
@@ -414,16 +422,22 @@ I.E. For this "instruction" only, there nothing to
 XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
                         NIP++ driven by read
 
+##### Instructions to Consider:
+
 N2S and S2N not really necessary as N2A,SKW and
   SKR,A2N will suffice.. although need to load contant
   into operand and premptively ADD to NIP.
   Will require selecting stack ptr
 
 ASB swap ACC <=> BOP and save another opcode
-do the same with PTR[]?  ASP?
+do the same with PTR[]?  ASP? - will require another internal data bus
 
-// Instruction Trash Bin:
-NOTE: Other instructions to consider:
+Nice-to-haves but not necessary (removed from first draft)
+swo  ACC[OCT3] <=> ACC[OCT2]
+bcd  ACC[4:11] = 0
+
+##### Instruction Trash Bin:
+
 MCS[CMP] = MCS[CAR] for testing carry in 2 instr vs 5
 MCS[CMP] = ~MCS[CMP] via JK toggle (reduce #opcodes)
 ZHI      ACC[HCHAR] = 0 (Debatable)
