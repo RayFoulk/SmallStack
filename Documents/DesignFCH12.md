@@ -348,6 +348,9 @@ during socket read/write).
         - 1 dev: 6 bit low or high char others zero
         - parallel interface? look up early apple 1
     - Hard Disk -- use EEPROM instead?
+    - (128K EEPROM)[http://ww1.microchip.com/downloads/en/DeviceDoc/doc0395F.pdf]
+        - Will have to be external mem-mapped because of interface pinout
+        - Control register and Data register
     - External RAM
         - 3 devs: 12 high addr, 12 low addr, 12 data
         - 2 dev: bit fields mux select, value
@@ -369,11 +372,11 @@ during socket read/write).
 | Device Address | Device Type | Description 
 |----------------|-------------|---
 0 | ROM | 4K ROM (RO) Pluggable Cartridge
-1 | RAM | 4K RAM (RW) Stacks in Upper 1K
-2 | RAM | 4K RAM (RW)
-3 | RAM | 4K RAM (RW)
-4 | RAM | 4K RAM (RW)
-5 | EEPROM | ???K (RW) Large(ish) Non Volatile Storage
+1 | RAM | 4K RAM (RW) Stacks in Upper 1K, Decompressed Data
+2 | RAM | 4K RAM (RW) High Memory (Heap)
+3 | N/A | Empty Slot (Could be 4K RAM module)
+4 | N/A | Empty Slot (Could be 4K RAM module)
+5 | N/A | Empty Slot (Could be 4K RAM module)
 6 | TERMINAL | Parallel Input Keyboard, Simple Text Console TBD
 7 | MEM MAP | Put other peripherals out here
 
