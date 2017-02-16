@@ -175,14 +175,12 @@ One of these can be selected at any time via the PSEL
 bit field in the MCS register.  The currently
 selected register in the PTR[] bank drives the ADDR
 bus output lines, as well as having its incrementor
-and dectrementor lines connected to the decoder,
-such that on socket R/W and stack R/W operations
-cause the applicable in-place INC/DEC (if
+and decrementor lines connected to the decoder,
+such that on socket R/W (and thus stack R/W) operations
+cause the applicable in-place INC/DEC (if and where
 applicable).  When N/A the register value remains
 static unless purposefully assigned or driven by
-IPT/DPT operations.
-
-First Design:
+inc ptr / dec ptr operations.
 
 | PSEL    | On SKW      | On SKR      | Intended Usage
 |---------|-------------|-------------|---
@@ -195,27 +193,12 @@ First Design:
 110  (d6) | N/A         | N/A         | Pointer Args
 111  (d7) | N/A         | N/A         | To Subroutines
 
-Consider storing or indicating stack sizes to
-internal data bus.  As it is, the stack size would
-have to be computed from knowing the start address
-and subtracting the current pointer address.
-This speaks to having proper hardware stacks in
-future designs.  On that note here is an alternate
-design.  Return and Data Stack pointers and size
-(0) are initialized on RESET.
-
-Alternate Design:
-
-| PSEL    | On SKW      | On SKR      | Intended Usage
-|---------|-------------|-------------|---
-000  (d0) | PTR[PSEL]-- | PTR[PSEL]++ | Return Stack
-001  (d1) | N/A (RO)    | N/A (RO)    | Return Stack Size
-010  (d2) | PTR[PSEL]-- | PTR[PSEL]++ | Data Stack
-011  (d3) | N/A (RO)    | N/A (RO)    | Data Stack Size
-100  (d2) | PTR[PSEL]++ | N/A         | General,<br>Block Mem Store
-101  (d3) | N/A         | PTR[PSEL]++ | General,<br>Block Mem Load
-110  (d6) | N/A         | N/A         | General
-111  (d7) | N/A         | N/A         | General, <br>(Could be NIP?)
+If stack pointers are initialized wisely (that is
+on an X777 word boundary, then stack sizes are very easily
+computed by software using a few operations, without even
+having to store the initial pointer somewhere.  For this
+reason and also to minimize gate usage, sticking to
+a simplified design.
 
 General Purpose / Subroutine Argument Registers
 (Arguments can be pointer or literal value,
