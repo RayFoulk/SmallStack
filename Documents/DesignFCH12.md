@@ -51,8 +51,7 @@ ACC | (RW) | Accumulator: 1st ALU input and output
 BOP | (RW) | Operand: 2nd ALU input for dyadic funcs. 
 ALU | (RO) | ALU output to data bus
 MCS | (RW) | Machine Control & Status: Carry, Compare, Device Select, Pointer Select
-PTR | (RW) | Peripheral Address (ROM/RAM/etc) Selectable Register Bank. See table below
-NIP | (RW) | Next Instruction Pointer (for ROM Only)
+PTR | (RW) | Peripheral Address (ROM/RAM/etc) Selectable Register Bank (Inluding NIP!). See table below
 SKT | (RW) | CPU Socket: Bi-Directional Tristated Peripheral Device I/O and other dedicated interface pins.
 
 ### CPU socket layout:
@@ -160,7 +159,7 @@ comparison and also signed versus unsigned
 operations.
 
      11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-    [RES RES CMP|RES RES CAR|   CSL    |   PSL   ]
+    [RES RES CMP|RES RES CAR|    CSL    |    PSL   ]
 
 #### General / Accumulator Register Layout:
 
@@ -182,16 +181,16 @@ applicable).  When N/A the register value remains
 static unless purposefully assigned or driven by
 inc ptr / dec ptr operations.
 
-| PSL    | On SKW      | On SKR     | Intended Usage
-|---------|------------|------------|---
-000  (d0) | PTR[PSL]-- | PTR[PSL]++ | Return Stack
-001  (d1) | PTR[PSL]-- | PTR[PSL]++ | Data Stack
-010  (d2) | PTR[PSL]++ | N/A        | Block Mem Store
-011  (d3) | N/A        | PTR[PSL]++ | Block Mem Load
-100  (d4) | N/A        | N/A        |
-101  (d5) | N/A        | N/A        | General Purpose
-110  (d6) | N/A        | N/A        | Pointer Args
-111  (d7) | N/A        | N/A        | To Subroutines
+| PSL     | On SKW   | On SKR   | Intended Usage
+|---------|----------|----------|---
+000  (d0) | INVALID  | ptr[0]++ | Instruction Pointer (NIP)
+001  (d1) | ptr[1]-- | ptr[1]++ | Return Stack
+010  (d2) | ptr[2]-- | ptr[2]++ | Data Stack
+011  (d3) | ptr[3]++ | N/A      | GP / Block Mem Store
+100  (d4) | N/A      | ptr[4]++ | GP / Block Mem Load
+101  (d5) | N/A      | N/A      | 
+110  (d6) | N/A      | N/A      | General Purpose
+111  (d7) | N/A      | N/A      | Pointer Args
 
 If stack pointers are initialized wisely (that is
 on an X777 word boundary, then stack sizes are very easily
@@ -222,12 +221,14 @@ during socket read/write).
 
 ##### Group 1: Normal Transport Operations (Move)
 - ACC Implied: 1 bit to/from, 2 bits src/dst
-- Requires Argument: BOP, MCS, PTR, NIP 
+- Requires Argument: BOP, MCS, PTR
+- NIP moved into PTR[0]
+- Introducion of acc/bop swap will reduce this to 4 opcode words 
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0010XY | 010 to 013 | mtr | Move acc To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Absolute Jump)
-0011XY | 014 to 017 | mfr | Move From Register To acc<br> 00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Get Instr Ptr)
+0010XY | 010 to 013 | mtr | Move acc To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSL] (NIP is Absolute Jump), 11=RESERVED
+0011XY | 014 to 017 | mfr | Move From Register To acc<br> 00=BOP, 01=MCS,<br> 10=PTR[PSL] (NIP is Get Instr Ptr), 11=RESERVED
 
 ##### Group 2: Incrementors and Decrementors
 - All are in-place up/down counter operations
