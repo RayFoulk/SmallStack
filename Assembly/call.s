@@ -1,51 +1,49 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Note: Manually selecting the return stack pointer may not always be
-; necessary depending on the context, but this example will work in
-; all cases.  Also: if an extended addition or subtraction operation
-; is in progress or for whatever reason you don't want the high
-; character in MCS to be cleared, then instead, execute:
-; mfr mcs, shr 6, lol 1, lol 0, mtr mcs
+;; Note: Manually selecting the return stack pointer
+;; may not always be necessary depending on context,
+;; but putting things in a known state will work in
+;; all cases.
 
-args:   ...     ; push all subroutine arguments to data stack
-        ...     ; put number of arguments in high ptr array?
-        ...
-        ...
+:subrtna
+mfr mcs ; get current mcs
+rol     ; preserve cmp
+lol 0   ; clear car
+lol 1   ; csl ram bank 1
+lol 1   ; psl data stack
+mtr mcs ; write back new mcs
+:pushargs
+...     ; push all arguments to data stack
+...
+skw
+...
+...
+:pushaddr
+dec psl ; select return stack the easy way
+shl 6   ; zero out acc
+shl 6
+lol 4   ; load nip offset (+4 words) in acc
+mtr bop ; put nip offset into operand
+mfr nip ; get nip into accumulator
+add     ; add nip offset into accumulator
+skw     ; push return address to stack
+:callsubrtnb
+load :subrtnb  ; this is actually 4 x lol
+mtr nip ; jump to subroutine
+:continue
+...     ; point where code returns to
+...
+...
 
-push:   shl 6   ; pull up zero char to clear carry & compare
-        lol 1   ; set dsel octet to first ram bank
-        lol 0   ; set psel octet to return stack pointer
-        mtr mcs ; configure the mcs register
-        shr 6   ; hchar still 0, discard all selector bits
-        lol 4   ; load nip offset (+4 words) in acc
-        mtr bop ; put nip offset into operand
-        mfr nip ; get nip into accumulator
-        add     ; add nip offset into accumulator
-        skw     ; socket write the address to return stack
-                ; and decrement stack pointer (push)
-                
-call:   lol 1   ; load hypothetical subroutine address 1337 into acc
-        lol 3
-        lol 3
-        lol 7
-        mtr nip ; jump to subroutine
+:subrtnb
+...     ; do a bunch of stuff...
+...
+...
+:doreturn
+mfr mcs ; get mcs register
+rol     ; preserve cmp
+rol     ; preserve car
+lol 1   ; select ram bank 1
+lol 0   ; select return stack
+mtr mcs ; configure mcs register
+skr     ; pop return stack
+mtr nip ; jump to return address
 
-cont:   ...     ; point where code returns to
-        ...
-        ...
-        ...
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; subroutine
-
-sub:    ...     ; start of subroutine at nip 1337
-        ...     ; do a bunch of stuff...
-        ...
-        ...
-
-return: shl 6   ; pull up zero char to clear carry & compare
-        lol 1   ; set dsel octet to first ram bank
-        lol 0   ; set psel octet to return stack pointer
-        mtr mcs ; configure the mcs register
-        skr     ; pop from return stack into acckumulator
-        mtr nip ; jump back to return address (return)
-        
