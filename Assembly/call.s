@@ -46,6 +46,6 @@ return: shl 6   ; pull up zero char to clear carry & compare
         lol 1   ; set dsel octet to first ram bank
         lol 0   ; set psel octet to return stack pointer
         mtr mcs ; configure the mcs register
-        skr     ; pop from return stack into accumulator
+        skr     ; pop from return stack into acckumulator
         mtr nip ; jump back to return address (return)
         

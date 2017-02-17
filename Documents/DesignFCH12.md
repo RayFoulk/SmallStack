@@ -59,9 +59,9 @@ SKT | (RW) | CPU Socket: Bi-Directional Tristated Peripheral Device I/O and othe
 
 - Bidirectional Data Bus: 12 pins
 - Output Address Bus: 12 pins
-    - Driven by PTR[PSEL] or NIP during instruction fetch
+    - Driven by PTR[PSL] or NIP during instruction fetch
 - Output Device Select: 3 pins
-    - DSEL Intended to drive chip select on peripherals
+    - CSL Intended to drive chip select on peripherals
 - Data Mode (8080 Style) Read/Write: 2 pins
 - Other Pins
     - Multiple Grounds (GND), Multiple Voltage In (VDD)
@@ -120,9 +120,9 @@ and Address Bus on the other)
 #### Special Case Transport
 
     INS <-- SKT     Fetch Instr. hardcoded in 18-bit INS,
-                    Read line overrides DSEL out to 0
+                    Read line overrides CSL out to 0
                     also overrides ADDR_BUS with NIP out
-                    NOTE: SKW with DSEL 0 is illegal
+                    NOTE: SKW with CSL 0 is illegal
 
     ALU --> ACC     Driven by ALU opcodes,
                     Implied operands are ACC and BOP
@@ -131,9 +131,9 @@ and Address Bus on the other)
                     Overrides BOP before ALU
 
     ACC <-> SKT     RAM Read/Write or ROM Read, all
-                    expect manually driving DSEL
+                    expect manually driving CSL
                     Internal R/W lines auto drive
-                    INC/DEC of PTR[PSEL]
+                    INC/DEC of PTR[PSL]
 
 #### Normal Case Transport (Simple Internal Data R/W)
 
@@ -142,7 +142,7 @@ and Address Bus on the other)
     ACC <-> PTR     Writing to MCS will clear/set carry
     ACC <-> NIP     and compare bits. Writing to NIP
                     will also of course jump absolute!
-                    Writing to PTR and PSEL drives the
+                    Writing to PTR and PSL drives the
                     address bus to ROM/RAM/(EEPROM)
 
 #### MCS Register Layout:
@@ -151,8 +151,8 @@ Upper two octets R/W are hardwired to ALU in/out.
 In this way, the MCS resembles ACC except reversed.
 writing ACC => MCS with zero in upper char clears
 carry and compare bits.  ADD is always with carry.
-DSEL and PSEL octets could be independent up/dn
-counters to all for next/prev-dev and psel instr.
+CSL and PSL octets could be independent up/dn
+counters to all for next/prev-dev and PSL instr.
 PTR[] registers may be used for temporary storage
 to simulate ROR and ROL operations.  Future usage
 for some reserved bits include greater/less
@@ -160,7 +160,7 @@ comparison and also signed versus unsigned
 operations.
 
      11  10   9 | 8   7   6 | 5   4   3 | 2   1   0
-    [RES RES CMP|RES RES CAR|   DSEL    |   PSEL   ]
+    [RES RES CMP|RES RES CAR|   CSL    |   PSL   ]
 
 #### General / Accumulator Register Layout:
 
@@ -169,9 +169,9 @@ operations.
     [  Octet 3  |  Octet 2  |  Octet 1  |  Octet 0  ]
     [  High Char (HCHAR)    |  Low Char (LCHAR)     ]
 
-## Address Pointer (PTR[PSEL]) Register Bank Behavior
+## Address Pointer (PTR[PSL]) Register Bank Behavior
 
-One of these can be selected at any time via the PSEL
+One of these can be selected at any time via the PSL
 bit field in the MCS register.  The currently
 selected register in the PTR[] bank drives the ADDR
 bus output lines, as well as having its incrementor
@@ -182,16 +182,16 @@ applicable).  When N/A the register value remains
 static unless purposefully assigned or driven by
 inc ptr / dec ptr operations.
 
-| PSEL    | On SKW      | On SKR      | Intended Usage
-|---------|-------------|-------------|---
-000  (d0) | PTR[PSEL]-- | PTR[PSEL]++ | Return Stack
-001  (d1) | PTR[PSEL]-- | PTR[PSEL]++ | Data Stack
-010  (d2) | PTR[PSEL]++ | N/A         | Block Mem Store
-011  (d3) | N/A         | PTR[PSEL]++ | Block Mem Load
-100  (d4) | N/A         | N/A         |
-101  (d5) | N/A         | N/A         | General Purpose
-110  (d6) | N/A         | N/A         | Pointer Args
-111  (d7) | N/A         | N/A         | To Subroutines
+| PSL    | On SKW      | On SKR     | Intended Usage
+|---------|------------|------------|---
+000  (d0) | PTR[PSL]-- | PTR[PSL]++ | Return Stack
+001  (d1) | PTR[PSL]-- | PTR[PSL]++ | Data Stack
+010  (d2) | PTR[PSL]++ | N/A        | Block Mem Store
+011  (d3) | N/A        | PTR[PSL]++ | Block Mem Load
+100  (d4) | N/A        | N/A        |
+101  (d5) | N/A        | N/A        | General Purpose
+110  (d6) | N/A        | N/A        | Pointer Args
+111  (d7) | N/A        | N/A        | To Subroutines
 
 If stack pointers are initialized wisely (that is
 on an X777 word boundary, then stack sizes are very easily
@@ -226,17 +226,17 @@ during socket read/write).
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0010XY | 010 to 013 | mtr | Move ACC To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSEL], 11=NIP (Absolute Jump)
-0011XY | 014 to 017 | mfr | Move From Register To ACC<br> 00=BOP, 01=MCS,<br> 10=PTR[PSEL], 11=NIP (Get Instr Ptr)
+0010XY | 010 to 013 | mtr | Move ACC To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Absolute Jump)
+0011XY | 014 to 017 | mfr | Move From Register To ACC<br> 00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Get Instr Ptr)
 
 ##### Group 2: Incrementors and Decrementors
 - All are in-place up/down counter operations
-- Requires Argument: ACC, PTR, PSEL, DSEL
+- Requires Argument: ACC, PTR, PSL, CSL
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0100XY | 020 to 023 | inc | Increment Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
-0101XY | 024 to 027 | dec | Decrement Register<br>00=ACC,01=PTR[PSEL],<br>10=PSEL,11=DSEL
+0100XY | 020 to 023 | inc | Increment Register<br>00=ACC,01=PTR[PSL],<br>10=PSL,11=CSL
+0101XY | 024 to 027 | dec | Decrement Register<br>00=ACC,01=PTR[PSL],<br>10=PSL,11=CSL
 
 ##### Group 3: Single Stage Barrel Shifter (Shift Mode)
 - Requires Argument: 1, 3, 4, or 6 (Legal number of bits)
@@ -305,6 +305,7 @@ during socket read/write).
     - b0XY100 produces 4, 12, 20, 28
     - bX0Y010 produces 2, 10, 34, 42
     - b0X0Y10 produces 2, 6, 18, 22
+- Strongly considering eliminating jcn
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
@@ -386,17 +387,17 @@ one to the data bus.
 
 NOTE: ROM needs to be separate and socketable.
 An address bus driven by NIP and PTR is necessary,
-as well as a bypass on external DSEL.
+as well as a bypass on external CSL.
 this would reduce the number of CPU pins by re-using
 the address lines for ROM and RAM.  Not shown above
   are the control lines.
-FCH bypasses DSEL and asserts 0 on output pins
-ADDR output pins are normally driven by PTR[PSEL]
+FCH bypasses CSL and asserts 0 on output pins
+ADDR output pins are normally driven by PTR[PSL]
 but FCH instructuon overrides this with NIP
 NOTE: This also allows PTR access to ROM for reading
 fonts, bitmaps, strings, etc... 
-  by manually setting DSEL to 0,
-  set PTR[PSEL] to desired address and executing IOR.
+  by manually setting CSL to 0,
+  set PTR[PSL] to desired address and executing IOR.
   This eliminates the need for LBL and frees up an
     8-block of opcodes.
 
@@ -405,7 +406,7 @@ directly into the main micro cycle => drive lines.
 I.E. For this "instruction" only, there nothing to
 "decode" per se, just do it!
 
-XXXXXX  N/A    FCH      INS = SKT, DSEL => 0,
+XXXXXX  N/A    FCH      INS = SKT, CSL => 0,
                         NIP++ driven by read
 
 ##### Instructions to Consider:
