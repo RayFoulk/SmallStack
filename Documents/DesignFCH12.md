@@ -215,8 +215,8 @@ during socket read/write).
 000001 | 001 | rst | Reset CPU
 000010 | 002 | nop | No Operation
 000011 | 003 | --- | RESERVED
-000100 | 004 | --- | RESERVED
-000101 | 005 | --- | RESERVED
+000100 | 004 | zsl | mcs[psl:csl] = 0
+000101 | 005 | zca | mcs[car] = 0
 000110 | 006 | skw | SKT = ACC, Auto-inc/dec PTR[] if applicable (wired)
 000111 | 007 | skr | ACC = SKT, Auto-inc/dec PTR[] if applicable (wired)
 
