@@ -190,7 +190,7 @@ inc ptr / dec ptr operations.
 100  (d4) | N/A      | N/A      | +- General Purpose 
 101  (d5) | N/A      | N/A      | \| Pointer Args
 110  (d6) | N/A      | N/A      | -
-111  (d7) | INVALID  | PTR[0]++ | Instruction Pointer (NIP)
+111  (d7) | INVALID  | PTR[7]++ | Instruction Pointer (NIP)
 
 If stack pointers are initialized wisely (that is
 on an X777 word boundary, then stack sizes are very easily
