@@ -4,12 +4,10 @@
 ;; all cases.
 
 :subrtna
-mfr mcs ; get current mcs
-rol     ; preserve cmp
-lol 0   ; clear car
-lol 1   ; csl ram bank 1
-lol 1   ; psl data stack
-mtr mcs ; write back new mcs
+zsl     ; zero selectors
+inc csl ; csl ram bank 1
+inc psl ; psl data stack
+
 :pushargs
 ...     ; push all arguments to data stack
 ...
@@ -17,11 +15,12 @@ skw
 ...
 ...
 :pushaddr
-dec psl ; select return stack the easy way
+dec psl ; psl back to return stack
 shl 6   ; zero out acc
 shl 6
 lol 4   ; load nip offset (+4 words) in acc
 mtr bop ; put nip offset into operand
+zca     ; clear carry
 mfr nip ; get nip into accumulator
 add     ; add nip offset into accumulator
 skw     ; push return address to stack
@@ -37,13 +36,12 @@ mtr nip ; jump to subroutine
 ...     ; do a bunch of stuff...
 ...
 ...
+
+;; with new opcodes and nip inside ptr[7]
 :doreturn
-mfr mcs ; get mcs register
-rol     ; preserve cmp
-rol     ; preserve car
-lol 1   ; select ram bank 1
-lol 0   ; select return stack
-mtr mcs ; configure mcs register
-skr     ; pop return stack
-mtr nip ; jump to return address
+zsl     ; zero selectors to return stack
+inc csl ; chip select ram bank 1
+skr     ; pop return stack to acc
+dec psl ; underflow psl to nip
+mtr ptr ; jump to return address
 
