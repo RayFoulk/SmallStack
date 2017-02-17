@@ -226,25 +226,25 @@ during socket read/write).
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0010XY | 010 to 013 | mtr | Move ACC To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Absolute Jump)
-0011XY | 014 to 017 | mfr | Move From Register To ACC<br> 00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Get Instr Ptr)
+0010XY | 010 to 013 | mtr | Move acc To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Absolute Jump)
+0011XY | 014 to 017 | mfr | Move From Register To acc<br> 00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Get Instr Ptr)
 
 ##### Group 2: Incrementors and Decrementors
 - All are in-place up/down counter operations
-- Requires Argument: ACC, PTR, PSL, CSL
+- Requires Argument: acc, ptr, psl, csl
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0100XY | 020 to 023 | inc | Increment Register<br>00=ACC,01=PTR[PSL],<br>10=PSL,11=CSL
-0101XY | 024 to 027 | dec | Decrement Register<br>00=ACC,01=PTR[PSL],<br>10=PSL,11=CSL
+0100XY | 020 to 023 | inc | Increment Register<br>00=acc,01=PTR[PSL],<br>10=PSL,11=CSL
+0101XY | 024 to 027 | dec | Decrement Register<br>00=acc,01=PTR[PSL],<br>10=PSL,11=CSL
 
 ##### Group 3: Single Stage Barrel Shifter (Shift Mode)
 - Requires Argument: 1, 3, 4, or 6 (Legal number of bits)
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0110XY | 030 to 033 | shl | ACC <<= N(XY) where 00=1,01=3,10=4,11=6
-0111XY | 034 to 037 | shr | ACC >>= N(XY) where 00=1,01=3,10=4,11=6
+0110XY | 030 to 033 | shl | acc <<= N(XY) where 00=1,01=3,10=4,11=6
+0111XY | 034 to 037 | shr | acc >>= N(XY) where 00=1,01=3,10=4,11=6
 
 ##### Group 4: Literal Octet Assignment
 - Requires Argument: 1 through 7
@@ -264,34 +264,34 @@ during socket read/write).
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-100XYZ | 040 to 047 | lol | ACC Load Octet 0 with XYZ and Rotate ACC Left 3
+100XYZ | 040 to 047 | lol | acc Load Octet 0 with XYZ and Rotate acc Left 3
 
 ##### Group 5: Comparators + Rotate Octet
 - BarrelShifter (Rotate Mode) used to help with loading specific values into ACC
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-101000 | 050 | ror | ACC Rotate Octet Right (3 Bits)
+101000 | 050 | ror | acc Rotate Octet Right (3 Bits)
 101001 | 051 | --- | RESERVED
-101010 | 052 | rol | ACC Rotate Octet Left (3 Bits)
+101010 | 052 | rol | acc Rotate Octet Left (3 Bits)
 101011 | 053 | --- | RESERVED
-101100 | 054 | eq  | MCS[CMP] = (ACC == BOP)
-101101 | 055 | eqz | MCS[CMP] = (ACC == 0)
-101110 | 056 | neq | MCS[CMP] = ~MCS\[CMP\] (JK Toggle)
+101100 | 054 | eq  | mcs[cmp] = (acc == bop)
+101101 | 055 | eqz | mcs[cmp] = (acc == 0)
+101110 | 056 | neq | mcs[cmp] = ~mcs\[cmp\] (JK Toggle)
 101111 | 057 | --- | RESERVED
 
 ##### Group 6: Arithmetic & Logic Operations
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-110000 | 060 | add | ACC += BOP (Carry MCS[CAR])
-110001 | 061 | sub | ACC -= BOP (Borrow MCS[CAR])
+110000 | 060 | add | acc += bop (Carry mcs[car])
+110001 | 061 | sub | acc -= bop (Borrow mcs[car])
 110010 | 062 | --- | RESERVED
 110011 | 063 | --- | RESERVED
-110100 | 064 | and | ACC &= BOP
-110101 | 065 | or  | ACC \|= BOP
-110110 | 066 | xor | ACC ^= BOP
-110111 | 067 | not | ACC = ~ACC
+110100 | 064 | and | acc &= bop
+110101 | 065 | or  | acc \|= bop
+110110 | 066 | xor | acc ^= bop
+110111 | 067 | not | acc = ~acc
 
 ##### Group 7: Conditional Relative Jumps
 - Requires Argument: 1, 3, 5, 7, 9, 11, 13, 15
@@ -309,7 +309,7 @@ during socket read/write).
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-111XYZ | 070 to 077 | jcr | if MCS[CMP] then NIP = ACC + b00000000XYZ1
+111XYZ | 070 to 077 | jcr | mcs[cmp] ? nip = acc + b00000000XYZ1 : continue
 
 ### TODO: 
     
