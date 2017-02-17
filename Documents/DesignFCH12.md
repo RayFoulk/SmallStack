@@ -272,8 +272,8 @@ during socket read/write).
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
 101000 | 050 | ror | ACC Rotate Octet Right (3 Bits)
-101001 | 051 | rol | ACC Rotate Octet Left (3 Bits)
-101010 | 052 | --- | RESERVED
+101001 | 051 | --- | RESERVED
+101010 | 052 | rol | ACC Rotate Octet Left (3 Bits)
 101011 | 053 | --- | RESERVED
 101100 | 054 | eq  | MCS[CMP] = (ACC == BOP)
 101101 | 055 | eqz | MCS[CMP] = (ACC == 0)
@@ -294,23 +294,22 @@ during socket read/write).
 110111 | 067 | not | ACC = ~ACC
 
 ##### Group 7: Conditional Relative Jumps
-- Requires Argument: 2, 6, 10, or 14
-- Bitwise composition of NIP offset
-    - Values generated are +/- 2, 6, 10, 14
+- Requires Argument: 1, 3, 5, 7, 9, 11, 13, 15
+    - Number of words forward to skip
+    - Bitwise composition of NIP offset
+    - Outside of fetch cycle, so normal fetch increment will also be performed
 - These require a specific calling sequence
-    - Give an example in Assembly/loop.s
-    - Execute mfr nip, jcp
+    - Normall will execute eq, mfr nip, jcr
+    - BOP is bypassed with decoded value
     - ALU output written directly to NIP
-- May need to adjust bit composition of offset
-    - b0XY100 produces 4, 12, 20, 28
-    - bX0Y010 produces 2, 10, 34, 42
-    - b0X0Y10 produces 2, 6, 18, 22
-- Strongly considering eliminating jcn
+    - Give an example in Assembly/loop.s
+- May need to adjust bit composition of offset at later time
+    - Composition starting at 0th bit can result in 0 offset
+    - ACC could be modified between mfr nip and jcr for unique offsets
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-1110XY | 070 to 073 | jcp | if MCS[CMP] then NIP += b00XY10
-1111XY | 074 to 077 | jcn | if MCS[CMP] then NIP -= b00XY10
+111XYZ | 070 to 077 | jcr | if MCS[CMP] then NIP = ACC + b00000000XYZ1
 
 ### TODO: 
     
