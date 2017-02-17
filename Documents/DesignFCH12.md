@@ -183,14 +183,14 @@ inc ptr / dec ptr operations.
 
 | PSL     | On SKW   | On SKR   | Intended Usage
 |---------|----------|----------|---
-000  (d0) | INVALID  | ptr[0]++ | Instruction Pointer (NIP)
-001  (d1) | ptr[1]-- | ptr[1]++ | Return Stack
-010  (d2) | ptr[2]-- | ptr[2]++ | Data Stack
-011  (d3) | ptr[3]++ | N/A      | GP / Block Mem Store
-100  (d4) | N/A      | ptr[4]++ | GP / Block Mem Load
-101  (d5) | N/A      | N/A      | 
-110  (d6) | N/A      | N/A      | General Purpose
-111  (d7) | N/A      | N/A      | Pointer Args
+000  (d0) | INVALID  | PTR[0]++ | Instruction Pointer (NIP)
+001  (d1) | PTR[1]-- | PTR[1]++ | Return Stack
+010  (d2) | PTR[2]-- | PTR[2]++ | Data Stack
+011  (d3) | PTR[3]++ | N/A      |\ Block Mem Store
+100  (d4) | N/A      | PTR[4]++ | \| Block Mem Load
+101  (d5) | N/A      | N/A      | \| 
+110  (d6) | N/A      | N/A      | \| General Purpose
+111  (d7) | N/A      | N/A      |/  Pointer Args
 
 If stack pointers are initialized wisely (that is
 on an X777 word boundary, then stack sizes are very easily
@@ -227,8 +227,8 @@ during socket read/write).
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0010XY | 010 to 013 | mtr | Move acc To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSL] (NIP is Absolute Jump), 11=RESERVED
-0011XY | 014 to 017 | mfr | Move From Register To acc<br> 00=BOP, 01=MCS,<br> 10=PTR[PSL] (NIP is Get Instr Ptr), 11=RESERVED
+0010XY | 010 to 013 | mtr | Move acc To Register<br>00=BOP, 01=MCS,<br> 10=PTR\[PSL\] (NIP is Absolute Jump), 11=RESERVED
+0011XY | 014 to 017 | mfr | Move From Register To acc<br> 00=BOP, 01=MCS,<br> 10=PTR\[PSL\] (NIP is Get Instr Ptr), 11=RESERVED
 
 ##### Group 2: Incrementors and Decrementors
 - All are in-place up/down counter operations
