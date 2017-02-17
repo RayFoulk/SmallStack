@@ -183,14 +183,14 @@ inc ptr / dec ptr operations.
 
 | PSL     | On SKW   | On SKR   | Intended Usage
 |---------|----------|----------|---
-000  (d0) | INVALID  | PTR[0]++ | Instruction Pointer (NIP)
-001  (d1) | PTR[1]-- | PTR[1]++ | Return Stack
-010  (d2) | PTR[2]-- | PTR[2]++ | Data Stack
-011  (d3) | PTR[3]++ | N/A      |\ Block Mem Store
-100  (d4) | N/A      | PTR[4]++ | \| Block Mem Load
-101  (d5) | N/A      | N/A      | \| 
-110  (d6) | N/A      | N/A      | \| General Purpose
-111  (d7) | N/A      | N/A      |/  Pointer Args
+000  (d0) | PTR[0]-- | PTR[0]++ | Return Stack
+001  (d1) | PTR[1]-- | PTR[1]++ | Data Stack
+010  (d2) | PTR[2]++ | N/A      | - (Block Mem Store)
+011  (d3) | N/A      | PTR[3]++ | \| (Block Mem Load)
+100  (d4) | N/A      | N/A      | +- General Purpose 
+101  (d5) | N/A      | N/A      | \| Pointer Args
+110  (d6) | N/A      | N/A      | -
+111  (d7) | INVALID  | PTR[0]++ | Instruction Pointer (NIP)
 
 If stack pointers are initialized wisely (that is
 on an X777 word boundary, then stack sizes are very easily
