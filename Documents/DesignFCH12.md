@@ -322,7 +322,10 @@ during socket read/write).
     - in competition with ability to port Forth.
 
 - Design peripheral interfaces
-    - ROM expected at peripheral address 0
+    - ROM expected at peripheral address 7
+        - Why? because fetch overrides psl and dsl with 7,7
+        - Because zsl is easiest to implement with zeros
+        - thus stack RAM is at 0
     - Graphics - Color LCD
         - 8080 interface. memory mapped CMD/CTRL regs
         - 2 devs possible 12 bit RGB or 9bit 1 dev
@@ -355,23 +358,25 @@ during socket read/write).
 
 | Device Address | Device Type | Description 
 |----------------|-------------|---
-0 | ROM | 4K ROM (RO) Pluggable Cartridge
-1 | RAM | [4K RAM](http://www.idt.com/document/70v35342524-data-sheet) (RW) Stacks in Upper 1K, Decompressed Data
+0 | RAM | [4K RAM](http://www.idt.com/document/70v35342524-data-sheet) (RW) Stacks in Upper 1K, Decompressed Data
+1 | RAM | 4K RAM (RW) High Memory (Heap) Use 14 bits of 16 bit SRAM chip for these 4 slots
 2 | RAM | 4K RAM (RW) High Memory (Heap)
-3 | N/A | Empty Slot (Could be 4K RAM module)
-4 | N/A | Empty Slot (Could be 4K RAM module)
-5 | N/A | Empty Slot (Could be 4K RAM module)
-6 | TERMINAL | Parallel Input Keyboard, Simple Text Console TBD
-7 | MEM MAP | Put other peripherals out here
+3 | RAM | 4K RAM (RW) High Memory (Heap)
+4 | MEM MAP | Put other peripherals here and use addr_bus high bits to select ctrl/data regs
+5 | TERMINAL | Parallel Input Keyboard, Simple Text Console TBD
+6 | N/A | Empty Slot - could be data ROM - may need HW stub
+7 | INSTR ROM | 4K ROM (RO) Pluggable Cartridge
 
 ### Memory Model
 
 | RAM Module | Designation | Entries | Address Range (Octal)
 |---|---|---|---
-1 | Return Stack | 0 to 512 | 7000 to 7777
-1 | Data Stack | 0 to 512 | 6000 to 6777
-1 | Heap / Decompressed App Data (Strings, Bitmaps) | 3072 | 0 to 5777
+0 | Return Stack | 0 to 256 | 7400 to 7777
+0 | Data Stack | 0 to Remainder | X to 7377
+0 | Heap / Decompressed App Data (Strings, Bitmaps) | 3072 | 0 to (X-1)
+1 | Heap / Scratch Pad | 4096 | 0 to 7777
 2 | Heap / Scratch Pad | 4096 | 0 to 7777
+3 | Heap / Scratch Pad | 4096 | 0 to 7777
 
 ### Instruction Design Notes
 
@@ -408,6 +413,10 @@ I.E. For this "instruction" only, there nothing to
 
 XXXXXX  N/A    FCH      INS = SKT, CSL => 0,
                         NIP++ driven by read
+
+XXXXXX  N/A    ldl      Load Label
+                        Equovalent to 4 x lol
+                        replaced by assembler
 
 ##### Instructions to Consider:
 
