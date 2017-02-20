@@ -8,6 +8,8 @@
     - One or More 4K RAM Modules
         - Segmented Addressing
         - Data Only, Non-Executable
+    - No Interrupts! (yet)
+        - Poll terminal within main loop for input
 - Rudimentary Stack Functionality
     - Sythesized using lower-level opcodes
     - Future Designs will be a true Stack Machines
