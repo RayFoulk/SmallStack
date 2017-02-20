@@ -41,13 +41,61 @@ nop
 nop
 hlt
 
-;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; All strings assumed to be word-aligned
+
 :strlen
 zsl
 inc psl ; data stack
-mfr ptr ; get stack ptr
+mfr ptr ; get data stack ptr
 inc psl ; 1st gp addr reg
 mtr ptr ; store stack ptr
+
+;; Get CSL, strip unecessary bits, store in operand
+inc ptr ; point to csl value
+skr     ; read the csl value
+shl 6   ; ensure we only keep least 3 bits
+shl 3   ; csl bits are at top
+shr 6   ; csl are lined up with mcs csl
+mtr bop ; stash csl value in operand
+
+;; Apply caller's CSL to MCS register
+mfr mcs ; read current mcs
+rol	; preserve cmp
+rol     ; preserve car
+shl 3   ; zero out csl
+rol     ; preserve psl
+or      ; mask in caller's csl
+mtr mcs ; write back mcs
+
+;; Get setup to start processing string
+dec ptr ; point 1st gp back to string
+inc psl ; use 2nd gp as loop counter
+shl 6   ; zero out acc
+shl 6
+mtr ptr ; initialize counter to zero
+dec psl ; re-select string pointer (1st gp)
+
+;; Start reading & processing string chars
+
+:loopbegin
+
+
+
+
+
+jcr 5
+load loopbegin
+;; need to select nip
+
+mtr ptr
+
+
+
+
+
+
 
 ...     ; check stack size?
 ...     ; pop args off data stack
