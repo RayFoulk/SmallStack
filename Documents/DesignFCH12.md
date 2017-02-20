@@ -185,11 +185,11 @@ inc ptr / dec ptr operations.
 |---------|----------|----------|---
 000  (d0) | PTR[0]-- | PTR[0]++ | Return Stack
 001  (d1) | PTR[1]-- | PTR[1]++ | Data Stack
-010  (d2) | PTR[2]++ | N/A      | General Purpose / Block Mem Store
-011  (d3) | N/A      | PTR[3]++ | General Purpose / Block Mem Load
+010  (d2) | N/A      | N/A      | General Purpose
+011  (d3) | N/A      | N/A      | General Purpose
 100  (d4) | N/A      | N/A      | General Purpose
-101  (d5) | N/A      | N/A      | General Purpose
-110  (d6) | N/A      | N/A      | General Purpose
+101  (d5) | PTR[5]++ | N/A      | General Purpose / Block Mem Store
+110  (d6) | N/A      | PTR[6]++ | General Purpose / Block Mem Load
 111  (d7) | INVALID  | PTR[7]++ | Instruction Pointer (NIP)
 
 If stack pointers are initialized wisely (that is
@@ -295,22 +295,21 @@ during socket read/write).
 110111 | 067 | not | acc = ~acc
 
 ##### Group 7: Conditional Relative Jumps
-- Requires Argument: 1, 3, 5, 7, 9, 11, 13, 15
-    - Number of words forward to skip
-    - Bitwise composition of NIP offset
+- Requires Argument: 1 through 7 
+    - Number of words forward to skip (opcodes x 2)
     - Outside of fetch cycle, so normal fetch increment will also be performed
 - These require a specific calling sequence
-    - Normall will execute eq, mfr nip, jcr
-    - BOP is bypassed with decoded value
+    - Normally would execute eq, mfr nip, jcr
+    - BOP is bypassed with argument value
     - ALU output written directly to NIP
     - Give an example in Assembly/loop.s
-- May need to adjust bit composition of offset at later time
-    - Composition starting at 0th bit can result in 0 offset
-    - ACC could be modified between mfr nip and jcr for unique offsets
+    - acc can be preloaded with any value for large offsets
+        - Usually just load with nip or label
+        - Arg offset can avoid overhead of label load
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-111XYZ | 070 to 077 | jcr | mcs[cmp] ? nip = acc + b00000000XYZ1 : continue
+111XYZ | 070 to 077 | jcr | mcs[cmp] ? nip = acc + b000XYZ : continue
 
 ### TODO: 
     
@@ -320,7 +319,6 @@ during socket read/write).
     - Or keep it simple with 1 table
     - ability to port/play Roguelike games a priority
     - in competition with ability to port Forth.
-
 - Design peripheral interfaces
     - ROM expected at peripheral address 7
         - Why? because fetch overrides psl and dsl with 7,7
@@ -366,6 +364,15 @@ during socket read/write).
 5 | TERMINAL | Parallel Input Keyboard, Simple Text Console TBD
 6 | N/A | Empty Slot - could be data ROM - may need HW stub
 7 | INSTR ROM | 4K ROM (RO) Pluggable Cartridge
+
+#### Alternate 2-Bit CSL Design
+
+| Device Address | Device Type | Description 
+|----------------|-------------|---
+0 | RAM | [4K RAM](http://www.idt.com/document/70v35342524-data-sheet) (RW) Stacks in Upper 1K, Decompressed Data
+1 | RAM | 4K RAM (RW) High Memory (Heap) Use 14 bits of 16 bit SRAM chip for these 4 slots
+2 | MEM MAP | Put other peripherals here and use addr_bus high bits to select ctrl/data regs
+3 | INSTR ROM | 4K ROM (RO) Pluggable Cartridge
 
 ### Memory Model
 
