@@ -29,6 +29,8 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 ### Research:
 - Links regarding hobbyist CPUs
     - [FPGA CPU org](http://www.fpgacpu.org/)
+    - [Homebrew CPU](http://www.homebrewcpu.com/)
+    - [From NAND to Tetris](http://www.nand2tetris.org/)
 - Discovery that "Minimal Instruction Set Computer" is a real thing (MISC)
 - Inspired by the life's work of Charles Moore, an unsung genius (in my opinion)
     - Computer Cowboys, Ultratechnology, Greenarrays
