@@ -29,7 +29,7 @@ add     ; add nip offset into accumulator
 inc psl ; back to return stack
 skw     ; push return address to stack
 :docall
-load :subrtnb  ; this is actually 4 x lol
+lda subrtnb  ; this is actually 4 x lol
 dec psl ; back to nip again
 mtr ptr ; jump to subroutine
 :continue

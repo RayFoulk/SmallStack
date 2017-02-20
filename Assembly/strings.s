@@ -68,6 +68,7 @@ shl 3   ; zero out csl
 rol     ; preserve psl
 or      ; mask in caller's csl
 mtr mcs ; write back mcs
+mtr bop ; stash a copy of mcs (for loop start)
 
 ;; Get setup to start processing string
 dec ptr ; point 1st gp back to string
@@ -75,21 +76,59 @@ inc psl ; use 2nd gp as loop counter
 shl 6   ; zero out acc
 shl 6
 mtr ptr ; initialize counter to zero
-dec psl ; re-select string pointer (1st gp)
 
 ;; Start reading & processing string chars
 
 :loopbegin
+mfr bop ; recall original mcs value
+mtr mcs ; re-apply original mcs
+
+;; Determine if this is an odd or even iteration
+;; based on current counter value
+shl 6   ; generate a bitmask for odd/even compare
+shl 6
+lol 1
+mtr bop ; put odd/even bitmask in operand
+mfr ptr ; get current counter
+and     ; acc will be zero if even
+eqz     ; mcs[cmp] is 1 if even
+
+;; Read in a character
+dec psl ; re-select string pointer (1st gp)
+swr     ; read in a word
+jcr X   ; jump to even block
+:isodd
+
+
+lda donechar
+;; need to safely select nip again, UGH!!!
+;; about ready to go back to standalone nip.
+
+:iseven
 
 
 
+:donechar
 
 
-jcr 5
-load loopbegin
-;; need to select nip
 
-mtr ptr
+eq
+eqz
+
+
+
+jcr 5   ; escape the loop if done
+
+;; need to safely select nip without losing csl
+mfr mcs ; get mcs with caller's csl
+mtr bop ; stash in bop
+zsl     ; zero selector
+dec psl ; select nip
+lda loopbegin
+mtr ptr ; goto start of loop 
+nop
+
+; jcr jumps here.
 
 
 

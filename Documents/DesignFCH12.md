@@ -253,8 +253,8 @@ during socket read/write).
 - ACC Octet 3 is discarded.
     - This is done by bypassing Octet 3 before the BarrelShifter
     - And asserting the SH/RO line (Rotate Mode)
-- Assembler will support a higher level 'load' command
-    - Given some label:, support 'load label'
+- Assembler will support a higher level 'load' command (lda)
+    - Given some label:, support 'lda label'
     - To facilitate labels & subroutine calls
     - assembler will replace with 4 sequential lol operations
 - Labels themselves are also supported by the assembler
@@ -421,9 +421,9 @@ I.E. For this "instruction" only, there nothing to
 XXXXXX  N/A    FCH      INS = SKT, CSL => 0,
                         NIP++ driven by read
 
-XXXXXX  N/A    ldl      Load Label
-                        Equovalent to 4 x lol
-                        replaced by assembler
+XXXXXX  N/A    lda      Load Label
+                        Equivalent to 4 x lol
+                        Replaced by assembler
 
 ##### Instructions to Consider:
 
