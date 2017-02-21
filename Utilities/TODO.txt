@@ -1,0 +1,6 @@
+- TODO:
+    - Create Assembler
+    - Data relocation can be uncompressed in first version
+    - Port LZSS to FCH12 assembly & 12 bit version to Assembler
+    - Create Terminal component for smartsim
+
