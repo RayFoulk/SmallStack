@@ -20,7 +20,15 @@
 
 ;; (Decompressed Data Section)
 :myleetstr
-"0mg 1337 h4x0r d00d"
+str "0mg 1337 h4x0r d00d"
+:globalcount
+u12 0
+:bignum
+u24 077777777
+:signednum
+i12 -01777 
+:bigsignednum
+i24 -017777777
 
 :example
 zsl     ; zero selectors
