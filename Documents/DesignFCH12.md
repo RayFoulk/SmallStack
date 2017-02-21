@@ -53,7 +53,7 @@ ACC | (RW) | Accumulator: 1st ALU input and output
 BOP | (RW) | Operand: 2nd ALU input for dyadic funcs. 
 ALU | (RO) | ALU output to data bus
 MCS | (RW) | Machine Control & Status: Carry, Compare, Device Select, Pointer Select
-PTR | (RW) | Peripheral Address (ROM/RAM/etc) Selectable Register Bank (Inluding NIP!). See table below
+PTR | (RW) | Peripheral Address (ROM/RAM/etc) Selectable Register Bank (Inludes NIP!). See table below
 SKT | (RW) | CPU Socket: Bi-Directional Tristated Peripheral Device I/O and other dedicated interface pins.
 
 ### CPU socket layout:
@@ -223,14 +223,14 @@ during socket read/write).
 
 ##### Group 1: Normal Transport Operations (Move)
 - ACC Implied: 1 bit to/from, 2 bits src/dst
-- Requires Argument: BOP, MCS, PTR
-- NIP moved into PTR[0]
-- Introducion of acc/bop swap will reduce this to 4 opcode words 
+- Requires Argument: bop, mcs, ptr, nip (special case)
+- nip moved into PTR[7] for storage, but can be called out specifically
+- Introducion of acc/bop swap will reduce opcode count 
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-0010XY | 010 to 013 | mtr | Move acc To Register<br>00=BOP, 01=MCS,<br> 10=PTR\[PSL\] (NIP is Absolute Jump), 11=RESERVED
-0011XY | 014 to 017 | mfr | Move From Register To acc<br> 00=BOP, 01=MCS,<br> 10=PTR\[PSL\] (NIP is Get Instr Ptr), 11=RESERVED
+0010XY | 010 to 013 | mtr | Move acc To Register<br>00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Absolute Jump)
+0011XY | 014 to 017 | mfr | Move From Register To acc<br> 00=BOP, 01=MCS,<br> 10=PTR[PSL], 11=NIP (Get Instr Ptr)
 
 ##### Group 2: Incrementors and Decrementors
 - All are in-place up/down counter operations
@@ -358,14 +358,14 @@ during socket read/write).
 
 | Device Address | Device Type | Description 
 |----------------|-------------|---
-0 | RAM | [4K RAM](http://www.idt.com/document/70v35342524-data-sheet) (RW) Stacks in Upper 1K, Decompressed Data
+0 | RAM | [4K RAM](http://www.idt.com/document/70v35342524-data-sheet) (RW) Stacks in Upper 1K, Decompressed Data starts at 0
 1 | RAM | 4K RAM (RW) High Memory (Heap) Use 14 bits of 16 bit SRAM chip for these 4 slots
 2 | RAM | 4K RAM (RW) High Memory (Heap)
 3 | RAM | 4K RAM (RW) High Memory (Heap)
-4 | MEM MAP | Put other peripherals here and use addr_bus high bits to select ctrl/data regs
-5 | TERMINAL | Parallel Input Keyboard, Simple Text Console TBD
-6 | N/A | Empty Slot - could be data ROM - may need HW stub
-7 | INSTR ROM | 4K ROM (RO) Pluggable Cartridge
+4 | BUS | Put other peripherals here and use addr_bus high bits to select ctrl/data regs
+5 | TERM | Parallel Input Keyboard + Simple Text Console TBD
+6 | N/A | Empty Slot: Could be data ROM (Fonts, Bitmaps), may need HW stub if empty
+7 | ROM | 4K ROM (RO) Pluggable Cartridge
 
 #### Alternate 2-Bit CSL Design
 
@@ -373,8 +373,8 @@ during socket read/write).
 |----------------|-------------|---
 0 | RAM | [4K RAM](http://www.idt.com/document/70v35342524-data-sheet) (RW) Stacks in Upper 1K, Decompressed Data
 1 | RAM | 4K RAM (RW) High Memory (Heap) Use 14 bits of 16 bit SRAM chip for these 4 slots
-2 | MEM MAP | Put other peripherals here and use addr_bus high bits to select ctrl/data regs
-3 | INSTR ROM | 4K ROM (RO) Pluggable Cartridge
+2 | BUS | Put other peripherals here and use addr_bus high bits to select ctrl/data regs
+3 | ROM | 4K ROM (RO) Pluggable Cartridge
 
 ### Memory Model
 
@@ -420,7 +420,7 @@ directly into the main micro cycle => drive lines.
 I.E. For this "instruction" only, there nothing to
 "decode" per se, just do it!
 
-XXXXXX  N/A    FCH      INS = SKT, CSL => 0,
+XXXXXX  N/A    fch      INS = SKT, CSL => 0,
                         NIP++ driven by read
 
 XXXXXX  N/A    lda      Load Label
@@ -460,27 +460,13 @@ NIX: SWC      ACC[HCHAR] <=> ACC[LCHAR]
 // Links for Reference:
 http://www.learnabout-electronics.org/Digital/images/register-SISO-PISO.gif
 
-// Bus reduction using rising edge latches
-// not really necessary at all
-7    BUS_EXT ADDR/DATA (2 bit mode, 10 bits data bus)
-         writes:
-         11xxxxxxxxxx set addr mode, apply data(addr)
-         10xxxxxxxxxx set addr mode, do not apply data
-         01xxxxxxxxxx set data mode, apply data(data)
-         00xxxxxxxxxx set data mode, do not apply data
-
-
 // Old (Mostly Outdated) TODO Contents:
-- Create bi-directional bus tristate buffer component
-- Create up-down counter component (4 bit and 12 bit versions, or 4 bit cascadable)
-	- This will be used for the PC, and also the stack sizes
 - Create shift registers, some power of 2 size large, possibly 8 or 16
 	- This will be used for a 'column' in the stack
 - Create stack component.
 	- dual-read ported on top two elements.
 	- push/pop control lines
 	- ability to read size via control line assert
-- Create general purpose register
 - Create ALU
 	- Adder/Subtractor
 	- Equality comparator only (no magnitude - yet - 2.0)
@@ -500,9 +486,3 @@ http://www.learnabout-electronics.org/Digital/images/register-SISO-PISO.gif
 		  back to data bus.  it is the writer in an op.
 		- memory unit
 
-- Memory Unit upgrades.
-	- three r/w data bus interfaces: PC, AR, MEM
-	- state machine between PC control and Addr Reg control.
-		- default is latched to PC control
-		- override with a write to AR
-		- resets after a read or write to MEM
