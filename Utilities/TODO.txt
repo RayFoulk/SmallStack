@@ -4,3 +4,7 @@
     - Port LZSS to FCH12 assembly & 12 bit version to Assembler
     - Create Terminal component for smartsim
 
+- Allman style:
+    - https://en.wikipedia.org/wiki/Indent_(Unix)
+    - indent -st -bap -bli0 -i4 -l79 -ncs -npcs -npsl -fca -lc79 -fc1 -ts4 SomeFile.c
+
