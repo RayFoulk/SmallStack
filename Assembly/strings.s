@@ -72,24 +72,19 @@ mfr ptr ; get data stack ptr
 inc psl ; select gp addr reg p2
 mtr ptr ; store stack ptr in p2
 
-
-
-
 ;; Get setup to start processing string
 inc psl ; use p3 as loop counter
 shl 6   ; zero out acc
 shl 6
 mtr ptr ; initialize counter to zero
+lol 1   ; acc already zero, create bitmask for odd/even compare
+mtr bop ; put odd/even bitmask in operand
 
 ;; Start reading & processing string chars
 :loopbegin
 
 ;; Determine if this is an odd or even iteration
 ;; based on current counter value
-shl 6   ; generate a bitmask for odd/even compare
-shl 6
-lol 1
-mtr bop ; put odd/even bitmask in operand
 mfr ptr ; get current counter
 xor     ; acc will be zero if even
 eqz     ; mcs[cmp] will be 1 if odd
@@ -98,50 +93,24 @@ eqz     ; mcs[cmp] will be 1 if odd
 dec psl ; re-select string pointer p2
 swr     ; read in a word
 
-jcr 1   ; skip over shl 6 if odd
+jcr 1   ; skip over next two ops if odd, subject to alignment issues
 shl 6   ; even only, put low char in high
 inc ptr ; even only, advance to next word
 shr 6   ; bring high char down to low
-
+        ; character is place either way here
 eqz     ; check for null terminator
+jcr 4   ; escape the loop if done, skip next 8 ops (alignment issues)
 
-
-
-
-:donechar
-
-
-
-
-jcr 5   ; escape the loop if done
-
-;; need to safely select nip without losing csl
-
-
-
-
+inc psl ; back up to the counter
+inc ptr ; counter++
 lda loopbegin
 mtr nip ; goto start of loop 
-nop
+nop	; because of alignment
 
-; jcr jumps here.
+mfr ptr ; jcr jumps here, get counter
+mtr bop ; stash return value in bop
 
-
-
-
-
-
-
-...     ; check stack size?
-...     ; pop args off data stack
-...     ; store in ptr array
-...     ; do stuff
-...
-
-;; with new opcodes and nip inside ptr[7]
 :doreturn
 zsl     ; zero selectors to return stack
 skr     ; pop return stack to acc
-dec psl ; underflow psl to nip
-mtr ptr ; jump to return address
-
+mtr nip ; jump to return address
