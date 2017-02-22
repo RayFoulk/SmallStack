@@ -69,27 +69,20 @@ hlt
 zsl
 inc psl ; select data stack
 mfr ptr ; get data stack ptr
-inc psl ; select gp addr reg
-mtr ptr ; store stack ptr
+inc psl ; select gp addr reg p2
+mtr ptr ; store stack ptr in p2
 
-
-
-;; TODO: Finish this
 
 
 
 ;; Get setup to start processing string
-dec ptr ; point 1st gp back to string
-inc psl ; use 2nd gp as loop counter
+inc psl ; use p3 as loop counter
 shl 6   ; zero out acc
 shl 6
 mtr ptr ; initialize counter to zero
 
 ;; Start reading & processing string chars
-
 :loopbegin
-mfr bop ; recall original mcs value
-mtr mcs ; re-apply original mcs
 
 ;; Determine if this is an odd or even iteration
 ;; based on current counter value
@@ -98,21 +91,20 @@ shl 6
 lol 1
 mtr bop ; put odd/even bitmask in operand
 mfr ptr ; get current counter
-and     ; acc will be zero if even
-eqz     ; mcs[cmp] is 1 if even
+xor     ; acc will be zero if even
+eqz     ; mcs[cmp] will be 1 if odd
 
 ;; Read in a character
-dec psl ; re-select string pointer (1st gp)
+dec psl ; re-select string pointer p2
 swr     ; read in a word
-jcr X   ; jump to even block
-:isodd
 
+jcr 1   ; skip over shl 6 if odd
+shl 6   ; even only, put low char in high
+inc ptr ; even only, advance to next word
+shr 6   ; bring high char down to low
 
-lda donechar
-;; need to safely select nip again, UGH!!!
-;; about ready to go back to standalone nip.
+eqz     ; check for null terminator
 
-:iseven
 
 
 
@@ -120,20 +112,16 @@ lda donechar
 
 
 
-eq
-eqz
-
-
 
 jcr 5   ; escape the loop if done
 
 ;; need to safely select nip without losing csl
-mfr mcs ; get mcs with caller's csl
-mtr bop ; stash in bop
-zsl     ; zero selector
-dec psl ; select nip
+
+
+
+
 lda loopbegin
-mtr ptr ; goto start of loop 
+mtr nip ; goto start of loop 
 nop
 
 ; jcr jumps here.
