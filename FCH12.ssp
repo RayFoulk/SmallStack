@@ -12,8 +12,8 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/FCH12_CPU.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer2to1Octet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/LogicXorWord.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/Components/LogicXorOctet.ssc</component>
-	<component>/home/rfoulk/Source/SmartSim/SmallStack/Components/LogicNotOctet.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/LogicXorOctet.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/LogicNotOctet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterBit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer2to1Word.ssc</component>
