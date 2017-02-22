@@ -1,2 +1,4 @@
+Assembly/*.s linguist-language=Assembly
 Components/*.ssc linguist-language=XML
 Documents/* linguist-documentation
+Utilities/*.c linguist-language=C
