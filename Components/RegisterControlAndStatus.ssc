@@ -6,51 +6,51 @@
 	<name>RegisterControlAndStatus</name>
 	<description>Machine Control And Status Register</description>
 	<label>MCS</label>
-	<bound right="65" down="40" left="-65" up="-40"/>
+	<bound right="65" down="45" left="-65" up="-45"/>
 	<colour a="0" r="255" g="255" b="255"/>
-	<pin x="55" y="40" length="10" direction="down" id="0" flow="in" required="true"/>
-	<pin x="45" y="40" length="10" direction="down" id="1" flow="in" required="true"/>
-	<pin x="35" y="40" length="10" direction="down" id="2" flow="in" required="true"/>
-	<pin x="25" y="40" length="10" direction="down" id="3" flow="in" required="true"/>
-	<pin x="15" y="40" length="10" direction="down" id="4" flow="in" required="true"/>
-	<pin x="5" y="40" length="10" direction="down" id="5" flow="in" required="true"/>
-	<pin x="-5" y="40" length="10" direction="down" id="6" flow="in" required="true"/>
-	<pin x="-15" y="40" length="10" direction="down" id="7" flow="in" required="true"/>
-	<pin x="-25" y="40" length="10" direction="down" id="8" flow="in" required="true"/>
-	<pin x="-35" y="40" length="10" direction="down" id="9" flow="in" required="true"/>
-	<pin x="-45" y="40" length="10" direction="down" id="10" flow="in" required="true"/>
-	<pin x="-55" y="40" length="10" direction="down" id="11" flow="in" required="true"/>
-	<pin x="55" y="-40" length="10" direction="up" id="12" required="true"/>
-	<pin x="45" y="-40" length="10" direction="up" id="13" required="true"/>
-	<pin x="35" y="-40" length="10" direction="up" id="14" required="true"/>
-	<pin x="25" y="-40" length="10" direction="up" id="15" flow="out" required="true"/>
-	<pin x="15" y="-40" length="10" direction="up" id="16" flow="out" required="true"/>
-	<pin x="5" y="-40" length="10" direction="up" id="17" flow="out" required="true"/>
-	<pin x="-5" y="-40" length="10" direction="up" id="18" flow="out" required="true"/>
-	<pin x="-15" y="-40" length="10" direction="up" id="19" flow="out" required="false"/>
-	<pin x="-25" y="-40" length="10" direction="up" id="20" flow="out" required="false"/>
-	<pin x="-35" y="-40" length="10" direction="up" id="21" flow="out" required="true"/>
-	<pin x="-45" y="-40" length="10" direction="up" id="22" flow="out" required="false"/>
-	<pin x="-55" y="-40" length="10" direction="up" id="23" flow="out" required="false"/>
-	<pin x="65" y="30" length="10" direction="right" id="24" flow="in" label="RE" required="true"/>
-	<pin x="65" y="20" length="10" direction="right" id="25" flow="in" label="WE" required="true"/>
-	<pin x="-65" y="10" length="10" direction="left" id="26" flow="in" label="INV" required="true"/>
-	<pin x="65" y="-20" length="10" direction="right" id="27" flow="in" label="DS--" required="true"/>
-	<pin x="65" y="-30" length="10" direction="right" id="28" flow="in" label="DS++" required="true"/>
-	<pin x="65" y="10" length="10" direction="right" id="29" flow="in" symlabel="clock" required="true"/>
-	<pin x="65" y="0" length="10" direction="right" id="30" flow="in" label="PS--" required="true"/>
-	<pin x="65" y="-10" length="10" direction="right" id="31" flow="in" label="PS++" required="true"/>
-	<pin x="-65" y="20" length="10" direction="left" id="32" flow="in" label="CMPi" required="true"/>
-	<pin x="-65" y="30" length="10" direction="left" id="33" flow="in" label="WCM" required="true"/>
-	<pin x="-65" y="-10" length="10" direction="left" id="34" flow="in" label="CARi" required="true"/>
-	<pin x="-65" y="0" length="10" direction="left" id="35" flow="in" label="WCA" required="true"/>
-	<pin x="0" y="0" length="0" direction="right" id="36" flow="out" required="true"/>
+	<pin x="55" y="45" length="10" direction="down" id="0" flow="in" required="true"/>
+	<pin x="45" y="45" length="10" direction="down" id="1" flow="in" required="true"/>
+	<pin x="35" y="45" length="10" direction="down" id="2" flow="in" required="true"/>
+	<pin x="25" y="45" length="10" direction="down" id="3" flow="in" required="true"/>
+	<pin x="15" y="45" length="10" direction="down" id="4" flow="in" required="true"/>
+	<pin x="5" y="45" length="10" direction="down" id="5" flow="in" required="true"/>
+	<pin x="-5" y="45" length="10" direction="down" id="6" flow="in" required="true"/>
+	<pin x="-15" y="45" length="10" direction="down" id="7" flow="in" required="true"/>
+	<pin x="-25" y="45" length="10" direction="down" id="8" flow="in" required="true"/>
+	<pin x="-35" y="45" length="10" direction="down" id="9" flow="in" required="true"/>
+	<pin x="-45" y="45" length="10" direction="down" id="10" flow="in" required="true"/>
+	<pin x="-55" y="45" length="10" direction="down" id="11" flow="in" required="true"/>
+	<pin x="55" y="-45" length="10" direction="up" id="12" required="true"/>
+	<pin x="45" y="-45" length="10" direction="up" id="13" required="true"/>
+	<pin x="35" y="-45" length="10" direction="up" id="14" required="true"/>
+	<pin x="25" y="-45" length="10" direction="up" id="15" flow="out" required="true"/>
+	<pin x="15" y="-45" length="10" direction="up" id="16" flow="out" required="true"/>
+	<pin x="5" y="-45" length="10" direction="up" id="17" flow="out" required="true"/>
+	<pin x="-5" y="-45" length="10" direction="up" id="18" flow="out" required="true"/>
+	<pin x="-15" y="-45" length="10" direction="up" id="19" flow="out" required="false"/>
+	<pin x="-25" y="-45" length="10" direction="up" id="20" flow="out" required="false"/>
+	<pin x="-35" y="-45" length="10" direction="up" id="21" flow="out" required="true"/>
+	<pin x="-45" y="-45" length="10" direction="up" id="22" flow="out" required="false"/>
+	<pin x="-55" y="-45" length="10" direction="up" id="23" flow="out" required="false"/>
+	<pin x="65" y="25" length="10" direction="right" id="24" flow="in" label="WE" required="true"/>
+	<pin x="65" y="35" length="10" direction="right" id="25" flow="in" label="RE" required="true"/>
+	<pin x="-65" y="5" length="10" direction="left" id="26" flow="in" label="wCA" required="true"/>
+	<pin x="-65" y="-5" length="10" direction="left" id="27" flow="in" label="CAi" required="true"/>
+	<pin x="-65" y="35" length="10" direction="left" id="28" flow="in" label="wCM" required="true"/>
+	<pin x="-65" y="25" length="10" direction="left" id="29" flow="in" label="CMi" required="true"/>
+	<pin x="65" y="5" length="10" direction="right" id="30" flow="in" label="ZSL" required="true"/>
+	<pin x="65" y="-25" length="10" direction="right" id="31" flow="in" label="CS-" required="true"/>
+	<pin x="65" y="15" length="10" direction="right" id="32" flow="in" symlabel="clock" required="true"/>
+	<pin x="65" y="-5" length="10" direction="right" id="33" flow="in" label="PS-" required="true"/>
+	<pin x="65" y="-15" length="10" direction="right" id="34" flow="in" label="PS+" required="true"/>
+	<pin x="65" y="-35" length="10" direction="right" id="35" flow="in" label="CS+" required="true"/>
+	<pin x="-65" y="15" length="10" direction="left" id="36" flow="out" label="NEQ" required="true"/>
 	<wire id="0">
 		<path>
 			<point x="-375" y="100"/>
 			<point x="-420" y="100"/>
 		</path>
-		<tag type="interface" xwire="-420" ywire="100" xtag="-430" ytag="100" flow="in" pinid="24" text="RE"/>
+		<tag type="interface" xwire="-420" ywire="100" xtag="-430" ytag="100" flow="in" pinid="25" text="RE"/>
 	</wire>
 	<wire id="1">
 		<path>
@@ -233,7 +233,7 @@
 			<point x="165" y="-235"/>
 			<point x="300" y="-235"/>
 		</path>
-		<tag type="interface" xwire="300" ywire="-235" xtag="310" ytag="-235" flow="in" pinid="31" text="PSL++"/>
+		<tag type="interface" xwire="300" ywire="-235" xtag="310" ytag="-235" flow="in" pinid="34" text="PSL++"/>
 	</wire>
 	<wire id="15">
 		<path>
@@ -242,14 +242,14 @@
 			<point x="175" y="-205"/>
 			<point x="300" y="-205"/>
 		</path>
-		<tag type="interface" xwire="300" ywire="-205" xtag="310" ytag="-205" flow="in" pinid="30" text="PSL--"/>
+		<tag type="interface" xwire="300" ywire="-205" xtag="310" ytag="-205" flow="in" pinid="33" text="PSL--"/>
 	</wire>
 	<wire id="16">
 		<path>
 			<point x="155" y="-170"/>
 			<point x="300" y="-170"/>
 		</path>
-		<tag type="interface" xwire="300" ywire="-170" xtag="310" ytag="-170" flow="in" pinid="12" text="CLK"/>
+		<tag type="interface" xwire="300" ywire="-170" xtag="310" ytag="-170" flow="in" pinid="32" text="CLK"/>
 	</wire>
 	<wire id="17">
 		<path>
@@ -451,7 +451,7 @@
 			<point x="-105" y="-210"/>
 			<point x="-420" y="-210"/>
 		</path>
-		<tag type="interface" xwire="-420" ywire="-210" xtag="-430" ytag="-210" flow="in" pinid="13" text="NEQ"/>
+		<tag type="interface" xwire="-420" ywire="-210" xtag="-430" ytag="-210" flow="in" pinid="36" text="NEQ"/>
 	</wire>
 	<wire id="46">
 		<path>
@@ -459,7 +459,7 @@
 			<point x="-115" y="-50"/>
 			<point x="-420" y="-50"/>
 		</path>
-		<tag type="interface" xwire="-420" ywire="-50" xtag="-430" ytag="-50" flow="in" pinid="14" text="CMPi"/>
+		<tag type="interface" xwire="-420" ywire="-50" xtag="-430" ytag="-50" flow="in" pinid="29" text="CMPi"/>
 	</wire>
 	<wire id="47">
 		<path>
@@ -469,7 +469,7 @@
 			<point x="-220" y="-20"/>
 			<point x="-420" y="-20"/>
 		</path>
-		<tag type="interface" xwire="-420" ywire="-20" xtag="-430" ytag="-20" flow="in" pinid="15" text="wCMP"/>
+		<tag type="interface" xwire="-420" ywire="-20" xtag="-430" ytag="-20" flow="in" pinid="28" text="wCMP"/>
 	</wire>
 	<wire id="48">
 		<path>
@@ -479,7 +479,7 @@
 			<point x="-210" y="10"/>
 			<point x="-420" y="10"/>
 		</path>
-		<tag type="interface" xwire="-420" ywire="10" xtag="-430" ytag="10" flow="in" pinid="16" text="CARi"/>
+		<tag type="interface" xwire="-420" ywire="10" xtag="-430" ytag="10" flow="in" pinid="27" text="CARi"/>
 	</wire>
 	<wire id="49">
 		<path>
@@ -489,7 +489,7 @@
 			<point x="-200" y="40"/>
 			<point x="-420" y="40"/>
 		</path>
-		<tag type="interface" xwire="-420" ywire="40" xtag="-430" ytag="40" flow="in" pinid="17" text="wCAR"/>
+		<tag type="interface" xwire="-420" ywire="40" xtag="-430" ytag="40" flow="in" pinid="26" text="wCAR"/>
 	</wire>
 	<wire id="50">
 		<path>
@@ -503,7 +503,7 @@
 			<point x="165" y="-50"/>
 		</path>
 		<marker x="165" y="-50"/>
-		<tag type="interface" xwire="300" ywire="-50" xtag="310" ytag="-50" flow="in" pinid="19" text="ZSL"/>
+		<tag type="interface" xwire="300" ywire="-50" xtag="310" ytag="-50" flow="in" pinid="30" text="ZSL"/>
 	</wire>
 	<wire id="51">
 		<path>
@@ -535,7 +535,7 @@
 		<marker x="165" y="-130"/>
 		<marker x="75" y="-130"/>
 		<marker x="-15" y="-130"/>
-		<tag type="interface" xwire="300" ywire="100" xtag="310" ytag="100" flow="in" pinid="18" text="WE"/>
+		<tag type="interface" xwire="300" ywire="100" xtag="310" ytag="100" flow="in" pinid="24" text="WE"/>
 	</wire>
 	<wire id="52">
 		<path>
@@ -568,7 +568,7 @@
 			<point x="75" y="-140"/>
 			<point x="300" y="-140"/>
 		</path>
-		<tag type="interface" xwire="300" ywire="-140" xtag="310" ytag="-140" flow="in" pinid="20" text="CSL--"/>
+		<tag type="interface" xwire="300" ywire="-140" xtag="310" ytag="-140" flow="in" pinid="31" text="CSL--"/>
 	</wire>
 	<wire id="57">
 		<path>
@@ -579,7 +579,7 @@
 			<point x="155" y="-265"/>
 			<point x="300" y="-265"/>
 		</path>
-		<tag type="interface" xwire="300" ywire="-265" xtag="310" ytag="-265" flow="in" pinid="21" text="CSL++"/>
+		<tag type="interface" xwire="300" ywire="-265" xtag="310" ytag="-265" flow="in" pinid="35" text="CSL++"/>
 	</wire>
 	<wire id="58">
 		<path>
@@ -593,7 +593,7 @@
 			<point x="135" y="-400"/>
 		</path>
 		<marker x="135" y="-240"/>
-		<tag type="interface" xwire="135" ywire="-400" xtag="135" ytag="-410" flow="out" pinid="22" text="PSL0"/>
+		<tag type="interface" xwire="135" ywire="-400" xtag="135" ytag="-410" flow="out" pinid="12" text="PSL0"/>
 	</wire>
 	<wire id="59">
 		<path>
@@ -607,7 +607,7 @@
 			<point x="105" y="-400"/>
 		</path>
 		<marker x="105" y="-250"/>
-		<tag type="interface" xwire="105" ywire="-400" xtag="105" ytag="-410" flow="out" pinid="23" text="PSL1"/>
+		<tag type="interface" xwire="105" ywire="-400" xtag="105" ytag="-410" flow="out" pinid="13" text="PSL1"/>
 	</wire>
 	<wire id="60">
 		<path>
@@ -621,7 +621,7 @@
 			<point x="75" y="-400"/>
 		</path>
 		<marker x="75" y="-260"/>
-		<tag type="interface" xwire="75" ywire="-400" xtag="75" ytag="-410" flow="out" pinid="25" text="PSL2"/>
+		<tag type="interface" xwire="75" ywire="-400" xtag="75" ytag="-410" flow="out" pinid="14" text="PSL2"/>
 	</wire>
 	<wire id="61">
 		<path>
@@ -635,7 +635,7 @@
 			<point x="45" y="-400"/>
 		</path>
 		<marker x="45" y="-270"/>
-		<tag type="interface" xwire="45" ywire="-400" xtag="45" ytag="-410" flow="out" pinid="26" text="CSL0"/>
+		<tag type="interface" xwire="45" ywire="-400" xtag="45" ytag="-410" flow="out" pinid="15" text="CSL0"/>
 	</wire>
 	<wire id="62">
 		<path>
@@ -649,7 +649,7 @@
 			<point x="15" y="-400"/>
 		</path>
 		<marker x="15" y="-280"/>
-		<tag type="interface" xwire="15" ywire="-400" xtag="15" ytag="-410" flow="out" pinid="27" text="CSL1"/>
+		<tag type="interface" xwire="15" ywire="-400" xtag="15" ytag="-410" flow="out" pinid="16" text="CSL1"/>
 	</wire>
 	<wire id="63">
 		<path>
@@ -663,7 +663,7 @@
 			<point x="-15" y="-400"/>
 		</path>
 		<marker x="-15" y="-290"/>
-		<tag type="interface" xwire="-15" ywire="-400" xtag="-15" ytag="-410" flow="out" pinid="28" text="CSL2"/>
+		<tag type="interface" xwire="-15" ywire="-400" xtag="-15" ytag="-410" flow="out" pinid="17" text="CSL2"/>
 	</wire>
 	<wire id="64">
 		<path>
@@ -677,7 +677,7 @@
 			<point x="-45" y="-400"/>
 		</path>
 		<marker x="-45" y="-300"/>
-		<tag type="interface" xwire="-45" ywire="-400" xtag="-45" ytag="-410" flow="out" pinid="29" text="CAR"/>
+		<tag type="interface" xwire="-45" ywire="-400" xtag="-45" ytag="-410" flow="out" pinid="18" text="CAR"/>
 	</wire>
 	<wire id="65">
 		<path>
@@ -691,7 +691,7 @@
 			<point x="-75" y="-400"/>
 		</path>
 		<marker x="-75" y="-310"/>
-		<tag type="interface" xwire="-75" ywire="-400" xtag="-75" ytag="-410" flow="out" pinid="32" text="RES7"/>
+		<tag type="interface" xwire="-75" ywire="-400" xtag="-75" ytag="-410" flow="out" pinid="19" text="RES7"/>
 	</wire>
 	<wire id="66">
 		<path>
@@ -705,7 +705,7 @@
 			<point x="-105" y="-400"/>
 		</path>
 		<marker x="-105" y="-320"/>
-		<tag type="interface" xwire="-105" ywire="-400" xtag="-105" ytag="-410" flow="out" pinid="33" text="RES8"/>
+		<tag type="interface" xwire="-105" ywire="-400" xtag="-105" ytag="-410" flow="out" pinid="20" text="RES8"/>
 	</wire>
 	<wire id="67">
 		<path>
@@ -719,7 +719,7 @@
 			<point x="-135" y="-400"/>
 		</path>
 		<marker x="-135" y="-330"/>
-		<tag type="interface" xwire="-135" ywire="-400" xtag="-135" ytag="-410" flow="out" pinid="34" text="CMP"/>
+		<tag type="interface" xwire="-135" ywire="-400" xtag="-135" ytag="-410" flow="out" pinid="21" text="CMP"/>
 	</wire>
 	<wire id="68">
 		<path>
@@ -733,7 +733,7 @@
 			<point x="-165" y="-400"/>
 		</path>
 		<marker x="-165" y="-340"/>
-		<tag type="interface" xwire="-165" ywire="-400" xtag="-165" ytag="-410" flow="out" pinid="35" text="RES10"/>
+		<tag type="interface" xwire="-165" ywire="-400" xtag="-165" ytag="-410" flow="out" pinid="22" text="RES10"/>
 	</wire>
 	<wire id="69">
 		<path>
@@ -747,7 +747,7 @@
 			<point x="-195" y="-400"/>
 		</path>
 		<marker x="-195" y="-350"/>
-		<tag type="interface" xwire="-195" ywire="-400" xtag="-195" ytag="-410" flow="out" pinid="36" text="RES11"/>
+		<tag type="interface" xwire="-195" ywire="-400" xtag="-195" ytag="-410" flow="out" pinid="23" text="RES11"/>
 	</wire>
 	<component id="0" def="BusInterfaceWord" x="80" y="100" direction="left" flip="false">
 		<connection pinid="0" wireid="12" invert="false"/>
