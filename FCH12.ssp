@@ -14,6 +14,7 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/LogicXorWord.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/LogicXorOctet.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/LogicNotOctet.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/Decoder1to2Char.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/UpDownCounterBit.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/ReverseBitsOrPassThrough.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/Multiplexer2to1Word.ssc</component>
@@ -40,5 +41,6 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterAccumulator.ssc</component>
 	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterControlAndStatus.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerStackPair.ssc</component>
+	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerArray4.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestStackPointer.ssc</component>
 </project>
