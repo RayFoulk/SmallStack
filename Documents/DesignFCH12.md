@@ -297,17 +297,22 @@ during socket read/write).
 110111 | 067 | not | acc = ~acc
 
 ##### Group 7: Conditional Relative Jumps
-- Requires Argument: 1 through 7 
-    - Number of words forward to skip (opcodes x 2)
+- Requires Argument: 1 through 14
+    - Number of operations to skip over
+    - Assember will divide argument by 2 to derive XYZ
+    - Assembler will insert nop if necessary
+        - To achieve odd numbered jumps
+        - To maintain word alignment
+        - Depending on position of jcr in ins word
     - Outside of fetch cycle, so normal fetch increment will also be performed
 - These require a specific calling sequence
     - Normally would execute eq, mfr nip, jcr
     - BOP is bypassed with argument value
     - ALU output written directly to NIP
-    - Give an example in Assembly/loop.s
     - acc can be preloaded with any value for large offsets
         - Usually just load with nip or label
         - Arg offset can avoid overhead of label load
+- Alternatively, route nip output to bypass acc to alu
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
@@ -426,6 +431,12 @@ XXXXXX  N/A    fch      INS = SKT, CSL => 0,
 XXXXXX  N/A    lda      Load Label
                         Equivalent to 4 x lol
                         Replaced by assembler
+
+XXXXXX  N/A    cll      Call Subroutine
+                        Assumes return stack selected
+                        Replaced by assembler
+
+
 
 ##### Instructions to Consider:
 

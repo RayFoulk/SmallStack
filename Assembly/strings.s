@@ -36,6 +36,9 @@ inc psl ; select data stack
 lda myleetstr ; pretend second arg is ptr 1337 to string
 skw     ; push second arg: ptr 1337
 dec psl ; select return stack
+
+;; This opcode sequence could be aliased
+;; to a "call" mnemonic
 shl 6   ; zero out acc
 shl 6
 lol 4   ; load nip offset (+4 words) in acc
@@ -47,6 +50,7 @@ skw     ; push return address to stack
 lda strlen
 mtr nip ; jump to subroutine
 nop     ; because of word alignment
+
 mfr bop ; returns to here, get str len into acc
 nop
 nop
@@ -93,19 +97,18 @@ eqz     ; mcs[cmp] will be 1 if odd
 dec psl ; re-select string pointer p2
 swr     ; read in a word
 
-jcr 1   ; skip over next two ops if odd, subject to alignment issues
+jcr 2   ; skip over next two ops if odd
 shl 6   ; even only, put low char in high
 inc ptr ; even only, advance to next word
 shr 6   ; bring high char down to low
         ; character is place either way here
 eqz     ; check for null terminator
-jcr 4   ; escape the loop if done, skip next 8 ops (alignment issues)
+jcr 7   ; escape the loop if done, skip next 7 ops
 
 inc psl ; back up to the counter
 inc ptr ; counter++
 lda loopbegin
-mtr nip ; goto start of loop 
-nop	; because of alignment
+mtr nip ; goto start of loop
 
 mfr ptr ; jcr jumps here, get counter
 mtr bop ; stash return value in bop
