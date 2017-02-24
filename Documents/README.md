@@ -37,6 +37,8 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
     - Stack Computers, RPN, and Forth Language.
 - Links regarding Stack Computers:
     - [Wikipedia: Stack Machine](https://en.wikipedia.org/wiki/Stack_machine)
+    - [Porting the GNU C Compiler to the Thor Microprocessor (Gunnarsson & Lundqvist, 1995)]
+      (http://tlundqvist.org/Publications/thesis95/ThorGCC.pdf)
     - [Stack Computers "The New Wave" (Koopman, 1989)]
       (https://users.ece.cmu.edu/~koopman/stack_computers/)
     - [Stack Computers & Forth (Koopman)]
