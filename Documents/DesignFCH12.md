@@ -297,10 +297,10 @@ during socket read/write).
 110111 | 067 | not | acc = ~acc
 
 ##### Group 7: Conditional Relative Jumps
-- Requires Argument: 1 through 14
+- Requires Argument: 1 through 15
     - Number of operations to skip over
     - Assember will divide argument by 2 to derive XYZ
-    - Assembler will insert nop if necessary
+    - Assembler will insert nop(s) if necessary
         - To achieve odd numbered jumps
         - To maintain word alignment
         - Depending on position of jcr in ins word
@@ -436,7 +436,7 @@ XXXXXX  N/A    cll      Call Subroutine
                         Assumes return stack selected
                         Replaced by assembler
 
-
+ret
 
 ##### Instructions to Consider:
 
