@@ -38,18 +38,16 @@ skw     ; push second arg: ptr 1337
 dec psl ; select return stack
 
 ;; This opcode sequence could be aliased
-;; to a "call" mnemonic
-shl 6   ; zero out acc
-shl 6
-lol 4   ; load nip offset (+4 words) in acc
-mtr bop ; put nip offset into operand
-zca     ; clear carry
-mfr nip ; get nip into accumulator
-add     ; add nip offset into accumulator
-skw     ; push return address to stack
+;; to a "call" meta-mnemonic to help with
+;; word alignment, just be aware that
+;; this would include the 'load' alias
+;; within an alias.
+
+pra     ; push nip + 3 to stack
 lda strlen
 mtr nip ; jump to subroutine
 nop     ; because of word alignment
+; ASSEMBLER HANDLES NOP / WORD ALIGNMENT
 
 mfr bop ; returns to here, get str len into acc
 nop

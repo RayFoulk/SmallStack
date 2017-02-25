@@ -212,6 +212,7 @@ during socket read/write).
 - pra is intended to help with call sequence
     - mux bypass of bop with constant
     - mux bypass of acc with nip output
+    - add function is used, but carry bypassed to 0
     - output written to socket via bus
     - assumes appropriate stack/memory has been selected
     - acts like skw regarding inc/dec lines
