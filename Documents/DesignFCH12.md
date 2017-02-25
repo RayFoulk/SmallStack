@@ -209,6 +209,12 @@ during socket read/write).
 ### Opcode Table
 
 ##### Group 0: Essentials, Special Transport
+- pra is intended to help with call sequence
+    - mux bypass of bop with constant
+    - mux bypass of acc with nip output
+    - output written to socket via bus
+    - assumes appropriate stack/memory has been selected
+    - acts like skw regarding inc/dec lines
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
@@ -216,10 +222,10 @@ during socket read/write).
 000001 | 001 | rst | Reset CPU
 000010 | 002 | nop | No Operation
 000011 | 003 | --- | RESERVED
-000100 | 004 | zsl | mcs[psl:csl] = 0
-000101 | 005 | zca | mcs[car] = 0
-000110 | 006 | skw | SKT = ACC, Auto-inc/dec PTR[] if applicable (wired)
-000111 | 007 | skr | ACC = SKT, Auto-inc/dec PTR[] if applicable (wired)
+000100 | 004 | pra | skt = nip + 4, Push return address
+000101 | 005 | --- | RESERVED
+000110 | 006 | skw | skt = acc, Auto-inc/dec PTR[] if applicable (wired)
+000111 | 007 | skr | acc = skt, Auto-inc/dec PTR[] if applicable (wired)
 
 ##### Group 1: Normal Transport Operations (Move)
 - ACC Implied: 1 bit to/from, 2 bits src/dst
@@ -250,7 +256,7 @@ during socket read/write).
 0111XY | 034 to 037 | shr | acc >>= N(XY) where 00=1,01=3,10=4,11=6
 
 ##### Group 4: Literal Octet Assignment
-- Requires Argument: 1 through 7
+- Requires Argument: 0 through 7
 - Left-shifts by 3 bits and loads ACC Octet 0
 - ACC Octet 3 is discarded.
     - This is done by bypassing Octet 3 before the BarrelShifter
@@ -269,7 +275,7 @@ during socket read/write).
 |--------|-------|----------|---
 100XYZ | 040 to 047 | lol | acc Load Octet 0 with XYZ and Rotate acc Left 3
 
-##### Group 5: Comparators + Rotate Octet
+##### Group 5: Rotate Octet + MCS Manipulation
 - BarrelShifter (Rotate Mode) used to help with loading specific values into ACC
 
 | Binary | Octal | Mnemonic | Description
@@ -278,19 +284,19 @@ during socket read/write).
 101001 | 051 | --- | RESERVED
 101010 | 052 | rol | acc Rotate Octet Left (3 Bits)
 101011 | 053 | --- | RESERVED
-101100 | 054 | eq  | mcs[cmp] = (acc == bop)
-101101 | 055 | eqz | mcs[cmp] = (acc == 0)
-101110 | 056 | neq | mcs[cmp] = ~mcs\[cmp\] (JK Toggle)
+101100 | 054 | neq | mcs[cmp] = ~mcs\[cmp\] (JK Toggle)
+101101 | 055 | zca | mcs[car] = 0
+101110 | 056 | zsl | mcs[psl] = mcs[csl] = 0
 101111 | 057 | --- | RESERVED
 
-##### Group 6: Arithmetic & Logic Operations
+##### Group 6: Arithmetic & Logic Operations, with Comparator
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-110000 | 060 | add | acc += bop (Carry mcs[car])
-110001 | 061 | sub | acc -= bop (Borrow mcs[car])
-110010 | 062 | --- | RESERVED
-110011 | 063 | --- | RESERVED
+110000 | 060 | eq  | mcs[cmp] = (acc == bop)
+110001 | 061 | eqz | mcs[cmp] = (acc == 0)
+110010 | 062 | add | acc += bop (Carry mcs[car])
+110011 | 063 | sub | acc -= bop (Borrow mcs[car])
 110100 | 064 | and | acc &= bop
 110101 | 065 | or  | acc \|= bop
 110110 | 066 | xor | acc ^= bop
@@ -304,19 +310,16 @@ during socket read/write).
         - To achieve odd numbered jumps
         - To maintain word alignment
         - Depending on position of jcr in ins word
-    - Outside of fetch cycle, so normal fetch increment will also be performed
+    - Outside of fetch cycle, so normal fetch increment will also occur
 - These require a specific calling sequence
-    - Normally would execute eq, mfr nip, jcr
-    - BOP is bypassed with argument value
-    - ALU output written directly to NIP
-    - acc can be preloaded with any value for large offsets
-        - Usually just load with nip or label
-        - Arg offset can avoid overhead of label load
-- Alternatively, route nip output to bypass acc to alu
+    - Normally would execute eq/eqz ... jcr
+    - acc is mux bypassed with nip output
+    - bop is mux bypassed with argument value
+    - ALU output written directly to NIP via bus
 
 | Binary | Octal | Mnemonic | Description
 |--------|-------|----------|---
-111XYZ | 070 to 077 | jcr | mcs[cmp] ? nip = acc + b000XYZ : continue
+111XYZ | 070 to 077 | jcr | mcs[cmp] ? nip += b000XYZ : continue
 
 ### TODO: 
     
