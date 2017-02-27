@@ -16,17 +16,9 @@ lol 3
 lol 3
 lol 7
 skw     ; push second arg: ptr 1337
-:pushaddr
-dec psl ; back to return stack
-shl 6   ; zero out acc
-shl 6
-lol 4   ; load nip offset (+4 words) in acc
-mtr bop ; put nip offset into operand
-zca     ; clear carry
-mfr nip ; get nip into accumulator
-add     ; add nip offset into accumulator
-skw     ; push return address to stack
 :docall
+zsl     ; back to return stack
+pra     ; push return address to stack
 lda subrtnb  ; this is actually 4 x lol
 mtr nip ; jump to subroutine
 nop     ; because of word alignment

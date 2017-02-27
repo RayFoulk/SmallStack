@@ -170,7 +170,7 @@ operations.
     [  Octet 3  |  Octet 2  |  Octet 1  |  Octet 0  ]
     [  High Char (HCHAR)    |  Low Char (LCHAR)     ]
 
-## Address Pointer (PTR[PSL]) Register Bank Behavior
+### Address Pointer (PTR[PSL]) Register Bank Behavior
 
 One of these can be selected at any time via the PSL
 bit field in the MCS register.  The currently
@@ -205,6 +205,26 @@ General Purpose / Subroutine Argument Registers
 (Arguments can be pointer or literal value,
 address bus output at socket is only enabled
 during socket read/write).
+
+### High Level Assembler Keywords
+
+These are replaced by opcode sequences and
+literal numeric values by the assembler
+and object linker
+
+link <number>     At beginning of file, optionally
+                  specify the linker order of
+                  the object.  startup.s should
+                  be 0.
+
+:<label>          Label a subroutine or data
+
+load <label>      Load address of label into acc
+                  Equivalent to 4 x lol
+
+call <label>      Call a subroutine
+
+retn              Return from a subroutine
 
 ### Opcode Table
 
@@ -431,16 +451,6 @@ I.E. For this "instruction" only, there nothing to
 
 XXXXXX  N/A    fch      INS = SKT, CSL => 0,
                         NIP++ driven by read
-
-XXXXXX  N/A    lda      Load Label
-                        Equivalent to 4 x lol
-                        Replaced by assembler
-
-XXXXXX  N/A    cll      Call Subroutine
-                        Assumes return stack selected
-                        Replaced by assembler
-
-ret
 
 ##### Instructions to Consider:
 

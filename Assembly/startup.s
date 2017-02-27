@@ -1,3 +1,5 @@
+link 0  ; link order
+
 :start
 shl 6   ; zero put acc
 shl 6
@@ -17,6 +19,8 @@ mtr ptr ; initialize the data stack ptr 7377
 ;; decompress all data to ram
 ;; skip over a bunch of library code
 ;; jump straight to main (no return)
+load main
+mtr nip
 
 ;; UPDATE: 2/16/2017 deciding against fixed stack sizes
 ;; and locations.  convention is up to rom developer.
