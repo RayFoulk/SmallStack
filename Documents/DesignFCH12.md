@@ -212,19 +212,13 @@ These are replaced by opcode sequences and
 literal numeric values by the assembler
 and object linker
 
-link <number>     At beginning of file, optionally
-                  specify the linker order of
-                  the object.  startup.s should
-                  be 0.
-
-:<label>          Label a subroutine or data
-
-load <label>      Load address of label into acc
-                  Equivalent to 4 x lol
-
-call <label>      Call a subroutine
-
-retn              Return from a subroutine
+| Keyword | Opcode Sequence | Description |
+|---------|-----------------|-------------|
+link \<number\> | N/A | Optionally once at the beginning of a source file, specify the linker order of the object.  startup.s should be 0.
+:\<label\> | N/A | Apply a label to a subroutine, location, or data
+load \<label\> | lol label_oct3<br>lol label_oct2<br>lol label_oct1<br>lol label_oct0<br> | Load the address of a label into acc
+call \<label\> | zsl<br>pra<br>load \<label\><br>mtr nip<br>nop ; as determined by assembler<br> | Push return address and call subroutine
+retn | zsl<br>skr<br>mtr nip<br> | Pop address and return from a subroutine
 
 ### Opcode Table
 
