@@ -1,7 +1,7 @@
 ;; Note: Manually selecting the return stack pointer
 ;; may not always be necessary depending on context,
 ;; but putting things in a known state will work in
-;; all cases. zsl defaults to RAM 0  and return stack
+;; all cases. zsl defaults to RAM 0 and return stack
 
 :subrtna
 zsl     ; zero selectors
@@ -16,29 +16,18 @@ lol 3
 lol 3
 lol 7
 skw     ; push second arg: ptr 1337
-:docall
-zsl     ; back to return stack
-pra     ; push return address to stack
-lda subrtnb  ; this is actually 4 x lol
-mtr nip ; jump to subroutine
-nop     ; because of word alignment
-:continue
-...     ; point where code returns to
+call subrtn ; call subroutine b
+mfr bop ; return value usually stashed in bop
 ...
 ...
 ...
 ...
+retn
 
 :subrtnb
-...     ; check stack size?
 ...     ; pop args off data stack
 ...     ; store in ptr array
 ...     ; do stuff
 ...
-
-;; with new opcodes and nip inside ptr[7]
-:doreturn
-zsl     ; zero selectors to return stack
-skr     ; pop return stack to acc
-mtr nip ; jump to return address
+retn    ; return from subroutine
 

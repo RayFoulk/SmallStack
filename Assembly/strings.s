@@ -20,7 +20,7 @@
 
 ;; (Decompressed Data Section)
 :myleetstr
-str "0mg 1337 h4x0r d00d"
+str "Hello, world"
 :globalcount
 u12 0
 :bignum
@@ -33,22 +33,9 @@ i24 -017777777
 :example
 zsl     ; zero selectors
 inc psl ; select data stack
-lda myleetstr ; pretend second arg is ptr 1337 to string
+load myleetstr ; pretend second arg is ptr 1337 to string
 skw     ; push second arg: ptr 1337
-dec psl ; select return stack
-
-;; This opcode sequence could be aliased
-;; to a "call" meta-mnemonic to help with
-;; word alignment, just be aware that
-;; this would include the 'load' alias
-;; within an alias.
-
-pra     ; push nip + 3 to stack
-lda strlen
-mtr nip ; jump to subroutine
-nop     ; because of word alignment
-; ASSEMBLER HANDLES NOP / WORD ALIGNMENT
-
+call strlen ; call subroutine
 mfr bop ; returns to here, get str len into acc
 nop
 nop
@@ -73,6 +60,8 @@ inc psl ; select data stack
 mfr ptr ; get data stack ptr
 inc psl ; select gp addr reg p2
 mtr ptr ; store stack ptr in p2
+dec ptr ; may or may not be necessary
+        ; i think the top of the stack is always empty
 
 ;; Get setup to start processing string
 inc psl ; use p3 as loop counter
@@ -91,6 +80,8 @@ mfr ptr ; get current counter
 xor     ; acc will be zero if even
 eqz     ; mcs[cmp] will be 1 if odd
 
+OFF BY 1 BUG: ZERO IS FIRST AND IS EVEN: FIX THIS
+
 ;; Read in a character
 dec psl ; re-select string pointer p2
 swr     ; read in a word
@@ -105,13 +96,9 @@ jcr 7   ; escape the loop if done, skip next 7 ops
 
 inc psl ; back up to the counter
 inc ptr ; counter++
-lda loopbegin
+load loopbegin
 mtr nip ; goto start of loop
 
 mfr ptr ; jcr jumps here, get counter
 mtr bop ; stash return value in bop
-
-:doreturn
-zsl     ; zero selectors to return stack
-skr     ; pop return stack to acc
-mtr nip ; jump to return address
+retn
