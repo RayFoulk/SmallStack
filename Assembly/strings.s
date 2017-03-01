@@ -18,18 +18,6 @@
 ;; And also that data locations can be labelled by the
 ;; assembler.
 
-;; (Decompressed Data Section)
-:myleetstr
-str "Hello, world"
-:globalcount
-u12 0
-:bignum
-u24 077777777
-:signednum
-i12 -01777 
-:bigsignednum
-i24 -017777777
-
 :example
 zsl     ; zero selectors
 inc psl ; select data stack
