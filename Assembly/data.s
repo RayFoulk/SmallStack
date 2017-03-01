@@ -9,6 +9,9 @@
 ;; assembler.  The examples below are enough to create
 ;; primitive data structures
 
+data
+link 999
+
 ;; (Decompressed Data Section)
 :myleetstr
 str "Hello, World"
