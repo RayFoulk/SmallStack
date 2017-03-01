@@ -25,7 +25,7 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
     - Usable single-cycle indirect addressing (4k space)
     - Maintain 6bit opcodes / characters by packing 2 chars per word.
     - Future designs  may transition to 18-bit design with 3 chars per word
-- [Current Design](DesignFCH12.md)
+- [Current Design](Documents/DesignFCH12.md)
 
 ### Research:
 - Links regarding hobbyist CPUs
