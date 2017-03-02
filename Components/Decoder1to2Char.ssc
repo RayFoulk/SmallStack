@@ -8,7 +8,7 @@
 	<label>1:2</label>
 	<bound right="20" down="70" left="-20" up="-70"/>
 	<colour a="0" r="255" g="255" b="255"/>
-	<pin x="-20" y="25" length="10" direction="left" id="0" flow="in" required="true"/>
+	<pin x="-20" y="25" length="10" direction="left" id="0" flow="in" label="Z0" required="true"/>
 	<pin x="-20" y="15" length="10" direction="left" id="1" flow="in" required="true"/>
 	<pin x="-20" y="5" length="10" direction="left" id="2" flow="in" required="true"/>
 	<pin x="-20" y="-5" length="10" direction="left" id="3" flow="in" required="true"/>
@@ -19,8 +19,8 @@
 	<pin x="20" y="-30" length="10" direction="right" id="8" flow="out" required="true"/>
 	<pin x="20" y="-40" length="10" direction="right" id="9" flow="out" required="true"/>
 	<pin x="20" y="-50" length="10" direction="right" id="10" flow="out" required="true"/>
-	<pin x="20" y="-60" length="10" direction="right" id="11" flow="out" required="true"/>
-	<pin x="20" y="60" length="10" direction="right" id="12" flow="out" required="true"/>
+	<pin x="20" y="-60" length="10" direction="right" id="11" flow="out" label="X5" required="true"/>
+	<pin x="20" y="60" length="10" direction="right" id="12" flow="out" label="Y0" required="true"/>
 	<pin x="20" y="50" length="10" direction="right" id="13" flow="out" required="true"/>
 	<pin x="20" y="40" length="10" direction="right" id="14" flow="out" required="true"/>
 	<pin x="20" y="30" length="10" direction="right" id="15" flow="out" required="true"/>
