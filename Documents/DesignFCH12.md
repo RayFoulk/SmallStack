@@ -190,16 +190,14 @@ inc ptr / dec ptr operations.
 010  (d2) | N/A      | N/A      | General Purpose
 011  (d3) | N/A      | N/A      | General Purpose
 100  (d4) | N/A      | N/A      | General Purpose
-101  (d5) | PTR[5]++ | N/A      | General Purpose / Block Mem Store
-110  (d6) | N/A      | PTR[6]++ | General Purpose / Block Mem Load
+101  (d5) | N/A      | N/A      | General Purpose
+110  (d6) | N/A      | N/A      | General Purpose
 111  (d7) | INVALID  | PTR[7]++ | Instruction Pointer (NIP)
 
-If stack pointers are initialized wisely (that is
-on an X777 word boundary, then stack sizes are very easily
-computed by software using a few operations, without even
-having to store the initial pointer somewhere.  For this
-reason and also to minimize gate usage, sticking to
-a simplified design.
+For this first iteration, I'm sticking to a simplified
+hardware design, and relying on startup code / ROM
+software to manage stacks.  Stack sizes can be computed
+easily.
 
 General Purpose / Subroutine Argument Registers
 (Arguments can be pointer or literal value,
@@ -214,6 +212,7 @@ and object linker
 
 | Keyword | Opcode Sequence | Description |
 |---------|-----------------|-------------|
+data | N/A | At the beginning of a source file, designate the entire file as global data.  The assembler and linker will create a special label named "data".
 link \<number\> | N/A | Optionally once at the beginning of a source file, specify the linker order of the object.  startup.s should be 0.
 :\<label\> | N/A | Apply a label to a subroutine, location, or data
 load \<label\> | lol label_oct3<br>lol label_oct2<br>lol label_oct1<br>lol label_oct0<br> | Load the address of a label into acc
@@ -238,7 +237,7 @@ retn | zsl<br>skr<br>mtr nip<br> | Pop address and return from a subroutine
 000010 | 002 | nop | No Operation
 000011 | 003 | --- | RESERVED
 000100 | 004 | pra | skt = nip + 4, Push return address
-000101 | 005 | --- | RESERVED
+000101 | 005 | --- | RESERVED (could be ret in future TBD)
 000110 | 006 | skw | skt = acc, Auto-inc/dec PTR[] if applicable (wired)
 000111 | 007 | skr | acc = skt, Auto-inc/dec PTR[] if applicable (wired)
 
@@ -413,38 +412,24 @@ retn | zsl<br>skr<br>mtr nip<br> | Pop address and return from a subroutine
 ### Instruction Design Notes
 
 // Synthesis of other instructions:
-GT and LT comparisons can be synthesized easily
-MUL and DIV can be sythesized.  will never be included.
+GT, LT, GE, LE comparisons, MUL and DIV operations
+can be sythesized in software.
 
 // Later Design changes:
 single cycle hardware register swap or
  queue would be very useful for ptr/stack/data
-also: MUX reg on RAM PTR array.  only exposes
-one to the data bus.
 
-NOTE: ROM needs to be separate and socketable.
-An address bus driven by NIP and PTR is necessary,
-as well as a bypass on external CSL.
-this would reduce the number of CPU pins by re-using
-the address lines for ROM and RAM.  Not shown above
-  are the control lines.
-FCH bypasses CSL and asserts 0 on output pins
+ROM shall be separate and socketable.
+FCH bypasses CSL and PSL and asserts 1 on all output pins
+(forcing selection of PTR[7] (NIP) and peripheral 7 (ROM)
 ADDR output pins are normally driven by PTR[PSL]
-but FCH instructuon overrides this with NIP
-NOTE: This also allows PTR access to ROM for reading
-fonts, bitmaps, strings, etc... 
-  by manually setting CSL to 0,
-  set PTR[PSL] to desired address and executing IOR.
-  This eliminates the need for LBL and frees up an
-    8-block of opcodes.
 
-NOTE: fetch opcode is avoided since this can be built
+Explicit fetch opcode is avoided since this can be built
 directly into the main micro cycle => drive lines.
 I.E. For this "instruction" only, there nothing to
 "decode" per se, just do it!
 
-XXXXXX  N/A    fch      INS = SKT, CSL => 0,
-                        NIP++ driven by read
+fch   PSL =>7, CSL => 7, INS <= SKT, NIP++ driven by read
 
 ##### Instructions to Consider:
 
@@ -488,12 +473,10 @@ http://www.learnabout-electronics.org/Digital/images/register-SISO-PISO.gif
 	- ability to read size via control line assert
 - Create ALU
 	- Adder/Subtractor
-	- Equality comparator only (no magnitude - yet - 2.0)
+	- Equality comparator only (no magnitude)
 	- logical subset
-	- negate
 	- shift by one +/-
-	- special load hex operation - load 4 low bits and shift all others up.
-	- char swap - swap low 6 with high 6
+	- bcd hex operation - mask off all but 4 bits
 
 - Control unit
 	- Instruction register split into opcodes
