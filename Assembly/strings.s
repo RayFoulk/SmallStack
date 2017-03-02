@@ -65,10 +65,10 @@ mtr bop ; put odd/even bitmask in operand
 ;; Determine if this is an odd or even iteration
 ;; based on current counter value
 mfr ptr ; get current counter
-xor     ; acc will now be zero if odd
+and     ; acc should be zero if even
 eqz     ; mcs[cmp] will be 1 if even
 dec psl ; re-select string pointer p2
-swr     ; (re)read in current word, prepare to extract char
+skr     ; (re)read in current word, prepare to extract char
 jcr 2   ; skip over next two ops if even
 shl 6   ; odd only, put low char in high
 inc ptr ; odd only, advance to next word
