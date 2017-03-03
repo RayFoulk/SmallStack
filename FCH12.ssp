@@ -44,6 +44,5 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterAccumulator.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestRegisterControlAndStatus.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerStackPair.ssc</component>
-	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerPair01.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/TestStackPointer.ssc</component>
 </project>
