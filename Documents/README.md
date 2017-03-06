@@ -29,6 +29,7 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
 
 ### Research:
 - Links regarding hobbyist CPUs
+    - [Nibbler 4 Bit CPU](http://www.bigmessowires.com/nibbler/)
     - [FPGA CPU org](http://www.fpgacpu.org/)
     - [Homebrew CPU](http://www.homebrewcpu.com/)
     - [From NAND to Tetris](http://www.nand2tetris.org/)
