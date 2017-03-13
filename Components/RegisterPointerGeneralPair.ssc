@@ -987,4 +987,6 @@
 	<component id="7" def="Reader" x="315" y="-110" direction="up" flip="false">
 		<connection flow="in" pinid="0" wireid="89" invert="false"/>
 	</component>
+	<annotation x="70" y="-75" text="GP" fontsize="16"/>
+	<annotation x="-290" y="55" text="GP" fontsize="16"/>
 </custom_component>
