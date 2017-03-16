@@ -99,7 +99,6 @@
 		<marker x="15" y="185"/>
 		<marker x="15" y="235"/>
 		<marker x="15" y="285"/>
-		<tag type="interface" xwire="15" ywire="380" xtag="15" ytag="390" flow="in" pinid="18" text="S"/>
 	</wire>
 	<wire id="1">
 		<path>
@@ -263,6 +262,13 @@
 		</path>
 		<tag type="interface" xwire="150" ywire="-275" xtag="160" ytag="-275" flow="out" pinid="11" text="X5"/>
 	</wire>
+	<wire id="19">
+		<path>
+			<point x="15" y="430"/>
+			<point x="15" y="440"/>
+		</path>
+		<tag type="interface" xwire="15" ywire="440" xtag="15" ytag="450" flow="in" pinid="18" text="S"/>
+	</wire>
 	<component id="0" def="And" x="70" y="-275" direction="right" flip="false">
 		<connection flow="in" pinid="0">
 			<subpin wireid="6" invert="false"/>
@@ -346,5 +352,9 @@
 			<subpin wireid="0" invert="true"/>
 		</connection>
 		<connection flow="out" pinid="1" wireid="7" invert="false"/>
+	</component>
+	<component id="12" def="Buffer" x="15" y="405" direction="up" flip="false">
+		<connection flow="in" pinid="0" wireid="19" invert="false"/>
+		<connection flow="out" pinid="1" wireid="0" invert="true"/>
 	</component>
 </custom_component>

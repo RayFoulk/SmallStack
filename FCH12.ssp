@@ -45,8 +45,8 @@
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerStackPair.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerGeneralPair.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerGPWithNipPair.ssc</component>
-	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestStackPointer.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerFirstQuad.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerSecondQuad.ssc</component>
 	<component>/home/ray/Source/SmartSim/SmallStack/Components/RegisterPointerArray.ssc</component>
+	<component root="true">/home/ray/Source/SmartSim/SmallStack/Components/TestStackPointer.ssc</component>
 </project>
