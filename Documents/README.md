@@ -39,29 +39,18 @@ Design &amp; Simulation of a Minimal Instruction Set Computer (MISC)
     - Stack Computers, RPN, and Forth Language.
 - Links regarding Stack Computers:
     - [Wikipedia: Stack Machine](https://en.wikipedia.org/wiki/Stack_machine)
-    - [Porting the GNU C Compiler to the Thor Microprocessor (Gunnarsson & Lundqvist, 1995)]
-      (http://tlundqvist.org/Publications/thesis95/ThorGCC.pdf)
-    - [Stack Computers "The New Wave" (Koopman, 1989)]
-      (https://users.ece.cmu.edu/~koopman/stack_computers/)
-    - [Stack Computers & Forth (Koopman)]
-      (https://users.ece.cmu.edu/~koopman/stack.html)
-    - [FPGACPU.CA: Stack Computer Architecture]
-      (http://fpgacpu.ca/stack/index.html)
+    - [Porting the GNU C Compiler to the Thor Microprocessor (Gunnarsson & Lundqvist, 1995)](http://tlundqvist.org/Publications/thesis95/ThorGCC.pdf)
+    - [Stack Computers "The New Wave" (Koopman, 1989)](https://users.ece.cmu.edu/~koopman/stack_computers/)
+    - [Stack Computers & Forth (Koopman)](https://users.ece.cmu.edu/~koopman/stack.html)
+    - [FPGACPU.CA: Stack Computer Architecture](http://fpgacpu.ca/stack/index.html)
 - Links regarding Charles Moore:
-    - [Wikipedia: Charles H. Moore]
-      (https://en.wikipedia.org/wiki/Charles_H._Moore)
-    - [Simple Talk: Chuck Moore: Geek of the Week]
-      (https://www.simple-talk.com/opinion/geek-of-the-week/chuck-moore-geek-of-the-week/)
-    - [GreenArrays, Inc]
-      (http://www.greenarraychips.com/)
+    - [Wikipedia: Charles H. Moore](https://en.wikipedia.org/wiki/Charles_H._Moore)
+    - [Simple Talk: Chuck Moore: Geek of the Week](https://www.simple-talk.com/opinion/geek-of-the-week/chuck-moore-geek-of-the-week/)
+    - [<b>GreenArrays, Inc</b>](http://www.greenarraychips.com/)
         - Affordable evaluation boards available!
         - Fully asynchronous 144 parallel SoC 
-    - [UltraTechnology: Charles Moore, Forth, and Computer Cowboys]
-      (http://www.ultratechnology.com/cowboys.html)
-    - [UltraTechnology: Minimal Instruction Set Computers]
-      (http://www.ultratechnology.com/misc.html)
-    - [TEDx (Circa 2011?) Charles H. Moore - Software: Past and Future]
-      (https://www.youtube.com/watch?v=tb0_V7Tc5MU)
-    - [Chuck Moore (Forth) Fireside Chat - May 22 1999]
-      (https://www.youtube.com/watch?v=N1FUY6g5crA)
+    - [UltraTechnology: Charles Moore, Forth, and Computer Cowboys](http://www.ultratechnology.com/cowboys.html)
+    - [UltraTechnology: Minimal Instruction Set Computers](http://www.ultratechnology.com/misc.html)
+    - [TEDx (Circa 2011?) Charles H. Moore - Software: Past and Future](https://www.youtube.com/watch?v=tb0_V7Tc5MU)
+    - [Chuck Moore (Forth) Fireside Chat - May 22 1999](https://www.youtube.com/watch?v=N1FUY6g5crA)
 
